@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+    <include 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        layout="@layout/movie_editor_view"/>
+    
+       
+    	<!-- 录音界面 -->
+    <include 
+        android:id="@+id/lsq_editor_voiceRecording_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        layout="@layout/movie_editor_voice_recording"/>
+
+</RelativeLayout>

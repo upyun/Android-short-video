@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<org.lasque.tusdk.impl.view.widget.listview.TuListTotalFootView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <org.lasque.tusdk.core.view.TuSdkRelativeLayout
+        android:id="@+id/lsq_wrapView"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" >
+
+        <TextView
+            android:id="@+id/lsq_titleView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/lsq_text"
+            android:textColor="@color/lsq_color_gray"
+            android:textSize="15sp" />
+
+    </org.lasque.tusdk.core.view.TuSdkRelativeLayout>
+
+</org.lasque.tusdk.impl.view.widget.listview.TuListTotalFootView>

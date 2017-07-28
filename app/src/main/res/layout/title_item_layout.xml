@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout 
+	xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lsq_title_item"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/lsq_title_height"
+    android:background="@color/lsq_color_white">
+        <TextView
+            android:id="@+id/lsq_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/lsq_back" 
+            android:textColor="@color/lsq_background_entry_default"
+            android:textSize="@dimen/lsq_font_size_36"
+            android:paddingLeft="@dimen/lsq_font_space_8"
+			android:paddingRight="@dimen/lsq_font_space_15"
+            android:gravity="left|center_vertical"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:drawableLeft="@drawable/lsq_style_default_btn_back"/>
+        <TextView
+            android:id="@+id/lsq_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lsq_clip" 
+            android:textColor="@color/lsq_clip_title_color"
+            android:textSize="@dimen/lsq_font_size_36"
+            android:gravity="center"
+            android:layout_centerInParent="true"/>   
+        <TextView
+            android:id="@+id/lsq_next"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/lsq_next" 
+            android:textColor="@color/lsq_background_entry_default"
+            android:textSize="@dimen/lsq_font_size_36"
+            android:gravity="center"
+            android:paddingLeft="@dimen/lsq_font_space_15"
+			android:paddingRight="@dimen/lsq_font_space_15"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"/>    
+</RelativeLayout>

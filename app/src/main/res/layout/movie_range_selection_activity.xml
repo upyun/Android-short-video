@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lsq_color_white">
+    
+   <!-- movie layout --> 
+   <FrameLayout
+        android:id="@+id/movie_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/lsq_video_height"
+        android:background="@color/lsq_color_black" >
+        <org.lasque.tusdkvideodemo.views.HVScrollView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/hvScrollView"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+            android:background="#000"
+            android:fadingEdge="horizontal|vertical"
+            android:scrollbars="horizontal|vertical"
+            app:childLayoutCenter="true"
+            app:fillViewportH="false"
+            app:fillViewportV="false"
+            app:scrollOrientation="none" >
+            <RelativeLayout
+                android:id="@+id/lsq_video_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/lsq_color_black" >
+                <SurfaceView
+                    android:id="@+id/lsq_video_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal" />
+            </RelativeLayout>
+        </org.lasque.tusdkvideodemo.views.HVScrollView>
+        <Button
+            android:id="@+id/lsq_play_btn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@drawable/lsq_style_default_crop_btn_record"
+            android:visibility="visible" />
+    </FrameLayout>
+    
+    <!-- title layout --> 
+	<include layout="@layout/title_item_layout"/>
+        
+    <!-- select time layout -->
+    <LinearLayout 
+        android:id="@+id/time_layout"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical"
+	    android:background="@color/lsq_color_white"
+	    android:layout_gravity="bottom" >
+		<include layout="@layout/movie_range_selection_time"/>
+    </LinearLayout>
+</FrameLayout>

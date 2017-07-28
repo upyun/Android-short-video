@@ -1,0 +1,126 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+	<!-- Application theme. -->
+    <style name="lsq_sdkBaseTheme" parent="android:Theme.Light.NoTitleBar"></style>
+
+    <style name="lsq_sdkTheme" parent="lsq_sdkBaseTheme"></style>
+
+    <!-- split -->
+    <style name="lsq_split">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1px</item>
+        <item name="android:background">@color/lsq_split_bg</item>
+    </style>
+
+    <!-- 提示视图 -->
+    <style name="lsq_dotView">
+        <item name="android:layout_width">8dp</item>
+        <item name="android:layout_height">8dp</item>
+        <item name="android:src">@drawable/tusdk_button_info_icon_dot</item>
+        <item name="android:background">@color/lsq_color_transparent</item>
+    </style>
+    
+    <style name="lsq_badgeView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">15dp</item>
+        <item name="android:minWidth">15dp</item>
+        <item name="android:background">@drawable/tusdk_button_info_icon_badge</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:paddingLeft">4dp</item>
+        <item name="android:paddingRight">4dp</item>
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:textColor">@color/lsq_color_white</item>
+        <item name="android:textSize">11sp</item>
+    </style>
+
+    <!-- ListView -->
+    <style name="lsq_listView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/lsq_color_white</item>
+        <item name="android:cacheColorHint">@null</item>
+        <item name="android:divider">@null</item>
+        <item name="android:dividerHeight">0dp</item>
+        <item name="android:listSelector">@drawable/tusdk_list_view_selector_background</item>
+    </style>
+
+    <style name="lsq_listSplitView" parent="lsq_listView">
+        <item name="android:divider">@color/lsq_split_bg</item>
+        <item name="android:dividerHeight">1px</item>
+    </style>
+
+    <style name="lsq_textShadow">
+        <item name="android:textColor">@color/lsq_color_white</item>
+        <item name="android:shadowColor">@color/lsq_color_black</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">1</item>
+    </style>
+
+    <style name="lsq_lineTextShadow" parent="lsq_textShadow">
+        <item name="android:ellipsize">end</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:lines">1</item>
+        <item name="android:text">@string/lsq_text</item>
+    </style>
+
+    <style name="lsq_lineText">
+        <item name="android:ellipsize">end</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:lines">1</item>
+        <item name="android:text">@string/lsq_text</item>
+    </style>
+
+    <style name="lsq_video_record_timer_progress">
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:progressDrawable">@drawable/tusdk_view_widge_progress_video_timer</item><!-- progress_horizontal -->
+        <item name="android:indeterminateDrawable">@android:drawable/progress_indeterminate_horizontal</item>
+        <item name="android:minHeight">20dip</item>
+        <item name="android:maxHeight">20dip</item>
+    </style>
+    
+        <!-- camera controll Option -->
+    <style name="lsq_camera_OptionButton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingTop">18dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+    
+    <style name="lsq_editor_filter_list_view">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">90dp</item>
+ 		<item name="android:gravity">center_vertical</item>
+    </style>
+    <style name="lsq_record_filter_list_view">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">90dp</item>
+ 
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_alignParentBottom">true</item>
+    </style>
+      <style name="lsq_mv_list_view">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">90dp</item>
+        <item name="android:paddingLeft">8dp</item>
+    </style>
+    <style name="lsq_sticker_list_view">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">13dp</item>
+        <item name="android:paddingLeft">13dp</item>
+        <item name="android:paddingRight">13dp</item>
+        <item name="android:paddingBottom">13dp</item>
+    </style>
+    <style name="lsq_audio_mixer_button">
+        <item name="android:background">@color/lsq_color_api_button</item>
+        <item name="android:textColor">@color/lsq_color_white</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_marginTop">20dp</item>
+    </style>
+    
+</resources>

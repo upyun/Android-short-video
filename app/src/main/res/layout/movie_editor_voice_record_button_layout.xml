@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+     <org.lasque.tusdk.core.view.TuSdkImageView
+        android:id="@+id/lsq_voice_close_button"
+     	android:layout_width="29dp"
+     	android:layout_height="29dp"
+     	android:src="@drawable/lsq_cancel"
+     	android:scaleType="centerInside"
+     	android:layout_marginLeft="56dp"
+     	android:layout_centerVertical="true"
+         />
+     
+     <org.lasque.tusdk.core.view.TuSdkImageView
+        android:id="@+id/lsq_voice_cancel_button"
+     	android:layout_width="29dp"
+     	android:layout_height="29dp"
+     	android:src="@drawable/lsq_icon_back"
+     	android:scaleType="centerInside"
+     	android:layout_marginLeft="56dp"
+     	android:layout_centerVertical="true"
+     	android:visibility="gone"
+         />
+          
+    <org.lasque.tusdk.core.view.TuSdkImageView
+        android:id="@+id/lsq_voice_record_button"
+     	android:layout_width="65dp"
+     	android:layout_height="65dp"
+     	android:src="@drawable/tusdk_view_dubbing_record_unselected_button"
+		android:layout_centerInParent="true"
+         />
+          
+     <org.lasque.tusdk.core.view.TuSdkImageView
+        android:id="@+id/lsq_voice_record_save_button"
+     	android:layout_width="42dp"
+     	android:layout_height="43dp"
+     	android:src="@drawable/lsq_save"
+     	android:scaleType="centerInside"
+     	android:layout_alignParentRight="true"
+     	android:layout_marginRight="44dp"
+     	android:layout_centerVertical="true"
+         />
+
+</RelativeLayout>

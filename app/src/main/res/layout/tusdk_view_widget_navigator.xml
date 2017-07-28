@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<org.lasque.tusdk.impl.view.widget.TuNavigatorBar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lsq_navigatorBar"
+    android:layout_width="match_parent"
+    android:layout_height="44dp"
+    android:background="@color/lsq_navigator_bg"
+    android:clipChildren="false" >
+
+    <TextView
+        android:id="@+id/lsq_titleView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="70dp"
+        android:layout_marginRight="70dp"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textColor="@color/lsq_navigator_title"
+        android:textSize="@dimen/lsq_font_size_36" />
+
+    <org.lasque.tusdk.core.view.widget.button.TuSdkNavigatorBackButton
+        android:id="@+id/lsq_backButton"
+        android:layout_width="45dp"
+        android:layout_height="32dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/lsq_style_default_nav_bar_back"
+        android:maxLines="1"
+        android:paddingLeft="5dp" />
+
+</org.lasque.tusdk.impl.view.widget.TuNavigatorBar>

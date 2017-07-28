@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RoundProgressBar">  
+        <attr name="ringColor" format="color"/>
+        <attr name="ringProgressColor" format="color"/>
+        <attr name="textColor" format="color" />  
+        <attr name="textSize" format="dimension" /> 
+        <attr name="max" format="integer"></attr> 
+        <attr name="textIsDisplayable" format="boolean"></attr>
+        <attr name="ringWidth" format="dimension"></attr>
+        <attr name="innerRoundRadius" format="dimension"></attr>
+        <attr name="innerRoundColor" format="color"></attr>
+        <attr name="ringProgressWidth" format="dimension"></attr>
+        <attr name="style">
+            <enum name="STROKE" value="0"></enum>
+            <enum name="FILL" value="1"></enum>
+        </attr>
+    </declare-styleable> 
+    
+    <declare-styleable name="CompoundDrawableTextView">
+        <attr name="drawableTopHeight" format="dimension"/>
+        <attr name="drawableTopWidth" format="dimension"/>
+        <attr name="drawableTop" format="reference"/>
+    </declare-styleable>
+</resources>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:clickable="true">
+    
+	    <RelativeLayout 
+	        android:id="@+id/lsq_voiceRecord_layout"
+	        android:layout_width="match_parent"
+	        android:layout_height="150dp"
+	        android:background="@color/lsq_color_white"
+	        android:layout_alignParentBottom="true">
+	        <!-- 录音界面进度条 -->
+			<include 
+			    android:id="@+id/lsq_voiceRecord_progressbar"
+			    android:layout_width="match_parent"
+			    android:layout_height="4dp"
+			    layout="@layout/tusdk_view_record_progressbar"/>
+	    
+		    <!-- 录音界面剩余时间文本 -->
+		    <TextView 
+		        android:id="@+id/lsq_voiceRrecord_timeRemaining_text"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text="@string/lsq_voiceRcording_timeRemaining"
+		        android:textSize="12sp"
+		        android:layout_centerHorizontal="true"
+		        android:layout_marginTop="13dp"
+		        android:textColor="@color/lsq_voice_record_time_remaining_color"/>
+	    
+		    <!-- 录音界面按钮 -->
+			<include 
+			    android:layout_width="match_parent"
+			    android:layout_height="150dp" 
+			    layout="@layout/movie_editor_voice_record_button_layout"/>
+		
+     </RelativeLayout>   
+     
+	  <RelativeLayout 
+	    android:id="@+id/lsq_voiceRcording_blank"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:layout_above="@id/lsq_voiceRecord_layout"
+	    android:background="@color/lsq_alpha_black_7f"/>
+        
+</RelativeLayout>

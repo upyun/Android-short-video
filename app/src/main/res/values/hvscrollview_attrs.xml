@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="HVScrollView">
+        <!--水平内容宽度是否充满，默认false自适应-->
+        <attr name="fillViewportH" format="boolean" />
+        <!--垂直内容高度是否充满，默认false自适应-->
+        <attr name="fillViewportV" format="boolean" />
+        <!--滚动方向，默认both双向滚动-->
+        <attr name="scrollOrientation">
+            <enum name="none" value="0" />
+            <enum name="horizontal" value="1" />
+            <enum name="vertical" value="2" />
+            <enum name="both" value="3" />
+        </attr>
+        <!--内容是否居中显示，默认右上角对齐-->
+        <attr name="childLayoutCenter" format="boolean" />
+    </declare-styleable>
+
+</resources>

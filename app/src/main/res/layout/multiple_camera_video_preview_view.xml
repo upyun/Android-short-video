@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res/org.lasque.tusdkvideodemo"
+     >
+
+    <!-- preview video -->
+    <RelativeLayout
+        android:id="@+id/lsq_preview_video"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/lsq_color_black" />
+
+    <!-- preview imageview -->
+    <ImageView
+        android:id="@+id/lsq_preview_imageview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitCenter"
+        android:background="@color/lsq_color_black"
+        android:visibility="gone" />
+    
+    <org.lasque.tusdkvideodemo.views.CompoundDrawableTextView
+         android:id="@+id/lsq_delet_btn"
+         android:layout_width="65dp"
+         android:layout_height="88dp" 
+         app:drawableTop="@drawable/lsq_del_btn_default"
+         app:drawableTopHeight="65dp"
+         app:drawableTopWidth="65dp"
+         android:layout_marginBottom="32dp"
+         android:layout_marginLeft="45dp"
+         android:layout_gravity="bottom|left"
+         android:drawablePadding="4dp"
+         android:text="@string/lsq_text_delete"
+         android:textSize="14sp"
+         android:shadowColor="#96000000"
+         android:shadowDx="0"
+         android:shadowDy="0"
+         android:shadowRadius="3"
+         android:gravity="center"
+         />
+
+    <org.lasque.tusdkvideodemo.views.CompoundDrawableTextView
+         android:id="@+id/lsq_save_btn"
+         android:layout_width="65dp"
+         android:layout_height="88dp" 
+         app:drawableTop="@drawable/lsq_save_btn_default"
+         app:drawableTopHeight="65dp"
+         app:drawableTopWidth="65dp"
+         android:layout_marginBottom="32dp"
+         android:layout_marginRight="45dp"
+         android:layout_gravity="bottom|right"
+         android:drawablePadding="4dp"
+         android:text="@string/lsq_save"
+         android:textSize="14sp"
+         android:shadowColor="#96000000"
+         android:shadowDx="0"
+         android:shadowDy="0"
+         android:shadowRadius="3"
+         android:gravity="center"
+         />
+</FrameLayout>
+

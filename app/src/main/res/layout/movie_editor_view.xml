@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?><RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/lsq_color_black" >
+      
+ 	<!-- camera layout -->
+    <RelativeLayout
+        android:id="@+id/lsq_cameraView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        >
+        <Button
+            android:id="@+id/lsq_actButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/lsq_style_default_crop_btn_record"
+            android:clickable="false" />
+    </RelativeLayout>
+    
+    <!-- title layout -->
+    <include
+        android:id="@+id/lsq_topBar"
+        layout="@layout/title_item_layout" />
+
+    <org.lasque.tusdkvideodemo.views.MovieRangeSelectionBar
+        android:id="@+id/lsq_rangeseekbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/lsq_seekbar_height"
+        android:layout_below="@id/lsq_topBar"
+        />
+    
+    <!-- filter MV wrap layout -->
+    <include
+        android:id="@+id/filter_mv_wrap_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/lsq_color_transparent"
+        android:layout_above="@+id/lsq_bottom_navigator"
+        layout="@layout/filter_mv_wrap_layout" />
+    
+  	<!-- 配音页面 -->	   
+   	<include 
+      android:id="@+id/lsq_dubbing_wrap"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_centerVertical="true"
+      android:layout_above="@+id/lsq_bottom_navigator"
+      android:background="@color/lsq_color_transparent"
+      layout="@layout/movie_editor_dubbing_view"/>
+   	
+   	<include 
+   	    android:id="@+id/lsq_bottom_navigator"
+   	    android:layout_width="match_parent"
+   	    android:layout_height="wrap_content"
+   	    android:layout_alignParentBottom="true"
+   	    layout="@layout/movie_editor_bottom_navigation"/>
+
+</RelativeLayout>

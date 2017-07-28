@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<org.lasque.tusdk.impl.view.widget.TuProgressHubView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0000"
+    android:clickable="true"
+    android:padding="40dp" >
+
+    <LinearLayout
+        android:id="@+id/lsq_hubView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/tusdk_view_widget_progress_hud_view_bg"
+        android:gravity="center"
+        android:minWidth="126dp"
+        android:orientation="vertical" >
+
+        <ProgressBar
+            android:id="@+id/lsq_progressBar"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginBottom="10dp" />
+
+        <ImageView
+            android:id="@+id/lsq_hubImageView"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginBottom="10dp"
+            android:scaleType="center"
+            android:src="@drawable/lsq_style_default_hud_success" />
+
+        <TextView
+            android:id="@+id/lsq_hubTitleView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/lsq_text"
+            android:textColor="#FFFFFFFF"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+</org.lasque.tusdk.impl.view.widget.TuProgressHubView>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/org.lasque.tusdkvideodemo"
+    android:id="@+id/lsq_preview_layout"
+    android:layout_width="match_parent"
+    android:layout_height="244dp"
+ >
+<RelativeLayout 
+     android:id="@+id/lsq_btn_layout"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent">
+
+    <org.lasque.tusdkvideodemo.views.CompoundDrawableTextView
+         android:id="@+id/lsq_sticker_btn"
+         android:layout_width="58dp"
+         android:layout_height="64dp" 
+         app:drawableTop="@drawable/lsq_sticker_btn_default"
+         app:drawableTopHeight="37dp"
+         app:drawableTopWidth="37dp"
+         android:drawablePadding="4dp"
+         android:text="@string/lsq_text_sticker"
+         android:textSize="14sp"
+         android:layout_alignParentBottom="true"
+         android:layout_marginBottom="50dp"
+         android:layout_marginLeft="35dp"
+         android:shadowColor="#96000000"
+         android:shadowDx="0"
+         android:shadowDy="0"
+         android:shadowRadius="3"
+         android:gravity="center"
+         />
+ 
+    <org.lasque.tusdkvideodemo.views.CompoundDrawableTextView
+        android:id="@+id/lsq_filter_btn"
+         android:layout_width="58dp"
+         android:layout_height="64dp" 
+         app:drawableTop="@drawable/lsq_filter_btn_default"
+         app:drawableTopHeight="37dp"
+         app:drawableTopWidth="37dp"
+         android:drawablePadding="4dp"
+         android:text="@string/lsq_text_filter"
+         android:textSize="14sp"
+         android:layout_alignParentBottom="true"
+         android:layout_marginBottom="50dp"
+         android:layout_alignParentRight="true"
+         android:layout_marginRight="35dp"
+         android:shadowColor="#96000000"
+         android:shadowDx="0"
+         android:shadowDy="0"
+         android:shadowRadius="3"
+         android:gravity="center"
+         />
+  	 <org.lasque.tusdkvideodemo.views.RoundProgressBar
+       android:id="@+id/roundProgressBar"
+       android:layout_width="110dp"
+       android:layout_height="110dp"
+       android:layout_marginLeft="42dp"
+       android:layout_marginRight="42dp"
+       android:layout_centerHorizontal="true"
+       android:layout_alignParentBottom="true"
+       android:layout_marginBottom="25dp"
+       app:ringColor="@color/lsq_ring_color"
+       app:innerRoundColor="@color/lsq_innerRound_unselected_color"
+       app:innerRoundRadius="30dp"
+       app:ringProgressWidth="85dp"
+       app:ringProgressColor="#f6a623"
+       app:ringWidth="6dp"
+      
+       />
+    </RelativeLayout>
+ 
+        <RelativeLayout
+        android:id="@+id/lsq_sticker_group_bottom_view"
+        android:layout_width="match_parent"
+        android:layout_height="244dp"
+        android:layout_alignParentBottom="true"
+        android:background="#7f000000"
+        android:orientation="vertical" >
+
+        <org.lasque.tusdkvideodemo.views.StickerListView
+            android:id="@+id/lsq_sticker_list_view"
+            style="@style/lsq_sticker_list_view" 
+      />
+         </RelativeLayout>
+      <RelativeLayout
+        android:id="@+id/lsq_filter_group_bottom_view"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:layout_alignParentBottom="true"
+        android:background="#7f000000"
+        android:paddingBottom="40dp"
+        android:paddingLeft="8dp" >
+
+        <LinearLayout
+            android:id="@+id/lsq_filter_layout"
+            style="@style/lsq_record_filter_list_view"
+            android:orientation="horizontal" >
+
+            <RelativeLayout
+                android:id="@+id/lsq_beautyWrap"
+                android:layout_width="65dp"
+                android:layout_height="90dp"
+                >
+
+                <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+                    android:id="@+id/lsq_beautyBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:drawablePadding="5dp"
+                    android:drawableTop="@drawable/lsq_style_default_btn_beauty_unselected"
+                    android:gravity="center"
+                    android:text="@string/lsq_text_beauty"
+                    android:textColor="#9fa0a0" />
+            </RelativeLayout>
+
+            <org.lasque.tusdkvideodemo.views.FilterListView
+                android:id="@+id/lsq_filter_list_view"
+                style="@style/lsq_record_filter_list_view"
+                android:paddingLeft="8dp" />
+            
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/lsq_filter_layout" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true">
+
+                <include
+                    android:id="@+id/lsq_filter_config_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    layout="@layout/filter_config_view" />
+            </LinearLayout>
+
+            <include
+                android:id="@+id/lsq_beauty_config_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                layout="@layout/beauty_config_view"
+                 />
+            
+        </RelativeLayout>
+        
+    </RelativeLayout>
+ 
+ </RelativeLayout>

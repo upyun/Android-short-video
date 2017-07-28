@@ -1,0 +1,24 @@
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/lsq_text_group_header"
+        android:orientation="horizontal"
+        android:gravity="left|center"
+        android:paddingLeft="8dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp">
+
+    <TextView
+            android:id="@+id/itemTitle"
+            android:layout_width="match_parent"
+            android:layout_height="30dip"
+            android:paddingLeft="5dp"
+            android:layout_alignParentLeft="true"
+            android:ellipsize="end"
+            android:gravity="left|center"
+            android:singleLine="false"
+            android:textColor="@color/lsq_color_white"
+            android:textSize="14sp" />
+
+</RelativeLayout>

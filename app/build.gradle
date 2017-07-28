@@ -1,0 +1,29 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "25.0.2"
+
+    defaultConfig {
+        applicationId "org.lasque.tusdkvideodemo"
+        minSdkVersion 18
+        targetSdkVersion 22
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
+        }
+    }
+}
+
+dependencies {
+    compile files('libs/TuSDKCore-2.8.1.jar')
+    compile files('libs/TuSDKFace-1.0.0.jar')
+    compile files('libs/TuSDKVideo-1.7.0.jar')
+    compile files('libs/android-support-v4-23.1.2.jar')
+    compile files('libs/android-support-v7-recyclerview.jar')
+    compile files('libs/bugly_crash_release_2.6.5.jar')
+    compile files('libs/universal-image-loader-1.9.4.jar')
+}

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- color -->
+    <color name="lsq_color_white">#ffffff</color>
+    <color name="lsq_color_black">#000000</color>
+    <color name="lsq_color_red">#ff0000</color>
+    <color name="lsq_color_gray">#707070</color>
+    <color name="lsq_color_orange">#ff6633</color>
+    <color name="lsq_color_transparent">#00000000</color>
+    
+
+    <!-- alpha -->
+    <color name="lsq_alpha_black_66">#66000000</color>
+    <color name="lsq_alpha_black_B4">#B4000000</color>
+    <color name="lsq_alpha_black_CO">#C0000000</color>
+
+	<color name="lsq_alpha_black_7f">#7F000000</color>
+    <!-- split -->
+    <color name="lsq_split_bg">#d7d8dc</color>
+    <color name="lsq_split_cell">#FF3e3c41</color>
+
+    <!-- navigatorBar -->
+    <color name="lsq_navigator_bg">#403e43</color>
+    <color name="lsq_navigator_title">#ffffff</color>
+    <color name="lsq_navigator_button_title">#ffffff</color>
+    <color name="lsq_navigator_button_right_title">#22bbf4</color>
+    <color name="lsq_navigator_split">#66000000</color>
+    
+    <!-- text -->
+    <color name="lsq_link_action">#22bbf4</color>
+
+    <!-- actionsheet -->
+    <color name="lsq_actionsheet_mask_bg">#66000000</color>
+    <color name="lsq_actionsheet_title_color">#666666</color>
+    <color name="lsq_actionsheet_boutton_bg">#ddffffff</color>
+    <color name="lsq_actionsheet_boutton_bg_selected">#ddcccccc</color>
+    <color name="lsq_actionsheet_text_color">#ff287dfa</color>
+    <color name="lsq_actionsheet_text_stress">#fff6393f</color>
+
+    <!-- focus -->
+    <color name="lsq_focus_normal">#fff</color>
+    <color name="lsq_focus_succeed">#0bff45</color>
+    <color name="lsq_focus_failed">#0b72ff</color>
+    <color name="lsq_focus_face">#22bbf4</color>
+
+    <!-- backgroud -->
+    <color name="lsq_background_default">#2e2c30</color>
+    <color name="lsq_background_default_cell">#353338</color>
+    <color name="lsq_background_default_header">#B4262625</color>
+    <color name="lsq_background_album">#1e1c1f</color>
+    <color name="lsq_background_multi_album">#ffffff</color>
+    <color name="lsq_background_album_cell">#353338</color>
+    <color name="lsq_background_photo_cell">#2e2c30</color>
+    <color name="lsq_background_option_bar">#1e1c1f</color>
+    <color name="lsq_background_camera">#403e43</color>
+    <color name="lsq_background_camera_bar_alpha">#59403e43</color>
+    <color name="lsq_background_editor">#2e2c30</color>
+    <color name="lsq_background_editor_bottom_bar">#403e43</color>
+
+    <!-- text -->
+    <color name="lsq_text_group_header">#9fa0a4</color>
+    <color name="lsq_text_time">#9fa0a0</color>
+    
+    <!-- seekbar -->
+    <color name="lsq_seekbar_drag_color">#22bbf4</color>
+    <color name="lsq_seekbar_view_color">#d9d9d9</color>
+    
+    <!-- video editor-->
+    <color name="lsq_background_entry_default">#22bbf4</color>
+    <color name="lsq_record_title_color">#22bbf4</color>
+    
+	<color name="lsq_clip_title_color">#3e3e39</color>
+	<!--<color name="lsq_filter_title_color">#f4a11a</color>-->
+	<color name="lsq_filter_title_color">#22bbf4</color>
+	<color name="lsq_filter_title_default_color">#9fa0a0</color>
+	
+	<color name="lsq_filter_title_unselected_color">#d9d9d9</color>
+    <color name="lsq_progress_interupt_color">#d9d9d9</color>
+    <color name="shadow_color">#231815</color>
+    <!-- camera&&Recording-->
+    <color name="lsq_capture_selected">#22bbf4</color>
+    <color name="lsq_capture_unselected">#fff</color>
+    <color name="lsq_innerRound_unselected_color">#7fffffff</color>
+    <color name="lsq_innerRound_selected_color">#22bbf4</color>
+    <color name="lsq_ring_color">#ffffff</color>
+    <color name="lsq_color_semitransparent">#7f000000</color>
+    <color name="lsq_dubbing_unselected_color">#9B9B9B</color>
+    <color name="lsq_dubbing_bg_color">#EFEFEF</color>
+    <color name="lsq_dubbing_record_selected_color">#22bbf4</color>
+    <color name="lsq_voice_record_time_remaining_color">#4a4a4a</color>
+    <color name="lsq_color_api_gray">#c0c0c0</color>
+    <color name="lsq_color_api_button">#22bbf4</color>
+    
+</resources>

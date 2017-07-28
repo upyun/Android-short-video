@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<org.lasque.tusdk.impl.view.widget.listview.TuRefreshListHeaderView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <RelativeLayout
+        android:id="@+id/lsq_headWrap"
+        android:layout_width="match_parent"
+        android:layout_height="45dp" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_alignParentBottom="true"
+            tools:ignore="UselessParent" >
+
+            <TextView
+                android:id="@+id/lsq_titleLabel"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="@string/lsq_refresh_list_view_state_visible"
+                android:textColor="@color/lsq_color_black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/lsq_lastLoadTime"
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:layout_below="@+id/lsq_titleLabel"
+                android:gravity="center"
+                android:text="@string/lsq_refresh_list_view_state_lasttime"
+                android:textColor="@color/lsq_color_gray"
+                android:textSize="11sp"
+                tools:ignore="SmallSp" />
+
+            <ImageView
+                android:id="@+id/lsq_loadIcon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</org.lasque.tusdk.impl.view.widget.listview.TuRefreshListHeaderView>

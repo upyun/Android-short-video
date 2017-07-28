@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"> 
+     <include
+        android:id="@+id/lsq_voice_config_view"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        layout="@layout/tusdk_config_view" 
+        android:background="@color/lsq_alpha_black_7f"
+        />  
+     <RelativeLayout 
+         android:id="@+id/lsq_mixing_list_view_wrap"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:gravity="center_vertical"
+         android:paddingTop="4dp">
+	 <org.lasque.tusdkvideodemo.views.MixingListView
+           android:id="@+id/lsq_mixing_list_view"
+           style="@style/lsq_mv_list_view" />
+	</RelativeLayout>   	  
+</LinearLayout>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+   <!-- movie layout --> 
+   <FrameLayout
+        android:id="@+id/movie_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/lsq_color_black" >
+            <RelativeLayout
+                android:id="@+id/lsq_video_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@color/lsq_color_black" >
+                <SurfaceView
+                    android:id="@+id/lsq_video_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    />
+              <Button
+	            android:id="@+id/lsq_play_btn"
+	            android:layout_width="50dp"
+	            android:layout_height="50dp"
+	            android:layout_centerInParent="true"
+	            android:background="@drawable/lsq_style_default_crop_btn_record"
+	            android:visibility="visible" />
+            </RelativeLayout>
+    </FrameLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+	    android:layout_height="match_parent">
+    <!-- title layout --> 
+	<include 
+	    layout="@layout/title_item_layout"/>
+	</FrameLayout>
+	<FrameLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent">
+    <!-- select time layout -->
+		<include
+		  android:id="@+id/lsq_movie_range_selection"
+		  android:layout_width="match_parent"
+	      android:layout_height="wrap_content"
+		  layout="@layout/movie_range_selection_time"
+		  android:background="@color/lsq_color_transparent"
+		  android:layout_gravity="bottom"/>
+    </FrameLayout>
+</FrameLayout>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:gravity="center_horizontal">
+    
+	<include
+       layout="@layout/title_item_layout"/> 
+       
+	 <include
+        android:id="@+id/lsq_voice_config_view"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        layout="@layout/tusdk_config_view" 
+        />  
+	
+	 <include 
+	     android:layout_width="280dp"
+	     android:layout_height="wrap_content"
+	     layout="@layout/audio_mixer_button_layout"/>
+
+</LinearLayout>

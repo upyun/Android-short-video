@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<org.lasque.tusdkvideodemo.views.MVCellView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+   >
+<!-- Mv特效布局 -->
+   <include 
+    android:layout_width="65dp"
+    android:layout_height="90dp"
+    layout="@layout/mv_effect_cell_view"/>
+   
+<!--  Mv无效果布局 -->
+   <include 
+    android:layout_width="65dp"
+    android:layout_height="90dp"
+    layout="@layout/mv_none_cell_view"/>
+   
+<!-- mv列表边框 -->
+	<RelativeLayout 
+	  android:id="@+id/lsq_item_border"
+	  android:layout_width="65dp"
+	  android:layout_height="90dp"
+	  android:background="@drawable/tusdk_view_filter_selected_border"
+	  android:visibility="gone"
+   />
+</org.lasque.tusdkvideodemo.views.MVCellView>

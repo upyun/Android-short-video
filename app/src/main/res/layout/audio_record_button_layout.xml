@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+	 <Button
+       android:id="@+id/lsq_audio_record_btn"
+       style="@style/lsq_audio_mixer_button"
+       android:text="@string/lsq_audio_record_start"/>
+	 
+	 <Button
+	   android:id="@+id/lsq_audio_stop_btn"
+       style="@style/lsq_audio_mixer_button"
+       android:text="@string/lsq_audio_record_stop"/>
+	 
+	 <Button
+	   android:id="@+id/lsq_audio_play_btn"
+       style="@style/lsq_audio_mixer_button"
+       android:text="@string/lsq_audio_record_play"/>
+</LinearLayout>

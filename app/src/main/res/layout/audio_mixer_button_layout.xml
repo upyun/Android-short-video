@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+ 
+	 <Button
+       android:id="@+id/lsq_audio_mixer_btn"
+       style="@style/lsq_audio_mixer_button"
+       android:text="@string/lsq_audio_mixer_start"/>
+	 
+	 <Button
+	   android:id="@+id/lsq_delete_mixing_btn"
+       style="@style/lsq_audio_mixer_button"
+       android:text="@string/lsq_audio_mixer_delete"/>
+	 
+	 <RelativeLayout 
+	     style="@style/lsq_audio_mixer_button"
+	     android:background="@null">
+	     
+	     <Button
+	       android:id="@+id/lsq_play_mixing_btn"
+	       android:layout_width="90dp"
+	       android:layout_height="match_parent"
+	       android:textColor="@color/lsq_color_white"
+	       android:background="@color/lsq_color_api_button"
+	       android:text="@string/lsq_audio_mixer_play"/>
+		  <Button
+		   android:id="@+id/lsq_pause_mixing_btn"
+	       android:layout_width="70dp"
+	       android:layout_height="match_parent"
+	       android:textColor="@color/lsq_color_white"
+	       android:background="@color/lsq_color_api_button"
+	       android:text="@string/lsq_audio_mixer_pause"
+	       android:layout_alignParentRight="true"/>
+		  
+	 </RelativeLayout>
+
+</LinearLayout>
