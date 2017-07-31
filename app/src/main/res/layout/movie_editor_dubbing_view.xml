@@ -16,7 +16,7 @@
          android:layout_height="wrap_content"
          android:gravity="center_vertical"
          android:paddingTop="4dp">
-	 <org.lasque.tusdkvideodemo.views.MixingListView
+	 <com.upyun.shortvideo.views.MixingListView
            android:id="@+id/lsq_mixing_list_view"
            style="@style/lsq_mv_list_view" />
 	</RelativeLayout>   	  

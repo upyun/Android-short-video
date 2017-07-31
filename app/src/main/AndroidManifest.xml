@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.lasque.tusdkvideodemo"
+    package="com.upyun.shortvideo"
     android:versionCode="20170714"
     android:versionName="1.7.0" xmlns:tools="http://schemas.android.com/tools">
 
@@ -37,7 +37,7 @@
     <uses-permission android:name="android.permission.READ_LOGS" />
 	
 	<application
-        android:name="org.lasque.tusdkvideodemo.TuApplication"
+        android:name=".TuApplication"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@drawable/ic_launcher"
@@ -66,125 +66,125 @@
         
         <!-- 示例 -->
         <activity
-            android:name="org.lasque.tusdkvideodemo.MovieRecordAndImportEditorActivity"
+            android:name=".MovieRecordAndImportEditorActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         
         <activity
-            android:name="org.lasque.tusdkvideodemo.component.MovieEditorActivity"
+            android:name=".component.MovieEditorActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         
         <activity
-            android:name="org.lasque.tusdkvideodemo.suite.MoviePreviewAndCutActivity"
+            android:name=".suite.MoviePreviewAndCutActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />       
              
         <activity
-            android:name="org.lasque.tusdkvideodemo.component.MultipleCameraActivity"
+            android:name=".component.MultipleCameraActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />    
             
         <activity
-            android:name="org.lasque.tusdkvideodemo.ComponentListActivity"
+            android:name=".ComponentListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />  
              
         <activity
-            android:name="org.lasque.tusdkvideodemo.api.MovieSplicerActivity"
+            android:name=".api.MovieSplicerActivity"
             android:theme="@style/lsq_sdkTheme"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />   
             
         <activity
-            android:name="org.lasque.tusdkvideodemo.api.AudioRecordActivity"
+            android:name=".api.AudioRecordActivity"
             android:theme="@style/lsq_sdkTheme"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />
 
         <activity
-            android:name="org.lasque.tusdkvideodemo.custom.MovieRecordFullScreenActivity"
+            android:name=".custom.MovieRecordFullScreenActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" /> 
             
         <activity
-            android:name="org.lasque.tusdkvideodemo.suite.MovieRecordAndPreviewEditorActivity"
+            android:name=".suite.MovieRecordAndPreviewEditorActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" /> 
             
         <activity
-            android:name="org.lasque.tusdkvideodemo.suite.MovieCutAndEditorActivity"
+            android:name=".suite.MovieCutAndEditorActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" /> 
             
         <activity
-            android:name="org.lasque.tusdkvideodemo.component.MovieRecordKeepModeActivity"
+            android:name=".component.MovieRecordKeepModeActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" /> 
             
         <activity
-            android:name="org.lasque.tusdkvideodemo.component.MovieRecordNormalModeActivity"
+            android:name=".component.MovieRecordNormalModeActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" /> 
 
           <activity
-            android:name="org.lasque.tusdkvideodemo.custom.MoviePreviewAndCutFullScreenActivity"
+            android:name=".custom.MoviePreviewAndCutFullScreenActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" /> 
             
           <activity
-            android:name="org.lasque.tusdkvideodemo.custom.MovieEditorFullScreenActivity"
+            android:name=".custom.MovieEditorFullScreenActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" /> 
             
           <activity
-            android:name="org.lasque.tusdkvideodemo.custom.MultipleCameraRatioActivity"
+            android:name=".custom.MultipleCameraRatioActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="stateHidden|adjustResize" /> 
             
           <activity
-            android:name="org.lasque.tusdkvideodemo.custom.MoviePreviewAndCutRatioActivity"
+            android:name=".custom.MoviePreviewAndCutRatioActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" /> 
             
           <activity
-            android:name="org.lasque.tusdkvideodemo.api.MovieMixerActivity"
+            android:name=".api.MovieMixerActivity"
             android:theme="@style/lsq_sdkTheme"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />
           
           <activity
-            android:name="org.lasque.tusdkvideodemo.api.MovieThumbActivity"
+            android:name=".api.MovieThumbActivity"
             android:theme="@style/lsq_sdkTheme"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />
           
           <activity
-            android:name="org.lasque.tusdkvideodemo.api.AudioMixerActivity"
+            android:name=".api.AudioMixerActivity"
             android:theme="@style/lsq_sdkTheme"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />
           
           <activity
-            android:name="org.lasque.tusdkvideodemo.api.MovieCutActivity"
+            android:name=".api.MovieCutActivity"
             android:theme="@style/lsq_sdkTheme"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"

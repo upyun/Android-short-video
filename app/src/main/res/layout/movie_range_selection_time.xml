@@ -47,7 +47,7 @@
 	          android:layout_alignParentRight="true"/> 
 	  </RelativeLayout>
 	  
-	  <org.lasque.tusdkvideodemo.views.MovieRangeSelectionBar 
+	  <com.upyun.shortvideo.views.MovieRangeSelectionBar
 	       android:id="@+id/lsq_seekbar"
 	       android:layout_width="match_parent"
 	       android:layout_height="@dimen/lsq_seekbar_height"

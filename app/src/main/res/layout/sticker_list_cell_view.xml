@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<org.lasque.tusdkvideodemo.views.StickerCellView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.upyun.shortvideo.views.StickerCellView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="65dp" >
 
@@ -21,4 +21,4 @@
 
     </RelativeLayout>
 
-</org.lasque.tusdkvideodemo.views.StickerCellView>
+</com.upyun.shortvideo.views.StickerCellView>

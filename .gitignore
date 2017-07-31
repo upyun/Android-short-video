@@ -63,3 +63,6 @@ freeline_project_description.json
 *.iml
 out
 gen
+
+.DS_Store
+*/.DS_Store

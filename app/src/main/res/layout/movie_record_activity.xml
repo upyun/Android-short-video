@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
         
-   	<org.lasque.tusdkvideodemo.views.record.MovieRecordView 
+   	<com.upyun.shortvideo.views.record.MovieRecordView
    		android:id="@+id/lsq_movie_record_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

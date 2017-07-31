@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<org.lasque.tusdkvideodemo.views.MVCellView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.upyun.shortvideo.views.MVCellView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" 
    >
@@ -23,4 +23,4 @@
 	  android:background="@drawable/tusdk_view_filter_selected_border"
 	  android:visibility="gone"
    />
-</org.lasque.tusdkvideodemo.views.MVCellView>
+</com.upyun.shortvideo.views.MVCellView>

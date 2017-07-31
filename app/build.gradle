@@ -5,7 +5,7 @@ android {
     buildToolsVersion "25.0.2"
 
     defaultConfig {
-        applicationId "org.lasque.tusdkvideodemo"
+        applicationId "com.upyun.shortvideo"
         minSdkVersion 18
         targetSdkVersion 22
     }

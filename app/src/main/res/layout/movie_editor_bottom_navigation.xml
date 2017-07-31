@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout 
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res/org.lasque.tusdkvideodemo"
+    xmlns:app="http://schemas.android.com/apk/res/com.upyun.shortvideo"
     android:id="@+id/lsq_bottom_navigator"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -47,7 +47,7 @@
                 android:textColor="@color/lsq_filter_title_default_color"
                 android:textSize="14sp" />
             
-             <org.lasque.tusdkvideodemo.views.CompoundDrawableTextView
+             <com.upyun.shortvideo.views.CompoundDrawableTextView
                 android:id="@+id/lsq_dubbingBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

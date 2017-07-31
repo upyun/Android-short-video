@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout 
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res/org.lasque.tusdkvideodemo"
+    xmlns:app="http://schemas.android.com/apk/res/com.upyun.shortvideo"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
@@ -134,7 +134,7 @@
 			android:layout_marginBottom="10dp"
 	        android:background="@drawable/lsq_style_default_record_btn_record_unselected" />
 		
-		<org.lasque.tusdkvideodemo.views.CompoundDrawableTextView
+		<com.upyun.shortvideo.views.CompoundDrawableTextView
 	        android:id="@+id/lsq_movieEditorButton"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
@@ -191,7 +191,7 @@
                     android:textColor="#9fa0a0" />
             </RelativeLayout>
 
-            <org.lasque.tusdkvideodemo.views.FilterListView
+            <com.upyun.shortvideo.views.FilterListView
                 android:id="@+id/lsq_filter_list_view"
                 style="@style/lsq_record_filter_list_view"
                 android:paddingLeft="8dp" />
@@ -234,7 +234,7 @@
         android:background="@color/lsq_color_white"
         android:orientation="vertical" >
 
-        <org.lasque.tusdkvideodemo.views.StickerListView
+        <com.upyun.shortvideo.views.StickerListView
             android:id="@+id/lsq_sticker_list_view"
             style="@style/lsq_sticker_list_view" />
         

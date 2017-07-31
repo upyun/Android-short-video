@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
     
-	<org.lasque.tusdkvideodemo.views.record.MultipleCameraView
+	<com.upyun.shortvideo.views.record.MultipleCameraView
 	    android:id="@+id/lsq_multiple_camera_view"
 	    android:layout_width="match_parent"
 	    android:layout_height="match_parent"

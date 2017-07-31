@@ -14,7 +14,7 @@
 		    />
 	   
       <!-- MV列表 -->          
-      <org.lasque.tusdkvideodemo.views.MVListView
+      <com.upyun.shortvideo.views.MVListView
         android:id="@+id/lsq_mv_list_view"
         style="@style/lsq_mv_list_view"
         android:visibility="gone"

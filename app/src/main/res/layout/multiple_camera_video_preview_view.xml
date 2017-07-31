@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res/org.lasque.tusdkvideodemo"
+    xmlns:app="http://schemas.android.com/apk/res/com.upyun.shortvideo"
      >
 
     <!-- preview video -->
@@ -21,7 +21,7 @@
         android:background="@color/lsq_color_black"
         android:visibility="gone" />
     
-    <org.lasque.tusdkvideodemo.views.CompoundDrawableTextView
+    <com.upyun.shortvideo.views.CompoundDrawableTextView
          android:id="@+id/lsq_delet_btn"
          android:layout_width="65dp"
          android:layout_height="88dp" 
@@ -41,7 +41,7 @@
          android:gravity="center"
          />
 
-    <org.lasque.tusdkvideodemo.views.CompoundDrawableTextView
+    <com.upyun.shortvideo.views.CompoundDrawableTextView
          android:id="@+id/lsq_save_btn"
          android:layout_width="65dp"
          android:layout_height="88dp" 

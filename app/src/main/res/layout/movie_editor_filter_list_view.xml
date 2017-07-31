@@ -52,7 +52,7 @@
 	             />
 	           </RelativeLayout>
 	
-	           <org.lasque.tusdkvideodemo.views.FilterListView
+	           <com.upyun.shortvideo.views.FilterListView
 	               android:id="@+id/lsq_filter_list_view"
 	               style="@style/lsq_editor_filter_list_view"
 	               android:paddingLeft="8dp" 

@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/lsq_video_height"
         android:background="@color/lsq_color_black" >
-        <org.lasque.tusdkvideodemo.views.HVScrollView
+        <com.upyun.shortvideo.views.HVScrollView
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/hvScrollView"
 	        android:layout_width="match_parent"
@@ -33,7 +33,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal" />
             </RelativeLayout>
-        </org.lasque.tusdkvideodemo.views.HVScrollView>
+        </com.upyun.shortvideo.views.HVScrollView>
         <Button
             android:id="@+id/lsq_play_btn"
             android:layout_width="50dp"
