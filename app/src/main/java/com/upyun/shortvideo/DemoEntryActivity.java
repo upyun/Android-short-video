@@ -74,6 +74,10 @@ public class DemoEntryActivity extends TuFragmentActivity {
         editorLayout
                 .setOnClickListener(mClickListener);
 
+        RelativeLayout playLayout = (RelativeLayout) findViewById(com.upyun.shortvideo.R.id.lsq_play_layout);
+        playLayout
+                .setOnClickListener(mClickListener);
+
 //		RelativeLayout componentLayout= (RelativeLayout) findViewById(R.id.lsq_component_layout);
 //		componentLayout.setOnClickListener(mClickListener);
     }
@@ -102,9 +106,18 @@ public class DemoEntryActivity extends TuFragmentActivity {
                 case com.upyun.shortvideo.R.id.lsq_editor_layout:
                     handleImportButton();
                     break;
+
+                case R.id.lsq_play_layout:
+                    handlePlayButton();
+                    break;
             }
         }
     };
+
+    private void handlePlayButton() {
+        Intent intent = new Intent(this, PlayVideoActivity.class);
+        startActivity(intent);
+    }
 
     /**
      * 开启录制相机

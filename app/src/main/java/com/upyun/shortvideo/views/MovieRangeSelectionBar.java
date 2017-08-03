@@ -88,7 +88,7 @@ public class MovieRangeSelectionBar extends View
 	/** 进度条背景颜色 */
 	private String mSeekBarColorBg = "#9fa0a0";
 	/**当前进度条选择范围的颜色 */
-	private String mSeekBarSelectColorBg = "#f4a11a";
+	private String mSeekBarSelectColorBg = "#22bbf4";
 	/** 当前播放点位置的填充色 */
 	private String mPlayCursorColorBg = "#ffffff";
     /** 左光标移动指针ID */
