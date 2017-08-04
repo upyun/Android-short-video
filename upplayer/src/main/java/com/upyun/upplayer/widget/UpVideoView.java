@@ -346,13 +346,13 @@ public class UpVideoView extends FrameLayout implements MediaController.MediaPla
             mMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "overlay-format", IjkMediaPlayer.SDL_FCC_RV32);
             mMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "framedrop", 1);
             mMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "start-on-prepared", isAutoPlay ? 1 : 0);
-            mMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "max-buffer-size", 1024 * 400);
+            mMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "max-buffer-size", 1024 * 1024 * 50);
             mMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "http-detect-range-support", 0);
             mMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_CODEC, "skip_loop_filter", 0);
-            mMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "probesize", "4096");
+//            mMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "probesize", "4096");
 //            mMediaPlayer.setLooping(true);
 //            mMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "sync", "ext");
-            mMediaPlayer.setSpeed(1.03f);
+//            mMediaPlayer.setSpeed(1.03f);
 
             if (bufferSize != -1) {
                 mMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "max-buffer-size", bufferSize);
@@ -539,27 +539,27 @@ public class UpVideoView extends FrameLayout implements MediaController.MediaPla
                             Log.d(TAG, "MEDIA_INFO_VIDEO_RENDERING_START:");
                             break;
                         case IMediaPlayer.MEDIA_INFO_BUFFERING_START:
-                            Log.e(TAG, "卡顿时间：" + bufferTime);
-                            startbufferTime = System.currentTimeMillis();
-                            if (bufferTime > PURSUETIME && isAutoPursue) {
-                                bufferTime = 0;
-                                resume();
-                                Log.e(TAG, "卡顿重连追帧");
-                            }
-                            reportError();
-
+//                            Log.e(TAG, "卡顿时间：" + bufferTime);
+//                            startbufferTime = System.currentTimeMillis();
+//                            if (bufferTime > PURSUETIME && isAutoPursue) {
+//                                bufferTime = 0;
+//                                resume();
+//                                Log.e(TAG, "卡顿重连追帧");
+//                            }
+//                            reportError();
+                            monitorRecorder.BufferStart();
                             Log.d(TAG, "MEDIA_INFO_BUFFERING_START:");
                             break;
                         case IMediaPlayer.MEDIA_INFO_BUFFERING_END:
-                            if (startbufferTime != 0) {
-                                bufferTime = System.currentTimeMillis() - startbufferTime;
-                                Log.e(TAG, "结束缓冲：" + bufferTime);
-                                if (bufferTime > 2000) {
-                                    bufferTime = 0;
-                                    resume();
-                                }
-                            }
-                            cancelReport();
+//                            if (startbufferTime != 0) {
+//                                bufferTime = System.currentTimeMillis() - startbufferTime;
+//                                Log.e(TAG, "结束缓冲：" + bufferTime);
+//                                if (bufferTime > 2000) {
+//                                    bufferTime = 0;
+//                                    resume();
+//                                }
+//                            }
+//                            cancelReport();
                             monitorRecorder.BufferEnd();
                             Log.d(TAG, "MEDIA_INFO_BUFFERING_END:");
                             break;

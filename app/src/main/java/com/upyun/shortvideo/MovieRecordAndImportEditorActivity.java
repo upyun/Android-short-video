@@ -46,6 +46,8 @@ public class MovieRecordAndImportEditorActivity extends MovieRecordKeepModeActiv
     public void onMovieRecordComplete(TuSDKVideoResult result) {
         super.onMovieRecordComplete(result);
 
+        //录制成功回调 录制视频：result.videoPath.toString()
+
         startActivityWithClassName(MovieEditorActivity.class.getName(), result.videoPath.toString());
     }
 

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">TuSDK 视频</string>
+    <string name="app_name">UPYUN 视频</string>
 
     <!-- SDK -->
-    <string name="lsq_sdk_name">TuSDK 涂图</string>
+    <string name="lsq_sdk_name">UPYUN 涂图</string>
     <string name="lsq_exit_info">再按一次将退出应用</string>
     <string name="lsq_text">TuSDK 涂图</string>
     <string name="lsq_reset">重置</string>
