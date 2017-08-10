@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">UPYUN 视频</string>
+    <string name="app_name">又拍云短视频</string>
 
     <!-- SDK -->
     <string name="lsq_sdk_name">UPYUN 涂图</string>

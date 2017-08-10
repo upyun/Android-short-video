@@ -1239,7 +1239,7 @@ public class MovieEditorActivity extends SimpleCameraActivity {
     protected void changeMvEffect(int position, StickerGroup itemData) {
         // 循环播放音乐
         if (position > 0) {
-            int[] resId = new int[]{R.raw.lsq_audio_cat, R.raw.lsq_audio_crow, R.raw.lsq_audio_children};
+            int[] resId = new int[]{R.raw.lsq_audio_cat, R.raw.lsq_audio_children, R.raw.lsq_audio_crow};
             Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + resId[position - 1]);
 
             // 设置MV特效的音乐路径和贴纸对象

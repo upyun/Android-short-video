@@ -34,6 +34,7 @@ public class PlayVideoActivity extends Activity {
 
         mHudView = (TableLayout) findViewById(R.id.hud_view);
         mVideoView.setHudView(mHudView);
+        mHudView.setVisibility(View.GONE);
     }
 
 
