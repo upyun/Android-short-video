@@ -28,21 +28,21 @@
     <string name="beauty_off">美颜已关闭</string>
 
     <string name="lsq_filter_Original">原始</string>
-    <string name="lsq_filter_Fair01">白皙</string>
-    <string name="lsq_filter_Pink01">粉嫩</string>
-    <string name="lsq_filter_Forest01">小森林</string>
-    <string name="lsq_filter_Sundown">日不落</string>
-    <string name="lsq_filter_Sakura">樱花草</string>
-    <string name="lsq_filter_Paul01">阿宝色</string>
-    <string name="lsq_filter_Lavender">薰衣草</string>
-    <string name="lsq_filter_Manhattan">曼哈顿</string>
-    <string name="lsq_filter_Dusk">黄昏</string>
-    <string name="lsq_filter_TinyTimes">小时代</string>
-    <string name="lsq_filter_Vivid01">小清新</string>
-    <string name="lsq_filter_Year1950">1950</string>
-    <string name="lsq_filter_Missing01">想你色</string>
-    <string name="lsq_filter_Grapefruit01">西柚色</string>
-    <string name="lsq_filter_BabyPink001">粉色</string>
+    <string name="lsq_filter_Fair04">白皙</string>
+    <string name="lsq_filter_Pink005">粉嫩</string>
+    <string name="lsq_filter_Forest04">小森林</string>
+    <string name="lsq_filter_Sundown04">日不落</string>
+    <string name="lsq_filter_Sakura04">樱花草</string>
+    <string name="lsq_filter_Paul04">阿宝色</string>
+    <string name="lsq_filter_Lavender04">薰衣草</string>
+    <string name="lsq_filter_Manhattan04">曼哈顿</string>
+    <string name="lsq_filter_Dusk05">黄昏</string>
+    <string name="lsq_filter_TinyTimes04">小时代</string>
+    <string name="lsq_filter_Vivid04">小清新</string>
+    <string name="lsq_filter_Year195004">1950</string>
+    <string name="lsq_filter_Missing04">想你色</string>
+    <string name="lsq_filter_Grapefruit04">西柚色</string>
+    <string name="lsq_filter_BabyPink004">粉色</string>
 
     <string name="live_camera_sample">直播相机示例</string>
     <string name="record_camera_sample">"视频录制示例</string>

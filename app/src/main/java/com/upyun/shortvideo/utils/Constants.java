@@ -24,8 +24,14 @@ public class Constants
 	/**
 	 * 滤镜 filterCode 列表
 	 */
-	public static String[] VIDEOFILTERS = {"Original", "Pink01", "Fair01", "Forest01", 
-		"Sundown", "Sakura", "Paul01", "Lavender", 
-		"Manhattan", "Dusk", "TinyTimes", "Vivid01", 
-		"Year1950", "Missing01", "Grapefruit01", "BabyPink001"};
+//	public static String[] VIDEOFILTERS = {"Original", "Pink01", "Fair01", "Forest01",
+//		"Sundown", "Sakura", "Paul01", "Lavender",
+//		"Manhattan", "Dusk", "TinyTimes", "Vivid01",
+//		"Year1950", "Missing01", "Grapefruit01", "BabyPink001"};
+
+
+	public static String[] VIDEOFILTERS = {"Original","Fair04", "Pink005", "Forest04", "Sundown04",
+			"Sakura04", "Paul04", "Lavender04", "Manhattan04",
+			"Dusk05", "TinyTimes04", "Vivid04", "Year195004",
+			"Missing04", "Grapefruit04", "BabyPink004"};
 }
