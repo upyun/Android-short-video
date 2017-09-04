@@ -17,7 +17,22 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerInside"  />
-
+        <ImageView
+			android:visibility="gone"
+            android:id="@+id/lsq_progress_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerInside"
+            android:src="@drawable/loading_icon"  />
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/lsq_item_state_image"
+            android:layout_width="@dimen/lsq__space_20"
+            android:layout_height="@dimen/lsq__space_20"
+            android:scaleType="centerInside"
+            android:src="@drawable/download_icon"
+            android:layout_alignRight="@id/lsq_item_image"
+            android:layout_alignBottom="@id/lsq_item_image" />
 
     </RelativeLayout>
 

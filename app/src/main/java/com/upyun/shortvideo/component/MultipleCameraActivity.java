@@ -20,7 +20,7 @@ import org.lasque.tusdk.core.utils.hardware.TuSDKRecordVideoCamera.TuSDKRecordVi
 import org.lasque.tusdk.core.utils.hardware.TuSDKVideoCamera.TuSDKVideoCameraDelegate;
 import org.lasque.tusdk.core.utils.hardware.TuSdkStillCameraAdapter.CameraState;
 import org.lasque.tusdk.core.video.TuSDKVideoResult;
-import com.upyun.shortvideo.R;
+
 import com.upyun.shortvideo.SimpleCameraActivity;
 import com.upyun.shortvideo.views.FilterConfigView;
 import com.upyun.shortvideo.views.FilterListView;
@@ -39,7 +39,7 @@ import android.widget.RelativeLayout;
  * @author LiuHang
  */
 @SuppressLint("ClickableViewAccessibility") 
-public class MultipleCameraActivity extends SimpleCameraActivity implements TuSDKMultipleCameraDelegate 
+public class MultipleCameraActivity extends SimpleCameraActivity implements TuSDKMultipleCameraDelegate
 {
 	/** 最大录制时间 */
 	private final int MAX_RECORDING_TIME = 8;
@@ -60,12 +60,12 @@ public class MultipleCameraActivity extends SimpleCameraActivity implements TuSD
 	{
 		super.onCreate(savedInstanceState);
 		hideNavigationBar();
-		setContentView(R.layout.multiple_camera_activity);
+		setContentView(com.upyun.shortvideo.R.layout.multiple_camera_activity);
 		
 		initCamera();
 		getMultipleCameraView();
 		
-		RelativeLayout cameraView = (RelativeLayout) findViewById(R.id.lsq_cameraView);
+		RelativeLayout cameraView = (RelativeLayout) findViewById(com.upyun.shortvideo.R.id.lsq_cameraView);
 	    // 延迟启动相机，确认视图已经初始化完毕
 	    cameraView.post(new Runnable()
 	    {
@@ -119,7 +119,7 @@ public class MultipleCameraActivity extends SimpleCameraActivity implements TuSD
 	{
 		if (mMultipleCameraView == null)
 		{
-			mMultipleCameraView = (MultipleCameraView) findViewById(R.id.lsq_multiple_camera_view);
+			mMultipleCameraView = (MultipleCameraView) findViewById(com.upyun.shortvideo.R.id.lsq_multiple_camera_view);
 			mMultipleCameraView.setDelegate(this);
 			mMultipleCameraView.setUpCamera(this,mVideoCamera);
 		}

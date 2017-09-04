@@ -20,10 +20,9 @@ import com.upyun.shortvideo.component.MovieRecordKeepModeActivity;
 import com.upyun.shortvideo.component.MovieRecordNormalModeActivity;
 import com.upyun.shortvideo.component.MultipleCameraActivity;
 import com.upyun.shortvideo.custom.MoviePreviewAndCutFullScreenActivity;
+import com.upyun.shortvideo.custom.MoviePreviewAndCutRatioActivity;
 import com.upyun.shortvideo.custom.MovieRecordFullScreenActivity;
-import com.upyun.shortvideo.custom.MultipleCameraRatioActivity;
 import com.upyun.shortvideo.suite.MoviePreviewAndCutActivity;
-import com.upyun.shortvideo.suite.MovieRecordAndPreviewEditorActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -110,10 +109,10 @@ public class ExpandableSamplesListAdapter extends BaseExpandableListAdapter
             groupView = convertView;
         }
         else {
-            groupView = LayoutInflater.from(mContext).inflate(com.upyun.shortvideo.R.layout.sample_list_group, null);
+            groupView = LayoutInflater.from(mContext).inflate(R.layout.sample_list_group, null);
         }
 
-        ((TextView)groupView.findViewById(com.upyun.shortvideo.R.id.itemTitle))
+        ((TextView)groupView.findViewById(R.id.itemTitle))
                 .setText(mContext.getResources().getString(((SampleGroup)getGroup(groupPosition)).titleId));
 
         return groupView;
@@ -129,10 +128,10 @@ public class ExpandableSamplesListAdapter extends BaseExpandableListAdapter
             childView = convertView;
         }
         else {
-            childView = LayoutInflater.from(mContext).inflate(com.upyun.shortvideo.R.layout.sample_list_item, null);
+            childView = LayoutInflater.from(mContext).inflate(R.layout.sample_list_item, null);
         }
 
-        ((TextView)childView.findViewById(com.upyun.shortvideo.R.id.itemTitle))
+        ((TextView)childView.findViewById(R.id.itemTitle))
                 .setText(mContext.getResources().getString(((SampleItem)this.getChild(groupPosition, childPosition)).titleId));
 
         return childView;
@@ -146,28 +145,28 @@ public class ExpandableSamplesListAdapter extends BaseExpandableListAdapter
 
     public enum SampleItem
     {
-    	// 功能组合展示
-    	RECORD_PREVIEW_EDITOR(com.upyun.shortvideo.R.string.lsq_record_preview_editor, MovieRecordAndPreviewEditorActivity.class.getName(), false, true),
-    	VIDEO_PREVIEW_EDITOR(com.upyun.shortvideo.R.string.lsq_video_preview_editor, MoviePreviewAndCutActivity.class.getName(), true, false),
+    	// 功能套件展示
+    	RECORD_PREVIEW_EDITOR(R.string.lsq_record_video, MovieRecordAndImportEditorActivity.class.getName(), false, true),
+    	VIDEO_PREVIEW_EDITOR(R.string.lsq_video_preview_editor, MoviePreviewAndCutActivity.class.getName(), true, false),
     	
-    	// 功能单个展示
-    	NORMAL_RECORD_CAMERA(com.upyun.shortvideo.R.string.lsq_normal_record_camera, MovieRecordNormalModeActivity.class.getName(), false, true),
-    	CAPTURE_RECORD_CAMERA(com.upyun.shortvideo.R.string.lsq_capture_record_camera, MultipleCameraActivity.class.getName(), false, true),
-    	KEEP_RECORD_CAMERA(com.upyun.shortvideo.R.string.lsq_keep_record_camera, MovieRecordKeepModeActivity.class.getName(), false, true),
-    	ALBUM_VIDEO_EDITOR(com.upyun.shortvideo.R.string.lsq_album_video_editor, MovieEditorActivity.class.getName(), true, false),
+    	// 常用组件展示
+    	NORMAL_RECORD_CAMERA(R.string.lsq_normal_record_camera, MovieRecordNormalModeActivity.class.getName(), false, true),
+    	CAPTURE_RECORD_CAMERA(R.string.lsq_capture_record_camera, MultipleCameraActivity.class.getName(), false, true),
+    	KEEP_RECORD_CAMERA(R.string.lsq_keep_record_camera, MovieRecordKeepModeActivity.class.getName(), false, true),
+    	ALBUM_VIDEO_EDITOR(R.string.lsq_album_video_editor, MovieEditorActivity.class.getName(), true, false),
     	
     	// 自定义组件示例
-    	FULL_SCREEN_RECORD_PREVIEW_EDITOR(com.upyun.shortvideo.R.string.lsq_full_screen_record_preview_editor, MovieRecordFullScreenActivity.class.getName(), false, true),
-    	FULL_SCREEN_RECORD_PREVIEW_RATIO_EDITOR(com.upyun.shortvideo.R.string.lsq_full_screen_record_preview_ratio_editor,MultipleCameraRatioActivity.class.getName(), false, true),
-    	FULL_SCREEN_ALBUM_VIDEO_TIMECUT_EDITOR(com.upyun.shortvideo.R.string.lsq_full_screen_album_video_timecut_editor, MoviePreviewAndCutFullScreenActivity.class.getName(), true, false),
+    	FULL_SCREEN_RECORD_PREVIEW_EDITOR(R.string.lsq_full_screen_record_preview_editor, MovieRecordFullScreenActivity.class.getName(), false, true),
+    	FULL_SCREEN_RECORD_PREVIEW_RATIO_EDITOR(R.string.lsq_full_screen_ratio_cut_editor,MoviePreviewAndCutRatioActivity.class.getName(), true, true),
+    	FULL_SCREEN_ALBUM_VIDEO_TIMECUT_EDITOR(R.string.lsq_full_screen_album_video_timecut_editor, MoviePreviewAndCutFullScreenActivity.class.getName(), true, false),
     	
     	// 功能 API 展示
-    	AUDIO_MIXED(com.upyun.shortvideo.R.string.lsq_audio_mixed, AudioMixerActivity.class.getName(), false, false),
-    	VIDEO_BGM(com.upyun.shortvideo.R.string.lsq_video_bgm, MovieMixerActivity.class.getName(), false, false),
-    	GAIN_THUMBNAIL(com.upyun.shortvideo.R.string.lsq_gain_thumbnail, MovieThumbActivity.class.getName(), false, false),
-    	VIDEO_MIXED(com.upyun.shortvideo.R.string.lsq_video_mixed, MovieSplicerActivity.class.getName(), false, false),
-    	ALBUM_VIDEO_TIMECUT_SAVE(com.upyun.shortvideo.R.string.lsq_album_video_timecut_save, MovieCutActivity.class.getName(), false, false),
-    	AUDIO_FILE_RECORDER(com.upyun.shortvideo.R.string.lsq_audio_file_recorder, AudioRecordActivity.class.getName(), false, false);
+    	AUDIO_MIXED(R.string.lsq_audio_mixed, AudioMixerActivity.class.getName(), false, false),
+    	VIDEO_BGM(R.string.lsq_video_bgm, MovieMixerActivity.class.getName(), false, false),
+    	GAIN_THUMBNAIL(R.string.lsq_gain_thumbnail, MovieThumbActivity.class.getName(), false, false),
+    	VIDEO_MIXED(R.string.lsq_video_mixed, MovieSplicerActivity.class.getName(), false, false),
+    	ALBUM_VIDEO_TIMECUT_SAVE(R.string.lsq_album_video_timecut_save, MovieCutActivity.class.getName(), false, false),
+    	AUDIO_FILE_RECORDER(R.string.lsq_audio_file_recorder, AudioRecordActivity.class.getName(), false, false);
     	
         public String className;
         public int titleId;
@@ -186,25 +185,25 @@ public class ExpandableSamplesListAdapter extends BaseExpandableListAdapter
     public enum SampleGroup
     {
     	/** 功能组合展示 */
-    	COMPOSITE(com.upyun.shortvideo.R.string.lsq_composite_components,
+    	COMPOSITE(R.string.lsq_composite_components,
                 SampleItem.RECORD_PREVIEW_EDITOR, 
                 SampleItem.VIDEO_PREVIEW_EDITOR),
 
         /** 功能单个展示 */
-        COMMON(com.upyun.shortvideo.R.string.lsq_common_components,
+        COMMON(R.string.lsq_common_components,
                 SampleItem.NORMAL_RECORD_CAMERA,
                 SampleItem.CAPTURE_RECORD_CAMERA,
                 SampleItem.KEEP_RECORD_CAMERA,
                 SampleItem.ALBUM_VIDEO_EDITOR),
                 
         /** 自定义组件示例 */
-    	CUSTOM(com.upyun.shortvideo.R.string.lsq_custom_components,
+    	CUSTOM(R.string.lsq_custom_components,
                 SampleItem.FULL_SCREEN_RECORD_PREVIEW_EDITOR, 
                 SampleItem.FULL_SCREEN_RECORD_PREVIEW_RATIO_EDITOR, 
                 SampleItem.FULL_SCREEN_ALBUM_VIDEO_TIMECUT_EDITOR),
                 
         /** 功能 API 展示 */
-    	API(com.upyun.shortvideo.R.string.lsq_api_usage_example,
+    	API(R.string.lsq_api_usage_example,
                 SampleItem.AUDIO_MIXED, 
                 SampleItem.VIDEO_BGM, 
                 SampleItem.GAIN_THUMBNAIL,

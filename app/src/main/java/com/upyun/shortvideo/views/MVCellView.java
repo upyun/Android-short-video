@@ -9,12 +9,10 @@
  */
 package com.upyun.shortvideo.views;
 
-import org.lasque.tusdk.core.TuSdkContext;
 import org.lasque.tusdk.core.view.TuSdkImageView;
 import org.lasque.tusdk.core.view.listview.TuSdkCellRelativeLayout;
 import org.lasque.tusdk.modules.view.widget.sticker.StickerGroup;
 import org.lasque.tusdk.modules.view.widget.sticker.StickerLocalPackage;
-import com.upyun.shortvideo.R;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -68,7 +66,9 @@ public class MVCellView extends TuSdkCellRelativeLayout<StickerGroup>
 
 		if ( this.getTitleView() != null )
 		{
-			getTitleView().setText(TuSdkContext.getString("lsq_mv_" + model.name));
+			if (model.name == null ) model.name = "";
+
+			getTitleView().setText(model.name);
 		}
 		
 		if((Integer) getTag() == 0 )
@@ -87,7 +87,7 @@ public class MVCellView extends TuSdkCellRelativeLayout<StickerGroup>
 	{
 		if ( mThumbView == null )
 		{
-			mThumbView = (ImageView)findViewById(R.id.lsq_item_image);
+			mThumbView = (ImageView)findViewById(com.upyun.shortvideo.R.id.lsq_item_image);
 		}
 		return mThumbView;
 	}
@@ -109,7 +109,7 @@ public class MVCellView extends TuSdkCellRelativeLayout<StickerGroup>
 	{
 		if ( mMvNoneLayout == null )
 		{
-			mMvNoneLayout = (RelativeLayout)findViewById(R.id.lsq_mv_none_Wrap);
+			mMvNoneLayout = (RelativeLayout)findViewById(com.upyun.shortvideo.R.id.lsq_mv_none_Wrap);
 		}
 		return mMvNoneLayout;
 	}
@@ -120,7 +120,7 @@ public class MVCellView extends TuSdkCellRelativeLayout<StickerGroup>
 	{
 		if ( mMvLayout == null )
 		{
-			mMvLayout = (RelativeLayout)findViewById(R.id.lsq_mv_wrap);
+			mMvLayout = (RelativeLayout)findViewById(com.upyun.shortvideo.R.id.lsq_mv_wrap);
 		}
 		return mMvLayout;
 	}
@@ -129,7 +129,7 @@ public class MVCellView extends TuSdkCellRelativeLayout<StickerGroup>
 	{
 		if ( mMvBorderView == null )
 		{				
-			mMvBorderView = (RelativeLayout)findViewById(R.id.lsq_item_border);		
+			mMvBorderView = (RelativeLayout)findViewById(com.upyun.shortvideo.R.id.lsq_item_border);
 			
 		}
 	
@@ -140,7 +140,7 @@ public class MVCellView extends TuSdkCellRelativeLayout<StickerGroup>
 	{
 		if ( mTitleView == null )
 		{
-			mTitleView = (TextView)findViewById(R.id.lsq_item_title);
+			mTitleView = (TextView)findViewById(com.upyun.shortvideo.R.id.lsq_item_title);
 		}
 		return mTitleView;
 	}
@@ -149,7 +149,7 @@ public class MVCellView extends TuSdkCellRelativeLayout<StickerGroup>
 	{
 		if ( mBgImageView == null )
 		{
-			mBgImageView = (TuSdkImageView)findViewById(R.id.lsq_mv_bg);
+			mBgImageView = (TuSdkImageView)findViewById(com.upyun.shortvideo.R.id.lsq_mv_bg);
 		}
 		return mBgImageView;
 	}

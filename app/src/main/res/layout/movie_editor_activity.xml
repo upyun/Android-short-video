@@ -3,13 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     
+    <!-- 编辑界面 -->
     <include 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         layout="@layout/movie_editor_view"/>
     
        
-    	<!-- 录音界面 -->
+    <!-- 录音界面 -->
     <include 
         android:id="@+id/lsq_editor_voiceRecording_layout"
         android:layout_width="match_parent"

@@ -9,8 +9,9 @@
  */
 package com.upyun.shortvideo.suite;
 
-import org.lasque.tusdk.core.video.TuSDKVideoResult;
 import com.upyun.shortvideo.component.MovieRecordKeepModeActivity;
+
+import org.lasque.tusdk.core.video.TuSDKVideoResult;
 
 /**
  * 断点续拍相机 + 视频编辑

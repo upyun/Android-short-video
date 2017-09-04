@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lsq_smart_beauty"
+    android:layout_width="match_parent"
+    android:layout_height="230dp"
+    android:orientation="vertical" >
+    
+    <FrameLayout     
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+        <LinearLayout 
+            android:id="@+id/lsq_beauty_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+	        <include
+	            layout="@layout/beauty_wrap_layout" />            
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/lsq_filter_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" >
+
+            <include
+                android:id="@+id/lsq_filter_config_view"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                layout="@layout/filter_config_view" />
+
+            <LinearLayout 
+                android:layout_width="match_parent"
+            	android:layout_height="wrap_content"
+            	android:layout_marginTop="10dp"
+            	android:layout_below="@id/lsq_filter_config_view"
+            	android:orientation="horizontal" >
+            	
+                <com.upyun.shortvideo.views.FilterListView
+	                android:id="@+id/lsq_filter_list_view"
+	                style="@style/lsq_record_filter_list_view"
+	                android:paddingLeft="8dp" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </FrameLayout>
+    
+        <View
+            android:id="@+id/lsq_spilt_line"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@drawable/tusdk_view_edit_split_line" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:background="@color/lsq_color_transparent" >"
+
+	        <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+	            android:id="@+id/lsq_beauty_btn"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:paddingTop="@dimen/lsq__space_10"
+	            android:paddingLeft="@dimen/lsq__space_30"
+	            android:paddingRight="@dimen/lsq__space_30"
+	            android:drawablePadding="5dp"
+	            android:drawableTop="@drawable/lsq_style_default_btn_beauty_selected"
+	            android:text="@string/lsq_beauty_text"
+	            android:textColor="#f4a11a"
+	            android:textSize="14sp" />
+	                
+	        <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+	            android:id="@+id/lsq_filter_btn"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_toRightOf="@id/lsq_beauty_btn"
+	            android:paddingTop="@dimen/lsq__space_10"
+	            android:paddingLeft="@dimen/lsq__space_30"
+	            android:paddingRight="@dimen/lsq__space_30"
+	            android:drawablePadding="5dp"
+	            android:drawableTop="@drawable/lsq_style_default_btn_filter_unselected"
+	            android:text="@string/lsq_filter_text"
+	            android:textColor="@color/lsq_filter_title_default_color"
+	            android:textSize="14sp" />
+   		</RelativeLayout>
+
+</LinearLayout>

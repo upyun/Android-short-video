@@ -5,19 +5,26 @@
     android:layout_height="wrap_content"
     android:gravity="center_vertical">
     
+       <!-- 美颜调节栏-->
+       <include
+        android:visibility="visible"
+	    android:id="@+id/beauty_wrap_layout"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:background="@color/lsq_color_transparent"
+	    layout="@layout/beauty_wrap_layout" />
+       
 	   <!-- 滤镜列表、滤镜调节栏-->
 		<include
 		    android:id="@+id/lsq_filter_layout" 
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
-		    layout="@layout/movie_editor_filter_list_view"
-		    />
+		    layout="@layout/movie_editor_filter_list_view"/>
 	   
       <!-- MV列表 -->          
       <com.upyun.shortvideo.views.MVListView
         android:id="@+id/lsq_mv_list_view"
         style="@style/lsq_mv_list_view"
-        android:visibility="gone"
-       />
+        android:visibility="gone"/>
       
 </RelativeLayout>

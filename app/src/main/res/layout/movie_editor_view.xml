@@ -33,7 +33,7 @@
         android:layout_below="@id/lsq_topBar"
         />
     
-    <!-- filter MV wrap layout -->
+    <!-- Beauty Filter MV wrap layout -->
     <include
         android:id="@+id/filter_mv_wrap_layout"
         android:layout_width="match_parent"
@@ -41,7 +41,8 @@
         android:background="@color/lsq_color_transparent"
         android:layout_above="@+id/lsq_bottom_navigator"
         layout="@layout/filter_mv_wrap_layout" />
-    
+	   
+      	
   	<!-- 配音页面 -->	   
    	<include 
       android:id="@+id/lsq_dubbing_wrap"

@@ -63,13 +63,13 @@ public class ComponentListActivity extends ExpandableListActivity implements TuS
     {
         super.onCreate(icicle);
 
-        setContentView(com.upyun.shortvideo.R.layout.main_layout);
+        setContentView(R.layout.main_layout);
         
 		// 导航栏 实现类
-		mNavigatorBar = (TuNavigatorBar) findViewById(com.upyun.shortvideo.R.id.lsq_navigatorBar);
+		mNavigatorBar = (TuNavigatorBar) findViewById(R.id.lsq_navigatorBar);
 		TuSdkViewHelper.loadView(mNavigatorBar);
-		mNavigatorBar.setTitle(String.format("%s %s", TuSdkContext.getString(com.upyun.shortvideo.R.string.app_name), TuSDKVideo.VIDEO_VERSION));
-		mNavigatorBar.setBackButtonId(com.upyun.shortvideo.R.id.lsq_backButton);
+		mNavigatorBar.setTitle(String.format("%s %s", TuSdkContext.getString(R.string.app_name), TuSDKVideo.VIDEO_VERSION));
+		mNavigatorBar.setBackButtonId(R.id.lsq_backButton);
 		mNavigatorBar.showBackButton(true);
 		mNavigatorBar.delegate = this;
 
@@ -196,7 +196,7 @@ public class ComponentListActivity extends ExpandableListActivity implements TuS
 		    }
 		    else
 		    {
-		    	TuSdk.messageHub().showToast(getApplicationContext(), com.upyun.shortvideo.R.string.lsq_video_empty_error);
+		    	TuSdk.messageHub().showToast(getApplicationContext(), R.string.lsq_video_empty_error);
 		    }
 		}
 	}

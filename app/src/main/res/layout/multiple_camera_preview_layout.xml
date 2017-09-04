@@ -32,7 +32,7 @@
          />
  
     <com.upyun.shortvideo.views.CompoundDrawableTextView
-        android:id="@+id/lsq_filter_btn"
+        android:id="@+id/lsq_smart_beauty_btn"
          android:layout_width="58dp"
          android:layout_height="64dp" 
          app:drawableTop="@drawable/lsq_filter_btn_default"
@@ -49,8 +49,8 @@
          android:shadowDx="0"
          android:shadowDy="0"
          android:shadowRadius="3"
-         android:gravity="center"
-         />
+         android:gravity="center" />
+    
   	 <com.upyun.shortvideo.views.RoundProgressBar
        android:id="@+id/roundProgressBar"
        android:layout_width="110dp"
@@ -65,88 +65,34 @@
        app:innerRoundRadius="30dp"
        app:ringProgressWidth="85dp"
        app:ringProgressColor="#f6a623"
-       app:ringWidth="6dp"
-      
-       />
+       app:ringWidth="6dp" />
     </RelativeLayout>
  
-        <RelativeLayout
+    <RelativeLayout
+        android:id="@+id/lsq_filter_group_bottom_view"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:background="@color/lsq_color_semitransparent"
+        android:layout_alignParentBottom="true"
+        android:paddingLeft="8dp" >
+
+         <include
+             layout="@layout/smart_beauty_layout" />
+         
+    </RelativeLayout>
+
+   <RelativeLayout
+        android:visibility="gone"
         android:id="@+id/lsq_sticker_group_bottom_view"
         android:layout_width="match_parent"
-        android:layout_height="244dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="#7f000000"
+        android:background="@color/lsq_color_semitransparent"
         android:orientation="vertical" >
 
         <com.upyun.shortvideo.views.StickerListView
             android:id="@+id/lsq_sticker_list_view"
-            style="@style/lsq_sticker_list_view" 
-      />
-         </RelativeLayout>
-      <RelativeLayout
-        android:id="@+id/lsq_filter_group_bottom_view"
-        android:layout_width="match_parent"
-        android:layout_height="230dp"
-        android:layout_alignParentBottom="true"
-        android:background="#7f000000"
-        android:paddingBottom="40dp"
-        android:paddingLeft="8dp" >
-
-        <LinearLayout
-            android:id="@+id/lsq_filter_layout"
-            style="@style/lsq_record_filter_list_view"
-            android:orientation="horizontal" >
-
-            <RelativeLayout
-                android:id="@+id/lsq_beautyWrap"
-                android:layout_width="65dp"
-                android:layout_height="90dp"
-                >
-
-                <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
-                    android:id="@+id/lsq_beautyBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:drawablePadding="5dp"
-                    android:drawableTop="@drawable/lsq_style_default_btn_beauty_unselected"
-                    android:gravity="center"
-                    android:text="@string/lsq_text_beauty"
-                    android:textColor="#9fa0a0" />
-            </RelativeLayout>
-
-            <com.upyun.shortvideo.views.FilterListView
-                android:id="@+id/lsq_filter_list_view"
-                style="@style/lsq_record_filter_list_view"
-                android:paddingLeft="8dp" />
-            
-        </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@id/lsq_filter_layout" >
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true">
-
-                <include
-                    android:id="@+id/lsq_filter_config_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    layout="@layout/filter_config_view" />
-            </LinearLayout>
-
-            <include
-                android:id="@+id/lsq_beauty_config_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                layout="@layout/beauty_config_view"
-                 />
-            
-        </RelativeLayout>
+            style="@style/lsq_sticker_list_view" />
         
     </RelativeLayout>
  

@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">又拍云短视频</string>
-
+    
     <!-- SDK -->
     <string name="lsq_sdk_name">UPYUN 涂图</string>
     <string name="lsq_exit_info">再按一次将退出应用</string>
@@ -11,7 +11,7 @@
     <string name="lsq_initing">正在初始化</string>
     <string name="lsq_inited">初始化完成</string>
     <string name="lsq_carema_no_access">无法访问系统相机，请在\r\n设置&#045;&#062;应用程序&#045;&#062;权限&#045;&#062;%1$s&#034; \r\n开启 相机</string>
-
+    
     <!-- refreshListView -->
     <string name="lsq_refresh_list_view_state_visible">下拉刷新</string>
     <string name="lsq_refresh_list_view_state_hidden">加载完成</string>
@@ -19,31 +19,38 @@
     <string name="lsq_refresh_list_view_state_loading">正在加载&#8230;</string>
     <string name="lsq_refresh_list_view_state_lasttime">上次刷新时间：</string>
     <string name="lsq_refresh_list_view_state_load_more">正在加载更多&#8230;</string>
-
+    
     <string name="lsq_filter_set_smoothing">润滑</string>
     <string name="lsq_filter_set_whitening">白皙</string>
     <string name="lsq_filter_set_mixied">效果</string>
-
+    
     <string name="beauty_on">美颜已开启</string>
     <string name="beauty_off">美颜已关闭</string>
-
+    
+    <string name="lsq_strength">强度</string>
+    <string name="lsq_dermabrasion">磨皮</string>
+    <string name="lsq_big_eyes">大眼</string>
+    <string name="lsq_thin_face">瘦脸</string>
+	
+    <!-- 滤镜 -->
+    <string name="lsq_filter_None">无效果</string>
     <string name="lsq_filter_Original">原始</string>
-    <string name="lsq_filter_Fair04">白皙</string>
-    <string name="lsq_filter_Pink005">粉嫩</string>
-    <string name="lsq_filter_Forest04">小森林</string>
-    <string name="lsq_filter_Sundown04">日不落</string>
-    <string name="lsq_filter_Sakura04">樱花草</string>
-    <string name="lsq_filter_Paul04">阿宝色</string>
-    <string name="lsq_filter_Lavender04">薰衣草</string>
-    <string name="lsq_filter_Manhattan04">曼哈顿</string>
-    <string name="lsq_filter_Dusk05">黄昏</string>
-    <string name="lsq_filter_TinyTimes04">小时代</string>
-    <string name="lsq_filter_Vivid04">小清新</string>
-    <string name="lsq_filter_Year195004">1950</string>
-    <string name="lsq_filter_Missing04">想你色</string>
-    <string name="lsq_filter_Grapefruit04">西柚色</string>
-    <string name="lsq_filter_BabyPink004">粉色</string>
-
+    <string name="lsq_filter_Fair01">白皙</string>
+    <string name="lsq_filter_Pink01">粉嫩</string>
+    <string name="lsq_filter_Forest01">小森林</string>
+    <string name="lsq_filter_Sundown">日不落</string>
+    <string name="lsq_filter_Sakura">樱花草</string>
+    <string name="lsq_filter_Paul01">阿宝色</string>
+    <string name="lsq_filter_Lavender">薰衣草</string>
+    <string name="lsq_filter_Manhattan">曼哈顿</string>
+    <string name="lsq_filter_Dusk">黄昏</string>
+    <string name="lsq_filter_TinyTimes">小时代</string>
+    <string name="lsq_filter_Vivid01">小清新</string>
+    <string name="lsq_filter_Year1950">1950</string>
+    <string name="lsq_filter_Missing01">想你色</string>
+    <string name="lsq_filter_Grapefruit01">西柚色</string>
+    <string name="lsq_filter_BabyPink001">粉色</string>
+    
     <!-- 1.8.0 -->
     <string name="lsq_filter_SkinPink016">粉嫩</string>
     <string name="lsq_filter_SkinJelly016">果冻</string>
@@ -54,12 +61,12 @@
     <string name="lsq_filter_MintGreen016">薄荷绿</string>
     <string name="lsq_filter_TinyTimes016">小时代</string>
     <string name="lsq_filter_Year1950016">1950s</string>
-
-
+    
     <string name="live_camera_sample">直播相机示例</string>
     <string name="record_camera_sample">"视频录制示例</string>
     <string name="edit_camera_sample">视频编辑示例</string>
-
+    
+    <!-- 提示 -->
     <string name="new_movie_saving">正在保存视频...</string>
     <string name="new_movie_audio_effect_loading">正在加载音效</string>
     <string name="new_movie_saved">视频已成功保存</string>
@@ -68,14 +75,21 @@
     <string name="over_max_recordTime">超过录制时长</string>
     <string name="min_recordTime">录制时长尚不足 </string>
     <string name="max_recordTime">已到达最大录制时长 </string>
+    <string name="lsq_video_save_ok">视频保存成功</string>
+    <string name="lsq_video_del_ok">视频删除成功</string>
+    <string name="lsq_image_save_ok">图片保存成功</string>
+    <string name="lsq_image_del_ok">图片删除成功</string>
+    <string name="lsq_record_movie_error">录制视频出错</string>
+    <string name="lsq_record_time_invalid">录制时间过短</string>  
+    
     <!-- video editor -->
     <string name="lsq_text_record">录制视频</string>
     <string name="lsq_text_import">导入视频</string>
     <string name="lsq_text_sticker">动态贴纸</string>
     <string name="lsq_text_filter">智能美颜</string>
 
-    <string name="lsq_text_time_tv">00:00</string>
-    <string name="lsq_tusdk">TuSDK</string>
+   	<string name="lsq_text_time_tv">00:00</string>
+   	<string name="lsq_tusdk">TuSDK</string>
     <string name="lsq_back">返回</string>
     <string name="lsq_clip">剪辑</string>
     <string name="lsq_next">下一步</string>
@@ -83,104 +97,83 @@
     <string name="lsq_text_confirm">确认</string>
     <string name="lsq_save">保存</string>
     <string name="lsq_add_filter">视频编辑</string>
-
+    
     <string name="lsq_video_empty_error">视频路径为空</string>
     <string name="lsq_video_play_error">视频播放错误</string>
     <string name="lsq_video_read_prepare">正在读取视频,请稍等...</string>
     <string name="lsq_video_entry_company">杭州微禾迅科技有限公司</string>
     <string name="lsq_button_done">我知道了</string>
     <string name="lsq_carema_alert_title">无法开启相机</string>
-
+    
     <string name="lsq_beauty_text">美颜</string>
     <string name="lsq_text_beauty">美颜</string>
     <string name="lsq_filter_text">滤镜</string>
     <string name="lsq_text_MV">MV</string>
-
+    
+    <!-- MV -->
     <string name="lsq_mv_小猫玩球">猫球球</string>
     <string name="lsq_mv_无语乌鸦">无语乌鸦</string>
     <string name="lsq_mv_怪兽">怪兽</string>
     <string name="lsq_mv_none">无效果</string>
     <string name="lsq_mv_汤圆">汤圆</string>
     <string name="lsq_mv_儿童节">儿童节</string>
-
-    <string name="lsq_text_recordEdit">拍摄视频</string>
-    <string name="lsq_text_editor">编辑视频</string>
-    <string name="lsq_text_play">播放视频</string>
+    
+	<!-- 主页面 -->
+    <string name="lsq_text_recordEdit">录制视频</string>
     <string name="lsq_text_componentList">功能列表</string>
 
-    <string name="lsq_video_save_ok">视频保存成功</string>
-    <string name="lsq_video_del_ok">视频删除成功</string>
-    <string name="lsq_image_save_ok">图片保存成功</string>
-    <string name="lsq_image_del_ok">图片删除成功</string>
-    <string name="lsq_record_movie_error">录制视频出错</string>
-    <string name="lsq_record_time_invalid">录制时间过短</string>
-
+    <!-- 录音权限  -->
     <string name="lsq_record_dialog_title">提示</string>
     <string name="lsq_record_dialog_message">是否开启录音权限</string>
     <string name="lsq_record_dialog_confirm">确认</string>
-    <string name="lsq_record_dialog_cancel">取消</string>
+    <string name="lsq_record_dialog_cancel">取消</string>    
     <string name="lsq_text_delete">删除</string>
-
+    
+    <!-- 功能列表  -->
     <string name="lsq_composite_components">功能套件</string>
     <string name="lsq_common_components">常用组件</string>
     <string name="lsq_custom_components">自定义组件示例</string>
     <string name="lsq_api_usage_example">API 示例</string>
-
-    <string name="lsq_record_preview_editor">断点续拍 + 裁剪 + 编辑</string>
+    <string name="lsq_record_video">录制视频</string>
     <string name="lsq_video_preview_editor">相册导入 + 裁剪 + 编辑</string>
     <string name="lsq_capture_record_camera">拍照录制相机</string>
     <string name="lsq_keep_record_camera">断点续拍相机</string>
     <string name="lsq_normal_record_camera">正常录制相机</string>
     <string name="lsq_album_video_timecut">选择视频 + 时间裁剪</string>
     <string name="lsq_album_video_editor">相册导入 + 视频编辑</string>
-    <string name="lsq_full_screen_record_preview_editor">全屏展示：断点续拍 + 视频编辑</string>
-    <string name="lsq_full_screen_record_preview_ratio_editor">比例自适应：拍照录制 + 时间裁剪+ 视频编辑</string>
+    <string name="lsq_full_screen_record_preview_editor">全屏展示：断点续拍</string>
+    <string name="lsq_full_screen_ratio_cut_editor">比例自适应：相册导入 + 时间裁剪 + 视频编辑</string>
     <string name="lsq_full_screen_album_video_timecut_editor">全屏展示：相册导入+时间裁剪+视频编辑</string>
     <string name="lsq_audio_mixed">多音轨混合</string>
     <string name="lsq_video_bgm">音视频混合</string>
     <string name="lsq_gain_thumbnail">获取缩略图</string>
     <string name="lsq_video_mixed">多视频拼接</string>
     <string name="lsq_album_video_timecut_save">视频时间裁剪</string>
-    <string name="lsq_audio_file_recorder">录制音频</string>
+    <string name="lsq_audio_file_recorder">录制音频</string>    
+    
+    
+    <string name="lsq_album_import">导入</string>
 
-
-    <!-- demo api contents -->
-
-    <string name="lsq_go">选择文件</string>
-    <string name="lsq_clean">清除路径</string>
-    <string name="lsq_comp">合成视频</string>
-    <string name="lsq_open_comp">打开合成视频</string>
-    <string name="lsq_cut">裁剪</string>
-    <string name="lsq_path">路径</string>
-
-    <string name="lsq_segment_path">片段路径:</string>
-    <string name="lsq_muxer_path">合成路径:</string>
-
-    <string name="lsq_start">开始</string>
-    <string name="lsq_pause">暂停</string>
-    <string name="lsq_stop">结束</string>
-    <string name="lsq_audio">音频</string>
-    <string name="lsq_video">视频</string>
-    <string name="lsq_movie">媒体</string>
-    <string name="lsq_play">播放</string>
-    <string name="lsq_start_recorder">开始录制</string>
-    <string name="lsq_pause_recorder">暂停录制</string>
-    <string name="lsq_stop_recorder">结束录制</string>
-    <string name="lsq_album_import">相册导入</string>
+    
+    <!-- 配音音乐 -->
+    <string name="lsq_mixing_lively">欢快</string>
+    <string name="lsq_mixing_oldmovie">老电影</string>
+    <string name="lsq_mixing_relieve">舒缓</string>
+    <!-- 录音 -->
+    <string name="lsq_mixing_nosound">无配音</string>
+    <string name="lsq_mixing_soundrecording">自己录音</string>
+    <string name="lsq_start_audiotrecord_hint">请先长按录音</string>
+    <string name="lsq_audio_record_complete">录音完成</string>
+    <string name="lsq_audio_record_mintime">录制最短时间 1s</string>
     <string name="lsq_text_dubbing">配音</string>
     <string name="lsq_none_dubbing">无配音</string>
     <string name="lsq_mixing_recording">自己录音</string>
     <string name="lsq_congfigview_set_originIntensity">原音强度</string>
     <string name="lsq_congfigview_set_dubbingIntensity">配音强度</string>
     <string name="lsq_voiceRcording_timeRemaining">剩余7秒</string>
-    <string name="lsq_mixing_lively">欢快</string>
-    <string name="lsq_mixing_oldmovie">老电影</string>
-    <string name="lsq_mixing_relieve">舒缓</string>
-    <string name="lsq_mixing_nosound">无配音</string>
-    <string name="lsq_mixing_soundrecording">自己录音</string>
-    <string name="lsq_start_audiotrecord_hint">请先长按录音</string>
-    <string name="lsq_audio_record_complete">录音完成</string>
-    <string name="lsq_audio_record_mintime">录制最短时间 1s</string>
+    
+    <!-- API Example -->
+    <string name="lsq_cut">裁剪</string>
     <string name="lsq_movie_thumb">获取缩略图</string>
     <string name="lsq_audio_delete_hint">请先清除原有录音</string>
     <string name="lsq_audio_initialization_failed_hint">录制失败 请检查是否有录制权限</string>
@@ -218,5 +211,5 @@
     <string name="lsq_movie_cut_text">视频时间裁剪</string>
     <string name="lsq_audio_mixer_delete_success">混合音频删除成功</string>
     <string name="lsq_audio_mixer_delete_failed">混合音频删除失败</string>
-    <string name="lsq_cut_choose_cutrange">请先选择剪裁区域</string>
+    <string name="lsq_cut_choose_cutrange">请先选择裁剪区域</string>
 </resources>

@@ -170,8 +170,8 @@ public class FilterConfigView extends TuSdkRelativeLayout
 
         for (FilterArg arg : params.getArgs())
         {
-        	// 此处只设置美颜参数，磨皮(smoothing)参数忽略
         	if (arg.equalsKey("smoothing")) continue;
+        	
             FilterConfigSeekbar seekbar = this.buildAppendSeekbar(configWrap, this.mSeekHeigth);
             if (seekbar != null)
             {
@@ -217,9 +217,43 @@ public class FilterConfigView extends TuSdkRelativeLayout
         public void onSeekbarDataChanged(FilterConfigSeekbar seekbar, FilterArg arg)
         {
             requestRender();
+            
+            if (getSeekBarDelegate() != null)
+            	getSeekBarDelegate().onSeekbarDataChanged(seekbar, arg);
         }
     };
 
+    /**
+     * 滤镜配置拖动栏状态委托
+     *
+     * @author Clear
+     */
+    public interface FilterConfigViewSeekBarDelegate
+    {
+        /**
+         * 配置数据改变
+         *
+         * @param seekbar
+         *            滤镜配置拖动栏
+         * @param arg
+         *            滤镜参数
+         */
+        public void onSeekbarDataChanged(FilterConfigSeekbar seekbar, FilterArg arg);
+
+    }
+    
+    private FilterConfigViewSeekBarDelegate mSeekBarDelegate;
+    
+    public void setSeekBarDelegate(FilterConfigViewSeekBarDelegate seekBarDelegate)
+    {
+    	this.mSeekBarDelegate = seekBarDelegate;
+    }
+    
+    public FilterConfigViewSeekBarDelegate getSeekBarDelegate()
+    {
+    	return this.mSeekBarDelegate;
+    }
+    
     /**
      * 按钮点击事件
      */

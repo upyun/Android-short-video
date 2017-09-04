@@ -50,7 +50,7 @@ public class TuApplication extends TuSdkApplication
 		 */
 		
 		// 初始化 Bugly SDK
-		CrashReport.initCrashReport(getApplicationContext(), "4ec0dd4b40", true);
+//		CrashReport.initCrashReport(getApplicationContext(), "4ec0dd4b40", true);
 
 		// 设置资源类，当 Application id 与 Package Name 不相同时，必须手动调用该方法, 且在 init 之前执行。
 		// TuSdk.setResourcePackageClazz(org.lasque.tusdkdemo.R.class);
@@ -66,8 +66,10 @@ public class TuApplication extends TuSdkApplication
 	     *
 	     *  @param appkey 应用秘钥 (请前往 http://tusdk.com 申请秘钥)
 	     */
+//		this.initPreLoader(this.getApplicationContext(), "c863a73a6e0294bc-04-ewdjn1");
 		this.initPreLoader(this.getApplicationContext(), "f012a13bc0ba127d-01-dmlup1");
-		
+
+
 		/**
 	     *  指定开发模式,需要与lsq_tusdk_configs.json中masters.key匹配， 如果找不到devType将默认读取master字段
 	     *  如果一个应用对应多个包名，则可以使用这种方式来进行集成调试。

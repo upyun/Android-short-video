@@ -13,7 +13,6 @@ import org.lasque.tusdk.movie.muxer.TuSDKMovieSplicer;
 import org.lasque.tusdk.movie.muxer.TuSDKMovieSplicer.TuSDKMovieSegment;
 import org.lasque.tusdk.movie.muxer.TuSDKMovieSplicer.TuSDKMovieSplicerOption;
 import org.lasque.tusdk.movie.player.TuSDKMoviePlayer;
-import com.upyun.shortvideo.R;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -62,24 +61,24 @@ public class MovieSplicerActivity extends Activity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.movie_splicer_activity);
+        setContentView(com.upyun.shortvideo.R.layout.movie_splicer_activity);
         initView();
     }
     
     public void initView()
     {
-    	mBackBtn = (TextView) findViewById(R.id.lsq_back);
+    	mBackBtn = (TextView) findViewById(com.upyun.shortvideo.R.id.lsq_back);
 		mBackBtn.setOnClickListener(mOnClickListener);
-		TextView titleView = (TextView) findViewById(R.id.lsq_title);
+		TextView titleView = (TextView) findViewById(com.upyun.shortvideo.R.id.lsq_title);
 		titleView.setText(TuSdkContext.getString("lsq_movie_splicer_text"));
-		TextView nextBtn = (TextView) findViewById(R.id.lsq_next);
+		TextView nextBtn = (TextView) findViewById(com.upyun.shortvideo.R.id.lsq_next);
 		nextBtn.setVisibility(View.GONE);
     	
-    	mMuxerButton = (Button)this.findViewById(R.id.lsq_movie_mixer_btn);
+    	mMuxerButton = (Button)this.findViewById(com.upyun.shortvideo.R.id.lsq_movie_mixer_btn);
     	mMuxerButton.setOnClickListener(mOnClickListener);
-    	mPreViewOne = (SurfaceView) findViewById(R.id.lsq_movie_preview_one);
+    	mPreViewOne = (SurfaceView) findViewById(com.upyun.shortvideo.R.id.lsq_movie_preview_one);
     	mPreViewOne.getLayoutParams().height = TuSdkContext.getScreenSize().width*9/16;
-		mPreViewTwo = (SurfaceView) findViewById(R.id.lsq_movie_preview_two);
+		mPreViewTwo = (SurfaceView) findViewById(com.upyun.shortvideo.R.id.lsq_movie_preview_two);
 		mPreViewTwo.getLayoutParams().height = TuSdkContext.getScreenSize().width*9/16;
 		initMediaPlayer();
     }
@@ -88,13 +87,13 @@ public class MovieSplicerActivity extends Activity
 	{
 		mMediaPlayerOne = TuSDKMoviePlayer.createMoviePlayer();
 		mMediaPlayerOne.setLooping(true);
-		Uri firstVideoUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.tusdk_sample_splice_video);
+		Uri firstVideoUri = Uri.parse("android.resource://" + getPackageName() + "/" + com.upyun.shortvideo.R.raw.tusdk_sample_splice_video);
         mMoviePathList.add(firstVideoUri);
         mMediaPlayerOne.initVideoPlayer(this, firstVideoUri, mPreViewOne);
         
         mMediaPlayerTwo = TuSDKMoviePlayer.createMoviePlayer();
         mMediaPlayerTwo.setLooping(true);
-        Uri secondVideoUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.tusdk_sample_video);
+        Uri secondVideoUri = Uri.parse("android.resource://" + getPackageName() + "/" + com.upyun.shortvideo.R.raw.tusdk_sample_video);
         mMoviePathList.add(secondVideoUri);
         mMediaPlayerTwo.initVideoPlayer(this, secondVideoUri, mPreViewTwo);		
 	}
@@ -132,10 +131,10 @@ public class MovieSplicerActivity extends Activity
 		{
 			switch (v.getId())
 			{
-			case R.id.lsq_back:
+			case com.upyun.shortvideo.R.id.lsq_back:
 				finish();
 				break;
-			case R.id.lsq_movie_mixer_btn:
+			case com.upyun.shortvideo.R.id.lsq_movie_mixer_btn:
 				 handleMuxerMovieFragmentData(getMovieResultPath());
 			  	 break;	
 			}
@@ -205,21 +204,21 @@ public class MovieSplicerActivity extends Activity
 		@Override
 		public void onStart()
 		{
-			String hintMsg = getResources().getString(R.string.lsq_movie_splicer_processing);
+			String hintMsg = getResources().getString(com.upyun.shortvideo.R.string.lsq_movie_splicer_processing);
 			TuSdk.messageHub().setStatus(MovieSplicerActivity.this, hintMsg);
 		}
 		
 		@Override
 		public void onError(Exception exception)
 		{
-			String hintMsg = getResources().getString(R.string.lsq_movie_splicer_error);
+			String hintMsg = getResources().getString(com.upyun.shortvideo.R.string.lsq_movie_splicer_error);
 			TuSdk.messageHub().showError(MovieSplicerActivity.this, hintMsg);
 		}
 		
 		@Override
 		public void onDone() 
 		{
-			String hintMsg = getResources().getString(R.string.lsq_movie_splicer_success);
+			String hintMsg = getResources().getString(com.upyun.shortvideo.R.string.lsq_movie_splicer_success);
 			TuSdk.messageHub().showToast(MovieSplicerActivity.this, hintMsg);
 			refreshFile(new File(mMuxerResultPath));
 		}

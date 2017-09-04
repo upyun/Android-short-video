@@ -15,7 +15,7 @@ import org.lasque.tusdk.core.TuSdkContext;
 import org.lasque.tusdk.core.encoder.video.TuSDKVideoEncoderSetting;
 import org.lasque.tusdk.core.struct.TuSdkSize;
 import org.lasque.tusdk.core.video.TuSDKVideoResult;
-import com.upyun.shortvideo.R;
+
 import com.upyun.shortvideo.component.MovieRecordKeepModeActivity;
 import com.upyun.shortvideo.views.record.MovieRecordView;
 
@@ -35,6 +35,7 @@ public class MovieRecordFullScreenActivity extends MovieRecordKeepModeActivity
 		
 		// 设置录制界面背景为透明色
 		setRecordViewBackgroundColor(getRecordView());
+		getRecordView().setSquareSticker(false);
 		
 		hideNavigationBar();
         TuSdk.messageHub().applyToViewWithNavigationBarHidden(true);
@@ -50,8 +51,8 @@ public class MovieRecordFullScreenActivity extends MovieRecordKeepModeActivity
 	private void setRecordViewBackgroundColor(MovieRecordView recordView)
 	{
 		/** 全透明 colorId */
-		int transparentColorId = R.color.lsq_color_transparent;
-		int semiTransparentColorId = R.color.lsq_color_semitransparent;
+		int transparentColorId = com.upyun.shortvideo.R.color.lsq_color_transparent;
+		int semiTransparentColorId = com.upyun.shortvideo.R.color.lsq_color_semitransparent;
 		
 		recordView.getFilterBottomView().setBackgroundColor(TuSdkContext.getColor(semiTransparentColorId));
 		recordView.getStickerBottomView().setBackgroundColor(TuSdkContext.getColor(semiTransparentColorId));
@@ -91,7 +92,5 @@ public class MovieRecordFullScreenActivity extends MovieRecordKeepModeActivity
 	public void onMovieRecordComplete(TuSDKVideoResult result)
 	{
 		super.onMovieRecordComplete(result);
-		startActivityWithClassName(MovieEditorFullScreenActivity.class.getName(), 
-    			result.videoPath.toString());
 	}
 }

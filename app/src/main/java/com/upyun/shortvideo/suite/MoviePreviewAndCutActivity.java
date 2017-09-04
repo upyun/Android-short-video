@@ -23,14 +23,12 @@ import org.lasque.tusdk.movie.player.TuSDKMoviePlayer.TuSDKMoviePlayerDelegate;
 import org.lasque.tusdk.video.editor.TuSDKVideoImageExtractor;
 import org.lasque.tusdk.video.editor.TuSDKVideoImageExtractor.TuSDKVideoImageExtractorDelegate;
 import org.lasque.tusdk.video.mixer.TuSDKMediaDataSource;
-import com.upyun.shortvideo.R;
+
 import com.upyun.shortvideo.SimpleCameraActivity;
 import com.upyun.shortvideo.component.MovieEditorActivity;
 import com.upyun.shortvideo.views.HVScrollView;
 import com.upyun.shortvideo.views.HVScrollView.OnScrollChangeListener;
 import com.upyun.shortvideo.views.MovieRangeSelectionBar;
-import com.upyun.shortvideo.views.MovieRangeSelectionBar.OnCursorChangeListener;
-import com.upyun.shortvideo.views.MovieRangeSelectionBar.Type;
 
 import android.content.Intent;
 import android.content.res.Resources;
@@ -55,12 +53,12 @@ import android.widget.TextView;
  * 
  * @author leone.xia
  */
-public class MoviePreviewAndCutActivity extends SimpleCameraActivity  
+public class MoviePreviewAndCutActivity extends SimpleCameraActivity implements TuSDKMoviePlayerDelegate
 {
 	/** requestCode */
 	private static final int REQUEST_CODE  = 0;
 	/** 非比例自适应 */
-	private final boolean RATIO_ADAPTION = false;
+	protected boolean RATIO_ADAPTION = false;
 	/** 播放  Button */
 	private Button mPlayButton;
 	/** 返回  TextView */
@@ -100,7 +98,7 @@ public class MoviePreviewAndCutActivity extends SimpleCameraActivity
 	/** 滚动控件 */
 	private HVScrollView mHVScrollView;
 	/** 用于显示视频  */
-	private SurfaceView mSurfaceView;
+	protected SurfaceView mSurfaceView;
 	/** 视频播放模块布局 */
 	private FrameLayout mMovieLayout;
 	/** 选择时间范围模块布局 */
@@ -110,11 +108,11 @@ public class MoviePreviewAndCutActivity extends SimpleCameraActivity
     /** 视频播放地址  */
     private String mVideoPath ;
     /** 记录时间时长 */
-    private int mVideoTime;
+    private float mVideoTime;
     /** 裁剪视频的开始时间 */
-    private static int mStartTime;
+    private static float mStartTime;
     /** 裁剪视频的结束时间 */
-    private static int mEndTime;
+    private static float mEndTime;
     /** 是否播放视频 */
     private boolean mIsPlaying;
     /** 视频是否播放完成 */
@@ -127,13 +125,16 @@ public class MoviePreviewAndCutActivity extends SimpleCameraActivity
 	private int mScreenWidth;
 	/** 记录屏幕高度 */
 	private int mScreenHeight;
+    /** 跳转的类  */
+    private Class<?> mIntentClass = MovieEditorActivity.class;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.movie_range_selection_activity);
+		setContentView(com.upyun.shortvideo.R.layout.movie_range_selection_activity);
 		initView();
+		setIntentClass(MovieEditorActivity.class);
 	}
 
 	/** 初始化视图 */
@@ -141,33 +142,33 @@ public class MoviePreviewAndCutActivity extends SimpleCameraActivity
 	{
 		mVideoPath = getIntent().getStringExtra("videoPath");
 
-		mBackTextView = (TextView) this.findViewById(R.id.lsq_back);
+		mBackTextView = (TextView) this.findViewById(com.upyun.shortvideo.R.id.lsq_back);
 		mBackTextView.setOnClickListener(mOnClickListener);
 		
-		mTitleTextView = (TextView) this.findViewById(R.id.lsq_title);
-		mTitleTextView.setText(R.string.lsq_clip);
+		mTitleTextView = (TextView) this.findViewById(com.upyun.shortvideo.R.id.lsq_title);
+		mTitleTextView.setText(com.upyun.shortvideo.R.string.lsq_clip);
 		
-		mNextTextView = (TextView) this.findViewById(R.id.lsq_next);
+		mNextTextView = (TextView) this.findViewById(com.upyun.shortvideo.R.id.lsq_next);
 		mNextTextView.setOnClickListener(mOnClickListener);
 		
-		mPlayTextView  = (TextView) this.findViewById(R.id.lsq_play_time);
-		mLeftTextView  = (TextView) this.findViewById(R.id.lsq_left_time);
-		mRightTextView  = (TextView) this.findViewById(R.id.lsq_right_time);
+		mPlayTextView  = (TextView) this.findViewById(com.upyun.shortvideo.R.id.lsq_play_time);
+		mLeftTextView  = (TextView) this.findViewById(com.upyun.shortvideo.R.id.lsq_left_time);
+		mRightTextView  = (TextView) this.findViewById(com.upyun.shortvideo.R.id.lsq_right_time);
 		
-		mPlayTextView.setText(R.string.lsq_text_time_tv);
-		mLeftTextView.setText(R.string.lsq_text_time_tv);
-		mRightTextView.setText(R.string.lsq_text_time_tv);
+		mPlayTextView.setText(com.upyun.shortvideo.R.string.lsq_text_time_tv);
+		mLeftTextView.setText(com.upyun.shortvideo.R.string.lsq_text_time_tv);
+		mRightTextView.setText(com.upyun.shortvideo.R.string.lsq_text_time_tv);
 		
-        mPlayButton = (Button) this.findViewById(R.id.lsq_play_btn);
+        mPlayButton = (Button) this.findViewById(com.upyun.shortvideo.R.id.lsq_play_btn);
         mPlayButton.setOnClickListener(mOnClickListener);
         
-        mHVScrollView = (HVScrollView) this.findViewById(R.id.hvScrollView);
+        mHVScrollView = (HVScrollView) this.findViewById(com.upyun.shortvideo.R.id.hvScrollView);
         
-        mSurfaceView = (SurfaceView) this.findViewById(R.id.lsq_video_view);
+        mSurfaceView = (SurfaceView) this.findViewById(com.upyun.shortvideo.R.id.lsq_video_view);
         mSurfaceView.setOnClickListener(mOnClickListener);
         
-        mMovieLayout = (FrameLayout) this.findViewById(R.id.movie_layout);
-        mSelectTimeLayout = (LinearLayout) this.findViewById(R.id.time_layout);
+        mMovieLayout = (FrameLayout) this.findViewById(com.upyun.shortvideo.R.id.movie_layout);
+        mSelectTimeLayout = (LinearLayout) this.findViewById(com.upyun.shortvideo.R.id.time_layout);
         
         showPlayButton();
         
@@ -182,14 +183,14 @@ public class MoviePreviewAndCutActivity extends SimpleCameraActivity
         
         Uri uri = mVideoPath == null ? null : Uri.fromFile(new File(mVideoPath));
         mPlayer.initVideoPlayer(this, uri, mSurfaceView);
-        mPlayer.setDelegate(mMoviePlayerDelegate);
+        mPlayer.setDelegate(this);
 	}
 	
 	private void initRangeSelectionBar()
 	{
-        mRangeSelectionBar = (MovieRangeSelectionBar) this.findViewById(R.id.lsq_seekbar);
+        mRangeSelectionBar = (MovieRangeSelectionBar) this.findViewById(com.upyun.shortvideo.R.id.lsq_seekbar);
         mRangeSelectionBar.setShowPlayCursor(false);
-        mRangeSelectionBar.setType(Type.Clip);
+        mRangeSelectionBar.setType(MovieRangeSelectionBar.Type.Clip);
         mRangeSelectionBar.setLeftSelection(0);
         mRangeSelectionBar.setPlaySelection(0);
         mRangeSelectionBar.setRightSelection(100);
@@ -268,7 +269,7 @@ public class MoviePreviewAndCutActivity extends SimpleCameraActivity
 		if (mPlayButton != null)
 		{   
 			mPlayButton.setVisibility(View.VISIBLE);
-			mPlayButton.setBackgroundResource(R.drawable.lsq_style_default_crop_btn_record);
+			mPlayButton.setBackgroundResource(com.upyun.shortvideo.R.drawable.lsq_style_default_crop_btn_record);
 		}		
 	}
 	
@@ -319,7 +320,7 @@ public class MoviePreviewAndCutActivity extends SimpleCameraActivity
 	/** 点击下一步按钮  */
 	private void handleClickNextButton()
 	{
-		Intent intent = new Intent(this, MovieEditorActivity.class);
+		Intent intent = new Intent(this, mIntentClass);
 		intent.putExtra("startTime", mStartTime);
 		intent.putExtra("endTime", mEndTime);
 		intent.putExtra("videoPath", mVideoPath);
@@ -330,7 +331,13 @@ public class MoviePreviewAndCutActivity extends SimpleCameraActivity
 		intent.putExtra("ratioAdaption", RATIO_ADAPTION);
 		startActivityForResult(intent, REQUEST_CODE);
 	}
-
+	
+	protected void setIntentClass(Class<?> clazz)
+	{
+		if (clazz == null) clazz = MovieEditorActivity.class;
+		this.mIntentClass = clazz;
+	}
+	
     @Override
     protected void onResume()
     {
@@ -385,14 +392,14 @@ public class MoviePreviewAndCutActivity extends SimpleCameraActivity
 		{
 			switch (v.getId())
 			{
-			case R.id.lsq_back:
+			case com.upyun.shortvideo.R.id.lsq_back:
 				onBackPressed();
 				break;
-			case R.id.lsq_play_btn:
-			case R.id.lsq_video_view:
+			case com.upyun.shortvideo.R.id.lsq_play_btn:
+			case com.upyun.shortvideo.R.id.lsq_video_view:
 				handleClickSurfaceView();
 				break;
-			case R.id.lsq_next:
+			case com.upyun.shortvideo.R.id.lsq_next:
 				handleClickNextButton();
 				break;
 
@@ -403,7 +410,7 @@ public class MoviePreviewAndCutActivity extends SimpleCameraActivity
 	};
 
     /** 用于监听裁剪控件  */
-	private OnCursorChangeListener mOnCursorChangeListener = new OnCursorChangeListener()
+	private MovieRangeSelectionBar.OnCursorChangeListener mOnCursorChangeListener = new MovieRangeSelectionBar.OnCursorChangeListener()
 	{
 		
 		@Override
@@ -437,7 +444,7 @@ public class MoviePreviewAndCutActivity extends SimpleCameraActivity
 			if (mPlayer == null) return;
 			
 			mIsPlaying = false;
-			mEndTime = percent*mVideoTime/100;
+			mEndTime = percent*mVideoTime/(float)100;
 			seekToPreview(mEndTime,null);
 			updateRightCursorTime();
 			updatePlayCursorTime();
@@ -458,11 +465,11 @@ public class MoviePreviewAndCutActivity extends SimpleCameraActivity
 		}
 	};
 	
-	public void seekToPreview(final int time,final OnSeekToPreviewListener listener)
+	public void seekToPreview(final float time,final OnSeekToPreviewListener listener)
 	{
 		if (mPlayer == null) return;
 		
-		mPlayer.seekToPreview(time,listener);
+		mPlayer.seekToPreview((int)time,listener);
 	}
 	
 	/** 设置裁剪控件开始与结束的最小间隔距离 */
@@ -476,12 +483,12 @@ public class MoviePreviewAndCutActivity extends SimpleCameraActivity
 		mRangeSelectionBar.setCursorSpace(space);
 	}
 	
-	public void updateTextViewTime(TextView textView,int time)
+	public void updateTextViewTime(TextView textView,float time)
 	{
 		if (textView != null)
 		{
 			StringBuffer sb= new StringBuffer();
-			int tmpTime = time/1000;
+			int tmpTime = (int) (time/1000);
 			
 			int temp=(tmpTime%3600/60);
 			sb.append((temp<10)?("0"+temp+":"):(temp+":"));
@@ -634,7 +641,7 @@ public class MoviePreviewAndCutActivity extends SimpleCameraActivity
         
          Resources resources=getResources();
         // 显示title布局高度 ,单位像素
-        int titleHeight = (int) resources.getDimension(R.dimen.lsq_title_height);
+        int titleHeight = (int) resources.getDimension(com.upyun.shortvideo.R.dimen.lsq_title_height);
         // 显示时间选择范围布局高度
         int selectTimeHeight = (int) (mScreenHeight - titleHeight-mScreenWidth);
         RectF boundingRect = new RectF();
@@ -692,7 +699,7 @@ public class MoviePreviewAndCutActivity extends SimpleCameraActivity
     {
     	if (mPlayer == null || mRangeSelectionBar == null || !mIsPlaying) return;
   		
-		int  time = progress * mVideoTime / 100;
+		int  time = (int) (progress * mVideoTime / 100);
     	if (time < mStartTime) return;
   		if (time<mEndTime)
   		{
@@ -709,41 +716,38 @@ public class MoviePreviewAndCutActivity extends SimpleCameraActivity
   			showPlayButton();
   		}
     }
-    
-	private TuSDKMoviePlayerDelegate mMoviePlayerDelegate = new TuSDKMoviePlayerDelegate()
+
+	@Override
+	public void onStateChanged(PlayerState state)
 	{
+		playerStateChanged(state);
+	}
 
-		@Override
-		public void onStateChanged(PlayerState state) 
-		{
-			playerStateChanged(state);
-		}
+	@Override
+	public void onVideSizeChanged(MediaPlayer mp, int width, int height)
+	{
+		scaleVideoViews(width,height);		
+	}
 
-		@Override
-		public void onVideSizeChanged(MediaPlayer mp,int width, int height)
-		{
-			scaleVideoViews(width,height);
-		}
+	@Override
+	public void onProgress(int progress)
+	{
+		updateProgress(progress);
+	}
 
-		@Override
-		public void onProgress(int progress)
-		{
-			updateProgress(progress);
-		}
+	@Override
+	public void onSeekComplete()
+	{
+	}
 
-		@Override
-		public void onSeekComplete()
-		{
-		}
-
-		@Override
-		public void onCompletion() 
-		{
-  			if (mRangeSelectionBar.isShowPlayCursor())
-  				mRangeSelectionBar.setShowPlayCursor(false);
-  			mIsVideoFinished = true;
-  			pausePlayer();
-  			showPlayButton();
-		}
-	};
+	@Override
+	public void onCompletion()
+	{
+		if (mRangeSelectionBar.isShowPlayCursor())
+				mRangeSelectionBar.setShowPlayCursor(false);
+		
+		mIsVideoFinished = true;
+		pausePlayer();
+		showPlayButton();
+	}
 }

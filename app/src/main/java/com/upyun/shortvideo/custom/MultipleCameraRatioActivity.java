@@ -16,7 +16,7 @@ import com.upyun.shortvideo.component.MultipleCameraActivity;
  * 
  * @author LiuHang
  */
-public class MultipleCameraRatioActivity extends MultipleCameraActivity 
+public class MultipleCameraRatioActivity extends MultipleCameraActivity
 {
 	
 	@Override

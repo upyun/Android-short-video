@@ -13,7 +13,6 @@ import org.lasque.tusdk.core.TuSdkContext;
 import org.lasque.tusdk.core.seles.tusdk.FilterLocalPackage;
 import org.lasque.tusdk.core.view.TuSdkImageView;
 import org.lasque.tusdk.core.view.listview.TuSdkCellRelativeLayout;
-import com.upyun.shortvideo.R;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -139,7 +138,7 @@ public class MixingCellView extends TuSdkCellRelativeLayout<MixingCellView.Mixin
 	{
 		if (mThumbView == null)
 		{
-			mThumbView = (TuSdkImageView)findViewById(R.id.lsq_item_image);
+			mThumbView = (TuSdkImageView)findViewById(com.upyun.shortvideo.R.id.lsq_item_image);
 		}
 		return mThumbView;
 	}
@@ -148,7 +147,7 @@ public class MixingCellView extends TuSdkCellRelativeLayout<MixingCellView.Mixin
 	{
 		if (mMixingBorderView == null)
 		{
-			 mMixingBorderView = (RelativeLayout)findViewById(R.id.lsq_item_border);
+			 mMixingBorderView = (RelativeLayout)findViewById(com.upyun.shortvideo.R.id.lsq_item_border);
 		}
 		return mMixingBorderView;
 	}
@@ -157,7 +156,7 @@ public class MixingCellView extends TuSdkCellRelativeLayout<MixingCellView.Mixin
 	{
 		if (mTitlebView == null)
 		{
-			mTitlebView = (TextView)findViewById(R.id.lsq_item_title);
+			mTitlebView = (TextView)findViewById(com.upyun.shortvideo.R.id.lsq_item_title);
 		}
 		return mTitlebView;
 	}

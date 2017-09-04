@@ -21,7 +21,6 @@ import org.lasque.tusdk.movie.player.TuSDKMoviePlayer.TuSDKMoviePlayerDelegate;
 import org.lasque.tusdk.video.editor.TuSDKVideoImageExtractor;
 import org.lasque.tusdk.video.editor.TuSDKVideoImageExtractor.TuSDKVideoImageExtractorDelegate;
 import org.lasque.tusdk.video.mixer.TuSDKMediaDataSource;
-import com.upyun.shortvideo.R;
 
 import android.app.Activity;
 import android.content.Context;
@@ -64,23 +63,23 @@ public class MovieThumbActivity extends Activity
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.movie_thumb_activity);
+		setContentView(com.upyun.shortvideo.R.layout.movie_thumb_activity);
 		initView();
 	}
 	
 	private void initView()
 	{
-		mBackBtn = (TextView) findViewById(R.id.lsq_back);
+		mBackBtn = (TextView) findViewById(com.upyun.shortvideo.R.id.lsq_back);
 		mBackBtn.setOnClickListener(mOnClickListener);
-		TextView titleView = (TextView) findViewById(R.id.lsq_title);
+		TextView titleView = (TextView) findViewById(com.upyun.shortvideo.R.id.lsq_title);
 		titleView.setText(TuSdkContext.getString("lsq_movie_thumb"));
-		TextView nextBtn = (TextView) findViewById(R.id.lsq_next);
+		TextView nextBtn = (TextView) findViewById(com.upyun.shortvideo.R.id.lsq_next);
 		nextBtn.setVisibility(View.GONE);
-		SurfaceView preview = (SurfaceView) findViewById(R.id.lsq_preview);
+		SurfaceView preview = (SurfaceView) findViewById(com.upyun.shortvideo.R.id.lsq_preview);
 		iniMoviePlayer(preview);
-		mLoadThumbButton = (Button) findViewById(R.id.lsq_load_thumb_btn);
+		mLoadThumbButton = (Button) findViewById(com.upyun.shortvideo.R.id.lsq_load_thumb_btn);
 		mLoadThumbButton.setOnClickListener(mOnClickListener);
-		mThumbList = (GridView) findViewById(R.id.lsq_movie_thumb_list);
+		mThumbList = (GridView) findViewById(com.upyun.shortvideo.R.id.lsq_movie_thumb_list);
 		mThumbList.setNumColumns(3);
 		mThumbList.setColumnWidth(TuSdkContext.dip2px(56));
 		mThumbList.setHorizontalSpacing(TuSdkContext.dip2px(5));
@@ -145,7 +144,7 @@ public class MovieThumbActivity extends Activity
 			public void onVideoImageListDidLoaded(List<Bitmap> images) 
 			{
 				mThumbList.setAdapter(new MovieThumbAdapter(MovieThumbActivity.this, images));
-				String hintMsg = getResources().getString(R.string.lsq_refresh_list_view_state_hidden);
+				String hintMsg = getResources().getString(com.upyun.shortvideo.R.string.lsq_refresh_list_view_state_hidden);
 				TuSdk.messageHub().showToast(MovieThumbActivity.this, hintMsg);
 			}
 			
@@ -158,7 +157,7 @@ public class MovieThumbActivity extends Activity
 	
 	private Uri getVideoPath()
 	{
-		Uri videoPathUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.tusdk_sample_video);
+		Uri videoPathUri = Uri.parse("android.resource://" + getPackageName() + "/" + com.upyun.shortvideo.R.raw.tusdk_sample_video);
 		return videoPathUri;
 	}
 	
@@ -176,7 +175,7 @@ public class MovieThumbActivity extends Activity
 				if (mThumbList.getAdapter()!= null) return;
 				
 				loadVideoThumbList(getVideoPath().toString());
-				String hintMsg = getResources().getString(R.string.lsq_movie_thumb_loading);
+				String hintMsg = getResources().getString(com.upyun.shortvideo.R.string.lsq_movie_thumb_loading);
 				TuSdk.messageHub().setStatus(MovieThumbActivity.this, hintMsg);
 			}
 		}

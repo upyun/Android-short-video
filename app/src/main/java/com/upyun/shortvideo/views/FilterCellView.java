@@ -13,11 +13,12 @@ import org.lasque.tusdk.core.TuSdkContext;
 import org.lasque.tusdk.core.seles.tusdk.FilterLocalPackage;
 import org.lasque.tusdk.core.view.TuSdkImageView;
 import org.lasque.tusdk.core.view.listview.TuSdkCellRelativeLayout;
-import com.upyun.shortvideo.R;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.AttributeSet;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -67,7 +68,7 @@ public class FilterCellView extends TuSdkCellRelativeLayout<String>
 		
 		Bitmap filterImage = TuSdkContext.getRawBitmap(filterImageName);
 		
-		if (this.getImageView() != null)
+		if (this.getImageView() != null && filterImage != null)
 		{
 			getImageView().setImageBitmap(filterImage);
 		}
@@ -76,13 +77,21 @@ public class FilterCellView extends TuSdkCellRelativeLayout<String>
 		{
 			getTitleView().setText(TuSdkContext.getString("lsq_filter_" + filterCode));
 		}
+		
+		RelativeLayout layout = (RelativeLayout) this.findViewById(com.upyun.shortvideo.R.id.lsq_none_layout);
+		ImageView imageView = (ImageView) this.findViewById(com.upyun.shortvideo.R.id.lsq_item_none);
+		if (layout != null)
+		{
+			layout.setVisibility(((Integer)getTag() == 0)?View.VISIBLE:View.GONE);
+			imageView.setVisibility(((Integer)getTag() == 0)?View.VISIBLE:View.GONE);
+		}
 	}
 	
 	public TuSdkImageView getImageView()
 	{
 		if (mThumbView == null)
 		{
-			mThumbView = (TuSdkImageView)findViewById(R.id.lsq_item_image);
+			mThumbView = (TuSdkImageView)findViewById(com.upyun.shortvideo.R.id.lsq_item_image);
 		}
 		return mThumbView;
 	}
@@ -91,7 +100,7 @@ public class FilterCellView extends TuSdkCellRelativeLayout<String>
 	{
 		if (mFilterBorderView == null)
 		{
-			 mFilterBorderView = (RelativeLayout)findViewById(R.id.lsq_item_border);
+			 mFilterBorderView = (RelativeLayout)findViewById(com.upyun.shortvideo.R.id.lsq_item_border);
 		}
 		return mFilterBorderView;
 	}
@@ -100,7 +109,7 @@ public class FilterCellView extends TuSdkCellRelativeLayout<String>
 	{
 		if (mTitlebView == null)
 		{
-			mTitlebView = (TextView)findViewById(R.id.lsq_item_title);
+			mTitlebView = (TextView)findViewById(com.upyun.shortvideo.R.id.lsq_item_title);
 		}
 		return mTitlebView;
 	}

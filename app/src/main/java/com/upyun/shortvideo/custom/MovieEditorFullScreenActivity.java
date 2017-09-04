@@ -14,7 +14,7 @@ import java.io.IOException;
 
 import org.lasque.tusdk.core.TuSdkContext;
 import org.lasque.tusdk.core.struct.TuSdkSize;
-import com.upyun.shortvideo.R;
+
 import com.upyun.shortvideo.component.MovieEditorActivity;
 
 import android.graphics.Rect;
@@ -41,7 +41,7 @@ public class MovieEditorFullScreenActivity extends MovieEditorActivity
 		super.onCreate(savedInstanceState);
 		
 		// 背景设置为透明效果
-		RelativeLayout topBarLayout = (RelativeLayout) findViewById(R.id.lsq_topBar);
+		RelativeLayout topBarLayout = (RelativeLayout) findViewById(com.upyun.shortvideo.R.id.lsq_topBar);
 		topBarLayout.setBackgroundColor(TuSdkContext.getColor("lsq_color_transparent"));
 		getBottomNavigationLayout().setBackgroundColor(TuSdkContext.getColor("lsq_color_transparent"));
 		getMixingListViewWrap().setBackgroundColor(TuSdkContext.getColor("lsq_color_transparent"));

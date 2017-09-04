@@ -17,7 +17,7 @@
             android:ellipsize="end"
             android:gravity="center"
             android:lines="1"
-            android:text="@string/lsq_beauty_text"
+            android:text="@string/lsq_strength"
             android:textColor="@color/lsq_seekbar_drag_color"
             android:textSize="14sp" />
 

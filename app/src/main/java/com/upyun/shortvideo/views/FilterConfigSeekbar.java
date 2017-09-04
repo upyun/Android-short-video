@@ -11,6 +11,8 @@ package com.upyun.shortvideo.views;
 
 import org.lasque.tusdk.core.TuSdkContext;
 import org.lasque.tusdk.core.seles.SelesParameters.FilterArg;
+import org.lasque.tusdk.core.seles.SelesParameters.FilterParameterInterface;
+import org.lasque.tusdk.core.seles.sources.SelesOutInput;
 import org.lasque.tusdk.core.view.TuSdkRelativeLayout;
 import org.lasque.tusdk.impl.view.widget.TuSeekBar;
 import org.lasque.tusdk.impl.view.widget.TuSeekBar.TuSeekBarDelegate;
@@ -76,6 +78,8 @@ public class FilterConfigSeekbar extends TuSdkRelativeLayout
 	private TextView mTitleView;
 	// 计数视图
 	private TextView mNumberView;
+	// 滤镜对象
+    private FilterParameterInterface mFilter;
 	// 滤镜配置参数
 	private FilterArg mFilterArg;
 	// 滤镜配置拖动栏委托
@@ -257,4 +261,19 @@ public class FilterConfigSeekbar extends TuSdkRelativeLayout
 		mFilterArg.reset();
 		this.setFilterArg(mFilterArg);
 	}
+	
+    /**
+     * 设置滤镜
+     *
+     * @param filter
+     */
+    public void setSelesFilter(SelesOutInput filter)
+    {
+        if (filter == null || !(filter instanceof FilterParameterInterface))
+            return;
+        
+       this.mFilter = (FilterParameterInterface) filter;
+       
+       mFilter.submitParameter();
+    }
 }

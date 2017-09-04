@@ -11,7 +11,6 @@ package com.upyun.shortvideo.custom;
 import org.lasque.tusdk.core.TuSdkContext;
 import org.lasque.tusdk.core.struct.TuSdkSize;
 import org.lasque.tusdk.core.utils.RectHelper;
-import com.upyun.shortvideo.R;
 
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -34,7 +33,7 @@ public class MoviePreviewAndCutFullScreenActivity extends MoviePreviewAndCutRati
 	{
 		super.onCreate(savedInstanceState);
 		hideNavigationBar();
-		setIntentClass(MovieEditorFullScreenActivity.class.getName());
+		setIntentClass(MovieEditorFullScreenActivity.class);
 	}
 	
 	/**
@@ -44,15 +43,15 @@ public class MoviePreviewAndCutFullScreenActivity extends MoviePreviewAndCutRati
 	protected void initView()
 	{
 		super.initView();
-        RelativeLayout titleLayout = (RelativeLayout) findViewById(R.id.lsq_title_item);
-        titleLayout.setBackgroundColor(TuSdkContext.getColor(R.color.lsq_color_transparent));
+        RelativeLayout titleLayout = (RelativeLayout) findViewById(com.upyun.shortvideo.R.id.lsq_title_item);
+        titleLayout.setBackgroundColor(TuSdkContext.getColor(com.upyun.shortvideo.R.color.lsq_color_transparent));
         
-        FrameLayout moviePreviewLayout = (FrameLayout) findViewById(R.id.movie_layout);
+        FrameLayout moviePreviewLayout = (FrameLayout) findViewById(com.upyun.shortvideo.R.id.movie_layout);
         FrameLayout.LayoutParams lp = (LayoutParams) moviePreviewLayout.getLayoutParams();
         lp.width = LayoutParams.MATCH_PARENT;
         lp.height = LayoutParams.MATCH_PARENT;
         
-        LinearLayout timeLayout = (LinearLayout) findViewById(R.id.time_layout);
+        LinearLayout timeLayout = (LinearLayout) findViewById(com.upyun.shortvideo.R.id.time_layout);
         timeLayout.setBackgroundColor(TuSdkContext.getColor("lsq_color_transparent"));
 	}
 

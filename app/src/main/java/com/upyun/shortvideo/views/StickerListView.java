@@ -9,11 +9,14 @@
  */
 package com.upyun.shortvideo.views;
 
+import java.util.List;
+
 import org.lasque.tusdk.core.view.recyclerview.TuSdkTableView;
 import org.lasque.tusdk.modules.view.widget.sticker.StickerGroup;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.View;
 import android.view.ViewGroup;
 
 /**
@@ -38,6 +41,27 @@ public class StickerListView extends TuSdkTableView<StickerGroup, StickerCellVie
 	public StickerListView(Context context)
 	{
 		super(context);
+	}
+	
+	/**
+	 * 根据groupId获取对应的贴纸视图选项
+	 * @param groupId
+	 * @return
+	 */
+	public View getStickCellView(long groupId)
+	{
+		List<StickerGroup> groups = this.getModeList();
+		
+		if (groups == null) return null;
+		
+		for (int i = 0 ; i < groups.size() ; i++)
+		{
+			StickerGroup group = groups.get(i);
+			if (group.groupId == groupId)
+				return this.findViewWithTag(Integer.valueOf(i));	
+		}
+		
+		return null;
 	}
 	
 	/** 行视图宽度 */

@@ -23,9 +23,9 @@ import org.lasque.tusdk.core.audio.TuSDKAudioFileRecorder.OutputFormat;
 import org.lasque.tusdk.core.audio.TuSDKAudioFileRecorder.RecordError;
 import org.lasque.tusdk.core.audio.TuSDKAudioFileRecorder.RecordState;
 import org.lasque.tusdk.core.audio.TuSDKAudioFileRecorder.TuSDKRecordAudioDelegate;
-import org.lasque.tusdk.core.encoder.video.TuSDKVideoEncoderSetting;
+import org.lasque.tusdk.core.seles.SelesParameters;
+import org.lasque.tusdk.core.seles.SelesParameters.FilterArg;
 import org.lasque.tusdk.core.seles.sources.SelesOutInput;
-import org.lasque.tusdk.core.seles.tusdk.FilterManager;
 import org.lasque.tusdk.core.struct.TuSdkSize;
 import org.lasque.tusdk.core.utils.FileHelper;
 import org.lasque.tusdk.core.utils.TLog;
@@ -35,6 +35,7 @@ import org.lasque.tusdk.core.utils.image.BitmapHelper;
 import org.lasque.tusdk.core.video.TuSDKVideoResult;
 import org.lasque.tusdk.core.view.TuSdkImageView;
 import org.lasque.tusdk.core.view.TuSdkViewHelper;
+import org.lasque.tusdk.core.view.recyclerview.TuSdkTableView;
 import org.lasque.tusdk.core.view.recyclerview.TuSdkTableView.TuSdkTableViewItemClickDelegate;
 import org.lasque.tusdk.core.view.widget.button.TuSdkTextButton;
 import org.lasque.tusdk.impl.view.widget.TuSeekBar;
@@ -43,6 +44,7 @@ import org.lasque.tusdk.modules.view.widget.sticker.StickerLocalPackage;
 import org.lasque.tusdk.video.editor.TuSDKMediaAudioEffectData;
 import org.lasque.tusdk.video.editor.TuSDKMediaEffectData;
 import org.lasque.tusdk.video.editor.TuSDKMediaStickerAudioEffectData;
+import org.lasque.tusdk.video.editor.TuSDKMediaStickerEffectData;
 import org.lasque.tusdk.video.editor.TuSDKMovieEditor;
 import org.lasque.tusdk.video.editor.TuSDKMovieEditor.TuSDKMovieEditorDelegate;
 import org.lasque.tusdk.video.editor.TuSDKMovieEditor.TuSDKMovieEditorSoundStatus;
@@ -56,13 +58,11 @@ import org.lasque.tusdk.video.mixer.TuSDKMediaDataSource;
 import com.upyun.library.common.Params;
 import com.upyun.library.common.ResumeUploader;
 import com.upyun.library.common.UploadEngine;
-import com.upyun.library.common.UploadManager;
 import com.upyun.library.exception.UpYunException;
 import com.upyun.library.listener.UpCompleteListener;
 import com.upyun.library.listener.UpProgressListener;
 import com.upyun.library.utils.UpYunUtils;
 import com.upyun.shortvideo.Config;
-import com.upyun.shortvideo.R;
 import com.upyun.shortvideo.SimpleCameraActivity;
 import com.upyun.shortvideo.utils.AudioTimingRunnable;
 import com.upyun.shortvideo.utils.Constants;
@@ -72,6 +72,7 @@ import com.upyun.shortvideo.views.ConfigViewParams;
 import com.upyun.shortvideo.views.ConfigViewParams.ConfigViewArg;
 import com.upyun.shortvideo.views.ConfigViewSeekBar;
 import com.upyun.shortvideo.views.FilterCellView;
+import com.upyun.shortvideo.views.FilterConfigSeekbar;
 import com.upyun.shortvideo.views.FilterConfigView;
 import com.upyun.shortvideo.views.FilterListView;
 import com.upyun.shortvideo.views.MVCellView;
@@ -80,8 +81,6 @@ import com.upyun.shortvideo.views.MixingCellView;
 import com.upyun.shortvideo.views.MixingCellView.MixingEntity;
 import com.upyun.shortvideo.views.MixingListView;
 import com.upyun.shortvideo.views.MovieRangeSelectionBar;
-import com.upyun.shortvideo.views.MovieRangeSelectionBar.OnCursorChangeListener;
-import com.upyun.shortvideo.views.MovieRangeSelectionBar.Type;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -116,6 +115,7 @@ import android.widget.TextView;
  * @author Yanlin
  */
 public class MovieEditorActivity extends SimpleCameraActivity {
+    private static final String TAG = "MovieEditorActivity";
     /**
      * 保存按钮
      */
@@ -151,6 +151,9 @@ public class MovieEditorActivity extends SimpleCameraActivity {
 
     private TuSdkTextButton mFilterBtn;
 
+    // 记录当前滤镜
+    private SelesOutInput mSelesOutInput;
+
     // 记录上一个选中的滤镜
     private FilterCellView lastSelectedCellView;
 
@@ -173,19 +176,36 @@ public class MovieEditorActivity extends SimpleCameraActivity {
     /**
      * 美颜布局
      */
-    private RelativeLayout mBeautyLayout;
+    private LinearLayout mBeautyWrap;
     /**
-     * 美颜磨皮强度调节栏布局
+     * 磨皮调节栏
      */
-    private RelativeLayout mBeautyBarWrap;
+    private ConfigViewSeekBar mSmoothingBarLayout;
     /**
-     * 美颜磨皮强度调节栏
+     * 大眼调节栏
      */
-    private TuSeekBar mBeautyBar;
+    private ConfigViewSeekBar mEyeSizeBarLayout;
     /**
-     * 磨皮强度值
+     * 瘦脸调节栏
      */
-    private TextView mBeautyLevel;
+    private ConfigViewSeekBar mChinSizeBarLayout;
+    /**
+     * 用于记录当前调节栏磨皮系数
+     */
+    private float mSmoothingProgress = -1.0f;
+    /**
+     * 用于记录当前调节栏效果系数
+     */
+    private float mMixiedProgress = -1.0f;
+
+    /**
+     * 记录是否是首次进入
+     */
+    private boolean mIsFirstEntry = true;
+    /**
+     * 用于记录焦点位置
+     */
+    private int mFocusPostion = 1;
 
     /**
      * 视频路径
@@ -198,7 +218,7 @@ public class MovieEditorActivity extends SimpleCameraActivity {
     /**
      * 存储MV数据对象
      */
-    private TuSDKMediaStickerAudioEffectData mStickerAudioEffectData;
+    private TuSDKMediaEffectData mStickerAudioEffectData;
     private TuSDKMediaAudioEffectData mAudioEffectData;
     /**
      * MV特效时间
@@ -309,18 +329,14 @@ public class MovieEditorActivity extends SimpleCameraActivity {
      */
     private int mStartAudioTimes = 0;
 
-    @SuppressWarnings("deprecation")
-    private GestureDetector detector = new GestureDetector(new GestureDetector.SimpleOnGestureListener() {
-        @Override
-        public boolean onSingleTapConfirmed(MotionEvent e) {
-            // 开始播放视频
-            handleActionButton();
-            return true;
-        }
-    });
+    /**
+     * MV音效资源
+     */
+    @SuppressLint("UseSparseArrays")
+    private Map<Integer, Integer> mMusicMap = new HashMap<Integer, Integer>();
 
     protected int getLayoutId() {
-        return R.layout.movie_editor_activity;
+        return com.upyun.shortvideo.R.layout.movie_editor_activity;
     }
 
     @Override
@@ -329,33 +345,31 @@ public class MovieEditorActivity extends SimpleCameraActivity {
 
         setContentView(getLayoutId());
 
-        mSaveButton = (TextView) findViewById(R.id.lsq_next);
-        mSaveButton.setText(R.string.lsq_save);
+        mIsFirstEntry = true;
+        mSaveButton = (TextView) findViewById(com.upyun.shortvideo.R.id.lsq_next);
+        mSaveButton.setText(com.upyun.shortvideo.R.string.lsq_save);
         mSaveButton.setOnClickListener(mButtonSafeClickListener);
         mSaveButton.setEnabled(false);
 
-        mTitleTextView = (TextView) this.findViewById(R.id.lsq_title);
-        mTitleTextView.setText(R.string.lsq_add_filter);
-        mActionButton = (Button) findViewById(R.id.lsq_actButton);
-        mBackTextView = (TextView) findViewById(R.id.lsq_back);
+        mTitleTextView = (TextView) this.findViewById(com.upyun.shortvideo.R.id.lsq_title);
+        mTitleTextView.setText(com.upyun.shortvideo.R.string.lsq_add_filter);
+        mActionButton = (Button) findViewById(com.upyun.shortvideo.R.id.lsq_actButton);
+        mActionButton.setVisibility(View.INVISIBLE);
+        mBackTextView = (TextView) findViewById(com.upyun.shortvideo.R.id.lsq_back);
         mBackTextView.setOnClickListener(mButtonClickListener);
 
-        mFilterBtn = (TuSdkTextButton) findViewById(R.id.lsq_filterWrap);
+        mFilterBtn = (TuSdkTextButton) findViewById(com.upyun.shortvideo.R.id.lsq_filterWrap);
         mFilterBtn.setOnClickListener(mButtonClickListener);
 
-        mMvBtn = (TuSdkTextButton) findViewById(R.id.lsq_mvWrap);
+        mMvBtn = (TuSdkTextButton) findViewById(com.upyun.shortvideo.R.id.lsq_mvWrap);
         mMvBtn.setOnClickListener(mButtonClickListener);
-        // 开启美颜按钮
-        mBeautyBtn = (TuSdkTextButton) findViewById(R.id.lsq_beautyBtn);
-        mBeautyLayout = (RelativeLayout) findViewById(R.id.lsq_beautyWrap);
-        mBeautyLayout.setOnClickListener(mButtonClickListener);
-        getBeautyBarWrap().setVisibility(View.INVISIBLE);
 
-        mBeautyLevel = (TextView) findViewById(R.id.lsq_level_View);
+        mBeautyBtn = (TuSdkTextButton) findViewById(com.upyun.shortvideo.R.id.lsq_beautyWrap);
+        mBeautyBtn.setOnClickListener(mButtonClickListener);
 
-        mRangeSelectionBar = (MovieRangeSelectionBar) this.findViewById(R.id.lsq_rangeseekbar);
+        mRangeSelectionBar = (MovieRangeSelectionBar) this.findViewById(com.upyun.shortvideo.R.id.lsq_rangeseekbar);
         mRangeSelectionBar.setShowPlayCursor(false);
-        mRangeSelectionBar.setType(Type.MV);
+        mRangeSelectionBar.setType(MovieRangeSelectionBar.Type.MV);
         mRangeSelectionBar.setLeftSelection(0);
         mRangeSelectionBar.setPlaySelection(0);
         mRangeSelectionBar.setRightSelection(100);
@@ -363,7 +377,11 @@ public class MovieEditorActivity extends SimpleCameraActivity {
         hideNavigationBar();
         mRangeSelectionBar.setOnCursorChangeListener(mOnCursorChangeListener);
 
-        mFilterWrap = (LinearLayout) findViewById(R.id.lsq_filter_layout);
+        initBeautyLayout();
+
+        mFilterWrap = (LinearLayout) findViewById(com.upyun.shortvideo.R.id.lsq_filter_layout);
+        mFilterWrap.setVisibility(View.GONE);
+
         getFilterMVLayoutWrap().setBackgroundColor(TuSdkContext.getColor("lsq_color_white"));
         getBottomNavigationLayout().setBackgroundColor(TuSdkContext.getColor("lsq_color_white"));
         getMixingListViewWrap().setBackgroundColor(TuSdkContext.getColor("lsq_color_white"));
@@ -377,7 +395,7 @@ public class MovieEditorActivity extends SimpleCameraActivity {
         mVideoPath = intent.getStringExtra("videoPath");
 
         // 视频裁切区域时间
-        mCutTimeRange = TuSDKTimeRange.makeRange(intent.getIntExtra("startTime", 0) / 1000, intent.getIntExtra("endTime", 0) / 1000);
+        mCutTimeRange = TuSDKTimeRange.makeRange(intent.getFloatExtra("startTime", 0) / (float) 1000, intent.getFloatExtra("endTime", 0) / (float) 1000);
         // 如果没有传递开始和结束时间，默认视频编辑时长为总时长
         if (mCutTimeRange.duration() == 0 && mVideoPath != null) {
             mCutTimeRange = TuSDKTimeRange.makeRange(0, getVideoDuration(mVideoPath));
@@ -399,6 +417,8 @@ public class MovieEditorActivity extends SimpleCameraActivity {
         // 此方法在布局绘制完成后调用
         // 在此时机获取布局高度，避免获取高度为0
         getContentView(this).post(mGetLayoutHeightRunnable);
+
+        toggleBeautyMode();
     }
 
     /**
@@ -409,6 +429,17 @@ public class MovieEditorActivity extends SimpleCameraActivity {
         FrameLayout content = (FrameLayout) view.findViewById(android.R.id.content);
         return content.getChildAt(0);
     }
+
+
+    @SuppressWarnings("deprecation")
+    private GestureDetector detector = new GestureDetector(new GestureDetector.SimpleOnGestureListener() {
+        @Override
+        public boolean onSingleTapConfirmed(MotionEvent e) {
+            // 开始播放视频
+            handleActionButton();
+            return true;
+        }
+    });
 
     /**
      * 获取布局高度
@@ -425,7 +456,7 @@ public class MovieEditorActivity extends SimpleCameraActivity {
      * 适配大尺寸手机，比如：5.5英寸
      */
     private void setBottomViewHeight(ViewGroup viewGroup, int rangeBarHeight) {
-        RelativeLayout topBarLayout = (RelativeLayout) findViewById(R.id.lsq_topBar);
+        RelativeLayout topBarLayout = (RelativeLayout) findViewById(com.upyun.shortvideo.R.id.lsq_topBar);
 
         int remainHeight = getScreenSize().heightPixels - topBarLayout.getHeight()
                 - getCameraView().getHeight() - getBottomNavigationLayout().getHeight() - rangeBarHeight;
@@ -441,30 +472,29 @@ public class MovieEditorActivity extends SimpleCameraActivity {
     }
 
     public RelativeLayout getFilterMVLayoutWrap() {
-        RelativeLayout filterMVLayoutWrap = (RelativeLayout) findViewById(R.id.filter_mv_wrap_layout);
+        RelativeLayout filterMVLayoutWrap = (RelativeLayout) findViewById(com.upyun.shortvideo.R.id.filter_mv_wrap_layout);
         return filterMVLayoutWrap;
     }
 
     public RelativeLayout getBottomNavigationLayout() {
-        RelativeLayout bottomNavigationLayout = (RelativeLayout) findViewById(R.id.lsq_bottom_navigator);
+        RelativeLayout bottomNavigationLayout = (RelativeLayout) findViewById(com.upyun.shortvideo.R.id.lsq_bottom_navigator);
         return bottomNavigationLayout;
     }
 
     public RelativeLayout getMixingListViewWrap() {
-        RelativeLayout mixingLayoutWrap = (RelativeLayout) findViewById(R.id.lsq_mixing_list_view_wrap);
+        RelativeLayout mixingLayoutWrap = (RelativeLayout) findViewById(com.upyun.shortvideo.R.id.lsq_mixing_list_view_wrap);
         return mixingLayoutWrap;
     }
 
     private void initDubbingView() {
-        mDubbingLayoutWrap = (LinearLayout) findViewById(R.id.lsq_dubbing_wrap);
-        mDubbingButton = (CompoundDrawableTextView) findViewById(R.id.lsq_dubbingBtn);
+        mDubbingLayoutWrap = (LinearLayout) findViewById(com.upyun.shortvideo.R.id.lsq_dubbing_wrap);
+        mDubbingButton = (CompoundDrawableTextView) findViewById(com.upyun.shortvideo.R.id.lsq_dubbingBtn);
         mDubbingButton.setOnClickListener(mButtonClickListener);
-        mAudioRecordingLayout = (RelativeLayout) findViewById(R.id.lsq_editor_voiceRecording_layout);
+        mAudioRecordingLayout = (RelativeLayout) findViewById(com.upyun.shortvideo.R.id.lsq_editor_voiceRecording_layout);
         updateVoiceRecordLayout(true);
 
         initMixingListView();
         initVoiceConfigView();
-        mDubbingLayoutWrap.setVisibility(View.INVISIBLE);
         initAudioRecordingView();
         mAudioTimingRunnable = new AudioTimingRunnable();
         mAudioTimingRunnable.setDelegate(mAudioRecordProgressDelegate);
@@ -504,23 +534,23 @@ public class MovieEditorActivity extends SimpleCameraActivity {
 
     @SuppressLint("ClickableViewAccessibility")
     private void initAudioRecordingView() {
-        mAudioRecordCloseButton = (TuSdkImageView) findViewById(R.id.lsq_voice_close_button);
-        mAudioRecordButton = (TuSdkImageView) findViewById(R.id.lsq_voice_record_button);
-        mAudioRecordCancelButton = (TuSdkImageView) findViewById(R.id.lsq_voice_cancel_button);
+        mAudioRecordCloseButton = (TuSdkImageView) findViewById(com.upyun.shortvideo.R.id.lsq_voice_close_button);
+        mAudioRecordButton = (TuSdkImageView) findViewById(com.upyun.shortvideo.R.id.lsq_voice_record_button);
+        mAudioRecordCancelButton = (TuSdkImageView) findViewById(com.upyun.shortvideo.R.id.lsq_voice_cancel_button);
         mAudioRecordCancelButton.setOnClickListener(mButtonClickListener);
-        mAudioRecordSaveButton = (TuSdkImageView) findViewById(R.id.lsq_voice_record_save_button);
+        mAudioRecordSaveButton = (TuSdkImageView) findViewById(com.upyun.shortvideo.R.id.lsq_voice_record_save_button);
         mAudioRecordCloseButton.setOnClickListener(mButtonClickListener);
         mAudioRecordButton.setOnTouchListener(mAudioRecordButtonOnTouchListener);
         mAudioRecordSaveButton.setOnClickListener(mButtonClickListener);
 
-        Button minTimeButton = (Button) findViewById(R.id.lsq_minTimeBtn);
-        LayoutParams minTimeLayoutParams = (LayoutParams) minTimeButton.getLayoutParams();
+        Button minTimeButton = (Button) findViewById(com.upyun.shortvideo.R.id.lsq_minTimeBtn);
+        RelativeLayout.LayoutParams minTimeLayoutParams = (LayoutParams) minTimeButton.getLayoutParams();
         minTimeLayoutParams.leftMargin = (int) (((float) minAudioRecordTime * TuSdkContext.getScreenSize().width) / mCutTimeRange.duration())
                 - TuSdkContext.dip2px(minTimeButton.getWidth());
 
-        mAudioTimeRemainingText = (TextView) findViewById(R.id.lsq_voiceRrecord_timeRemaining_text);
+        mAudioTimeRemainingText = (TextView) findViewById(com.upyun.shortvideo.R.id.lsq_voiceRrecord_timeRemaining_text);
         updateAudioTimeRemaining(0.0f);
-        mAudioRecordProgressBar = (ProgressBar) findViewById(R.id.lsq_record_progressbar);
+        mAudioRecordProgressBar = (ProgressBar) findViewById(com.upyun.shortvideo.R.id.lsq_record_progressbar);
         updateAudioProgressBar(0.0f);
         initAudioFileRecorder();
     }
@@ -531,7 +561,7 @@ public class MovieEditorActivity extends SimpleCameraActivity {
      * @param duration
      */
     private void updateAudioTimeRemaining(float duration) {
-        int timeRemaining = (int) Math.ceil(mCutTimeRange.duration() - duration);
+        int timeRemaining = (int) Math.abs(mCutTimeRange.duration() - duration);
         mAudioTimeRemainingText.setText("剩余" + timeRemaining + "秒");
     }
 
@@ -558,7 +588,7 @@ public class MovieEditorActivity extends SimpleCameraActivity {
             getVoiceConfigView().setSeekBarHeight(TuSdkContext.dip2px(50));
             getVoiceConfigView().setDelegate(mFilterConfigSeekbarDelegate);
             getVoiceConfigView().setCompoundConfigView(params);
-            getVoiceConfigView().setBackgroundResource(R.color.lsq_alpha_black_7f);
+            getVoiceConfigView().setBackgroundResource(com.upyun.shortvideo.R.color.lsq_alpha_black_7f);
         }
     }
 
@@ -580,7 +610,7 @@ public class MovieEditorActivity extends SimpleCameraActivity {
 
     private CompoundConfigView getVoiceConfigView() {
         if (mVoiceConfigView == null) {
-            mVoiceConfigView = (CompoundConfigView) findViewById(R.id.lsq_voice_config_view);
+            mVoiceConfigView = (CompoundConfigView) findViewById(com.upyun.shortvideo.R.id.lsq_voice_config_view);
         }
 
         return mVoiceConfigView;
@@ -598,6 +628,7 @@ public class MovieEditorActivity extends SimpleCameraActivity {
             extractor.setOutputImageSize(tuSdkSize);
             extractor.setVideoDataSource(TuSDKMediaDataSource.create(mVideoPath));
             extractor.setExtractFrameCount(6);
+            extractor.setTimeRange(mCutTimeRange);
             mVideoThumbList = new ArrayList<Bitmap>();
             mRangeSelectionBar.setList(mVideoThumbList);
             extractor.asyncExtractImageList(new TuSDKVideoImageExtractorDelegate() {
@@ -633,10 +664,7 @@ public class MovieEditorActivity extends SimpleCameraActivity {
             mMovieEditor.setPlaygroundTimeRange(null);
         }
 
-//		mStickerAudioEffectData = effectData;
-
         mMovieEditor.addMediaEffectData(effectData);
-
     }
 
     @Override
@@ -664,7 +692,7 @@ public class MovieEditorActivity extends SimpleCameraActivity {
     /**
      * 用于监听裁剪控件
      */
-    private OnCursorChangeListener mOnCursorChangeListener = new OnCursorChangeListener() {
+    private MovieRangeSelectionBar.OnCursorChangeListener mOnCursorChangeListener = new MovieRangeSelectionBar.OnCursorChangeListener() {
 
         @Override
         public void onSeeekBarChanged(int width, int height) {
@@ -754,7 +782,7 @@ public class MovieEditorActivity extends SimpleCameraActivity {
     };
 
     protected RelativeLayout getCameraView() {
-        RelativeLayout cameraView = (RelativeLayout) findViewById(R.id.lsq_cameraView);
+        RelativeLayout cameraView = (RelativeLayout) findViewById(com.upyun.shortvideo.R.id.lsq_cameraView);
 
         // 播放视图设置触摸事件
         cameraView.setOnTouchListener(mCameraViewOnTouchListener);
@@ -765,7 +793,7 @@ public class MovieEditorActivity extends SimpleCameraActivity {
      * 设置视频播放区域大小
      */
     protected void setCameraViewSize(int width, int height) {
-        LayoutParams lp = (LayoutParams) getCameraView().getLayoutParams();
+        RelativeLayout.LayoutParams lp = (LayoutParams) getCameraView().getLayoutParams();
         lp.width = width;
         lp.height = height;
     }
@@ -813,6 +841,24 @@ public class MovieEditorActivity extends SimpleCameraActivity {
     }
 
     /**
+     * 初始化美颜视图
+     */
+    public void initBeautyLayout() {
+        mBeautyWrap = (LinearLayout) findViewById(com.upyun.shortvideo.R.id.beauty_wrap_layout);
+        mBeautyWrap.setVisibility(View.VISIBLE);
+
+        mSmoothingBarLayout = (ConfigViewSeekBar) mBeautyWrap.findViewById(com.upyun.shortvideo.R.id.lsq_dermabrasion_bar);
+        mSmoothingBarLayout.getTitleView().setText(com.upyun.shortvideo.R.string.lsq_dermabrasion);
+        mSmoothingBarLayout.getSeekbar().setDelegate(mTuSeekBarDelegate);
+
+        mEyeSizeBarLayout = (ConfigViewSeekBar) mBeautyWrap.findViewById(com.upyun.shortvideo.R.id.lsq_big_eyes_bar);
+        mEyeSizeBarLayout.setVisibility(View.GONE);
+
+        mChinSizeBarLayout = (ConfigViewSeekBar) mBeautyWrap.findViewById(com.upyun.shortvideo.R.id.lsq_thin_face_bar);
+        mChinSizeBarLayout.setVisibility(View.GONE);
+    }
+
+    /**
      * 初始化混音视图
      */
     protected void initMixingListView() {
@@ -823,8 +869,8 @@ public class MovieEditorActivity extends SimpleCameraActivity {
         this.mMixingListView.setModeList(getMixingListData());
     }
 
-    private List<MixingEntity> getMixingListData() {
-        List<MixingEntity> groups = new ArrayList<MixingEntity>();
+    private List<MixingCellView.MixingEntity> getMixingListData() {
+        List<MixingCellView.MixingEntity> groups = new ArrayList<MixingCellView.MixingEntity>();
 
         String[][] mixingStrings = new String[][]{{"0", "nosound"}, {"0", "soundrecording"}, {"1", "lively"}, {"1", "oldmovie"}, {"1", "relieve"}};
 
@@ -842,10 +888,10 @@ public class MovieEditorActivity extends SimpleCameraActivity {
      */
     private MixingListView getMixingListView() {
         if (mMixingListView == null) {
-            mMixingListView = (MixingListView) findViewById(R.id.lsq_mixing_list_view);
+            mMixingListView = (MixingListView) findViewById(com.upyun.shortvideo.R.id.lsq_mixing_list_view);
 
             mMixingListView.loadView();
-            mMixingListView.setCellLayoutId(R.layout.mixing_cell_view);
+            mMixingListView.setCellLayoutId(com.upyun.shortvideo.R.layout.mixing_cell_view);
             mMixingListView.setCellWidth(TuSdkContext.dip2px(73));
             mMixingListView
                     .setItemClickDelegate(mMixingTableItemClickDelegate);
@@ -861,11 +907,15 @@ public class MovieEditorActivity extends SimpleCameraActivity {
     protected void initMvListView() {
         getMvListView();
 
-        if (mMvListView == null)
-            return;
+        if (mMvListView == null) return;
 
+        mMusicMap.put(1420, com.upyun.shortvideo.R.raw.lsq_audio_cat);
+        mMusicMap.put(1427, com.upyun.shortvideo.R.raw.lsq_audio_crow);
+        mMusicMap.put(1432, com.upyun.shortvideo.R.raw.lsq_audio_tangyuan);
+        mMusicMap.put(1446, com.upyun.shortvideo.R.raw.lsq_audio_children);
         List<StickerGroup> groups = new ArrayList<StickerGroup>();
-        groups.addAll(StickerLocalPackage.shared().getSmartStickerGroups(false));
+        List<StickerGroup> smartStickerGroups = StickerLocalPackage.shared().getSmartStickerGroups(false);
+        groups.addAll(smartStickerGroups);
         groups.add(0, new StickerGroup());
         this.mMvListView.setModeList(groups);
     }
@@ -875,12 +925,12 @@ public class MovieEditorActivity extends SimpleCameraActivity {
      */
     private MVListView getMvListView() {
         if (mMvListView == null) {
-            mMvListView = (MVListView) findViewById(R.id.lsq_mv_list_view);
+            mMvListView = (MVListView) findViewById(com.upyun.shortvideo.R.id.lsq_mv_list_view);
 
             if (mMvListView == null) return null;
 
             mMvListView.loadView();
-            mMvListView.setCellLayoutId(R.layout.mv_cell_view);
+            mMvListView.setCellLayoutId(com.upyun.shortvideo.R.layout.mv_cell_view);
             mMvListView.setCellWidth(TuSdkContext.dip2px(73));
             mMvListView
                     .setItemClickDelegate(mMvTableItemClickDelegate);
@@ -891,11 +941,26 @@ public class MovieEditorActivity extends SimpleCameraActivity {
     }
 
     /**
+     * 设置调节栏是否有效
+     */
+    private void setEnableSeekBar(ConfigViewSeekBar viewSeekBar, boolean enable, float progress, int id) {
+        if (viewSeekBar == null) return;
+
+        viewSeekBar.setProgress(progress);
+        viewSeekBar.getSeekbar().setEnabled(enable);
+        viewSeekBar.getSeekbar().getDragView().setBackgroundResource(id);
+    }
+
+    private void setEnableAllSeekBar(boolean enable) {
+        setEnableSeekBar(mSmoothingBarLayout, enable, 0, com.upyun.shortvideo.R.drawable.tusdk_view_widget_seekbar_none_drag);
+    }
+
+    /**
      * 混音列表点击事件
      */
-    private TuSdkTableViewItemClickDelegate<MixingEntity, MixingCellView> mMixingTableItemClickDelegate = new TuSdkTableViewItemClickDelegate<MixingEntity, MixingCellView>() {
+    private TuSdkTableViewItemClickDelegate<MixingCellView.MixingEntity, MixingCellView> mMixingTableItemClickDelegate = new TuSdkTableView.TuSdkTableViewItemClickDelegate<MixingCellView.MixingEntity, MixingCellView>() {
         @Override
-        public void onTableViewItemClick(MixingEntity itemData, MixingCellView itemView, int position) {
+        public void onTableViewItemClick(MixingCellView.MixingEntity itemData, MixingCellView itemView, int position) {
             onMixingGroupSelected(itemData, itemView, position);
         }
     };
@@ -903,7 +968,7 @@ public class MovieEditorActivity extends SimpleCameraActivity {
     /**
      * MV 列表点击事件
      */
-    private TuSdkTableViewItemClickDelegate<StickerGroup, MVCellView> mMvTableItemClickDelegate = new TuSdkTableViewItemClickDelegate<StickerGroup, MVCellView>() {
+    private TuSdkTableViewItemClickDelegate<StickerGroup, MVCellView> mMvTableItemClickDelegate = new TuSdkTableView.TuSdkTableViewItemClickDelegate<StickerGroup, MVCellView>() {
         @Override
         public void onTableViewItemClick(StickerGroup itemData, MVCellView itemView, int position) {
             onMvGroupSelected(itemData, itemView, position);
@@ -918,7 +983,7 @@ public class MovieEditorActivity extends SimpleCameraActivity {
      * @param itemView
      * @param position
      */
-    protected void onMixingGroupSelected(MixingEntity itemData, MixingCellView itemView, int position) {
+    protected void onMixingGroupSelected(MixingCellView.MixingEntity itemData, MixingCellView itemView, int position) {
         if (mLastMixingCellView == itemView) return;
         // 取消上一个 MV 的选中状态
         selectMixing(mLastMixingCellView, false, -1);
@@ -939,7 +1004,7 @@ public class MovieEditorActivity extends SimpleCameraActivity {
         RelativeLayout filterBorderView = itemView.getBorderView();
         filterBorderView.setVisibility(isEnable ? View.VISIBLE : View.GONE);
 
-        MixingEntity group = itemView.getModel();
+        MixingCellView.MixingEntity group = itemView.getModel();
         TuSdkImageView mixingImageView = itemView.getImageView();
         String drawableId = isEnable ? ("lsq_mixing_thumb_" + group.mName.toLowerCase() + "_selected") : ("lsq_mixing_thumb_" + group.mName.toLowerCase());
         Drawable drawable = TuSdkContext.getDrawable(drawableId);
@@ -970,7 +1035,7 @@ public class MovieEditorActivity extends SimpleCameraActivity {
      * @param position
      */
     protected void changeAudioEffect(int position) {
-        int[] resId = new int[]{R.raw.lsq_audio_lively, R.raw.lsq_audio_oldmovie, R.raw.lsq_audio_relieve};
+        int[] resId = new int[]{com.upyun.shortvideo.R.raw.lsq_audio_lively, com.upyun.shortvideo.R.raw.lsq_audio_oldmovie, com.upyun.shortvideo.R.raw.lsq_audio_relieve};
 
         if (position == 0) {
             mMovieEditor.removeAllMediaEffects();
@@ -1101,50 +1166,26 @@ public class MovieEditorActivity extends SimpleCameraActivity {
      */
     private FilterListView getFilterListView() {
         if (mFilterListView == null) {
-            mFilterListView = (FilterListView) findViewById(R.id.lsq_filter_list_view);
+            mFilterListView = (FilterListView) findViewById(com.upyun.shortvideo.R.id.lsq_filter_list_view);
 
             if (mFilterListView == null) return null;
 
             mFilterListView.loadView();
-            mFilterListView.setCellLayoutId(R.layout.filter_list_cell_view);
-            mFilterListView.setCellWidth(TuSdkContext.dip2px(73));
+            mFilterListView.setCellLayoutId(com.upyun.shortvideo.R.layout.filter_list_cell_view);
+            mFilterListView.setCellWidth(TuSdkContext.dip2px(62));
             mFilterListView.setItemClickDelegate(mFilterTableItemClickDelegate);
             mFilterListView.reloadData();
+            mFilterListView.selectPosition(mFocusPostion);
         }
         return mFilterListView;
     }
 
     private FilterConfigView getFilterConfigView() {
         if (mConfigView == null) {
-            mConfigView = (FilterConfigView) findViewById(R.id.lsq_filter_config_view);
+            mConfigView = (FilterConfigView) findViewById(com.upyun.shortvideo.R.id.lsq_filter_config_view);
         }
 
         return mConfigView;
-    }
-
-    /**
-     * 美颜调节SeekBar
-     *
-     * @return
-     */
-    private TuSeekBar getBeautyBar() {
-        if (mBeautyBar == null) {
-            mBeautyBar = (TuSeekBar) findViewById(R.id.lsq_seekBar);
-            mBeautyBar.setDelegate(mTuSeekBarDelegate);
-        }
-        return mBeautyBar;
-    }
-
-    /**
-     * 美颜调节栏配置视图
-     *
-     * @return
-     */
-    private RelativeLayout getBeautyBarWrap() {
-        if (mBeautyBarWrap == null) {
-            mBeautyBarWrap = (RelativeLayout) findViewById(R.id.lsq_beauty_config_view);
-        }
-        return mBeautyBarWrap;
     }
 
     /**
@@ -1165,28 +1206,32 @@ public class MovieEditorActivity extends SimpleCameraActivity {
      * @param position
      */
     protected void onFilterGroupSelected(String itemData, FilterCellView itemView, int position) {
+        if (position == 0) {
+            setEnableAllSeekBar(false);
+        } else {
+            if (mSmoothingBarLayout == null) return;
+            TuSeekBar bar = mSmoothingBarLayout.getSeekbar();
+            if (bar.getEnabled()) {
+                bar.setEnabled(true);
+                bar.invalidate();
+            }
+        }
+
         playMovie();
+
+        mFocusPostion = position;
+        mFilterListView.selectPosition(mFocusPostion);
+
         changeVideoFilterCode(itemData);
-
         deSelectLastFilter(lastSelectedCellView, position);
-
         selectFilter(itemView, position);
-
-        getFilterConfigView().setVisibility(
-                FilterManager.shared().isNormalFilter(itemData) || (getFilterConfigView().getVisibility() == View.INVISIBLE
-                        && getBeautyBarWrap().getVisibility() == View.INVISIBLE) ? View.INVISIBLE : View.VISIBLE);
-
-        //更改美颜状态
-        handleOnClickBeautyButton(false);
+        getFilterConfigView().setVisibility((position == 0) ? View.INVISIBLE : View.VISIBLE);
     }
 
     private void playMovie() {
-        // 点击滤镜,如果视频为暂停状态,视频开始播放
-//        if(!mMovieEditor.isPreviewing())
-        {
-            mMovieEditor.startPreview();
-            updateActionButtonStatus(false);
-        }
+        if (mMovieEditor == null) return;
+        mMovieEditor.startPreview();
+        updateActionButtonStatus(false);
     }
 
     /**
@@ -1238,18 +1283,22 @@ public class MovieEditorActivity extends SimpleCameraActivity {
      * @param itemData
      */
     protected void changeMvEffect(int position, StickerGroup itemData) {
-        // 循环播放音乐
-        if (position > 0) {
-            int[] resId = new int[]{R.raw.lsq_audio_cat, R.raw.lsq_audio_children, R.raw.lsq_audio_crow};
-            Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + resId[position - 1]);
+        if (position < 0) return;
 
-            // 设置MV特效的音乐路径和贴纸对象
-            mStickerAudioEffectData = new TuSDKMediaStickerAudioEffectData(TuSDKMediaDataSource.create(uri), itemData);
-
-            applyStickerMusicEffect(mStickerAudioEffectData);
-        } else {
+        if (position == 0) {
             mStickerAudioEffectData = null;
             mMovieEditor.removeAllMediaEffects();
+        } else {
+            int groupId = (int) itemData.groupId;
+            if (mMusicMap != null && mMusicMap.containsKey(groupId)) {
+                Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + mMusicMap.get(groupId));
+                mStickerAudioEffectData = new TuSDKMediaStickerAudioEffectData(TuSDKMediaDataSource.create(uri), itemData);
+            } else {
+                mStickerAudioEffectData = new TuSDKMediaStickerEffectData(itemData);
+            }
+
+            // 设置MV特效的音乐路径和贴纸对象
+            applyStickerMusicEffect(mStickerAudioEffectData);
         }
 
         //循环播放视频
@@ -1266,15 +1315,74 @@ public class MovieEditorActivity extends SimpleCameraActivity {
     }
 
     /**
+     * 选择美颜
+     */
+    private void toggleBeautyMode() {
+        if (mIsFirstEntry) {
+            changeVideoFilterCode(Arrays.asList(Constants.VIDEOFILTERS).get(mFocusPostion));
+        }
+
+        mBeautyWrap.setVisibility(View.VISIBLE);
+        getFilterMVLayoutWrap().setVisibility(View.VISIBLE);
+        mMvListView.setVisibility(View.GONE);
+        mFilterWrap.setVisibility(View.GONE);
+        mDubbingLayoutWrap.setVisibility(View.INVISIBLE);
+        getVoiceConfigView().setVisibility(View.INVISIBLE);
+
+        updateButtonStatus(mBeautyBtn, true);
+        updateButtonStatus(mFilterBtn, false);
+        updateButtonStatus(mMvBtn, false);
+        updateButtonStatus(mDubbingButton, false);
+
+        mRangeSelectionBar.getLayoutParams().height = 0;
+        setCameraViewLocation(false);
+        setBottomViewHeight(getFilterMVLayoutWrap(), 0);
+
+        showBeautyContent();
+    }
+
+    /**
+     * 选择滤镜
+     */
+    private void toggleFilterMode() {
+        toggleFilterAndMVModel(true);
+
+        if (mSelesOutInput == null) return;
+
+        getFilterConfigView().post(new Runnable() {
+
+            @Override
+            public void run() {
+                getFilterConfigView().setSelesFilter(mSelesOutInput);
+                getFilterConfigView().setVisibility(View.VISIBLE);
+            }
+        });
+
+        getFilterConfigView().setSeekBarDelegate(mConfigSeekBarDelegate);
+        getFilterConfigView().invalidate();
+    }
+
+    /**
+     * 选择MV
+     */
+    private void toggleMVMode() {
+        toggleFilterAndMVModel(false);
+    }
+
+    /**
      * 在滤镜和 MV 模式下切换
      *
      * @param isFilterModel
      */
     private void toggleFilterAndMVModel(boolean isFilterModel) {
+        mBeautyWrap.setVisibility(View.GONE);
         mMvListView.setVisibility(isFilterModel ? View.GONE : View.VISIBLE);
         mFilterWrap.setVisibility(isFilterModel ? View.VISIBLE : View.GONE);
+        getFilterConfigView().setVisibility(isFilterModel ? View.VISIBLE : View.GONE);
         getFilterMVLayoutWrap().setVisibility(View.VISIBLE);
         getVoiceConfigView().setVisibility(View.GONE);
+
+        updateButtonStatus(mBeautyBtn, false);
         updateButtonStatus(mFilterBtn, isFilterModel);
         updateButtonStatus(mMvBtn, !isFilterModel);
         updateButtonStatus(mDubbingButton, false);
@@ -1283,6 +1391,30 @@ public class MovieEditorActivity extends SimpleCameraActivity {
         mRangeSelectionBar.getLayoutParams().height = rangBarHeight;
         setCameraViewLocation(isFilterModel);
         setBottomViewHeight(getFilterMVLayoutWrap(), rangBarHeight);
+    }
+
+    private void showBeautyContent() {
+        if (mSelesOutInput == null) {
+            setEnableAllSeekBar(false);
+            return;
+        }
+        SelesParameters params = mSelesOutInput.getParameter();
+        if (params == null) {
+            setEnableAllSeekBar(false);
+            return;
+        }
+        List<FilterArg> list = params.getArgs();
+        if (list == null || list.size() == 0) {
+            setEnableAllSeekBar(false);
+            return;
+        }
+
+        for (FilterArg arg : list) {
+            if (arg.equalsKey("smoothing")) {
+                setEnableSeekBar(mSmoothingBarLayout, true, arg.getPrecentValue(),
+                        com.upyun.shortvideo.R.drawable.tusdk_view_widget_seekbar_drag);
+            }
+        }
     }
 
     /**
@@ -1294,8 +1426,8 @@ public class MovieEditorActivity extends SimpleCameraActivity {
 
     private void setCameraViewLocation(boolean isbelowTopbar) {
         if (isCameraViewFullScreen) return;
-        LayoutParams lp = (LayoutParams) getCameraView().getLayoutParams();
-        int belowId = isbelowTopbar ? R.id.lsq_topBar : R.id.lsq_rangeseekbar;
+        RelativeLayout.LayoutParams lp = (LayoutParams) getCameraView().getLayoutParams();
+        int belowId = isbelowTopbar ? com.upyun.shortvideo.R.id.lsq_topBar : com.upyun.shortvideo.R.id.lsq_rangeseekbar;
         lp.addRule(RelativeLayout.BELOW, belowId);
     }
 
@@ -1326,14 +1458,11 @@ public class MovieEditorActivity extends SimpleCameraActivity {
             if (v == mBackTextView) {
                 finish();
             } else if (v == mFilterBtn) {
-                // 切换到滤镜模式下
-                toggleFilterAndMVModel(true);
+                toggleFilterMode();
             } else if (v == mMvBtn) {
-                // 切换到 MV 模式下
-                toggleFilterAndMVModel(false);
-            } else if (v == mBeautyLayout) {
-                // 点击美颜按钮，启用磨皮功能
-                handleOnClickBeautyButton(true);
+                toggleMVMode();
+            } else if (v == mBeautyBtn) {
+                toggleBeautyMode();
             } else if (v == mDubbingButton) {
                 toggleDubbingMode();
             } else if (v == mAudioRecordCloseButton) {
@@ -1352,7 +1481,6 @@ public class MovieEditorActivity extends SimpleCameraActivity {
                     setAudioEffect(Uri.fromFile(mAudioFile));
                     playMovie();
                 }
-
             } else if (v == mAudioRecordCancelButton) {
                 // 清空录音临时文件
                 deleteFile(mAudioFile);
@@ -1393,7 +1521,7 @@ public class MovieEditorActivity extends SimpleCameraActivity {
     /**
      * 录音按钮触摸事件处理
      */
-    private OnTouchListener mAudioRecordButtonOnTouchListener = new OnTouchListener() {
+    private View.OnTouchListener mAudioRecordButtonOnTouchListener = new View.OnTouchListener() {
         long startTime;
         long recordTime;
 
@@ -1451,7 +1579,7 @@ public class MovieEditorActivity extends SimpleCameraActivity {
 
     private void updateVoiceRecordButton(boolean isRecording) {
         int imgId = 0;
-        imgId = isRecording ? R.drawable.tusdk_view_dubbing_record_selected_button : R.drawable.tusdk_view_dubbing_record_unselected_button;
+        imgId = isRecording ? com.upyun.shortvideo.R.drawable.tusdk_view_dubbing_record_selected_button : com.upyun.shortvideo.R.drawable.tusdk_view_dubbing_record_unselected_button;
         mAudioRecordButton.setImageResource(imgId);
     }
 
@@ -1541,6 +1669,7 @@ public class MovieEditorActivity extends SimpleCameraActivity {
         getFilterMVLayoutWrap().setVisibility(View.GONE);
         mDubbingLayoutWrap.setVisibility(View.VISIBLE);
         getVoiceConfigView().setVisibility(View.VISIBLE);
+        updateButtonStatus(mBeautyBtn, false);
         updateButtonStatus(mFilterBtn, false);
         updateButtonStatus(mMvBtn, false);
         updateButtonStatus(mDubbingButton, true);
@@ -1551,49 +1680,41 @@ public class MovieEditorActivity extends SimpleCameraActivity {
     }
 
     /**
+     * 滤镜拖动条监听事件
+     */
+    private FilterConfigView.FilterConfigViewSeekBarDelegate mConfigSeekBarDelegate = new FilterConfigView.FilterConfigViewSeekBarDelegate() {
+
+        @Override
+        public void onSeekbarDataChanged(FilterConfigSeekbar seekbar, FilterArg arg) {
+            if (arg == null) return;
+
+            if (arg.equalsKey("mixied"))
+                mMixiedProgress = arg.getPrecentValue();
+        }
+
+    };
+
+    /**
      * 美颜拖动条监听事件
      */
     private TuSeekBar.TuSeekBarDelegate mTuSeekBarDelegate = new TuSeekBar.TuSeekBarDelegate() {
 
         @Override
         public void onTuSeekBarChanged(TuSeekBar seekBar, float progress) {
-            if (seekBar == mBeautyBar) {
-                mBeautyLevel.setText((int) (progress * 100) + "%");
-                mMovieEditor.setBeautyLevel(progress);
-
-                if (progress <= 0) {
-                    updateButtonStatus(mBeautyBtn, false);
-                } else {
-                    updateButtonStatus(mBeautyBtn, true);
-                }
+            if (seekBar == mSmoothingBarLayout.getSeekbar()) {
+                mSmoothingProgress = progress;
+                applyFilter(mSmoothingBarLayout, "smoothing", progress);
             }
         }
     };
 
-    /**
-     * 点击美颜按钮，启用磨皮功能
-     *
-     * @param isEnabled
-     */
-    private void handleOnClickBeautyButton(boolean isEnabled) {
-        int backgroundId = isEnabled ? R.drawable.tusdk_view_beauty_roundcorner_selected_bg :
-                R.drawable.tusdk_view_beauty_roundcorner_unselected_bg;
+    private void applyFilter(ConfigViewSeekBar viewSeekBar, String key, float progress) {
+        if (viewSeekBar == null || mSelesOutInput == null) return;
 
-        // 设置边框颜色，并显示美颜调节栏
-        mBeautyLayout.setBackgroundResource(backgroundId);
-
-        getBeautyBarWrap().setVisibility(isEnabled ? View.VISIBLE : View.INVISIBLE);
-
-        if (!isEnabled) return;
-
-        // 隐藏滤镜调节栏
-        getFilterConfigView().setVisibility(View.INVISIBLE);
-        // 隐藏滤镜选中边框
-        updateFilterBorderView(lastSelectedCellView, isEnabled);
-
-        updateButtonStatus(mBeautyBtn, mMovieEditor.getBeautyLevel() > (float) 0);
-        mBeautyLevel.setText((int) (mMovieEditor.getBeautyLevel() * 100) + "%");
-        getBeautyBar().setProgress(mMovieEditor.getBeautyLevel());
+        viewSeekBar.getConfigValueView().setText((int) (progress * 100) + "%");
+        SelesParameters params = mSelesOutInput.getParameter();
+        params.setFilterArg(key, progress);
+        mSelesOutInput.submitParameter();
     }
 
     /**
@@ -1606,27 +1727,27 @@ public class MovieEditorActivity extends SimpleCameraActivity {
         int imgId = 0, colorId = 0;
 
         switch (button.getId()) {
-            case R.id.lsq_filterWrap:
-                imgId = clickable ? R.drawable.lsq_style_default_btn_filter_selected
-                        : R.drawable.lsq_style_default_btn_filter_unselected;
-                colorId = clickable ? R.color.lsq_filter_title_color : R.color.lsq_filter_title_default_color;
+            case com.upyun.shortvideo.R.id.lsq_filterWrap:
+                imgId = clickable ? com.upyun.shortvideo.R.drawable.lsq_style_default_btn_filter_selected
+                        : com.upyun.shortvideo.R.drawable.lsq_style_default_btn_filter_unselected;
+                colorId = clickable ? com.upyun.shortvideo.R.color.lsq_filter_title_color : com.upyun.shortvideo.R.color.lsq_filter_title_default_color;
                 break;
 
-            case R.id.lsq_mvWrap:
-                imgId = clickable ? R.drawable.lsq_style_default_btn_mv_selected
-                        : R.drawable.lsq_style_default_btn_mv_unselected;
-                colorId = clickable ? R.color.lsq_filter_title_color : R.color.lsq_filter_title_default_color;
+            case com.upyun.shortvideo.R.id.lsq_mvWrap:
+                imgId = clickable ? com.upyun.shortvideo.R.drawable.lsq_style_default_btn_mv_selected
+                        : com.upyun.shortvideo.R.drawable.lsq_style_default_btn_mv_unselected;
+                colorId = clickable ? com.upyun.shortvideo.R.color.lsq_filter_title_color : com.upyun.shortvideo.R.color.lsq_filter_title_default_color;
                 break;
 
-            case R.id.lsq_beautyBtn:
-                imgId = clickable ? R.drawable.lsq_style_default_btn_beauty_selected
-                        : R.drawable.lsq_style_default_btn_beauty_unselected;
-                colorId = clickable ? R.color.lsq_filter_title_color : R.color.lsq_filter_title_default_color;
+            case com.upyun.shortvideo.R.id.lsq_beautyWrap:
+                imgId = clickable ? com.upyun.shortvideo.R.drawable.lsq_style_default_btn_beauty_selected
+                        : com.upyun.shortvideo.R.drawable.lsq_style_default_btn_beauty_unselected;
+                colorId = clickable ? com.upyun.shortvideo.R.color.lsq_filter_title_color : com.upyun.shortvideo.R.color.lsq_filter_title_default_color;
                 break;
-            case R.id.lsq_dubbing_wrap:
-                imgId = clickable ? R.drawable.lsq_style_default_btn_beauty_selected
-                        : R.drawable.lsq_style_default_btn_beauty_unselected;
-                colorId = clickable ? R.color.lsq_filter_title_color : R.color.lsq_filter_title_default_color;
+            case com.upyun.shortvideo.R.id.lsq_dubbing_wrap:
+                imgId = clickable ? com.upyun.shortvideo.R.drawable.lsq_style_default_btn_beauty_selected
+                        : com.upyun.shortvideo.R.drawable.lsq_style_default_btn_beauty_unselected;
+                colorId = clickable ? com.upyun.shortvideo.R.color.lsq_filter_title_color : com.upyun.shortvideo.R.color.lsq_filter_title_default_color;
                 break;
         }
 
@@ -1645,10 +1766,10 @@ public class MovieEditorActivity extends SimpleCameraActivity {
         int imgId = 0, colorId = 0;
 
         switch (button.getId()) {
-            case R.id.lsq_dubbingBtn:
-                imgId = clickable ? R.drawable.lsq_dubbing_selected
-                        : R.drawable.lsq_dubbing_default;
-                colorId = clickable ? R.color.lsq_filter_title_color : R.color.lsq_filter_title_default_color;
+            case com.upyun.shortvideo.R.id.lsq_dubbingBtn:
+                imgId = clickable ? com.upyun.shortvideo.R.drawable.lsq_dubbing_selected
+                        : com.upyun.shortvideo.R.drawable.lsq_dubbing_default;
+                colorId = clickable ? com.upyun.shortvideo.R.color.lsq_filter_title_color : com.upyun.shortvideo.R.color.lsq_filter_title_default_color;
                 break;
         }
         Drawable dubbingDrawable = TuSdkContext.getDrawable(imgId);
@@ -1691,7 +1812,6 @@ public class MovieEditorActivity extends SimpleCameraActivity {
         updateActionButtonStatus(false);
     }
 
-    private String TAG = getClass().getName();
     private TuSDKMovieEditorDelegate mEditorDelegate = new TuSDKMovieEditorDelegate() {
         /**
          * 视频处理完成
@@ -1811,8 +1931,33 @@ public class MovieEditorActivity extends SimpleCameraActivity {
 
         @Override
         public void onFilterChanged(SelesOutInput selesOutInput) {
-            if (selesOutInput != null && getFilterConfigView() != null) {
+            if (selesOutInput == null) return;
+
+            SelesParameters params = selesOutInput.getParameter();
+            List<FilterArg> list = params.getArgs();
+            for (FilterArg arg : list) {
+                if (arg.equalsKey("smoothing") && mSmoothingProgress != -1.0f)
+                    arg.setPrecentValue(mSmoothingProgress);
+                else if (arg.equalsKey("smoothing") && mSmoothingProgress == -1.0f)
+                    mSmoothingProgress = arg.getPrecentValue();
+                else if (arg.equalsKey("mixied") && mMixiedProgress != -1.0f)
+                    arg.setPrecentValue(mMixiedProgress);
+                else if (arg.equalsKey("mixied") && mMixiedProgress == -1.0f)
+                    mMixiedProgress = arg.getPrecentValue();
+
+            }
+            selesOutInput.setParameter(params);
+
+            mSelesOutInput = selesOutInput;
+
+            if (getFilterConfigView() != null) {
                 getFilterConfigView().setSelesFilter(selesOutInput);
+
+            }
+
+            if (mIsFirstEntry) {
+                mIsFirstEntry = false;
+                showBeautyContent();
             }
         }
     };

@@ -30,7 +30,7 @@ import org.lasque.tusdk.video.mixer.TuSDKMP4MovieMixer.ErrorCode;
 import org.lasque.tusdk.video.mixer.TuSDKMP4MovieMixer.OnMP4MovieMixerDelegate;
 import org.lasque.tusdk.video.mixer.TuSDKMP4MovieMixer.State;
 import org.lasque.tusdk.video.mixer.TuSDKMediaDataSource;
-import com.upyun.shortvideo.R;
+
 import com.upyun.shortvideo.views.CompoundConfigView;
 import com.upyun.shortvideo.views.ConfigViewParams;
 import com.upyun.shortvideo.views.ConfigViewParams.ConfigViewArg;
@@ -57,7 +57,7 @@ import android.widget.TextView;
  */
 public class MovieMixerActivity extends Activity implements OnMP4MovieMixerDelegate
 {
-	private final static int[] AUIDOENTRY_RESIDARRAY = new int[]{R.raw.tusdk_sample_video,R.raw.lsq_audio_oldmovie, R.raw.lsq_audio_relieve};
+	private final static int[] AUIDOENTRY_RESIDARRAY = new int[]{com.upyun.shortvideo.R.raw.tusdk_sample_video, com.upyun.shortvideo.R.raw.lsq_audio_oldmovie, com.upyun.shortvideo.R.raw.lsq_audio_relieve};
 	
 	/** MP4视频格式混合 */
 	private TuSDKMP4MovieMixer mMP4MovieMixer;
@@ -89,7 +89,7 @@ public class MovieMixerActivity extends Activity implements OnMP4MovieMixerDeleg
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.movie_mixer_activity);
+		setContentView(com.upyun.shortvideo.R.layout.movie_mixer_activity);
 		initView();
 		getAudioEntryList();
 		initMediaPlayer();
@@ -140,7 +140,7 @@ public class MovieMixerActivity extends Activity implements OnMP4MovieMixerDeleg
 	
 	private Uri getVideoPath()
 	{
-		Uri videoPathUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.tusdk_sample_video);
+		Uri videoPathUri = Uri.parse("android.resource://" + getPackageName() + "/" + com.upyun.shortvideo.R.raw.tusdk_sample_video);
 		return videoPathUri;
 	}
 
@@ -247,7 +247,7 @@ public class MovieMixerActivity extends Activity implements OnMP4MovieMixerDeleg
 	{
 		if (mMoviePreviewLayout == null)
 		{
-			mMoviePreviewLayout = (SurfaceView) findViewById(R.id.lsq_movie_mixer_preview);
+			mMoviePreviewLayout = (SurfaceView) findViewById(com.upyun.shortvideo.R.id.lsq_movie_mixer_preview);
 			int movieWidth = TuSdkContext.getScreenSize().width;
 			int movieHeight = movieWidth*9/16;
 			LinearLayout.LayoutParams lp =  (LayoutParams) mMoviePreviewLayout.getLayoutParams();
@@ -262,13 +262,13 @@ public class MovieMixerActivity extends Activity implements OnMP4MovieMixerDeleg
 	 */
 	private void initView()
 	{
-		mBackBtn = (TextView) findViewById(R.id.lsq_back);
+		mBackBtn = (TextView) findViewById(com.upyun.shortvideo.R.id.lsq_back);
 		mBackBtn.setOnClickListener(mOnClickListener);
-		TextView titleView = (TextView) findViewById(R.id.lsq_title);
+		TextView titleView = (TextView) findViewById(com.upyun.shortvideo.R.id.lsq_title);
 		titleView.setText(TuSdkContext.getString("lsq_movie_mixer_text"));
-		TextView nextBtn = (TextView) findViewById(R.id.lsq_next);
+		TextView nextBtn = (TextView) findViewById(com.upyun.shortvideo.R.id.lsq_next);
 		nextBtn.setVisibility(View.GONE);
-		mMovieMixerButton = (Button) findViewById(R.id.lsq_movie_mixer_start);
+		mMovieMixerButton = (Button) findViewById(com.upyun.shortvideo.R.id.lsq_movie_mixer_start);
 		mMovieMixerButton.setOnClickListener(mOnClickListener);
 		TuSdk.messageHub().applyToViewWithNavigationBarHidden(false);
 
@@ -357,7 +357,7 @@ public class MovieMixerActivity extends Activity implements OnMP4MovieMixerDeleg
 	{
 		if (mVoiceConfigView == null)
 		{
-			mVoiceConfigView = (CompoundConfigView) findViewById(R.id.lsq_voice_config_view);
+			mVoiceConfigView = (CompoundConfigView) findViewById(com.upyun.shortvideo.R.id.lsq_voice_config_view);
 		}
 
 		return mVoiceConfigView;
@@ -448,10 +448,10 @@ public class MovieMixerActivity extends Activity implements OnMP4MovieMixerDeleg
 		{
 			switch (v.getId())
 			{
-				case R.id.lsq_movie_mixer_start:
+				case com.upyun.shortvideo.R.id.lsq_movie_mixer_start:
 					startMovieMixer();
 					break;
-				case R.id.lsq_back:
+				case com.upyun.shortvideo.R.id.lsq_back:
 					finish();
 					break;
 			}

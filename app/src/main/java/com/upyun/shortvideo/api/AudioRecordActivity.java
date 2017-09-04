@@ -19,7 +19,6 @@ import org.lasque.tusdk.core.audio.TuSDKAudioFileRecorder.OutputFormat;
 import org.lasque.tusdk.core.audio.TuSDKAudioFileRecorder.RecordError;
 import org.lasque.tusdk.core.audio.TuSDKAudioFileRecorder.RecordState;
 import org.lasque.tusdk.core.audio.TuSDKAudioFileRecorder.TuSDKRecordAudioDelegate;
-import com.upyun.shortvideo.R;
 
 import android.app.Activity;
 import android.media.MediaPlayer;
@@ -61,21 +60,21 @@ public class AudioRecordActivity extends Activity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.audio_record_activity);
+		setContentView(com.upyun.shortvideo.R.layout.audio_record_activity);
 		initView();
 	}
 	
 	private void initView()
 	{
-		mBackBtn = (TextView) findViewById(R.id.lsq_back);
+		mBackBtn = (TextView) findViewById(com.upyun.shortvideo.R.id.lsq_back);
 		mBackBtn.setOnClickListener(mOnClickListener);
-		TextView titleView = (TextView) findViewById(R.id.lsq_title);
+		TextView titleView = (TextView) findViewById(com.upyun.shortvideo.R.id.lsq_title);
 		titleView.setText(TuSdkContext.getString("lsq_audio_record_text"));
-		TextView nextBtn = (TextView) findViewById(R.id.lsq_next);
+		TextView nextBtn = (TextView) findViewById(com.upyun.shortvideo.R.id.lsq_next);
 		nextBtn.setVisibility(View.GONE);
-		mStartRecordButton = (Button) findViewById(R.id.lsq_audio_record_btn);
-		mStopRecordButton = (Button) findViewById(R.id.lsq_audio_stop_btn);
-		mPlayAudioButton = (Button) findViewById(R.id.lsq_audio_play_btn);
+		mStartRecordButton = (Button) findViewById(com.upyun.shortvideo.R.id.lsq_audio_record_btn);
+		mStopRecordButton = (Button) findViewById(com.upyun.shortvideo.R.id.lsq_audio_stop_btn);
+		mPlayAudioButton = (Button) findViewById(com.upyun.shortvideo.R.id.lsq_audio_play_btn);
 		mStartRecordButton.setOnClickListener(mOnClickListener);
 		mPlayAudioButton.setOnClickListener(mOnClickListener);
 		mStopRecordButton.setOnClickListener(mOnClickListener);
@@ -106,12 +105,12 @@ public class AudioRecordActivity extends Activity
 		{
 			if (state == RecordState.Recording)
 			{
-	            String hintMsg = getResources().getString(R.string.lsq_audio_record_recording);    
+	            String hintMsg = getResources().getString(com.upyun.shortvideo.R.string.lsq_audio_record_recording);
 	            TuSdk.messageHub().showToast(AudioRecordActivity.this, hintMsg);
 			}
 			else if (state == RecordState.Stoped)
 			{
-				String hintMsg = getResources().getString(R.string.lsq_audio_record_stopped);    
+				String hintMsg = getResources().getString(com.upyun.shortvideo.R.string.lsq_audio_record_stopped);
 	            TuSdk.messageHub().showToast(AudioRecordActivity.this, hintMsg);
 			}
 		}
@@ -121,7 +120,7 @@ public class AudioRecordActivity extends Activity
 		{
 			if(error == RecordError.InitializationFailed)
 			{
-				String hintMsg = getResources().getString(R.string.lsq_audio_initialization_failed_hint);
+				String hintMsg = getResources().getString(com.upyun.shortvideo.R.string.lsq_audio_initialization_failed_hint);
 				TuSdk.messageHub().showError(AudioRecordActivity.this,hintMsg);
 			}
 		}
@@ -142,7 +141,7 @@ public class AudioRecordActivity extends Activity
 		@Override
 		public void onCompletion(MediaPlayer mp) 
 		{
-			String hintMsg = getResources().getString(R.string.lsq_audio_record_played);
+			String hintMsg = getResources().getString(com.upyun.shortvideo.R.string.lsq_audio_record_played);
 			TuSdk.messageHub().showToast(AudioRecordActivity.this, hintMsg);
 		}
 	};
@@ -185,7 +184,7 @@ public class AudioRecordActivity extends Activity
 		public void onPrepared(MediaPlayer mp) 
 		{
 			mMediaPlayer.start();  
-			String hintMsg = getResources().getString(R.string.lsq_audio_record_playing);
+			String hintMsg = getResources().getString(com.upyun.shortvideo.R.string.lsq_audio_record_playing);
 			TuSdk.messageHub().showToast(AudioRecordActivity.this, hintMsg);
 		}
 	};

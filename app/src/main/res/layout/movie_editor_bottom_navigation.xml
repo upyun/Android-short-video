@@ -13,55 +13,71 @@
             android:layout_height="10dp"
             android:background="@drawable/tusdk_view_edit_split_line" />
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="61dp"
             android:layout_below="@id/lsq_spilt_line"
-         >
+            android:gravity="center"
+            android:orientation="horizontal">
 
-            <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
-                android:id="@+id/lsq_filterWrap"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:paddingLeft="22dp"
-                android:paddingRight="28dp"
-                android:drawablePadding="5dp"
-                android:drawableTop="@drawable/lsq_style_default_btn_filter_selected"
-                android:text="@string/lsq_filter_text"
-                android:textColor="@color/lsq_link_action"
-                android:textSize="14sp" />
+        <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+            android:id="@+id/lsq_beautyWrap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/lsq__space_25"
+            android:paddingRight="@dimen/lsq__space_25"
+            android:drawableTop="@drawable/lsq_style_default_btn_beauty_selected"
+            app:drawableTopHeight="28dp"
+            app:drawableTopWidth="28dp"
+            android:gravity="center"
+            android:text="@string/lsq_beauty_text"
+            android:textColor="#f4a11a"
+            android:textSize="14sp" />
+                
+        <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+            android:id="@+id/lsq_filterWrap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/lsq__space_25"
+            android:paddingRight="@dimen/lsq__space_25"
+            android:drawableTop="@drawable/lsq_style_default_btn_filter_unselected"
+            app:drawableTopHeight="28dp"
+            app:drawableTopWidth="28dp"
+            android:gravity="center"
+            android:text="@string/lsq_filter_text"
+            android:textColor="@color/lsq_filter_title_default_color"
+            android:textSize="14sp" />
 
-            <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
-                android:id="@+id/lsq_mvWrap"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:paddingLeft="28dp"
-                android:paddingRight="28dp"
-                android:layout_toRightOf="@id/lsq_filterWrap"
-                android:drawablePadding="5dp"
-                android:drawableTop="@drawable/lsq_style_default_btn_mv_unselected"
-                android:gravity="center"
-                android:text="@string/lsq_text_MV"
-                android:textColor="@color/lsq_filter_title_default_color"
-                android:textSize="14sp" />
-            
-             <com.upyun.shortvideo.views.CompoundDrawableTextView
-                android:id="@+id/lsq_dubbingBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:paddingLeft="28dp"
-                android:paddingRight="28dp"
-                android:layout_toRightOf="@id/lsq_mvWrap"
-                android:drawablePadding="5dp"
-                app:drawableTop="@drawable/lsq_dubbing_default"
-                app:drawableTopHeight="28dp"
-                app:drawableTopWidth="28dp"
-                android:gravity="center"
-                android:text="@string/lsq_text_dubbing"
-                android:textColor="@color/lsq_filter_title_default_color"
-                android:textSize="14sp" />
-       </RelativeLayout>
+        <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+            android:id="@+id/lsq_mvWrap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/lsq__space_25"
+            android:paddingRight="@dimen/lsq__space_25"
+            android:drawableTop="@drawable/lsq_style_default_btn_mv_unselected"
+            app:drawableTopHeight="28dp"
+            app:drawableTopWidth="28dp"
+            android:gravity="center"
+            android:text="@string/lsq_text_MV"
+            android:textColor="@color/lsq_filter_title_default_color"
+            android:textSize="14sp" />
+        
+         <com.upyun.shortvideo.views.CompoundDrawableTextView
+            android:id="@+id/lsq_dubbingBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/lsq__space_25"
+            android:paddingRight="@dimen/lsq__space_25"
+            app:drawableTop="@drawable/lsq_dubbing_default"
+            app:drawableTopHeight="28dp"
+            app:drawableTopWidth="28dp"
+            android:gravity="center"
+            android:text="@string/lsq_text_dubbing"
+            android:textColor="@color/lsq_filter_title_default_color"
+            android:textSize="14sp" />
+   </LinearLayout>
 </RelativeLayout>

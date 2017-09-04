@@ -9,8 +9,6 @@
  */
 package com.upyun.shortvideo.views;
 
-import com.upyun.shortvideo.R;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -42,10 +40,10 @@ public class CompoundDrawableTextView extends TextView
 	{
 		super(context, attrs);
 		
-		mTypedArray=context.obtainStyledAttributes(attrs, R.styleable.CompoundDrawableTextView);
-		mDrawableTopHeight=mTypedArray.getDimension(R.styleable.CompoundDrawableTextView_drawableTopHeight, 10);
-		mDrawableTopWidth=mTypedArray.getDimension(R.styleable.CompoundDrawableTextView_drawableTopWidth, 10);
-		mDrawableTop=mTypedArray.getDrawable(R.styleable.CompoundDrawableTextView_drawableTop);
+		mTypedArray=context.obtainStyledAttributes(attrs, com.upyun.shortvideo.R.styleable.CompoundDrawableTextView);
+		mDrawableTopHeight=mTypedArray.getDimension(com.upyun.shortvideo.R.styleable.CompoundDrawableTextView_drawableTopHeight, 10);
+		mDrawableTopWidth=mTypedArray.getDimension(com.upyun.shortvideo.R.styleable.CompoundDrawableTextView_drawableTopWidth, 10);
+		mDrawableTop=mTypedArray.getDrawable(com.upyun.shortvideo.R.styleable.CompoundDrawableTextView_drawableTop);
 		
 		// 自定义设置图片的宽高
 		if(mDrawableTop != null) mDrawableTop.setBounds(0, 0, (int)mDrawableTopWidth, (int)mDrawableTopHeight);

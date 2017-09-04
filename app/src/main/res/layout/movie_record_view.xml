@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<RelativeLayout 
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res/com.upyun.shortvideo"
     android:layout_width="match_parent"
@@ -24,9 +24,9 @@
             android:gravity="center_vertical"
 		    android:text="@string/lsq_back"
 		    android:drawableLeft="@drawable/lsq_style_default_btn_back"
-		    android:textColor="@color/lsq_link_action"
+		    android:textColor="#22bbf4"
 		    />
-
+		
         <ImageView
             android:id="@+id/lsq_flashButton"
             android:layout_width="44dp"
@@ -50,13 +50,13 @@
             android:src="@drawable/lsq_style_default_btn_switch"
             android:scaleType="center"/>
     </RelativeLayout>
-
+    
     <RelativeLayout
         android:id="@+id/lsq_process_container"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="30dp" 
         android:layout_below="@+id/lsq_topBar" >
-
+        
 		<ProgressBar
 			android:id="@+id/lsq_record_progressbar"
 			android:layout_width="match_parent"
@@ -74,7 +74,7 @@
 			android:id="@+id/interuptLayout"
 			android:layout_width="match_parent"
 			android:layout_height="30dp" />
-
+		
     </RelativeLayout>
 
    <RelativeLayout
@@ -83,7 +83,7 @@
         android:layout_height="218dp"
         android:background="@color/lsq_color_white"
         android:layout_alignParentBottom="true">
-
+		
 		<LinearLayout
 			android:id="@+id/lsq_buttonwrap"
 			android:layout_width="match_parent"
@@ -91,7 +91,7 @@
 			android:orientation="horizontal"
 			android:layout_alignParentBottom="true"
 			android:layout_marginBottom="20dp">
-
+	            
 			<org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
 			    android:id="@+id/lsq_stickerWrap"
 				style="@style/lsq_camera_OptionButton"
@@ -99,15 +99,15 @@
 				android:drawableTop="@drawable/lsq_style_default_btn_sticker"
 				android:drawablePadding="4dp"
                 android:text="@string/lsq_text_sticker" />
-
+			
 			<org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
 			    android:id="@+id/lsq_filterWrap"
 				style="@style/lsq_camera_OptionButton"
 			    android:textColor="@color/lsq_record_title_color"
-				android:drawableTop="@drawable/lsq_style_default_btn_filter_selected"
+				android:drawableTop="@drawable/auto_default"
 				android:drawablePadding="4dp"
                 android:text="@string/lsq_text_filter" />
-
+			
 			<org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
 			    android:id="@+id/lsq_backWrap"
 				style="@style/lsq_camera_OptionButton"
@@ -115,7 +115,7 @@
 				android:drawableTop="@drawable/lsq_style_default_btn_back_unselected"
 				android:drawablePadding="4dp"
                 android:text="@string/lsq_stepback" />
-
+			
 			<org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
 			    android:id="@+id/lsq_confirmWrap"
 				style="@style/lsq_camera_OptionButton"
@@ -133,100 +133,47 @@
 			android:layout_above="@id/lsq_buttonwrap"
 			android:layout_marginBottom="10dp"
 	        android:background="@drawable/lsq_style_default_record_btn_record_unselected" />
-
+		
 		<com.upyun.shortvideo.views.CompoundDrawableTextView
 	        android:id="@+id/lsq_movieEditorButton"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
+	        android:gravity="center"
 	       	android:text="@string/lsq_album_import"
 	       	android:textColor="@color/lsq_filter_title_color"
 	       	app:drawableTop="@drawable/lsq_homepage_import_icon"
 	       	app:drawableTopHeight="31dp"
 	       	app:drawableTopWidth="31dp"
 	       	android:layout_marginLeft="20dp"
-			android:drawableTop="@drawable/lsq_homepage_import_icon"
 			android:layout_above="@id/lsq_buttonwrap"
 			android:layout_marginBottom="10dp"
 			/>
-
+		
 
 	</RelativeLayout>
-
+	   
    	<FrameLayout
 		android:id="@+id/lsq_touch_view"
 		android:layout_width="match_parent"
 	    android:layout_height="match_parent"
 	    android:layout_above="@id/lsq_bottomBar"
 	    android:layout_below="@id/lsq_topBar" />
-
+    
     <RelativeLayout
         android:id="@+id/lsq_filter_group_bottom_view"
         android:layout_width="match_parent"
         android:layout_height="230dp"
         android:background="@color/lsq_color_white"
         android:layout_alignParentBottom="true"
-        android:paddingBottom="40dp"
         android:paddingLeft="8dp" >
 
-        <LinearLayout
-            android:id="@+id/lsq_filter_layout"
-            style="@style/lsq_record_filter_list_view"
-            android:orientation="horizontal" >
-
-            <RelativeLayout
-                android:id="@+id/lsq_beautyWrap"
-                android:layout_width="65dp"
-                android:layout_height="90dp"
-                >
-
-                <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
-                    android:id="@+id/lsq_beautyBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:drawablePadding="5dp"
-                    android:drawableTop="@drawable/lsq_style_default_btn_beauty_unselected"
-                    android:gravity="center"
-                    android:text="@string/lsq_text_beauty"
-                    android:textColor="#9fa0a0" />
-            </RelativeLayout>
-
-            <com.upyun.shortvideo.views.FilterListView
-                android:id="@+id/lsq_filter_list_view"
-                style="@style/lsq_record_filter_list_view"
-                android:paddingLeft="8dp" />
-
-        </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@id/lsq_filter_layout" >
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center" >
-
-                <include
-                    android:id="@+id/lsq_filter_config_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    layout="@layout/filter_config_view" />
-            </LinearLayout>
-
-            <include
-                android:id="@+id/lsq_beauty_config_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                layout="@layout/beauty_config_view"
-                android:visibility="gone" />
-
-        </RelativeLayout>
-
+         <include
+             layout="@layout/smart_beauty_layout" />
+         
     </RelativeLayout>
 
-    <RelativeLayout
+   <RelativeLayout
+        android:visibility="gone"
         android:id="@+id/lsq_sticker_group_bottom_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -237,7 +184,7 @@
         <com.upyun.shortvideo.views.StickerListView
             android:id="@+id/lsq_sticker_list_view"
             style="@style/lsq_sticker_list_view" />
-
+        
     </RelativeLayout>
 
 </RelativeLayout>

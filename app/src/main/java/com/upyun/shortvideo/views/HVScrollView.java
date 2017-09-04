@@ -11,8 +11,6 @@ package com.upyun.shortvideo.views;
 
 import java.util.List;
 
-import com.upyun.shortvideo.R;
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -221,12 +219,12 @@ public class HVScrollView extends ViewGroup implements NestedScrollingParent,
         initScrollView();
 
         final TypedArray a = context.obtainStyledAttributes(
-                attrs, R.styleable.HVScrollView, defStyleAttr, 0);
+                attrs, com.upyun.shortvideo.R.styleable.HVScrollView, defStyleAttr, 0);
 
-        mChildLayoutCenter = a.getBoolean(R.styleable.HVScrollView_childLayoutCenter, false);
-        mFillViewportH = a.getBoolean(R.styleable.HVScrollView_fillViewportH, false);
-        mFillViewportV = a.getBoolean(R.styleable.HVScrollView_fillViewportV, false);
-        mScrollOrientation = a.getInt(R.styleable.HVScrollView_scrollOrientation, SCROLL_ORIENTATION_BOTH);
+        mChildLayoutCenter = a.getBoolean(com.upyun.shortvideo.R.styleable.HVScrollView_childLayoutCenter, false);
+        mFillViewportH = a.getBoolean(com.upyun.shortvideo.R.styleable.HVScrollView_fillViewportH, false);
+        mFillViewportV = a.getBoolean(com.upyun.shortvideo.R.styleable.HVScrollView_fillViewportV, false);
+        mScrollOrientation = a.getInt(com.upyun.shortvideo.R.styleable.HVScrollView_scrollOrientation, SCROLL_ORIENTATION_BOTH);
 
         a.recycle();
 
