@@ -24,8 +24,6 @@ import org.lasque.tusdk.core.utils.ThreadHelper;
 import org.lasque.tusdk.core.utils.image.AlbumHelper;
 import org.lasque.tusdk.movie.muxer.TuSDKMovieClipper;
 import org.lasque.tusdk.movie.muxer.TuSDKMovieClipper.TuSDKMovieClipperListener;
-import org.lasque.tusdk.movie.muxer.TuSDKMovieClipperOption;
-import org.lasque.tusdk.movie.muxer.TuSDKMovieSegment;
 import org.lasque.tusdk.video.editor.TuSDKTimeRange;
 import org.lasque.tusdk.video.editor.TuSDKVideoImageExtractor;
 import org.lasque.tusdk.video.editor.TuSDKVideoImageExtractor.TuSDKVideoImageExtractorDelegate;
@@ -424,37 +422,66 @@ public class MovieCutActivity extends Activity
 	 */
 	private void startMovieClipper()
 	{
-		// 添加需要移除的片段到list容器中
-	    List<TuSDKMovieSegment> segmentList = new ArrayList<TuSDKMovieSegment>();
-	    for (int i = 0; i < 2; i++) 
-	    {
-	    	TuSDKMovieSegment segment = new TuSDKMovieSegment();
-	    	if (i ==0)
-	    	{
-	    		// 时间单位μs
-	    		segment.setStartTime(0);
-	    		segment.setEndTime((long) mCuTimeRange.start*1000000);	
-	    	}
-	    	else if (i == 1)
-	    	{
-	    		segment.setStartTime((long) mCuTimeRange.end*1000000);
-		 	    segment.setEndTime(mVideoTotalTime*1000);	
-			}
-	 	    segmentList.add(segment);
+//		// 添加需要移除的片段到list容器中
+//	    List<TuSDKMovieSegment> segmentList = new ArrayList<TuSDKMovieSegment>();
+//	    for (int i = 0; i < 2; i++)
+//	    {
+//	    	TuSDKMovieSegment segment = new TuSDKMovieSegment();
+//	    	if (i ==0)
+//	    	{
+//	    		// 时间单位μs
+//	    		segment.setStartTime(0);
+//	    		segment.setEndTime((long) mCuTimeRange.start*1000000);
+//	    	}
+//	    	else if (i == 1)
+//	    	{
+//	    		segment.setStartTime((long) mCuTimeRange.end*1000000);
+//		 	    segment.setEndTime(mVideoTotalTime*1000);
+//			}
+//	 	    segmentList.add(segment);
+//		}
+//	    if (mMovieClipper == null)
+//	    	mMovieClipper = new TuSDKMovieClipper();
+//
+//	    TLog.e("mCuTimeRange:"+mCuTimeRange.toString() +"mVideoTotalTime:"+mVideoTotalTime);
+//
+//		TuSDKMovieClipperOption clipperOption = new TuSDKMovieClipperOption();
+//		clipperOption.setSavePath(getOutPutFilePath());
+//		clipperOption.setSrcUri(mVideoPathUri);
+//		clipperOption.setListener(mClipperProgressListener);
+//		// duration 单位μs
+//		clipperOption.setDuration(mVideoTotalTime*1000);
+//		mMovieClipper.setOption(clipperOption);
+//	    mMovieClipper.startEdit(segmentList);
+
+		if (mCuTimeRange.duration() == 0)
+		{
+			String hintMsg = getResources().getString(R.string.lsq_cut_choose_cutrange);
+			TuSdk.messageHub().showToast(this, hintMsg);
+			return;
 		}
-	    if (mMovieClipper == null)
-	    	mMovieClipper = new TuSDKMovieClipper();
-	    
-	    TLog.e("mCuTimeRange:"+mCuTimeRange.toString() +"mVideoTotalTime:"+mVideoTotalTime);
-	    
-		TuSDKMovieClipperOption clipperOption = new TuSDKMovieClipperOption();
-		clipperOption.setSavePath(getOutPutFilePath());
-		clipperOption.setSrcUri(mVideoPathUri);
-		clipperOption.setListener(mClipperProgressListener);
-		// duration 单位μs
-		clipperOption.setDuration(mVideoTotalTime*1000);
-		mMovieClipper.setOption(clipperOption);
-	    mMovieClipper.startEdit(segmentList);
+		if (mMovieClipper == null)
+		{
+			TuSDKMovieClipper.TuSDKMovieClipperOption option = new TuSDKMovieClipper.TuSDKMovieClipperOption();
+			option.savePath = getOutPutFilePath();
+			option.srcUri = mVideoPathUri;
+			option.listener = mClipperProgressListener;
+			mMovieClipper = new TuSDKMovieClipper(option);
+		}
+
+		// 添加需要移除的片段到list容器中
+		List<TuSDKMovieClipper.TuSDKMovieSegment> segmentList = new ArrayList<TuSDKMovieClipper.TuSDKMovieSegment>();
+		for (int i = 0; i < 2; i++)
+		{
+			TuSDKMovieClipper.TuSDKMovieSegment segment = null;
+			if (i ==0)
+				segment = mMovieClipper.createSegment(0,(long) mCuTimeRange.start*1000000);
+			else if (i == 1)
+				segment = mMovieClipper.createSegment((long) mCuTimeRange.end*1000000,mVideoTotalTime*1000);
+			segmentList.add(segment);
+		}
+
+		mMovieClipper.startEdit(segmentList);
 	}
 	
 	/**

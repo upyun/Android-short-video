@@ -10,6 +10,8 @@ package com.upyun.shortvideo;
 
 import org.lasque.tusdk.core.TuSdk;
 import org.lasque.tusdk.core.utils.StringHelper;
+import org.lasque.tusdk.core.utils.TuSdkWaterMarkOption;
+import org.lasque.tusdk.core.utils.image.BitmapHelper;
 import org.lasque.tusdk.core.video.TuSDKVideoResult;
 import com.upyun.shortvideo.component.MovieEditorActivity;
 import com.upyun.shortvideo.component.MovieRecordKeepModeActivity;
@@ -39,7 +41,8 @@ public class MovieRecordAndImportEditorActivity extends MovieRecordKeepModeActiv
     protected void initCamera() {
         super.initCamera();
 
-        mVideoCamera.setWaterMarkImage(null);
+        mVideoCamera.setWaterMarkImage(BitmapHelper.getBitmapFormRaw(this, com.upyun.shortvideo.R.raw.sample_watermark));
+        mVideoCamera.setWaterMarkPosition(TuSdkWaterMarkOption.WaterMarkPosition.TopLeft);
     }
 
     @Override

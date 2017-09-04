@@ -805,8 +805,9 @@ public class MovieEditorActivity extends SimpleCameraActivity {
         mMovieEditor.setSaveToAlbum(false);
 
         // 设置水印，默认为空
-        mMovieEditor.setWaterMarkImage(BitmapHelper.getBitmapFormRaw(this, R.raw.sample_watermark));
-        mMovieEditor.setWaterMarkPosition(WaterMarkPosition.TopLeft);
+        mMovieEditor.setWaterMarkImage(null);
+//        mMovieEditor.setWaterMarkImage(BitmapHelper.getBitmapFormRaw(this, R.raw.sample_watermark));
+//        mMovieEditor.setWaterMarkPosition(WaterMarkPosition.TopLeft);
         mMovieEditor.setDelegate(mEditorDelegate);
         mMovieEditor.loadVideo();
     }

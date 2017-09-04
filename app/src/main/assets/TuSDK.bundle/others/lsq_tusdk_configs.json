@@ -1,58 +1,58 @@
 {
     "filterGroups":[
         {
-            "file":"lsq_filter_YouPaiYun_76.gfilter",
-            "name":"lsq_filter_group_YouPaiYun",
-            "default_filter_id":508,
+            "file":"lsq_filter_YouPaiYun002_97.gfilter",
+            "name":"lsq_filter_group_YouPaiYun002",
+            "default_filter_id":675,
             "filters":[
                 {
-                    "id":508,
-                    "name":"lsq_filter_Fair04",
-                    "color":"#fecfcf",
+                    "id":675,
+                    "name":"lsq_filter_SkinPink016",
+                    "color":"#E9807E",
                     "args":{
-                        "smoothing":0.75,
-                        "mixied":0.8
+                        "smoothing":0.7,
+                        "mixied":0.7
                     }
                 },
                 {
-                    "id":509,
-                    "name":"lsq_filter_Pink005",
+                    "id":676,
+                    "name":"lsq_filter_SkinJelly016",
+                    "color":"#E9807E",
+                    "args":{
+                        "smoothing":0.7,
+                        "mixied":0.7
+                    }
+                },
+                {
+                    "id":677,
+                    "name":"lsq_filter_Pink016",
                     "color":"#ffffff",
                     "args":{
                         "smoothing":0.75,
-                        "mixied":0.8
+                        "mixied":0.7
                     }
                 },
                 {
-                    "id":510,
-                    "name":"lsq_filter_Forest04",
+                    "id":678,
+                    "name":"lsq_filter_Fair016",
                     "color":"#fecfcf",
                     "args":{
                         "smoothing":0.75,
-                        "mixied":0.8
+                        "mixied":0.7
                     }
                 },
                 {
-                    "id":511,
-                    "name":"lsq_filter_Sundown04",
-                    "color":"#ff8c19",
-                    "args":{
-                        "smoothing":0.6,
-                        "mixied":1
-                    }
-                },
-                {
-                    "id":512,
-                    "name":"lsq_filter_Sakura04",
-                    "color":"#45ebc6",
+                    "id":679,
+                    "name":"lsq_filter_Forest017",
+                    "color":"#fecfcf",
                     "args":{
                         "smoothing":0.75,
-                        "mixied":1
+                        "mixied":0.7
                     }
                 },
                 {
-                    "id":513,
-                    "name":"lsq_filter_Paul04",
+                    "id":680,
+                    "name":"lsq_filter_Paul016",
                     "color":"#E9807E",
                     "args":{
                         "smoothing":0.75,
@@ -60,117 +60,27 @@
                     }
                 },
                 {
-                    "id":514,
-                    "name":"lsq_filter_Lavender04",
-                    "color":"#E9807E",
-                    "args":{
-                        "smoothing":0.75,
-                        "mixied":0.4
-                    }
-                },
-                {
-                    "id":515,
-                    "name":"lsq_filter_Manhattan04",
-                    "color":"#0091FF",
-                    "args":{
-                        "smoothing":0.75,
-                        "mixied":0.8
-                    }
-                },
-                {
-                    "id":516,
-                    "name":"lsq_filter_Dusk05",
-                    "color":"#18BC9C",
+                    "id":681,
+                    "name":"lsq_filter_MintGreen016",
+                    "color":"#ffffff",
                     "args":{
                         "smoothing":0.75,
                         "mixied":0.7
                     }
                 },
                 {
-                    "id":517,
-                    "name":"lsq_filter_TinyTimes04",
+                    "id":682,
+                    "name":"lsq_filter_TinyTimes016",
                     "color":"#9de600",
                     "args":{
                         "smoothing":0.75,
-                        "mixied":0.8
+                        "mixied":0.7
                     }
                 },
                 {
-                    "id":518,
-                    "name":"lsq_filter_Year195004",
+                    "id":683,
+                    "name":"lsq_filter_Year1950016",
                     "color":"#d2d2d4",
-                    "args":{
-                        "smoothing":0.75,
-                        "mixied":1
-                    }
-                },
-                {
-                    "id":519,
-                    "name":"lsq_filter_Vivid04",
-                    "color":"#45e3f5",
-                    "args":{
-                        "smoothing":0.75,
-                        "mixied":0.8
-                    }
-                },
-                {
-                    "id":520,
-                    "name":"lsq_filter_Missing04",
-                    "color":"#fe7d99",
-                    "args":{
-                        "smoothing":0.75,
-                        "mixied":1
-                    }
-                },
-                {
-                    "id":521,
-                    "name":"lsq_filter_Grapefruit04",
-                    "color":"#fe7d99",
-                    "args":{
-                        "smoothing":0.75,
-                        "mixied":1
-                    }
-                },
-                {
-                    "id":522,
-                    "name":"lsq_filter_RoseCarmine04",
-                    "color":"#fe7d99",
-                    "args":{
-                        "smoothing":0.75,
-                        "mixied":1
-                    }
-                },
-                {
-                    "id":523,
-                    "name":"lsq_filter_Nude04",
-                    "color":"#fe7d99",
-                    "args":{
-                        "smoothing":0.75,
-                        "mixied":1
-                    }
-                },
-                {
-                    "id":524,
-                    "name":"lsq_filter_Orange04",
-                    "color":"#fe7d99",
-                    "args":{
-                        "smoothing":0.75,
-                        "mixied":1
-                    }
-                },
-                {
-                    "id":525,
-                    "name":"lsq_filter_BabyPink04",
-                    "color":"#fe7d99",
-                    "args":{
-                        "smoothing":0.75,
-                        "mixied":1
-                    }
-                },
-                {
-                    "id":526,
-                    "name":"lsq_filter_Original04",
-                    "color":"#ffffff",
                     "args":{
                         "smoothing":0.75,
                         "mixied":1
@@ -273,5 +183,5 @@
             ]
         }
     ],
-    "master":"VX4PKZJU8t7hNOqv1dlTAPdQmDvq8mibe80GvLFH5dUHf1b34BcAcrkrkYcW\/XhlfP2TnAUyqFZU6x10tApAHvRhxt74E5nBuSOGHWhZ5E87N96PUycdyIKeDP0+KYpGQlO781xOicYrsZqY13L9YJSGEYv15o4MLmfNcOFHriAol0d8tUXEtAOkbz1ZY4mjVivOJLawouakMLf+goI07HSgQCG5mCAAVaDcV3y\/VMChL+psxwC+xPrxlfijV66Q85FWrnlSS0ZTOsz3+EHzOkGB\/TuimWt2YOQs1pvOL8ijcr6lhaAxoh1VkVPLYbqgfVtwZYXYFsLFc7tWY\/gmN77zmED5sXzCYEHzqX6veHzXKBHEF+YrrPNY6fW\/hk0kdyfnvi8YYB6QRTrXTmM5hz4JzZziWw4n6Fs5KLEis2l+Q8UaryoOlRL1Lh906VlbXvPxwSRKOmsgKDKjtPzHsY\/5sV3dgfJehBP2KYnIsVQJB2WaJkVokxiOiPUS5gUwA2a0EQPZt4sSFP9\/hP4fyqlZwREU8vIwynb8krhpvBhpfMD3KEaQs8Yz7RXwxTnKPcLQgSaxZdW8OEPorbWug5SKoug5XVqfZohCvdCh1M4Dm\/nCUS6z5vMwWZ3v3XOlX3s5OMZ66c1ozhClTa8mAmk2wMEuqLYq9MHCU0N58Z\/GKj0xcwUMKc+f7fNH5Gv4Gk6bP+e\/ANDsOhR6kXzgq\/1E0FHmEJaM558mvfdUjaI\/\/kT+aal7sd1BU+RRGv5w5or0Ajvs7dwFu9PnEKx4V8je+VfEAG\/pPmwmgEV2buytajaRu6Ef4KXlK0sEqelr\/+cFlNHnR8ex3UEtIjkknIgaYGWH51dT+i\/rDzCTluqFMiIDJFEYuGWnziLKypULFRCwA9JrP9Sp4vjiWwAzIXm0N2aFqR3mgRP1YJ9\/p1Zhl3zir2BvgS6u2UJ3klwgMVTvHrEqNE+7iP8ePYfnxpsOEwNqmtoszC1+tJk5NliWCc4u3t8BT6lnjt45yNKCjDizLNk5G0b8+9GrbHwF6chcrAjLDMBP3ZZEa41C61c=6AA2BA4D04"
+    "master":"w3V7spNzQJGvskU4SyNK\/Xb5XjEUTH6qP4y2JL0Y\/vGE\/kzO9WyeKd6Z2k90Q+aEYDhu5DCT7imuZrOTqAdIhvUli4GgMddPg3A7ZELKO6Sictu56Kg4Xx4OJddfKA3+XxaQmeTzn6t5swYlUmt9L+294f2Kh5yydIUU\/GyKkMI6Gjg8wjuAgJ6FhN30qaNDo86ml8WFYqt56pb8+SyAMDOrrc1QIp\/f7VOkq4x+hrLwXi7QjDuGSw5nP32T4hpaPlE\/rygni5Q6Lyd263pJ9VBbOZxG3rWF9VkXBmkLzi42J10QODexOGtZYFbBxo5ytdsU0Gs1WjpD9GbTHFXn8VjAVfoPSp\/A4bi+yBzpUW18m2Ic7LNYlViFm2zYiXJWOSmlp\/CDjMRRLjTHx9p+dK0MO9xsX48n87HMh5MS5nzFLa8qvL9aRh+pwGYwTHlIoyO3FcsIUsFsmfuO01e9\/H\/rWr3JfvvQoffFkbRzrFdiEUhB7vYklPQ2tSdwS8ZDrtwgAuDy8wxNfXHSgwMc+WVyG+PaetexL7jiQdDAa0lpaDvSMoaoSo3DasNJx1QlyqA2+a3DT836H5aKIXfEuYfA1XkoFSBFwO36sS\/\/yyuoyR7YhOObPadI9bMTsCn\/CoqxjyKdjzG5ArDvNnXyz+vV+6F5fZhw7czLxiuDO3LbFu5nU4gzHOauR4+K9eZQbzPW2mTMAqH9H42YPiaugMFmsEtcRp9T\/Zo8gidPbBissYk1\/pvOBxoBp2lu6eI1v2Mvu2W1azGFhCXy7oYdCMiQ3fTFVD4JU5AdDal3rjaggoGZN2t9YDjUxT\/jNx1Izkr6bJ1aJNgBCrw03AmnIBqqJke38SMMkE8oyjZN2mlapFCnB6Z80kWddmL8Fl9fxTmbLhD4l83D1sJS9wcdDoLTKamLxTeyCssrh7hh\/IhLR06qCiKKTNy7EKLbQcl2by24vrO3rtNhwwI2JssifxjZ4wMzO2jUWqfpykNG2OLgT30XKvQObI90PgqM0MTGcrB13YkZuB2lUl7Hm4iSEigflTTP2NKJoUbY6hSY2n9rJxKoaP+qK1qBZD5nk92isYdDOf3\/anZY+UX1NMBdhF9UwRKxTmKcsdJ2800yZMZhCi9Lypa1W45Ud\/eMJsmmjf2xhn2tpW3XrQf67XM1PzXEnu7QrxG3Deav5n1k1Wrj8VivWVFUl+VtwT6ClwtZ6xSNRPG8Dues78LEHjpfKdcpWNeIMbhBLdHVRSjut8F52rgbZYNTuXwrCyqfBwvE4\/aKHSvNheV1NYVVOR5ofG15CVn2xV+MyORp8gZwAmSkel18LZRECUQk2faq5MKnL\/+CSqtd94dthUb5K15V0A==A5E3B3E150"
 }

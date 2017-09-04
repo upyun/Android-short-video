@@ -44,6 +44,18 @@
     <string name="lsq_filter_Grapefruit04">西柚色</string>
     <string name="lsq_filter_BabyPink004">粉色</string>
 
+    <!-- 1.8.0 -->
+    <string name="lsq_filter_SkinPink016">粉嫩</string>
+    <string name="lsq_filter_SkinJelly016">果冻</string>
+    <string name="lsq_filter_Pink016">淡雅</string>
+    <string name="lsq_filter_Fair016">白皙</string>
+    <string name="lsq_filter_Forest017">小森林</string>
+    <string name="lsq_filter_Paul016">阿宝色</string>
+    <string name="lsq_filter_MintGreen016">薄荷绿</string>
+    <string name="lsq_filter_TinyTimes016">小时代</string>
+    <string name="lsq_filter_Year1950016">1950s</string>
+
+
     <string name="live_camera_sample">直播相机示例</string>
     <string name="record_camera_sample">"视频录制示例</string>
     <string name="edit_camera_sample">视频编辑示例</string>
@@ -206,4 +218,5 @@
     <string name="lsq_movie_cut_text">视频时间裁剪</string>
     <string name="lsq_audio_mixer_delete_success">混合音频删除成功</string>
     <string name="lsq_audio_mixer_delete_failed">混合音频删除失败</string>
+    <string name="lsq_cut_choose_cutrange">请先选择剪裁区域</string>
 </resources>
