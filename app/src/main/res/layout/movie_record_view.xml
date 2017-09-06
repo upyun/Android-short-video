@@ -37,7 +37,7 @@
             android:layout_toLeftOf="@+id/lsq_toggleButton"
             android:layout_marginRight="22dp"
             android:scaleType="center"
-            android:src="@drawable/lsq_style_default_btn_flash_off" />
+            android:src="@drawable/lsq_icon_flash_off" />
 
         <ImageView
             android:id="@+id/lsq_toggleButton"
