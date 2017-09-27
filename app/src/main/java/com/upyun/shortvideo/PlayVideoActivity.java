@@ -10,18 +10,19 @@ import android.widget.MediaController;
 import android.widget.TableLayout;
 
 import com.upyun.upplayer.widget.UpVideoView;
+import com.upyun.upplayer.widget.UpVideoView2;
 
 
 public class PlayVideoActivity extends Activity {
 
-    private UpVideoView mVideoView;
+    private UpVideoView2 mVideoView;
     private TableLayout mHudView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_video);
-        mVideoView = (UpVideoView) findViewById(R.id.uv_demo);
+        mVideoView = (UpVideoView2) findViewById(R.id.uv_demo);
         //设置播放地址
         mVideoView.setVideoPath("http://uprocess.b0.upaiyun.com/demo/short_video/UPYUN_0.flv");
         //开始播放

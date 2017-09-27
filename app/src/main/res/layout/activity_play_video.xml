@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.upyun.upplayer.widget.UpVideoView
+        <com.upyun.upplayer.widget.UpVideoView2
             android:id="@+id/uv_demo"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
