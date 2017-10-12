@@ -109,7 +109,7 @@
     </style>
     <style name="lsq_sticker_list_view">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
         <item name="android:paddingTop">13dp</item>
         <item name="android:paddingLeft">13dp</item>
         <item name="android:paddingRight">13dp</item>
