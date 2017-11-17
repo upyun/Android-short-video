@@ -65,47 +65,40 @@
             style="@style/titleText"
             android:text="时长" />
 
+
         <LinearLayout
+            android:layout_marginLeft="@dimen/lsq__space_5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <com.upyun.shortvideo.views.SettingEditView
+                android:id="@+id/sev_minsec"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:orientation="horizontal">
+                android:layout_weight="1"
+                app:keyText="最小"
+                app:unitText="s"
+                app:valueText="2" />
 
-                <com.upyun.shortvideo.views.SettingEditView
-                    android:id="@+id/sev_minsec"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/lsq__space_10"
-                    android:layout_weight="1"
-                    app:keyText="最小"
-                    app:unitText="s"
-                    app:valueText="2" />
-
-                <com.upyun.shortvideo.views.SettingEditView
-                    android:id="@+id/sev_maxsec"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/lsq__space_10"
-                    android:layout_weight="1"
-                    app:keyText="最大"
-                    app:unitText="s"
-                    app:valueText="30" />
-
-            </LinearLayout>
+            <com.upyun.shortvideo.views.SettingEditView
+                android:id="@+id/sev_maxsec"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:keyText="最大"
+                app:unitText="s"
+                app:valueText="30" />
 
         </LinearLayout>
+
 
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/lsq_font_space_setting"
+        android:layout_height="@dimen/lsq_font_space_setting_qx"
         android:layout_marginBottom="@dimen/lsq__space_15"
         android:layout_marginLeft="@dimen/lsq__space_5"
         android:layout_marginRight="@dimen/lsq__space_5"
@@ -122,6 +115,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/lsq__space_10"
             android:layout_marginLeft="@dimen/lsq__space_10"
             android:layout_marginRight="@dimen/lsq__space_10"
             android:orientation="horizontal">
@@ -129,7 +123,7 @@
             <RadioButton
                 android:id="@+id/rb1"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="28dp"
                 android:layout_marginRight="@dimen/lsq__space_5"
                 android:layout_weight="1"
                 android:background="@drawable/setting_radio_selector"
@@ -137,12 +131,26 @@
                 android:gravity="center"
                 android:text="低清"
                 android:textColor="@color/setting_radio_text_selector"
-                android:textSize="8pt" />
+                android:textSize="12sp" />
 
             <RadioButton
                 android:id="@+id/rb2"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="28dp"
+                android:layout_marginLeft="@dimen/lsq__space_5"
+                android:layout_marginRight="@dimen/lsq__space_5"
+                android:layout_weight="1"
+                android:background="@drawable/setting_radio_selector"
+                android:button="@null"
+                android:gravity="center"
+                android:text="标清"
+                android:textColor="@color/setting_radio_text_selector"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/rb3"
+                android:layout_width="0dp"
+                android:layout_height="28dp"
                 android:layout_marginLeft="@dimen/lsq__space_5"
                 android:layout_marginRight="@dimen/lsq__space_5"
                 android:layout_weight="1"
@@ -151,26 +159,12 @@
                 android:gravity="center"
                 android:text="高清"
                 android:textColor="@color/setting_radio_text_selector"
-                android:textSize="8pt" />
-
-            <RadioButton
-                android:id="@+id/rb3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/lsq__space_5"
-                android:layout_marginRight="@dimen/lsq__space_5"
-                android:layout_weight="1"
-                android:background="@drawable/setting_radio_selector"
-                android:button="@null"
-                android:gravity="center"
-                android:text="超清"
-                android:textColor="@color/setting_radio_text_selector"
-                android:textSize="8pt" />
+                android:textSize="12sp" />
 
             <RadioButton
                 android:id="@+id/rb4"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="28dp"
                 android:layout_marginLeft="@dimen/lsq__space_5"
                 android:layout_weight="1"
                 android:background="@drawable/setting_radio_selector"
@@ -178,7 +172,7 @@
                 android:gravity="center"
                 android:text="超高清"
                 android:textColor="@color/setting_radio_text_selector"
-                android:textSize="8pt" />
+                android:textSize="12sp" />
         </RadioGroup>
 
     </RelativeLayout>
@@ -197,6 +191,7 @@
             android:text="分辨率" />
 
         <LinearLayout
+            android:layout_marginLeft="@dimen/lsq__space_5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -206,21 +201,17 @@
                 android:id="@+id/sev_width"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/lsq__space_10"
                 android:layout_weight="1"
                 app:keyText="宽度"
-                app:unitText="px"
-                 />
+                app:unitText="px" />
 
             <com.upyun.shortvideo.views.SettingEditView
                 android:id="@+id/sev_height"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/lsq__space_10"
                 android:layout_weight="1"
                 app:keyText="高度"
-                app:unitText="px"
-                />
+                app:unitText="px" />
 
         </LinearLayout>
 
@@ -240,6 +231,7 @@
             android:text="帧码率" />
 
         <LinearLayout
+            android:layout_marginLeft="@dimen/lsq__space_5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -249,21 +241,17 @@
                 android:id="@+id/sev_bit"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/lsq__space_10"
                 android:layout_weight="1"
                 app:keyText="码率"
-                app:unitText="kbps"
-                />
+                app:unitText="kbps" />
 
             <com.upyun.shortvideo.views.SettingEditView
                 android:id="@+id/sev_fps"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/lsq__space_10"
                 android:layout_weight="1"
-                app:keyText="码率"
-                app:unitText="fps"
-                 />
+                app:keyText="帧率"
+                app:unitText="fps" />
 
         </LinearLayout>
 
@@ -280,9 +268,21 @@
         <TextView
             android:id="@+id/title_marker"
             style="@style/titleText"
-            android:text="水印(图片默认)" />
+            android:text="水印" />
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/title_marker"
+            android:layout_marginLeft="@dimen/lsq__space_5"
+            android:layout_toRightOf="@id/title_marker"
+            android:gravity="bottom"
+            android:text="( 图片默认 )"
+            android:textColor="@color/setting_text_color"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_marginLeft="@dimen/lsq__space_5"
             android:id="@+id/tv_wz"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -290,7 +290,7 @@
             android:layout_marginTop="@dimen/lsq__space_10"
             android:text="方位"
             android:textColor="@color/setting_text_color"
-            android:textSize="8pt" />
+            android:textSize="12sp" />
 
         <com.upyun.shortvideo.views.MyRadioView
             android:id="@+id/mrv"

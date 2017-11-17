@@ -55,7 +55,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/lsq_font_space_setting"
+        android:layout_height="@dimen/lsq_font_space_setting_qx"
         android:layout_marginBottom="@dimen/lsq__space_15"
         android:layout_marginLeft="@dimen/lsq__space_5"
         android:layout_marginRight="@dimen/lsq__space_5"
@@ -72,6 +72,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/lsq__space_10"
             android:layout_marginLeft="@dimen/lsq__space_10"
             android:layout_marginRight="@dimen/lsq__space_10"
             android:orientation="horizontal">
@@ -79,7 +80,7 @@
             <RadioButton
                 android:id="@+id/rb1"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="28dp"
                 android:layout_marginRight="@dimen/lsq__space_5"
                 android:layout_weight="1"
                 android:background="@drawable/setting_radio_selector"
@@ -87,12 +88,26 @@
                 android:gravity="center"
                 android:text="低清"
                 android:textColor="@color/setting_radio_text_selector"
-                android:textSize="8pt" />
+                android:textSize="12sp" />
 
             <RadioButton
                 android:id="@+id/rb2"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="28dp"
+                android:layout_marginLeft="@dimen/lsq__space_5"
+                android:layout_marginRight="@dimen/lsq__space_5"
+                android:layout_weight="1"
+                android:background="@drawable/setting_radio_selector"
+                android:button="@null"
+                android:gravity="center"
+                android:text="标清"
+                android:textColor="@color/setting_radio_text_selector"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/rb3"
+                android:layout_width="0dp"
+                android:layout_height="28dp"
                 android:layout_marginLeft="@dimen/lsq__space_5"
                 android:layout_marginRight="@dimen/lsq__space_5"
                 android:layout_weight="1"
@@ -101,26 +116,12 @@
                 android:gravity="center"
                 android:text="高清"
                 android:textColor="@color/setting_radio_text_selector"
-                android:textSize="8pt" />
-
-            <RadioButton
-                android:id="@+id/rb3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/lsq__space_5"
-                android:layout_marginRight="@dimen/lsq__space_5"
-                android:layout_weight="1"
-                android:background="@drawable/setting_radio_selector"
-                android:button="@null"
-                android:gravity="center"
-                android:text="超清"
-                android:textColor="@color/setting_radio_text_selector"
-                android:textSize="8pt" />
+                android:textSize="12sp" />
 
             <RadioButton
                 android:id="@+id/rb4"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="28dp"
                 android:layout_marginLeft="@dimen/lsq__space_5"
                 android:layout_weight="1"
                 android:background="@drawable/setting_radio_selector"
@@ -128,7 +129,7 @@
                 android:gravity="center"
                 android:text="超高清"
                 android:textColor="@color/setting_radio_text_selector"
-                android:textSize="8pt" />
+                android:textSize="12sp" />
         </RadioGroup>
 
     </RelativeLayout>
@@ -150,6 +151,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/lsq__space_5"
             android:orientation="horizontal">
 
             <com.upyun.shortvideo.views.SettingEditView
@@ -193,6 +195,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/lsq__space_5"
             android:orientation="horizontal">
 
             <com.upyun.shortvideo.views.SettingEditView
@@ -202,8 +205,7 @@
                 android:layout_marginRight="@dimen/lsq__space_10"
                 android:layout_weight="1"
                 app:keyText="码率"
-                app:unitText="kbps"
-                app:valueText="2560" />
+                app:unitText="kbps" />
 
             <com.upyun.shortvideo.views.SettingEditView
                 android:id="@+id/sev_fps"
@@ -211,9 +213,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/lsq__space_10"
                 android:layout_weight="1"
-                app:keyText="码率"
-                app:unitText="fps"
-                app:valueText="30" />
+                app:keyText="帧率"
+                app:unitText="fps" />
 
         </LinearLayout>
 

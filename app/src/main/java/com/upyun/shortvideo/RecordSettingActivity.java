@@ -46,7 +46,7 @@ public class RecordSettingActivity extends AppCompatActivity implements View.OnC
         findViewById(R.id.lsq_next).setOnClickListener(this);
 
         qxRadio.setOnCheckedChangeListener(this);
-        ((RadioButton)findViewById(R.id.rb4)).setChecked(true);
+        ((RadioButton) findViewById(R.id.rb2)).setChecked(true);
     }
 
     @Override
@@ -79,8 +79,8 @@ public class RecordSettingActivity extends AppCompatActivity implements View.OnC
             case R.id.rb1:
                 sevWidth.setValue(640);
                 sevHeight.setValue(360);
-                sevBit.setValue(512);
-                sevFps.setValue(20);
+                sevBit.setValue(384);
+                sevFps.setValue(15);
                 break;
             case R.id.rb2:
                 sevWidth.setValue(854);

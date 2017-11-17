@@ -2,6 +2,7 @@ package com.upyun.shortvideo;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -10,29 +11,27 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.upyun.shortvideo.suite.MoviePreviewAndCutActivity;
-import com.upyun.shortvideo.utils.Constants;
+import com.upyun.shortvideo.utils.UriUtils;
 import com.upyun.shortvideo.views.MyRadioView;
 import com.upyun.shortvideo.views.SettingEditView;
 
+import org.lasque.tusdk.core.TuSdk;
+import org.lasque.tusdk.core.utils.StringHelper;
+
 public class EditorSettingActivity extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
 
+    private static final int IMAGE_PICKER_SELECT = 1;
     private static final String TAG = "RecordSettingActivity";
-    private MyRadioView myRadioView;
     private RadioGroup qxRadio;
-    private SettingEditView sevMinSec;
-    private SettingEditView sevMaxSec;
     private SettingEditView sevWidth;
     private SettingEditView sevHeight;
     private SettingEditView sevBit;
     private SettingEditView sevFps;
 
-    private String path;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.editor_setting_layout);
-        path = getIntent().getStringExtra("videoPath");
         initView();
     }
 
@@ -47,7 +46,7 @@ public class EditorSettingActivity extends AppCompatActivity implements View.OnC
         findViewById(R.id.lsq_next).setOnClickListener(this);
 
         qxRadio.setOnCheckedChangeListener(this);
-        ((RadioButton) findViewById(R.id.rb4)).setChecked(true);
+        ((RadioButton) findViewById(R.id.rb2)).setChecked(true);
     }
 
     @Override
@@ -60,11 +59,12 @@ public class EditorSettingActivity extends AppCompatActivity implements View.OnC
                 Config.EDITORBITRATE = Integer.parseInt(sevBit.getValue());
                 Config.EDITORFPS = Integer.parseInt(sevFps.getValue());
 
-                Intent intent = new Intent(this, MoviePreviewAndCutActivity.class);
-                intent.putExtra("videoPath", path);
-                startActivity(intent);
-                break;
 
+                Intent pickIntent = new Intent(Intent.ACTION_GET_CONTENT);
+                pickIntent.setType("video/*");
+                pickIntent.addCategory(Intent.CATEGORY_OPENABLE);
+                startActivityForResult(pickIntent, IMAGE_PICKER_SELECT);
+                break;
             case R.id.lsq_back:
                 finish();
                 break;
@@ -77,8 +77,8 @@ public class EditorSettingActivity extends AppCompatActivity implements View.OnC
             case R.id.rb1:
                 sevWidth.setValue(640);
                 sevHeight.setValue(360);
-                sevBit.setValue(512);
-                sevFps.setValue(20);
+                sevBit.setValue(384);
+                sevFps.setValue(15);
                 break;
             case R.id.rb2:
                 sevWidth.setValue(854);
@@ -98,6 +98,23 @@ public class EditorSettingActivity extends AppCompatActivity implements View.OnC
                 sevBit.setValue(2560);
                 sevFps.setValue(30);
                 break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != RESULT_OK) return;
+
+        Uri selectedMediaUri = data.getData();
+
+        String path = UriUtils.getFileAbsolutePath(getApplicationContext(), selectedMediaUri);
+
+        if (!StringHelper.isEmpty(path)) {
+            Intent intent = new Intent(this, MoviePreviewAndCutActivity.class);
+            intent.putExtra("videoPath", path);
+            startActivity(intent);
+        } else {
+            TuSdk.messageHub().showToast(getApplicationContext(), com.upyun.shortvideo.R.string.lsq_video_empty_error);
         }
     }
 }

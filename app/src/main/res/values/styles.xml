@@ -139,7 +139,8 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/setting_text_color</item>
-        <item name="android:textSize">10pt</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_marginLeft">5dp</item>
     </style>
 
 </resources>

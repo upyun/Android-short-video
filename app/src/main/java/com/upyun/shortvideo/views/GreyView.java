@@ -34,6 +34,7 @@ public class GreyView extends View {
         int height = getHeight();
         Paint paint = new Paint();
         paint.setColor(0xff323333);
+        paint.setAntiAlias(true);
         canvas.drawLine(0, 0, width, height, paint);
     }
 }

@@ -141,10 +141,13 @@ public class DemoEntryActivity extends TuFragmentActivity {
     }
 
     private void handleImportButton() {
-        Intent pickIntent = new Intent(Intent.ACTION_GET_CONTENT);
-        pickIntent.setType("video/*");
-        pickIntent.addCategory(Intent.CATEGORY_OPENABLE);
-        startActivityForResult(pickIntent, IMAGE_PICKER_SELECT);
+//        Intent pickIntent = new Intent(Intent.ACTION_GET_CONTENT);
+//        pickIntent.setType("video/*");
+//        pickIntent.addCategory(Intent.CATEGORY_OPENABLE);
+//        startActivityForResult(pickIntent, IMAGE_PICKER_SELECT);
+
+        Intent intent = new Intent(this, EditorSettingActivity.class);
+        startActivity(intent);
     }
 
     @Override
