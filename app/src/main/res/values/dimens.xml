@@ -36,6 +36,6 @@
     <dimen name="lsq_font_space_15">15dp</dimen>
     <dimen name="lsq_font_space_8">8dp</dimen>
 
-
+    <dimen name="lsq_font_space_setting">70dp</dimen>
 
 </resources>

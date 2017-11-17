@@ -22,4 +22,10 @@
         <attr name="drawableTopWidth" format="dimension"/>
         <attr name="drawableTop" format="reference"/>
     </declare-styleable>
+
+    <declare-styleable name="SettingEditView">
+        <attr name="keyText" format="string" />
+        <attr name="valueText" format="string"/>
+        <attr name="unitText" format="string" />
+    </declare-styleable>
 </resources>

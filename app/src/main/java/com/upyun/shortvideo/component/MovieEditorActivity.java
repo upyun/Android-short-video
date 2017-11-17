@@ -23,6 +23,7 @@ import org.lasque.tusdk.core.audio.TuSDKAudioFileRecorder.OutputFormat;
 import org.lasque.tusdk.core.audio.TuSDKAudioFileRecorder.RecordError;
 import org.lasque.tusdk.core.audio.TuSDKAudioFileRecorder.RecordState;
 import org.lasque.tusdk.core.audio.TuSDKAudioFileRecorder.TuSDKRecordAudioDelegate;
+import org.lasque.tusdk.core.encoder.video.TuSDKVideoEncoderSetting;
 import org.lasque.tusdk.core.seles.SelesParameters;
 import org.lasque.tusdk.core.seles.SelesParameters.FilterArg;
 import org.lasque.tusdk.core.seles.sources.SelesOutInput;
@@ -836,6 +837,11 @@ public class MovieEditorActivity extends SimpleCameraActivity {
         mMovieEditor.setWaterMarkImage(null);
 //        mMovieEditor.setWaterMarkImage(BitmapHelper.getBitmapFormRaw(this, R.raw.sample_watermark));
 //        mMovieEditor.setWaterMarkPosition(WaterMarkPosition.TopLeft);
+
+        TuSDKVideoEncoderSetting encoderSetting = mMovieEditor.getVideoEncoderSetting();
+        encoderSetting.videoSize = TuSdkSize.create(Config.EDITORWIDTH, Config.EDITORHEIGHT);
+        encoderSetting.videoQuality = TuSDKVideoEncoderSetting.VideoQuality.RECORD_LOW1.setBitrate(Config.EDITORBITRATE*1000).setFps(Config.EDITORFPS);
+
         mMovieEditor.setDelegate(mEditorDelegate);
         mMovieEditor.loadVideo();
     }

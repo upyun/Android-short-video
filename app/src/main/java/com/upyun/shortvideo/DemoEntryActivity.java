@@ -18,6 +18,7 @@ import org.lasque.tusdk.core.utils.hardware.CameraHelper;
 import org.lasque.tusdk.impl.activity.TuFragmentActivity;
 import org.lasque.tusdk.impl.view.widget.TuProgressHub;
 import org.lasque.tusdk.modules.components.ComponentActType;
+
 import com.upyun.shortvideo.suite.MoviePreviewAndCutActivity;
 import com.upyun.shortvideo.utils.UriUtils;
 
@@ -126,7 +127,8 @@ public class DemoEntryActivity extends TuFragmentActivity {
         // 如果不支持摄像头显示警告信息
         if (CameraHelper.showAlertIfNotSupportCamera(this, true)) return;
 
-        Intent intent = new Intent(this, MovieRecordAndImportEditorActivity.class);
+//        Intent intent = new Intent(this, MovieRecordAndImportEditorActivity.class);
+        Intent intent = new Intent(this, RecordSettingActivity.class);
         this.startActivity(intent);
     }
 
@@ -146,22 +148,19 @@ public class DemoEntryActivity extends TuFragmentActivity {
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
-        if(resultCode != RESULT_OK) return;
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != RESULT_OK) return;
 
         Uri selectedMediaUri = data.getData();
 
-        String path = UriUtils.getFileAbsolutePath(getApplicationContext(),selectedMediaUri);
+        String path = UriUtils.getFileAbsolutePath(getApplicationContext(), selectedMediaUri);
 
-        if(!StringHelper.isEmpty(path))
-        {
-            Intent intent = new Intent(this, MoviePreviewAndCutActivity.class);
+        if (!StringHelper.isEmpty(path)) {
+//            Intent intent = new Intent(this, MoviePreviewAndCutActivity.class);
+            Intent intent = new Intent(this, EditorSettingActivity.class);
             intent.putExtra("videoPath", path);
             startActivity(intent);
-        }
-        else
-        {
+        } else {
             TuSdk.messageHub().showToast(getApplicationContext(), com.upyun.shortvideo.R.string.lsq_video_empty_error);
         }
     }

@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#e7e7e7"
+    android:keepScreenOn="true"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="@dimen/lsq__space_15"
+        android:background="@color/lsq_color_white">
+
+        <TextView
+            android:id="@+id/lsq_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:drawableLeft="@drawable/lsq_style_default_btn_back"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="@dimen/lsq_font_space_8"
+            android:paddingRight="@dimen/lsq_font_space_15"
+            android:text="@string/lsq_back"
+            android:textColor="@color/lsq_background_entry_default"
+            android:textSize="@dimen/lsq_font_size_36" />
+
+        <TextView
+            android:id="@+id/lsq_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="拍摄配置"
+            android:textColor="@color/lsq_clip_title_color"
+            android:textSize="@dimen/lsq_font_size_36" />
+
+        <TextView
+            android:id="@+id/lsq_next"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:paddingLeft="@dimen/lsq_font_space_15"
+            android:paddingRight="@dimen/lsq_font_space_15"
+            android:text="@string/lsq_next"
+            android:textColor="@color/lsq_background_entry_default"
+            android:textSize="@dimen/lsq_font_size_36" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/lsq_font_space_setting"
+        android:layout_marginBottom="@dimen/lsq__space_15"
+        android:layout_marginLeft="@dimen/lsq__space_5"
+        android:layout_marginRight="@dimen/lsq__space_5"
+        android:background="@drawable/setting_bg"
+        android:padding="@dimen/lsq__space_5">
+
+        <TextView
+            style="@style/titleText"
+            android:text="时长" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal">
+
+                <com.upyun.shortvideo.views.SettingEditView
+                    android:id="@+id/sev_minsec"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/lsq__space_10"
+                    android:layout_weight="1"
+                    app:keyText="最小"
+                    app:unitText="s"
+                    app:valueText="2" />
+
+                <com.upyun.shortvideo.views.SettingEditView
+                    android:id="@+id/sev_maxsec"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/lsq__space_10"
+                    android:layout_weight="1"
+                    app:keyText="最大"
+                    app:unitText="s"
+                    app:valueText="30" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/lsq_font_space_setting"
+        android:layout_marginBottom="@dimen/lsq__space_15"
+        android:layout_marginLeft="@dimen/lsq__space_5"
+        android:layout_marginRight="@dimen/lsq__space_5"
+        android:background="@drawable/setting_bg"
+        android:padding="@dimen/lsq__space_5">
+
+        <TextView
+            style="@style/titleText"
+            android:text="清晰度" />
+
+
+        <RadioGroup
+            android:id="@+id/qx_rg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/lsq__space_10"
+            android:layout_marginRight="@dimen/lsq__space_10"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/lsq__space_5"
+                android:layout_weight="1"
+                android:background="@drawable/setting_radio_selector"
+                android:button="@null"
+                android:gravity="center"
+                android:text="低清"
+                android:textColor="@color/setting_radio_text_selector"
+                android:textSize="8pt" />
+
+            <RadioButton
+                android:id="@+id/rb2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/lsq__space_5"
+                android:layout_marginRight="@dimen/lsq__space_5"
+                android:layout_weight="1"
+                android:background="@drawable/setting_radio_selector"
+                android:button="@null"
+                android:gravity="center"
+                android:text="高清"
+                android:textColor="@color/setting_radio_text_selector"
+                android:textSize="8pt" />
+
+            <RadioButton
+                android:id="@+id/rb3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/lsq__space_5"
+                android:layout_marginRight="@dimen/lsq__space_5"
+                android:layout_weight="1"
+                android:background="@drawable/setting_radio_selector"
+                android:button="@null"
+                android:gravity="center"
+                android:text="超清"
+                android:textColor="@color/setting_radio_text_selector"
+                android:textSize="8pt" />
+
+            <RadioButton
+                android:id="@+id/rb4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/lsq__space_5"
+                android:layout_weight="1"
+                android:background="@drawable/setting_radio_selector"
+                android:button="@null"
+                android:gravity="center"
+                android:text="超高清"
+                android:textColor="@color/setting_radio_text_selector"
+                android:textSize="8pt" />
+        </RadioGroup>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/lsq_font_space_setting"
+        android:layout_marginBottom="@dimen/lsq__space_15"
+        android:layout_marginLeft="@dimen/lsq__space_5"
+        android:layout_marginRight="@dimen/lsq__space_5"
+        android:background="@drawable/setting_bg"
+        android:padding="@dimen/lsq__space_5">
+
+        <TextView
+            style="@style/titleText"
+            android:text="分辨率" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
+            <com.upyun.shortvideo.views.SettingEditView
+                android:id="@+id/sev_width"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/lsq__space_10"
+                android:layout_weight="1"
+                app:keyText="宽度"
+                app:unitText="px"
+                 />
+
+            <com.upyun.shortvideo.views.SettingEditView
+                android:id="@+id/sev_height"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/lsq__space_10"
+                android:layout_weight="1"
+                app:keyText="高度"
+                app:unitText="px"
+                />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/lsq_font_space_setting"
+        android:layout_marginBottom="@dimen/lsq__space_15"
+        android:layout_marginLeft="@dimen/lsq__space_5"
+        android:layout_marginRight="@dimen/lsq__space_5"
+        android:background="@drawable/setting_bg"
+        android:padding="@dimen/lsq__space_5">
+
+        <TextView
+            style="@style/titleText"
+            android:text="帧码率" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
+            <com.upyun.shortvideo.views.SettingEditView
+                android:id="@+id/sev_bit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/lsq__space_10"
+                android:layout_weight="1"
+                app:keyText="码率"
+                app:unitText="kbps"
+                />
+
+            <com.upyun.shortvideo.views.SettingEditView
+                android:id="@+id/sev_fps"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/lsq__space_10"
+                android:layout_weight="1"
+                app:keyText="码率"
+                app:unitText="fps"
+                 />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_margin="@dimen/lsq__space_5"
+        android:background="@drawable/setting_bg"
+        android:padding="@dimen/lsq__space_5">
+
+        <TextView
+            android:id="@+id/title_marker"
+            style="@style/titleText"
+            android:text="水印(图片默认)" />
+
+        <TextView
+            android:id="@+id/tv_wz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title_marker"
+            android:layout_marginTop="@dimen/lsq__space_10"
+            android:text="方位"
+            android:textColor="@color/setting_text_color"
+            android:textSize="8pt" />
+
+        <com.upyun.shortvideo.views.MyRadioView
+            android:id="@+id/mrv"
+            android:layout_width="200dp"
+            android:layout_height="87dp"
+            android:layout_alignTop="@id/tv_wz"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/lsq__space_5" />
+
+    </RelativeLayout>
+
+</LinearLayout>

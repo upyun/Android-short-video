@@ -21,6 +21,7 @@ import org.lasque.tusdk.core.utils.hardware.TuSDKRecordVideoCamera.TuSDKRecordVi
 import org.lasque.tusdk.core.video.TuSDKVideoResult;
 import org.lasque.tusdk.impl.view.widget.RegionDefaultHandler;
 
+import com.upyun.shortvideo.Config;
 import com.upyun.shortvideo.R;
 import com.upyun.shortvideo.SimpleCameraActivity;
 import com.upyun.shortvideo.utils.Constants;
@@ -106,13 +107,17 @@ public class MovieRecordKeepModeActivity extends SimpleCameraActivity implements
         mVideoCamera.setRecordMode(RecordMode.Keep);
         // 指定为 4/3 画面比例，近距离使用前置摄像头时人脸看起来较小
         mVideoCamera.setPreviewRatio(4.f / 3);
+
         TuSdkSize screenSize = TuSdkContext.getDisplaySize();
 
         // 编码配置
         TuSDKVideoEncoderSetting encoderSetting = TuSDKVideoEncoderSetting.getDefaultRecordSetting();
         // 1: 1 输出，必须和 regionRatio 保持一致比例
         // 这里可以根据实际使用场景，设为固定的值，比如 480 * 480
-        encoderSetting.videoSize = TuSdkSize.create(screenSize.width, screenSize.width);
+//        encoderSetting.videoSize = TuSdkSize.create(screenSize.width, screenSize.width);
+        encoderSetting.videoSize = TuSdkSize.create(Config.RECORDWIDTH, Config.RECORHEIGHT);
+
+        encoderSetting.videoQuality = TuSDKVideoEncoderSetting.VideoQuality.RECORD_LOW1.setBitrate(Config.RECORBITRATE * 1000).setFps(Config.RECORDFPS);
 
         mVideoCamera.setVideoEncoderSetting(encoderSetting);
     }
@@ -129,7 +134,8 @@ public class MovieRecordKeepModeActivity extends SimpleCameraActivity implements
         mVideoCamera.setRegionHandler(customeRegionHandler);
 
         // 刷新视图，使 regionHandler 生效, 1:1 视图
-        mVideoCamera.changeRegionRatio(1.0f);
+//        mVideoCamera.changeRegionRatio(1.0f);
+        mVideoCamera.changeRegionRatio(((float) Config.RECORDWIDTH) / Config.RECORDWIDTH);
 
         startCameraCapture();
     }

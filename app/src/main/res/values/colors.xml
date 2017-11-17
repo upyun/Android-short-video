@@ -91,5 +91,6 @@
     <color name="lsq_voice_record_time_remaining_color">#4a4a4a</color>
     <color name="lsq_color_api_gray">#c0c0c0</color>
     <color name="lsq_color_api_button">#22bbf4</color>
-    
+    <color name="setting_text_color">#323333</color>
+
 </resources>
