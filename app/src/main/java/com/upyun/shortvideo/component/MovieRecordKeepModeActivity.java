@@ -117,7 +117,7 @@ public class MovieRecordKeepModeActivity extends SimpleCameraActivity implements
 //        encoderSetting.videoSize = TuSdkSize.create(screenSize.width, screenSize.width);
         encoderSetting.videoSize = TuSdkSize.create(Config.RECORDWIDTH, Config.RECORHEIGHT);
 
-        encoderSetting.videoQuality = TuSDKVideoEncoderSetting.VideoQuality.RECORD_LOW1.setBitrate(Config.RECORBITRATE * 1000).setFps(Config.RECORDFPS);
+        encoderSetting.videoQuality = TuSDKVideoEncoderSetting.VideoQuality.RECORD_LOW1.setBitrate(Config.RECORBITRATE*1000).setFps(Config.RECORDFPS);
 
         mVideoCamera.setVideoEncoderSetting(encoderSetting);
     }
@@ -157,7 +157,7 @@ public class MovieRecordKeepModeActivity extends SimpleCameraActivity implements
 
             Rect insetRect = RectHelper.makeRectWithAspectRatioInsideRect(tSize, new Rect(0, 0, size.width, size.height));
 
-            int topBarHeight = ContextUtils.dip2px(getBaseContext(), 90);
+            int topBarHeight = ContextUtils.dip2px(getBaseContext(), 65);
 
             float rl = insetRect.left / (float) size.width;
             float rt = topBarHeight / (float) size.height;

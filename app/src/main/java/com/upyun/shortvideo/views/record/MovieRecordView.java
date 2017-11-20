@@ -61,6 +61,7 @@ import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.support.v7.widget.GridLayoutManager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -208,7 +209,7 @@ public class MovieRecordView extends RelativeLayout {
     private TuSDKMovieRecordDelegate mDelegate;
 
     // 跳转视频编辑按钮
-    private CompoundDrawableTextView mMovieImportButton;
+    private ImageView mMovieImportButton;
 
     // 顶部栏
     private RelativeLayout mTopBarLayout;
@@ -223,6 +224,7 @@ public class MovieRecordView extends RelativeLayout {
 
     // 记录是否使用方形贴纸
     private boolean isSquareSticker = true;
+    private TextView tv_time;
 
     /**
      * 录制视频动作委托
@@ -278,7 +280,7 @@ public class MovieRecordView extends RelativeLayout {
 
         LayoutInflater.from(context).inflate(com.upyun.shortvideo.R.layout.movie_record_view, this,
                 true);
-        mMovieImportButton = (CompoundDrawableTextView) findViewById(com.upyun.shortvideo.R.id.lsq_movieEditorButton);
+        mMovieImportButton = (ImageView) findViewById(com.upyun.shortvideo.R.id.lsq_movieEditorButton);
         mMovieImportButton.setOnClickListener(mButtonClickListener);
         mCloseView = (TuSdkTextButton) findViewById(com.upyun.shortvideo.R.id.lsq_closeButton);
         mCloseView.setOnClickListener(mButtonClickListener);
@@ -310,7 +312,7 @@ public class MovieRecordView extends RelativeLayout {
         mBottomBar = (RelativeLayout) findViewById(com.upyun.shortvideo.R.id.lsq_bottomBar);
         android.view.ViewGroup.LayoutParams params = mBottomBar.getLayoutParams();
 
-        int remainHeight = TuSdkContext.getScreenSize().height - TuSdkContext.getScreenSize().width - ContextUtils.dip2px(context, 90);
+        int remainHeight = TuSdkContext.getScreenSize().height - TuSdkContext.getScreenSize().width - ContextUtils.dip2px(context, 65);
         params.height = remainHeight;
         mBottomBar.setLayoutParams(params);
 
@@ -361,6 +363,8 @@ public class MovieRecordView extends RelativeLayout {
         param.height = remainHeight;
         mStickerBottomView.setLayoutParams(param);
 
+        tv_time = (TextView) findViewById(R.id.tv_time);
+
 
         initFilterListView();
         initStickerListView();
@@ -383,7 +387,7 @@ public class MovieRecordView extends RelativeLayout {
         return mFilterBottomView;
     }
 
-    public CompoundDrawableTextView getMovieImportButton() {
+    public ImageView getMovieImportButton() {
         return mMovieImportButton;
     }
 
@@ -598,6 +602,7 @@ public class MovieRecordView extends RelativeLayout {
                 if (mProgressBar.getProgress() == 0) {
                     updateButtonStatus(mRollBackButton, false);
                     updateButtonStatus(mConfirmButton, false);
+                    mMovieImportButton.setVisibility(VISIBLE);
                 }
 
                 if (interuptLayout.getChildCount() != 0) {
@@ -672,6 +677,7 @@ public class MovieRecordView extends RelativeLayout {
 
             if (mCamera == null || mCamera.isFrontFacingCameraPresent()) {
                 mFlashButton.setImageResource(R.drawable.lsq_icon_flash_off);
+                mFlashEnabled = false;
             }
         }
     }
@@ -690,9 +696,9 @@ public class MovieRecordView extends RelativeLayout {
      * @param isRecording
      */
     private void updateTopBarStatus(boolean isRecording) {
-        mCloseView.setVisibility(isRecording ? View.GONE : View.VISIBLE);
-        mFlashButton.setVisibility(isRecording ? View.GONE : View.VISIBLE);
-        mToggleButton.setVisibility(isRecording ? View.GONE : View.VISIBLE);
+//        mCloseView.setVisibility(isRecording ? View.GONE : View.VISIBLE);
+//        mFlashButton.setVisibility(isRecording ? View.GONE : View.VISIBLE);
+//        mToggleButton.setVisibility(isRecording ? View.GONE : View.VISIBLE);
     }
 
     /**
@@ -728,7 +734,7 @@ public class MovieRecordView extends RelativeLayout {
 
             case com.upyun.shortvideo.R.id.lsq_filterWrap:
                 imgId = clickable ? com.upyun.shortvideo.R.drawable.lsq_style_default_btn_filter_selected
-                        : com.upyun.shortvideo.R.drawable.auto_default;
+                        : R.drawable.lsq_style_default_btn_filter_unselected;
                 colorId = clickable ? com.upyun.shortvideo.R.color.lsq_filter_title_color : com.upyun.shortvideo.R.color.lsq_filter_title_unselected_color;
                 button.setClickable(clickable);
                 break;
@@ -759,6 +765,9 @@ public class MovieRecordView extends RelativeLayout {
      */
     private void setTimeProgress(float currentDuration, float progress) {
         mProgressBar.setProgress((int) Math.ceil(progress * 100));
+
+        tv_time.setText((int) currentDuration + "秒");
+        Log.e("setTimeProgress", currentDuration + "::" + progress);
     }
 
     /**
@@ -852,8 +861,10 @@ public class MovieRecordView extends RelativeLayout {
     public void updateViewOnMovieRecordStateChanged(RecordState state, boolean isRecording) {
         if (state == RecordState.Recording) // 开始录制
         {
+            mMovieImportButton.setVisibility(GONE);
             updateShowStatus(isRecording);
             updateButtonStatus(mRollBackButton, false);
+            updateViewStatus(true);
 
         } else if (state == RecordState.Paused) // 已暂停录制
         {
@@ -866,6 +877,7 @@ public class MovieRecordView extends RelativeLayout {
             progressList.add(lastProgress);
             updateButtonStatus(mRollBackButton, true);
             updateShowStatus(false);
+            updateViewStatus(false);
         } else if (state == RecordState.RecordCompleted) //录制完成弹出提示（续拍模式下录过程中超过最大时间时调用）
         {
             String msg = getStringFromResource("max_recordTime") + Constants.MAX_RECORDING_TIME + "s";
