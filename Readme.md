@@ -1154,11 +1154,6 @@ Android 2.3 (API 9) 及其以上
 
 ### 2.2 安装使用说明
 
-	
-#### 手动安装：
-
-直接将示例工程源码中 `UPLiveSDK.framework`文件夹拖拽到目标工程目录。
-
 #### 工程使用：    
 导入 upplayer module 使用：compile project(':upplayer')
 
