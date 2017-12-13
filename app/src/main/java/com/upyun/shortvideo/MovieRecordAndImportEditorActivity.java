@@ -8,22 +8,19 @@
  */
 package com.upyun.shortvideo;
 
-import org.lasque.tusdk.core.TuSdk;
-import org.lasque.tusdk.core.encoder.video.TuSDKVideoEncoderSetting;
-import org.lasque.tusdk.core.struct.TuSdkSize;
-import org.lasque.tusdk.core.utils.StringHelper;
-import org.lasque.tusdk.core.utils.TuSdkWaterMarkOption;
-import org.lasque.tusdk.core.utils.image.BitmapHelper;
-import org.lasque.tusdk.core.video.TuSDKVideoResult;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
 
 import com.upyun.shortvideo.component.MovieRecordKeepModeActivity;
 import com.upyun.shortvideo.suite.MoviePreviewAndCutActivity;
 import com.upyun.shortvideo.utils.UriUtils;
 
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.view.View;
+import org.lasque.tusdk.core.TuSdk;
+import org.lasque.tusdk.core.utils.StringHelper;
+import org.lasque.tusdk.core.utils.TuSdkWaterMarkOption;
+import org.lasque.tusdk.core.utils.image.BitmapHelper;
+import org.lasque.tusdk.core.video.TuSDKVideoResult;
 
 /**
  * 断点续拍录制相机 + 视频编辑
@@ -35,7 +32,7 @@ public class MovieRecordAndImportEditorActivity extends MovieRecordKeepModeActiv
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getRecordView().getMovieImportButton().setVisibility(View.VISIBLE);
+//        getRecordView().getMovieImportButton().setVisibility(View.VISIBLE);
     }
 
     @Override

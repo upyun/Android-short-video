@@ -41,6 +41,7 @@ import org.lasque.tusdk.impl.view.widget.TuSeekBar;
 import org.lasque.tusdk.modules.view.widget.sticker.StickerGroup;
 import org.lasque.tusdk.modules.view.widget.sticker.StickerLocalPackage;
 
+import com.upyun.shortvideo.Config;
 import com.upyun.shortvideo.R;
 import com.upyun.shortvideo.utils.Constants;
 import com.upyun.shortvideo.views.CompoundDrawableTextView;
@@ -281,7 +282,7 @@ public class MovieRecordView extends RelativeLayout {
         LayoutInflater.from(context).inflate(com.upyun.shortvideo.R.layout.movie_record_view, this,
                 true);
         mMovieImportButton = (ImageView) findViewById(com.upyun.shortvideo.R.id.lsq_movieEditorButton);
-        mMovieImportButton.setOnClickListener(mButtonClickListener);
+//        mMovieImportButton.setOnClickListener(mButtonClickListener);
         mCloseView = (TuSdkTextButton) findViewById(com.upyun.shortvideo.R.id.lsq_closeButton);
         mCloseView.setOnClickListener(mButtonClickListener);
 
@@ -597,12 +598,14 @@ public class MovieRecordView extends RelativeLayout {
 
                 // 设置进度条显示上一条视频的进度
                 mProgressBar.setProgress(progress);
+                float time = (float) progress * Constants.MAX_RECORDING_TIME / 100;
+                tv_time.setText(String.format("%.1f", time) + "秒");
                 lastProgress = mProgressBar.getProgress();
 
                 if (mProgressBar.getProgress() == 0) {
                     updateButtonStatus(mRollBackButton, false);
                     updateButtonStatus(mConfirmButton, false);
-                    mMovieImportButton.setVisibility(VISIBLE);
+                    mMovieImportButton.setImageResource(R.drawable.lsq_homepage_import_icon);
                 }
 
                 if (interuptLayout.getChildCount() != 0) {
@@ -765,8 +768,7 @@ public class MovieRecordView extends RelativeLayout {
      */
     private void setTimeProgress(float currentDuration, float progress) {
         mProgressBar.setProgress((int) Math.ceil(progress * 100));
-
-        tv_time.setText((int) currentDuration + "秒");
+        tv_time.setText(String.format("%.1f", currentDuration) + "秒");
         Log.e("setTimeProgress", currentDuration + "::" + progress);
     }
 
@@ -861,7 +863,7 @@ public class MovieRecordView extends RelativeLayout {
     public void updateViewOnMovieRecordStateChanged(RecordState state, boolean isRecording) {
         if (state == RecordState.Recording) // 开始录制
         {
-            mMovieImportButton.setVisibility(GONE);
+            mMovieImportButton.setImageResource(R.drawable.lsq_homepage_import_unselect_icon);
             updateShowStatus(isRecording);
             updateButtonStatus(mRollBackButton, false);
             updateViewStatus(true);

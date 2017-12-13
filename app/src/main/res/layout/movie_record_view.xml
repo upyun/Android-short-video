@@ -56,7 +56,8 @@
             android:layout_marginRight="17dp"
             android:layout_toLeftOf="@id/lsq_flashButton"
             android:gravity="center"
-            android:src="@drawable/lsq_homepage_import_icon" />
+            android:src="@drawable/lsq_homepage_import_icon"
+            android:visibility="gone" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -108,7 +109,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="0秒"
+            android:text="0.0秒"
             android:textColor="@color/lsq_color_white"
             android:textSize="12sp" />
 
@@ -131,16 +132,16 @@
             <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
                 android:id="@+id/lsq_stickerWrap"
                 style="@style/lsq_camera_OptionButton"
+                android:layout_marginLeft="@dimen/lsq__space_50"
                 android:drawablePadding="4dp"
                 android:drawableTop="@drawable/lsq_style_default_btn_sticker"
-                android:layout_marginLeft="@dimen/lsq__space_50"
                 android:text="@string/lsq_text_sticker"
                 android:textColor="@color/lsq_record_title_color" />
 
             <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
                 android:id="@+id/lsq_filterWrap"
-                android:layout_marginRight="@dimen/lsq__space_50"
                 style="@style/lsq_camera_OptionButton"
+                android:layout_marginRight="@dimen/lsq__space_50"
                 android:drawablePadding="4dp"
                 android:drawableTop="@drawable/lsq_style_default_btn_filter_unselected"
                 android:text="@string/lsq_text_filter"
