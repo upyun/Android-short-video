@@ -12,6 +12,7 @@ package com.upyun.shortvideo.component;
 import org.lasque.tusdk.core.encoder.video.TuSDKVideoEncoderSetting;
 import org.lasque.tusdk.core.seles.sources.SelesOutInput;
 import org.lasque.tusdk.core.seles.sources.SelesVideoCameraInterface;
+import org.lasque.tusdk.core.seles.tusdk.FilterWrap;
 import org.lasque.tusdk.core.struct.TuSdkSize;
 import org.lasque.tusdk.core.utils.hardware.TuSDKRecordVideoCamera.RecordError;
 import org.lasque.tusdk.core.utils.hardware.TuSDKRecordVideoCamera.RecordMode;
@@ -159,10 +160,10 @@ public class MultipleCameraActivity extends SimpleCameraActivity implements TuSD
 	 */
 	protected TuSDKVideoCameraDelegate mVideoCameraDelegate = new TuSDKVideoCameraDelegate() 
     {
-        @Override
-        public void onFilterChanged(SelesOutInput selesOutInput)
+		@Override
+        public void onFilterChanged(FilterWrap selesOutInput)
         {
-        	mMultipleCameraView.updateViewOnFilterChanged(selesOutInput);
+        	mMultipleCameraView.updateViewOnFilterChanged(selesOutInput.getFilter());
         }
 
 		@Override

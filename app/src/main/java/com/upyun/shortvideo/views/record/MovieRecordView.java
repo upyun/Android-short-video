@@ -23,6 +23,7 @@ import org.lasque.tusdk.core.seles.SelesParameters;
 import org.lasque.tusdk.core.seles.SelesParameters.FilterArg;
 import org.lasque.tusdk.core.seles.sources.SelesOutInput;
 import org.lasque.tusdk.core.seles.sources.SelesVideoCameraInterface;
+import org.lasque.tusdk.core.seles.tusdk.FilterWrap;
 import org.lasque.tusdk.core.type.DownloadTaskStatus;
 import org.lasque.tusdk.core.utils.ContextUtils;
 import org.lasque.tusdk.core.utils.ThreadHelper;
@@ -177,7 +178,7 @@ public class MovieRecordView extends RelativeLayout {
     private int mFocusPostion = 1;
 
     // 记录当前滤镜
-    private SelesOutInput mSelesOutInput;
+    private FilterWrap mSelesOutInput;
 
     // 滤镜Tab
     private TuSdkTextButton mFilterTab;
@@ -501,7 +502,7 @@ public class MovieRecordView extends RelativeLayout {
             return;
         }
 
-        SelesParameters params = mSelesOutInput.getParameter();
+        SelesParameters params = mSelesOutInput.getFilterParameter();
         if (params == null) {
             setEnableAllSeekBar(false);
             return;
@@ -544,7 +545,7 @@ public class MovieRecordView extends RelativeLayout {
 
                 @Override
                 public void run() {
-                    getFilterConfigView().setSelesFilter(mSelesOutInput);
+                    getFilterConfigView().setSelesFilter(mSelesOutInput.getFilter());
                     getFilterConfigView().setVisibility(View.VISIBLE);
                 }
             });
@@ -1208,7 +1209,6 @@ public class MovieRecordView extends RelativeLayout {
      * 取消上一个滤镜的选中状态
      *
      * @param lastFilter
-     * @param position
      */
     private void deSelectLastFilter(FilterCellView lastFilter) {
         if (lastFilter == null) return;
@@ -1397,11 +1397,12 @@ public class MovieRecordView extends RelativeLayout {
      * 滤镜效果改变监听事件
      */
     protected TuSDKVideoCameraDelegate mVideoCameraDelegate = new TuSDKVideoCameraDelegate() {
+
         @Override
-        public void onFilterChanged(SelesOutInput selesOutInput) {
+        public void onFilterChanged(FilterWrap selesOutInput) {
             if (selesOutInput == null) return;
 
-            SelesParameters params = selesOutInput.getParameter();
+            SelesParameters params = selesOutInput.getFilterParameter();
             List<FilterArg> list = params.getArgs();
             for (FilterArg arg : list) {
                 if (arg.equalsKey("smoothing") && mSmoothingProgress != -1.0f)
@@ -1421,12 +1422,12 @@ public class MovieRecordView extends RelativeLayout {
                 else if (arg.equalsKey("mixied") && mMixiedProgress == -1.0f)
                     mMixiedProgress = arg.getPrecentValue();
             }
-            selesOutInput.setParameter(params);
+            selesOutInput.setFilterParameter(params);
 
             mSelesOutInput = selesOutInput;
 
             if (getFilterConfigView() != null) {
-                getFilterConfigView().setSelesFilter(mSelesOutInput);
+                getFilterConfigView().setSelesFilter(mSelesOutInput.getFilter());
             }
 
             if (mIsFirstEntry) {
@@ -1489,9 +1490,9 @@ public class MovieRecordView extends RelativeLayout {
         if (viewSeekBar == null || mSelesOutInput == null) return;
 
         viewSeekBar.getConfigValueView().setText((int) (progress * 100) + "%");
-        SelesParameters params = mSelesOutInput.getParameter();
+        SelesParameters params = mSelesOutInput.getFilterParameter();
         params.setFilterArg(key, progress);
-        mSelesOutInput.submitParameter();
+        mSelesOutInput.submitFilterParameter();
     }
 
     public void setSquareSticker(boolean isSquareSticker) {

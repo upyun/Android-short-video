@@ -8,53 +8,28 @@
  */
 package com.upyun.shortvideo.component;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.lasque.tusdk.core.TuSdk;
-import org.lasque.tusdk.core.TuSdkContext;
-import org.lasque.tusdk.core.audio.TuSDKAudioFileRecorder;
-import org.lasque.tusdk.core.audio.TuSDKAudioFileRecorder.OutputFormat;
-import org.lasque.tusdk.core.audio.TuSDKAudioFileRecorder.RecordError;
-import org.lasque.tusdk.core.audio.TuSDKAudioFileRecorder.RecordState;
-import org.lasque.tusdk.core.audio.TuSDKAudioFileRecorder.TuSDKRecordAudioDelegate;
-import org.lasque.tusdk.core.encoder.video.TuSDKVideoEncoderSetting;
-import org.lasque.tusdk.core.seles.SelesParameters;
-import org.lasque.tusdk.core.seles.SelesParameters.FilterArg;
-import org.lasque.tusdk.core.seles.sources.SelesOutInput;
-import org.lasque.tusdk.core.struct.TuSdkSize;
-import org.lasque.tusdk.core.utils.FileHelper;
-import org.lasque.tusdk.core.utils.TLog;
-import org.lasque.tusdk.core.utils.ThreadHelper;
-import org.lasque.tusdk.core.utils.TuSdkWaterMarkOption.WaterMarkPosition;
-import org.lasque.tusdk.core.utils.image.BitmapHelper;
-import org.lasque.tusdk.core.video.TuSDKVideoResult;
-import org.lasque.tusdk.core.view.TuSdkImageView;
-import org.lasque.tusdk.core.view.TuSdkViewHelper;
-import org.lasque.tusdk.core.view.recyclerview.TuSdkTableView;
-import org.lasque.tusdk.core.view.recyclerview.TuSdkTableView.TuSdkTableViewItemClickDelegate;
-import org.lasque.tusdk.core.view.widget.button.TuSdkTextButton;
-import org.lasque.tusdk.impl.view.widget.TuSeekBar;
-import org.lasque.tusdk.modules.view.widget.sticker.StickerGroup;
-import org.lasque.tusdk.modules.view.widget.sticker.StickerLocalPackage;
-import org.lasque.tusdk.video.editor.TuSDKMediaAudioEffectData;
-import org.lasque.tusdk.video.editor.TuSDKMediaEffectData;
-import org.lasque.tusdk.video.editor.TuSDKMediaStickerAudioEffectData;
-import org.lasque.tusdk.video.editor.TuSDKMediaStickerEffectData;
-import org.lasque.tusdk.video.editor.TuSDKMovieEditor;
-import org.lasque.tusdk.video.editor.TuSDKMovieEditor.TuSDKMovieEditorDelegate;
-import org.lasque.tusdk.video.editor.TuSDKMovieEditor.TuSDKMovieEditorSoundStatus;
-import org.lasque.tusdk.video.editor.TuSDKMovieEditor.TuSDKMovieEditorStatus;
-import org.lasque.tusdk.video.editor.TuSDKMovieEditorOptions;
-import org.lasque.tusdk.video.editor.TuSDKTimeRange;
-import org.lasque.tusdk.video.editor.TuSDKVideoImageExtractor;
-import org.lasque.tusdk.video.editor.TuSDKVideoImageExtractor.TuSDKVideoImageExtractorDelegate;
-import org.lasque.tusdk.video.mixer.TuSDKMediaDataSource;
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.RectF;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnTouchListener;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.RelativeLayout.LayoutParams;
+import android.widget.TextView;
 
 import com.upyun.library.common.Params;
 import com.upyun.library.common.ResumeUploader;
@@ -83,28 +58,51 @@ import com.upyun.shortvideo.views.MixingCellView.MixingEntity;
 import com.upyun.shortvideo.views.MixingListView;
 import com.upyun.shortvideo.views.MovieRangeSelectionBar;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.RectF;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.View.OnTouchListener;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
-import android.widget.RelativeLayout.LayoutParams;
-import android.widget.TextView;
+import org.lasque.tusdk.core.TuSdk;
+import org.lasque.tusdk.core.TuSdkContext;
+import org.lasque.tusdk.core.audio.TuSDKAudioFileRecorder;
+import org.lasque.tusdk.core.audio.TuSDKAudioFileRecorder.OutputFormat;
+import org.lasque.tusdk.core.audio.TuSDKAudioFileRecorder.RecordError;
+import org.lasque.tusdk.core.audio.TuSDKAudioFileRecorder.RecordState;
+import org.lasque.tusdk.core.audio.TuSDKAudioFileRecorder.TuSDKRecordAudioDelegate;
+import org.lasque.tusdk.core.encoder.video.TuSDKVideoEncoderSetting;
+import org.lasque.tusdk.core.seles.SelesParameters;
+import org.lasque.tusdk.core.seles.SelesParameters.FilterArg;
+import org.lasque.tusdk.core.seles.tusdk.FilterWrap;
+import org.lasque.tusdk.core.struct.TuSdkSize;
+import org.lasque.tusdk.core.utils.FileHelper;
+import org.lasque.tusdk.core.utils.TLog;
+import org.lasque.tusdk.core.utils.ThreadHelper;
+import org.lasque.tusdk.core.video.TuSDKVideoResult;
+import org.lasque.tusdk.core.view.TuSdkImageView;
+import org.lasque.tusdk.core.view.TuSdkViewHelper;
+import org.lasque.tusdk.core.view.recyclerview.TuSdkTableView;
+import org.lasque.tusdk.core.view.recyclerview.TuSdkTableView.TuSdkTableViewItemClickDelegate;
+import org.lasque.tusdk.core.view.widget.button.TuSdkTextButton;
+import org.lasque.tusdk.impl.view.widget.TuSeekBar;
+import org.lasque.tusdk.modules.view.widget.sticker.StickerGroup;
+import org.lasque.tusdk.modules.view.widget.sticker.StickerLocalPackage;
+import org.lasque.tusdk.video.editor.TuSDKMediaAudioEffectData;
+import org.lasque.tusdk.video.editor.TuSDKMediaEffectData;
+import org.lasque.tusdk.video.editor.TuSDKMediaStickerAudioEffectData;
+import org.lasque.tusdk.video.editor.TuSDKMediaStickerEffectData;
+import org.lasque.tusdk.video.editor.TuSDKMovieEditor;
+import org.lasque.tusdk.video.editor.TuSDKMovieEditor.TuSDKMovieEditorDelegate;
+import org.lasque.tusdk.video.editor.TuSDKMovieEditor.TuSDKMovieEditorSoundStatus;
+import org.lasque.tusdk.video.editor.TuSDKMovieEditor.TuSDKMovieEditorStatus;
+import org.lasque.tusdk.video.editor.TuSDKMovieEditorOptions;
+import org.lasque.tusdk.video.editor.TuSDKTimeRange;
+import org.lasque.tusdk.video.editor.TuSDKVideoImageExtractor;
+import org.lasque.tusdk.video.editor.TuSDKVideoImageExtractor.TuSDKVideoImageExtractorDelegate;
+import org.lasque.tusdk.video.mixer.TuSDKMediaDataSource;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 视频编辑示例
@@ -153,7 +151,7 @@ public class MovieEditorActivity extends SimpleCameraActivity {
     private TuSdkTextButton mFilterBtn;
 
     // 记录当前滤镜
-    private SelesOutInput mSelesOutInput;
+    private FilterWrap mSelesOutInput;
 
     // 记录上一个选中的滤镜
     private FilterCellView lastSelectedCellView;
@@ -569,7 +567,7 @@ public class MovieEditorActivity extends SimpleCameraActivity {
     /**
      * 更新录音进度条
      *
-     * @param currentTime
+     * @param audioRecordDuration
      */
     private void updateAudioProgressBar(float audioRecordDuration) {
         float videoDuration = mCutTimeRange.duration();
@@ -1082,7 +1080,7 @@ public class MovieEditorActivity extends SimpleCameraActivity {
     /**
      * 设置配音音效
      *
-     * @param audioPath
+     * @param audioPathUri
      */
     private void setAudioEffect(Uri audioPathUri) {
         if (audioPathUri == null) return;
@@ -1359,7 +1357,7 @@ public class MovieEditorActivity extends SimpleCameraActivity {
 
             @Override
             public void run() {
-                getFilterConfigView().setSelesFilter(mSelesOutInput);
+                getFilterConfigView().setSelesFilter(mSelesOutInput.getFilter());
                 getFilterConfigView().setVisibility(View.VISIBLE);
             }
         });
@@ -1404,7 +1402,7 @@ public class MovieEditorActivity extends SimpleCameraActivity {
             setEnableAllSeekBar(false);
             return;
         }
-        SelesParameters params = mSelesOutInput.getParameter();
+        SelesParameters params = mSelesOutInput.getFilterParameter();
         if (params == null) {
             setEnableAllSeekBar(false);
             return;
@@ -1718,9 +1716,9 @@ public class MovieEditorActivity extends SimpleCameraActivity {
         if (viewSeekBar == null || mSelesOutInput == null) return;
 
         viewSeekBar.getConfigValueView().setText((int) (progress * 100) + "%");
-        SelesParameters params = mSelesOutInput.getParameter();
+        SelesParameters params = mSelesOutInput.getFilterParameter();
         params.setFilterArg(key, progress);
-        mSelesOutInput.submitParameter();
+        mSelesOutInput.submitFilterParameter();
     }
 
     /**
@@ -1936,10 +1934,10 @@ public class MovieEditorActivity extends SimpleCameraActivity {
         }
 
         @Override
-        public void onFilterChanged(SelesOutInput selesOutInput) {
+        public void onFilterChanged(FilterWrap selesOutInput) {
             if (selesOutInput == null) return;
 
-            SelesParameters params = selesOutInput.getParameter();
+            SelesParameters params = selesOutInput.getFilterParameter();
             List<FilterArg> list = params.getArgs();
             for (FilterArg arg : list) {
                 if (arg.equalsKey("smoothing") && mSmoothingProgress != -1.0f)
@@ -1952,12 +1950,12 @@ public class MovieEditorActivity extends SimpleCameraActivity {
                     mMixiedProgress = arg.getPrecentValue();
 
             }
-            selesOutInput.setParameter(params);
+            selesOutInput.setFilterParameter(params);
 
             mSelesOutInput = selesOutInput;
 
             if (getFilterConfigView() != null) {
-                getFilterConfigView().setSelesFilter(selesOutInput);
+                getFilterConfigView().setSelesFilter(selesOutInput.getFilter());
 
             }
 
