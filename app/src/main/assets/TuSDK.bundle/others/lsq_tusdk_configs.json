@@ -4,6 +4,7 @@
             "file":"lsq_filter_YouPaiYun002_97.gfilter",
             "name":"lsq_filter_group_YouPaiYun002",
             "default_filter_id":675,
+            "type":0,
             "filters":[
                 {
                     "id":675,
@@ -104,84 +105,7 @@
         }
     ],
     "stickerGroups":[
-        {
-            "file":"lsq_sticker_0_1419.gsce",
-            "name":"\u7c73\u59ae",
-            "stickers":[
-                {
-                    "id":10332
-                },
-                {
-                    "id":10333
-                }
-            ]
-        },
-        {
-            "file":"lsq_sticker_0_1468.gsce",
-            "name":"\u8367\u5149\u5154\u8033",
-            "stickers":[
-                {
-                    "id":10496
-                },
-                {
-                    "id":10497
-                }
-            ]
-        },
-        {
-            "file":"lsq_sticker_0_1455.gsce",
-            "name":"\u8367\u5149\u732b\u8033",
-            "stickers":[
-                {
-                    "id":10484
-                },
-                {
-                    "id":10485
-                }
-            ]
-        },
-        {
-            "file":"lsq_sticker_0_1250.gsce",
-            "name":"\u76ae\u5361\u4e18",
-            "stickers":[
-                {
-                    "id":10285
-                }
-            ]
-        },
-        {
-            "file":"lsq_sticker_0_1420.gsce",
-            "name":"\u5c0f\u732b\u73a9\u7403",
-            "stickers":[
-                {
-                    "id":10388
-                },
-                {
-                    "id":10389
-                }
-            ]
-        },
-        {
-            "file":"lsq_sticker_0_1446.gsce",
-            "name":"\u513f\u7ae5\u8282",
-            "stickers":[
-                {
-                    "id":10461
-                },
-                {
-                    "id":10462
-                }
-            ]
-        },
-        {
-            "file":"lsq_sticker_0_1427.gsce",
-            "name":"\u65e0\u8bed\u4e4c\u9e26",
-            "stickers":[
-                {
-                    "id":10365
-                }
-            ]
-        }
+        
     ],
-    "master":"w3V7spNzQJGvskU4SyNK\/Xb5XjEUTH6qP4y2JL0Y\/vGE\/kzO9WyeKd6Z2k90Q+aEYDhu5DCT7imuZrOTqAdIhvUli4GgMddPg3A7ZELKO6Sictu56Kg4Xx4OJddfKA3+XxaQmeTzn6t5swYlUmt9L+294f2Kh5yydIUU\/GyKkMI6Gjg8wjuAgJ6FhN30qaNDo86ml8WFYqt56pb8+SyAMDOrrc1QIp\/f7VOkq4x+hrLwXi7QjDuGSw5nP32T4hpaPlE\/rygni5Q6Lyd263pJ9VBbOZxG3rWF9VkXBmkLzi42J10QODexOGtZYFbBxo5ytdsU0Gs1WjpD9GbTHFXn8VjAVfoPSp\/A4bi+yBzpUW18m2Ic7LNYlViFm2zYiXJWOSmlp\/CDjMRRLjTHx9p+dK0MO9xsX48n87HMh5MS5nzFLa8qvL9aRh+pwGYwTHlIoyO3FcsIUsFsmfuO01e9\/H\/rWr3JfvvQoffFkbRzrFdiEUhB7vYklPQ2tSdwS8ZDrtwgAuDy8wxNfXHSgwMc+WVyG+PaetexL7jiQdDAa0lpaDvSMoaoSo3DasNJx1QlyqA2+a3DT836H5aKIXfEuYfA1XkoFSBFwO36sS\/\/yyuoyR7YhOObPadI9bMTsCn\/CoqxjyKdjzG5ArDvNnXyz+vV+6F5fZhw7czLxiuDO3LbFu5nU4gzHOauR4+K9eZQbzPW2mTMAqH9H42YPiaugMFmsEtcRp9T\/Zo8gidPbBissYk1\/pvOBxoBp2lu6eI1v2Mvu2W1azGFhCXy7oYdCMiQ3fTFVD4JU5AdDal3rjaggoGZN2t9YDjUxT\/jNx1Izkr6bJ1aJNgBCrw03AmnIBqqJke38SMMkE8oyjZN2mlapFCnB6Z80kWddmL8Fl9fxTmbLhD4l83D1sJS9wcdDoLTKamLxTeyCssrh7hh\/IhLR06qCiKKTNy7EKLbQcl2by24vrO3rtNhwwI2JssifxjZ4wMzO2jUWqfpykNG2OLgT30XKvQObI90PgqM0MTGcrB13YkZuB2lUl7Hm4iSEigflTTP2NKJoUbY6hSY2n9rJxKoaP+qK1qBZD5nk92isYdDOf3\/anZY+UX1NMBdhF9UwRKxTmKcsdJ2800yZMZhCi9Lypa1W45Ud\/eMJsmmjf2xhn2tpW3XrQf67XM1PzXEnu7QrxG3Deav5n1k1Wrj8VivWVFUl+VtwT6ClwtZ6xSNRPG8Dues78LEHjpfKdcpWNeIMbhBLdHVRSjut8F52rgbZYNTuXwrCyqfBwvE4\/aKHSvNheV1NYVVOR5ofG15CVn2xV+MyORp8gZwAmSkel18LZRECUQk2faq5MKnL\/+CSqtd94dthUb5K15V0A==A5E3B3E150"
+    "master":"zCGKrnr\/gHfeNkt2aJeHWK\/PPR0tTPx1Rq2cHxQ3oGDn5eBZdEu4+CV3NCu1H1VuHESKeQgWiorXqaxtv5148\/UmvPDe\/ZUnMlyjFWpz5r+HsUoBwLwZAEobPCXqlAuVdK7N7tpdCKG+bhQ6WZ1zvtMWdXWLDboGNWgqR9LFHgsqPO44AaIhcy\/hNRE+7ieSFsJcvqk2HeUgexIEvsXcRFjmnFpvYtZqRm2s8sutW71rpbxAnTPHXYZjIQZnKym0ItUxIJjeuRfyAmojgThQZ9g726fPZeJVDK3kOxjo8WPXwiErWxJkrNWagdChdzen802ufGeBKT6x3HtUfF12juPXrdP26lwG+i7f53HAjYZI5LOzdoJblIp3zFSJ9W+BbXomHqiL6RXq51vNAa8R3J5sN4nN\/8oJzR7XbL\/TXTMumxvBg9HsABYNePAYt2MSwO8L9GgdlBz0W1J3pNJRrb1EsWJJrTKXUFOEr7GN9kEk2kgeIWC1M1ZNifPuEjHO\/EdMByaF\/qSp+el+W\/peyKEFB+oBLY8GBYcydbPrWD+U1af9rsrwdQI3fU4OzQyeoBfXKLjjxBL\/9lpK73aJnk4QhYU3bGKzJCGNbTOz\/DhUX\/hyQzSb57qnL\/BQja0IEf0deSyNXAlSdJWKjGOplaPOUgRcZAaz2JkSdCLwvjQp5jSCP3\/MXxJoaWZ3gkR4AY9+BNBJZ9N+xm1Xz7kb4\/UxjFIG9bC6rh4vplIFtRX0WVlWiem8nfXibzu3VKhASiHqzEUEXJ0pcmdGuvY\/KepJMbUlw9NBNli395LZZWgWd6T60PDPxDHqi+9KWyY6hwi4rACYgKVmKTdjK9XWdAlKQaPIeyh7rhEpFqaygWsh0xywSFMp3pwgrWNqWNs\/sKE18u3XjcAom4Nw4JkeRF8Bqch5UO0S2uMhzwtd\/jo2jOJ\/2Z\/ohlOT4Gv6MdqMYNrsvJg5ihYyPzEI6mJnQXFCb41wx7FcA4VLScpY3SLH5wJxinuHLyWT7\/Oq1RY7BCD3D6E259"
 }
