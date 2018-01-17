@@ -660,7 +660,7 @@ public class MovieEditorActivity extends SimpleCameraActivity {
             // mMovieEditor.setPlaygroundTimeRange(mMVStickerMusicTimeRange);
 
         } else {
-            mMovieEditor.setPlaygroundTimeRange(null);
+            mMovieEditor.setTimeRange(null);
         }
 
         mMovieEditor.addMediaEffectData(effectData);
@@ -702,7 +702,7 @@ public class MovieEditorActivity extends SimpleCameraActivity {
         public void onLeftCursorChanged(final int percent) {
             if (mMovieEditor != null) {
                 mMVStickerMusicTimeRange.start = percent * mCutTimeRange.duration() / 100;
-                mMovieEditor.setPlaygroundTimeRange(TuSDKTimeRange.makeRange(mMVStickerMusicTimeRange.start, mCutTimeRange.duration()));
+                mMovieEditor.setTimeRange(TuSDKTimeRange.makeRange(mMVStickerMusicTimeRange.start, mCutTimeRange.duration()));
 
                 if (mMovieEditor.isPreviewing()) {
                     mMovieEditor.stopPreview();
@@ -721,7 +721,7 @@ public class MovieEditorActivity extends SimpleCameraActivity {
         public void onRightCursorChanged(final int percent) {
             if (mMovieEditor != null) {
                 mMVStickerMusicTimeRange.end = percent * mCutTimeRange.duration() / 100;
-                mMovieEditor.setPlaygroundTimeRange(TuSDKTimeRange.makeRange(mMVStickerMusicTimeRange.start, mCutTimeRange.duration()));
+                mMovieEditor.setTimeRange(TuSDKTimeRange.makeRange(mMVStickerMusicTimeRange.start, mCutTimeRange.duration()));
 
                 if (mMovieEditor.isPreviewing()) {
                     mMovieEditor.stopPreview();
@@ -1915,7 +1915,7 @@ public class MovieEditorActivity extends SimpleCameraActivity {
                 TuSdk.messageHub().showError(MovieEditorActivity.this, msg);
             } else if (status == TuSDKMovieEditorStatus.PreviewingCompleted) {
                 // 当再次启动预览或者预览完成后禁用 PlaygroundTimeRange （开发者可根据需要设置）
-                mMovieEditor.setPlaygroundTimeRange(null);
+                mMovieEditor.setTimeRange(null);
 //				mRangeSelectionBar.setPlaySelection(0);
             }
         }

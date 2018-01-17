@@ -148,7 +148,7 @@ public class UpVideoView extends FrameLayout implements MediaController.MediaPla
     private boolean isFullState;
     private ViewGroup.LayoutParams mRawParams;
 
-    private MonitorRecorder monitorRecorder;
+//    private MonitorRecorder monitorRecorder;
     private float playSpeed = .0f;
 
     private long bufferTime;
@@ -214,7 +214,7 @@ public class UpVideoView extends FrameLayout implements MediaController.MediaPla
         mCurrentState = STATE_IDLE;
         mTargetState = STATE_IDLE;
 
-        monitorRecorder = new MonitorRecorder(mAppContext);
+//        monitorRecorder = new MonitorRecorder(mAppContext);
 
         // user agent
         WebView webview;
@@ -330,8 +330,8 @@ public class UpVideoView extends FrameLayout implements MediaController.MediaPla
         release(false);
 
         //开始播放时间
-        monitorRecorder.start();
-        monitorRecorder.setPlayUrl(mUri.toString());
+//        monitorRecorder.start();
+//        monitorRecorder.setPlayUrl(mUri.toString());
 
 //        mHandler.removeMessages(MSG_CACHE_DRU);
 //        mHandler.sendEmptyMessageDelayed(MSG_CACHE_DRU, 500);
@@ -453,7 +453,7 @@ public class UpVideoView extends FrameLayout implements MediaController.MediaPla
             if (mHudViewHolder != null) {
                 mHudViewHolder.updateLoadCost(mPrepareEndTime - mPrepareStartTime);
             }
-            monitorRecorder.firstPacket();
+//            monitorRecorder.firstPacket();
             mCurrentState = STATE_PREPARED;
             mMediaPlayer.pause();
 
@@ -469,9 +469,9 @@ public class UpVideoView extends FrameLayout implements MediaController.MediaPla
             mVideoWidth = mp.getVideoWidth();
             mVideoHeight = mp.getVideoHeight();
 
-            monitorRecorder.setVideoSize(mVideoHeight, mVideoWidth);
-            monitorRecorder.setFirstPlayState(0);
-            monitorRecorder.getMetaData(mMediaPlayer._getMetaData());
+//            monitorRecorder.setVideoSize(mVideoHeight, mVideoWidth);
+//            monitorRecorder.setFirstPlayState(0);
+//            monitorRecorder.getMetaData(mMediaPlayer._getMetaData());
 
             int seekToPosition = mSeekWhenPrepared;  // mSeekWhenPrepared may be changed after seekTo() call
             if (seekToPosition != 0) {
@@ -547,7 +547,7 @@ public class UpVideoView extends FrameLayout implements MediaController.MediaPla
 //                                Log.e(TAG, "卡顿重连追帧");
 //                            }
 //                            reportError();
-                            monitorRecorder.BufferStart();
+//                            monitorRecorder.BufferStart();
                             Log.d(TAG, "MEDIA_INFO_BUFFERING_START:");
                             break;
                         case IMediaPlayer.MEDIA_INFO_BUFFERING_END:
@@ -560,7 +560,7 @@ public class UpVideoView extends FrameLayout implements MediaController.MediaPla
 //                                }
 //                            }
 //                            cancelReport();
-                            monitorRecorder.BufferEnd();
+//                            monitorRecorder.BufferEnd();
                             Log.d(TAG, "MEDIA_INFO_BUFFERING_END:");
                             break;
                         case IMediaPlayer.MEDIA_INFO_NETWORK_BANDWIDTH:
@@ -601,7 +601,7 @@ public class UpVideoView extends FrameLayout implements MediaController.MediaPla
                 public boolean onError(IMediaPlayer mp, int framework_err, int impl_err) {
                     Log.d(TAG, "Error: " + framework_err + "," + impl_err);
 
-                    monitorRecorder.errorDate("Error: " + framework_err + "," + impl_err);
+//                    monitorRecorder.errorDate("Error: " + framework_err + "," + impl_err);
 
                     mCurrentState = STATE_ERROR;
                     mTargetState = STATE_ERROR;
@@ -789,7 +789,7 @@ public class UpVideoView extends FrameLayout implements MediaController.MediaPla
             mMediaPlayer.reset();
             mMediaPlayer.release();
 //            mHandler.removeMessages(MSG_CACHE_DRU);
-            monitorRecorder.endRecode();
+//            monitorRecorder.endRecode();
             mMediaPlayer = null;
             // REMOVED: mPendingSubtitleTracks.clear();
             mCurrentState = STATE_IDLE;
