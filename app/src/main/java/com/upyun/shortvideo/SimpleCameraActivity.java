@@ -9,6 +9,7 @@
 package com.upyun.shortvideo;
 
 import org.lasque.tusdk.core.TuSdk;
+import org.lasque.tusdk.core.audio.TuSDKAudioCaptureSetting;
 import org.lasque.tusdk.core.utils.TuSdkWaterMarkOption.WaterMarkPosition;
 import org.lasque.tusdk.core.utils.hardware.CameraConfigs.CameraAntibanding;
 import org.lasque.tusdk.core.utils.hardware.TuSDKRecordVideoCamera;
@@ -56,6 +57,11 @@ public class SimpleCameraActivity extends Activity {
         captureSetting.videoAVCodecType = AVCodecType.HW_CODEC;
 
         mVideoCamera = new TuSDKRecordVideoCamera(getBaseContext(), captureSetting, cameraView);
+        TuSDKAudioCaptureSetting audioCaptureSetting = TuSDKAudioCaptureSetting.defaultCaptureSetting();
+        audioCaptureSetting.shouldEnableAec = false;
+        audioCaptureSetting.shouldEnableNs = false;
+        mVideoCamera.setAudioCaptureSetting(audioCaptureSetting);
+
         // 是否开启动态贴纸
         mVideoCamera.setEnableLiveSticker(true);
         // 是否开启美颜 (默认: false)
