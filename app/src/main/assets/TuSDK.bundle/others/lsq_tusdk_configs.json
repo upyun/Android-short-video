@@ -1,91 +1,399 @@
 {
     "filterGroups":[
         {
-            "file":"lsq_filter_YouPaiYun002_97.gfilter",
-            "name":"lsq_filter_group_YouPaiYun002",
-            "default_filter_id":675,
+            "file":"lsq_filter_LiveSignal_158.gfilter",
+            "name":"lsq_filter_group_LiveSignal",
+            "default_filter_id":918,
+            "type":1,
+            "filters":[
+                {
+                    "id":918,
+                    "name":"lsq_filter_LiveSignal01",
+                    "color":"#FFFFFF"
+                }
+            ]
+        },
+        {
+            "file":"lsq_filter_LiveSoulOut_157.gfilter",
+            "name":"lsq_filter_group_LiveSoulOut",
+            "default_filter_id":917,
+            "type":1,
+            "filters":[
+                {
+                    "id":917,
+                    "name":"lsq_filter_LiveSoulOut01",
+                    "color":"#FFFFFF"
+                }
+            ]
+        },
+        {
+            "file":"lsq_filter_LiveFancy01_156.gfilter",
+            "name":"lsq_filter_group_LiveFancy01",
+            "default_filter_id":916,
+            "type":1,
+            "filters":[
+                {
+                    "id":916,
+                    "name":"lsq_filter_LiveFancy01_1",
+                    "color":"#FFFFFF"
+                }
+            ]
+        },
+        {
+            "file":"lsq_filter_EdgeMagic_155.gfilter",
+            "name":"lsq_filter_group_EdgeMagic",
+            "default_filter_id":915,
+            "type":1,
+            "filters":[
+                {
+                    "id":915,
+                    "name":"lsq_filter_EdgeMagic01",
+                    "color":"#FFFFFF"
+                }
+            ]
+        },
+        {
+            "file":"lsq_filter_LiveMegrim_154.gfilter",
+            "name":"lsq_filter_group_LiveMegrim",
+            "default_filter_id":914,
+            "type":1,
+            "filters":[
+                {
+                    "id":914,
+                    "name":"lsq_filter_LiveMegrim01",
+                    "color":"#FFFFFF"
+                }
+            ]
+        },
+        {
+            "file":"lsq_filter_LiveShake_153.gfilter",
+            "name":"lsq_filter_group_LiveShake",
+            "default_filter_id":913,
+            "type":1,
+            "filters":[
+                {
+                    "id":913,
+                    "name":"lsq_filter_LiveShake01",
+                    "color":"#FFFFFF"
+                }
+            ]
+        },
+        {
+            "file":"lsq_filter_teamwork_115.gfilter",
+            "name":"lsq_filter_group_teamwork",
+            "default_filter_id":764,
             "type":0,
             "filters":[
                 {
-                    "id":675,
-                    "name":"lsq_filter_SkinPink016",
+                    "id":764,
+                    "name":"lsq_filter_nature",
                     "color":"#E9807E",
                     "args":{
-                        "smoothing":0.7,
-                        "mixied":0.7
+                        "smoothing":0.6,
+                        "mixied":0.7,
+                        "whitening":0
                     }
                 },
                 {
-                    "id":676,
-                    "name":"lsq_filter_SkinJelly016",
+                    "id":765,
+                    "name":"lsq_filter_pink",
                     "color":"#E9807E",
                     "args":{
-                        "smoothing":0.7,
-                        "mixied":0.7
+                        "smoothing":0.6,
+                        "mixied":0.7,
+                        "whitening":0.3
                     }
                 },
                 {
-                    "id":677,
-                    "name":"lsq_filter_Pink016",
-                    "color":"#ffffff",
+                    "id":766,
+                    "name":"lsq_filter_jelly",
+                    "color":"#E9807E",
                     "args":{
-                        "smoothing":0.75,
-                        "mixied":0.7
+                        "smoothing":0.6,
+                        "mixied":0.7,
+                        "whitening":0
                     }
                 },
                 {
-                    "id":678,
-                    "name":"lsq_filter_Fair016",
+                    "id":767,
+                    "name":"lsq_filter_ruddy",
+                    "color":"#E9807E",
+                    "args":{
+                        "smoothing":0.6,
+                        "mixied":0.7,
+                        "whitening":0
+                    }
+                },
+                {
+                    "id":768,
+                    "name":"lsq_filter_sugar",
+                    "color":"#E9807E",
+                    "args":{
+                        "smoothing":0.6,
+                        "mixied":0.7,
+                        "whitening":0
+                    }
+                },
+                {
+                    "id":769,
+                    "name":"lsq_filter_honey",
+                    "color":"#E9807E",
+                    "args":{
+                        "smoothing":0.6,
+                        "mixied":0.6,
+                        "whitening":0.24
+                    }
+                },
+                {
+                    "id":770,
+                    "name":"lsq_filter_clear",
+                    "color":"#dfaea7",
+                    "args":{
+                        "smoothing":0.6,
+                        "mixied":0.6,
+                        "whitening":0.8
+                    }
+                },
+                {
+                    "id":771,
+                    "name":"lsq_filter_timber",
                     "color":"#fecfcf",
                     "args":{
                         "smoothing":0.75,
-                        "mixied":0.7
+                        "mixied":0.5
                     }
                 },
                 {
-                    "id":679,
-                    "name":"lsq_filter_Forest017",
-                    "color":"#fecfcf",
-                    "args":{
-                        "smoothing":0.75,
-                        "mixied":0.7
-                    }
-                },
-                {
-                    "id":680,
-                    "name":"lsq_filter_Paul016",
+                    "id":772,
+                    "name":"lsq_filter_whitening",
                     "color":"#E9807E",
                     "args":{
-                        "smoothing":0.75,
+                        "smoothing":0.7,
+                        "mixied":0.5
+                    }
+                },
+                {
+                    "id":773,
+                    "name":"lsq_filter_porcelain",
+                    "color":"#E9807E",
+                    "args":{
+                        "smoothing":0.7,
+                        "mixied":0.5
+                    }
+                }
+            ]
+        },
+        {
+            "file":"lsq_filter_ShortVideoEditFilter_159.gfilter",
+            "name":"lsq_filter_group_ShortVideoEditFilter",
+            "default_filter_id":919,
+            "type":0,
+            "filters":[
+                {
+                    "id":919,
+                    "name":"lsq_filter_Olympus_1",
+                    "color":"#b28850"
+                },
+                {
+                    "id":920,
+                    "name":"lsq_filter_Leica_1",
+                    "color":"#E74C3C",
+                    "args":{
+                        "mixied":0.6
+                    }
+                },
+                {
+                    "id":921,
+                    "name":"lsq_filter_Gold_1",
+                    "color":"#18BC9C",
+                    "args":{
+                        "mixied":1,
+                        "vignette":0.6
+                    }
+                },
+                {
+                    "id":922,
+                    "name":"lsq_filter_Cheerful_1",
+                    "color":"#7E6B5A",
+                    "args":{
+                        "mixied":0.75
+                    }
+                },
+                {
+                    "id":924,
+                    "name":"lsq_filter_White_1",
+                    "color":"#8091c2"
+                },
+                {
+                    "id":925,
+                    "name":"lsq_filter_s1950_1",
+                    "color":"#d2d2d4"
+                },
+                {
+                    "id":926,
+                    "name":"lsq_filter_Blurred_1",
+                    "color":"#0091ff"
+                },
+                {
+                    "id":927,
+                    "name":"lsq_filter_Newborn_1",
+                    "color":"#0091FF",
+                    "args":{
                         "mixied":0.7
                     }
                 },
                 {
-                    "id":681,
-                    "name":"lsq_filter_MintGreen016",
-                    "color":"#ffffff",
-                    "args":{
-                        "smoothing":0.75,
-                        "mixied":0.7
-                    }
+                    "id":928,
+                    "name":"lsq_filter_Fade_1",
+                    "color":"#8fc31f"
                 },
                 {
-                    "id":682,
-                    "name":"lsq_filter_TinyTimes016",
-                    "color":"#9de600",
-                    "args":{
-                        "smoothing":0.75,
-                        "mixied":0.7
-                    }
-                },
+                    "id":929,
+                    "name":"lsq_filter_NewYork_1",
+                    "color":"#18bc9c"
+                }
+            ]
+        },
+        {
+            "file":"lsq_filter_Music_182.gfilter",
+            "name":"lsq_filter_group_Music",
+            "default_filter_id":0,
+            "type":2,
+            "filters":[
                 {
-                    "id":683,
-                    "name":"lsq_filter_Year1950016",
-                    "color":"#d2d2d4",
-                    "args":{
-                        "smoothing":0.75,
-                        "mixied":1
-                    }
+                    "id":1024,
+                    "name":"lsq_filter_Music",
+                    "color":"#FFFFFF"
+                }
+            ]
+        },
+        {
+            "file":"lsq_filter_Star_181.gfilter",
+            "name":"lsq_filter_group_Star",
+            "default_filter_id":0,
+            "type":2,
+            "filters":[
+                {
+                    "id":1021,
+                    "name":"lsq_filter_Star",
+                    "color":"#FFFFFF"
+                }
+            ]
+        },
+        {
+            "file":"lsq_filter_Love01_180.gfilter",
+            "name":"lsq_filter_group_Love01",
+            "default_filter_id":0,
+            "type":2,
+            "filters":[
+                {
+                    "id":1022,
+                    "name":"lsq_filter_Love",
+                    "color":"#ffffff"
+                }
+            ]
+        },
+        {
+            "file":"lsq_filter_Bubbles_179.gfilter",
+            "name":"lsq_filter_group_Bubbles",
+            "default_filter_id":0,
+            "type":2,
+            "filters":[
+                {
+                    "id":1003,
+                    "name":"lsq_filter_Bubbles",
+                    "color":"#FFFFFF"
+                }
+            ]
+        },
+        {
+            "file":"lsq_filter_Surprise_178.gfilter",
+            "name":"lsq_filter_group_Surprise",
+            "default_filter_id":0,
+            "type":2,
+            "filters":[
+                {
+                    "id":1007,
+                    "name":"lsq_filter_Surprise",
+                    "color":"#FFFFFF"
+                }
+            ]
+        },
+        {
+            "file":"lsq_filter_Fireball_177.gfilter",
+            "name":"lsq_filter_group_Fireball",
+            "default_filter_id":0,
+            "type":2,
+            "filters":[
+                {
+                    "id":1023,
+                    "name":"lsq_filter_Fireball",
+                    "color":"#FFFFFF"
+                }
+            ]
+        },
+        {
+            "file":"lsq_filter_Flower_176.gfilter",
+            "name":"lsq_filter_group_Flower",
+            "default_filter_id":0,
+            "type":2,
+            "filters":[
+                {
+                    "id":1025,
+                    "name":"lsq_filter_Flower",
+                    "color":"#FFFFFF"
+                }
+            ]
+        },
+        {
+            "file":"lsq_filter_Magic01_175.gfilter",
+            "name":"lsq_filter_group_Magic01",
+            "default_filter_id":0,
+            "type":2,
+            "filters":[
+                {
+                    "id":999,
+                    "name":"lsq_filter_Magic",
+                    "color":"#FFFFFF"
+                }
+            ]
+        },
+        {
+            "file":"lsq_filter_snow_166.gfilter",
+            "name":"lsq_filter_group_snow",
+            "default_filter_id":0,
+            "type":2,
+            "filters":[
+                {
+                    "id":1004,
+                    "name":"lsq_filter_snow01",
+                    "color":"#FFFFFF"
+                }
+            ]
+        },
+        {
+            "file":"lsq_filter_Burning_173.gfilter",
+            "name":"lsq_filter_group_Burning",
+            "default_filter_id":0,
+            "type":2,
+            "filters":[
+                {
+                    "id":1020,
+                    "name":"lsq_filter_Burning",
+                    "color":"#FFFFFF"
+                }
+            ]
+        },
+        {
+            "file":"lsq_filter_Money_174.gfilter",
+            "name":"lsq_filter_group_Money",
+            "default_filter_id":0,
+            "type":2,
+            "filters":[
+                {
+                    "id":1015,
+                    "name":"lsq_filter_Money",
+                    "color":"#FFFFFF"
                 }
             ]
         }
@@ -93,19 +401,19 @@
     "stickerCategories":[
         {
             "id":1,
-            "name":"\u8d34\u7eb8"
+            "name":"lsq_sticker_cate_default"
         },
         {
             "id":2,
-            "name":"\u5fc3\u60c5"
+            "name":"lsq_sticker_cate_mood"
         },
         {
             "id":3,
-            "name":"\u6c34\u5370"
+            "name":"lsq_sticker_cate_watermark"
         }
     ],
     "stickerGroups":[
-        
+
     ],
-    "master":"zCGKrnr\/gHfeNkt2aJeHWK\/PPR0tTPx1Rq2cHxQ3oGDn5eBZdEu4+CV3NCu1H1VuHESKeQgWiorXqaxtv5148\/UmvPDe\/ZUnMlyjFWpz5r+HsUoBwLwZAEobPCXqlAuVdK7N7tpdCKG+bhQ6WZ1zvtMWdXWLDboGNWgqR9LFHgsqPO44AaIhcy\/hNRE+7ieSFsJcvqk2HeUgexIEvsXcRFjmnFpvYtZqRm2s8sutW71rpbxAnTPHXYZjIQZnKym0ItUxIJjeuRfyAmojgThQZ9g726fPZeJVDK3kOxjo8WPXwiErWxJkrNWagdChdzen802ufGeBKT6x3HtUfF12juPXrdP26lwG+i7f53HAjYZI5LOzdoJblIp3zFSJ9W+BbXomHqiL6RXq51vNAa8R3J5sN4nN\/8oJzR7XbL\/TXTMumxvBg9HsABYNePAYt2MSwO8L9GgdlBz0W1J3pNJRrb1EsWJJrTKXUFOEr7GN9kEk2kgeIWC1M1ZNifPuEjHO\/EdMByaF\/qSp+el+W\/peyKEFB+oBLY8GBYcydbPrWD+U1af9rsrwdQI3fU4OzQyeoBfXKLjjxBL\/9lpK73aJnk4QhYU3bGKzJCGNbTOz\/DhUX\/hyQzSb57qnL\/BQja0IEf0deSyNXAlSdJWKjGOplaPOUgRcZAaz2JkSdCLwvjQp5jSCP3\/MXxJoaWZ3gkR4AY9+BNBJZ9N+xm1Xz7kb4\/UxjFIG9bC6rh4vplIFtRX0WVlWiem8nfXibzu3VKhASiHqzEUEXJ0pcmdGuvY\/KepJMbUlw9NBNli395LZZWgWd6T60PDPxDHqi+9KWyY6hwi4rACYgKVmKTdjK9XWdAlKQaPIeyh7rhEpFqaygWsh0xywSFMp3pwgrWNqWNs\/sKE18u3XjcAom4Nw4JkeRF8Bqch5UO0S2uMhzwtd\/jo2jOJ\/2Z\/ohlOT4Gv6MdqMYNrsvJg5ihYyPzEI6mJnQXFCb41wx7FcA4VLScpY3SLH5wJxinuHLyWT7\/Oq1RY7BCD3D6E259"
+    "master":"KqWGuKRfUhAiGmyEsO19OSrakYK+WUS1kxBMXkjBTUqM+cohgGxcH3+7aFiHW98utnZPyoDu3YpDEGPr9AjLcTR\/rWzMjIp6BPCnXs3wC+Xphm6dM\/KUUIt20Ky9Ib63ytKIl0kDhbnorvXK1UZrTUuUf\/SMarHphUraVVvEfs7S9d8ndKclQeauI\/31EsKSo6FXLM6YVEG1\/pni\/6UA0CI8kkhnslt5QjQXSYVFMcNOswDzi0fSVLoPB+qxA4xGjK54C+TsHY4MiyUFljjtufR7S54eVpxI1FTvVn95KXUuZ1Tt6uPy\/PAJ\/X2odagZcOdYBQtbXc7aKYlogmQdiTK6V5jvBBSKJKWfYD+npofdV0esw0y+zbdCeV00ctavhiVFa2JeaJZb6UzPIsDYWemzUGEBO0BAnHO+sZ7LJ7IKuzdhfuHmp7uHWRfZUOrgQ9OX8fX5NTvhpZdx9sdfoIUUzN0G1vyjsU\/zk3XApPXa1j0DFu7o8ARpegwloxaw1qW54CCGBRw3xOq4KyfNEU9UFAb7Wn3xSi1GFAgbnvUSR2cyPxQvocUhDtXv0d89WcVp7aWu5M0qjYrwg4erhVsL3qI9g1bMRtCLGd5PrBTTOAVBPqq6PgWcDvp\/fOc3eP3IEfP6IDCXDN8S42N8BjPQaovodJw8ordQu7jJMpbcHyIttT5f4cOxk0SdSEjZO+SN2cyUjr7mgZjCxEUzlY+v6bk\/Fb7MzUEvX6QSfYGFuH6FIVyW1btGlwuT06+0ZbsGJKHHrlcyatSkgOmfdIZZbbco1Oq8EdMb5kY\/JE9ZjcRLB0DrqgcgRvgEmmSWCh9H8H3SuI06hJEW+tt8BkvURZhFe4Yq+\/LpM9h2O10yoqNqtiLCrO\/YNYUIW3CnBgboRG0aimVxh1qkA7vqLJOh2usn2DMrM8uB04cfAjMMkIcvgk8WXWrbAojm0jodTUfN\/STDNJsgIkISiHC8wQuvZOerOVkLXb3jP2lIzWRzqHgbhxhFcnZt\/W9xOeZJ+nuHEzTLoHIfoc+P3RS6tdwAEuWkce0ZnwFd3SS7SQmkIFY4RC786566Pa3bDgD8jxBb\/ZWtTMNsbsmiV0Fk358tCa5HD8hcMtBfiTb8wD5H8N5eo7lTam6Qzy3YsbmbNEG\/3ALdgvnXER0EeO+68cJlemwn+nQMft9ytogA8cLs7SMpVclPoO7tSjbOVtnifc7iTh9lklaL0oYjXW\/dWZ702JcqSMO6OwytCs0JZd0muUP4Ymy7tCX6tvOm9bRh7\/pMItZs5BDnhlGKKrcapN\/z+oBtYfeXFkux2Q\/v1kET15WT\/1NCzg2tqfO7yhl6gZ5RJ92vcLagBadVb3RiksCZ5YTCpZu9l1eatpAQXDECjAhnok\/QnkQqGeLVeF+Gy6v20ppmoySMJXl\/qezYcc1SE1nbpaZqY53adrY+XLdIgpT5EzKTKlJ9Z8mfHYHqxIXbEhOB1IQ6RNCcS2\/tBBSYfI6lzAP5WIeVMo1PvbiDRdjbjgWA\/iDYp61LgNCGrYhfiDThmkdVA7gibrBtUkg1ew0fOkPZwIS3Aa4ZfnhAJHXAzh9kGTGHLR4CZHFu332p\/DrKLwSBJ3ZBNnI1nxErXZTJ0yVM+Frm5WBE\/SJHnmR5UKIJs26kFcNxceCp0pFX2AetLC+sr0r9KMevtzNWuigwORZi4UngzWhIP7hcMEHqdZF+4\/9RUWzyCEmNSrKelaoejW2dtTp3iOou7lqYi8akX+BXxz0FeY0PjiRMlRdER7iYynSOv+Q5Fzdko3rnbbRzzGOtdGqH+L+3cPZ72ZMo1EEfD3lNkIRZUrtCPPLWk3iGa9FWbCF3geXxGXoq8l1QsIyUaFGyzzs3iSavKhgqBppz1Sd0DzB2uIB\/seTy9GME6wa45IAWH79wEggJ0AVHBXiqRjZYA7onGW6SSEe+Bz489bXxhUZv7BMHqKXlpX\/X9Zd383obwLEZQoa3RizRAMRzQKXTMHPmuuHr9rKpVGTwsTfYgZ\/tigT+pk2opGxTpZGgjAEutvbUSuLNmc+Kt+V2zcxsxoLurg==A0B7B85753"
 }

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lsq_color_white"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/lsq_topBar"
+        layout="@layout/title_item_layout" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/lsq_movie_selector_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff"
+        android:overScrollMode="never"
+        android:layout_margin="5dp"
+        />
+
+</LinearLayout>

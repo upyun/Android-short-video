@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.upyun.shortvideo.views.StickerAudioEffectCellView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="60dp"
+    android:layout_height="match_parent"
+	android:layout_marginLeft="@dimen/lsq__space_12">
+
+<!-- MV 效果布局 -->
+<RelativeLayout
+		android:id="@+id/lsq_mv_wrap"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+		<org.lasque.tusdk.core.view.TuSdkImageView
+			android:id="@+id/lsq_mv_bg"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:src="@drawable/lsq_style_default_mv_bg"
+			android:scaleType="centerCrop"
+			/>
+
+		<org.lasque.tusdk.core.view.TuSdkImageView
+			android:id="@+id/lsq_item_image"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:scaleType="centerInside"
+			/>
+
+		<TextView
+			android:id="@+id/lsq_item_title"
+			android:layout_width="match_parent"
+			android:layout_height="20dp"
+			android:textSize="12sp"
+			android:textColor="@color/lsq_color_white"
+			android:background="@drawable/tusdk_view_filter_unselected_text_roundcorner"
+			android:gravity="center"
+			android:layout_alignBottom="@id/lsq_mv_bg"
+			/>
+</RelativeLayout>
+
+	<!--  MV 无效果布局 -->
+	<org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+			android:id="@+id/lsq_mv_none_btn"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:drawablePadding="5dp"
+			android:layout_centerInParent="true"
+			android:gravity="center"
+			android:textSize="12sp"
+			android:drawableTop="@drawable/lsq_style_default_btn_sticker_off"
+			android:text="@string/lsq_mv_none"
+			android:textColor="@color/lsq_filter_title_color" />
+
+	<!-- MV 边框 -->
+	<RelativeLayout
+		  android:id="@+id/lsq_item_border"
+		  android:layout_width="match_parent"
+		  android:layout_height="match_parent"
+		  android:background="@drawable/tusdk_view_filter_selected_border"
+		  android:visibility="gone" />
+
+</com.upyun.shortvideo.views.StickerAudioEffectCellView>

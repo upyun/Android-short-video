@@ -8,24 +8,35 @@
  */
 package com.upyun.shortvideo;
 
+import android.Manifest;
+import android.annotation.TargetApi;
+import android.app.AlertDialog;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
+import android.view.View;
+import android.widget.RelativeLayout;
+
+import com.upyun.shortvideo.custom.MovieEditorFullScreenActivity;
+import com.upyun.shortvideo.custom.MovieRecordFullScreenActivity;
+import com.upyun.shortvideo.utils.AlbumUtils;
+import com.upyun.shortvideo.utils.PermissionUtils;
+import com.upyun.shortvideo.utils.UriUtils;
+
 import org.lasque.tusdk.core.TuSdk;
 import org.lasque.tusdk.core.TuSdkContext;
 import org.lasque.tusdk.core.secret.StatisticsManger;
 import org.lasque.tusdk.core.seles.tusdk.FilterManager;
 import org.lasque.tusdk.core.seles.tusdk.FilterManager.FilterManagerDelegate;
+import org.lasque.tusdk.core.utils.ContextUtils;
 import org.lasque.tusdk.core.utils.StringHelper;
 import org.lasque.tusdk.core.utils.hardware.CameraHelper;
+import org.lasque.tusdk.core.view.TuSdkViewHelper;
 import org.lasque.tusdk.impl.activity.TuFragmentActivity;
 import org.lasque.tusdk.impl.view.widget.TuProgressHub;
 import org.lasque.tusdk.modules.components.ComponentActType;
-
-import com.upyun.shortvideo.suite.MoviePreviewAndCutActivity;
-import com.upyun.shortvideo.utils.UriUtils;
-
-import android.content.Intent;
-import android.net.Uri;
-import android.view.View;
-import android.widget.RelativeLayout;
 
 /**
  * 首页界面
@@ -35,7 +46,11 @@ public class DemoEntryActivity extends TuFragmentActivity {
     /**
      * 布局ID
      */
-    public static final int layoutId = com.upyun.shortvideo.R.layout.demo_entry_activity;
+    public static final int layoutId = com.upyun.shortvideo.R.layout.entry_activity;
+
+    /** 编辑类ClassName */
+    public static final String EDITOR_CLASS = MovieEditorFullScreenActivity.class.getName();
+
 
     public DemoEntryActivity() {
 
@@ -125,11 +140,21 @@ public class DemoEntryActivity extends TuFragmentActivity {
      */
     private void handleRecordButton() {
         // 如果不支持摄像头显示警告信息
-        if (CameraHelper.showAlertIfNotSupportCamera(this, true)) return;
+//        if (CameraHelper.showAlertIfNotSupportCamera(this, true)) return;
+//
+//        Intent intent = new Intent(this, MovieRecordFullScreenActivity.class);
+////        Intent intent = new Intent(this, RecordSettingActivity.class);
+//        this.startActivity(intent);
 
-//        Intent intent = new Intent(this, MovieRecordAndImportEditorActivity.class);
-        Intent intent = new Intent(this, RecordSettingActivity.class);
-        this.startActivity(intent);
+        if (PermissionUtils.hasRequiredPermissions(this, getRequiredPermissions()))
+        {
+            Intent intent = new Intent(this, MovieRecordFullScreenActivity.class);
+            this.startActivity(intent);
+        }
+        else
+        {
+            PermissionUtils.requestRequiredPermissions(this, getRequiredPermissions());
+        }
     }
 
     /**
@@ -141,13 +166,15 @@ public class DemoEntryActivity extends TuFragmentActivity {
     }
 
     private void handleImportButton() {
+        AlbumUtils.openVideoAlbum(EDITOR_CLASS);
+
 //        Intent pickIntent = new Intent(Intent.ACTION_GET_CONTENT);
 //        pickIntent.setType("video/*");
 //        pickIntent.addCategory(Intent.CATEGORY_OPENABLE);
 //        startActivityForResult(pickIntent, IMAGE_PICKER_SELECT);
 
-        Intent intent = new Intent(this, EditorSettingActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(this, EditorSettingActivity.class);
+//        startActivity(intent);
     }
 
     @Override
@@ -159,12 +186,86 @@ public class DemoEntryActivity extends TuFragmentActivity {
         String path = UriUtils.getFileAbsolutePath(getApplicationContext(), selectedMediaUri);
 
         if (!StringHelper.isEmpty(path)) {
-//            Intent intent = new Intent(this, MoviePreviewAndCutActivity.class);
-            Intent intent = new Intent(this, EditorSettingActivity.class);
+            Intent intent = new Intent(this, MovieEditorFullScreenActivity.class);
+//            Intent intent = new Intent(this, EditorSettingActivity.class);
             intent.putExtra("videoPath", path);
             startActivity(intent);
         } else {
             TuSdk.messageHub().showToast(getApplicationContext(), com.upyun.shortvideo.R.string.lsq_video_empty_error);
         }
     }
+
+    /**
+     * 组件运行需要的权限列表
+     *
+     * @return
+     *            列表数组
+     */
+    @TargetApi(Build.VERSION_CODES.M)
+    protected String[] getRequiredPermissions()
+    {
+        String[] permissions = new String[]{
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.CAMERA,
+                Manifest.permission.RECORD_AUDIO
+        };
+
+        return permissions;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
+    {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        PermissionUtils.handleRequestPermissionsResult(requestCode, permissions, grantResults, this, mGrantedResultDelgate);
+    }
+
+    /**
+     * 授予权限的结果，在对话结束后调用
+     *
+     * @param permissionGranted
+     *            true or false, 用户是否授予相应权限
+     */
+    protected PermissionUtils.GrantedResultDelgate mGrantedResultDelgate = new PermissionUtils.GrantedResultDelgate()
+    {
+        @Override
+        public void onPermissionGrantedResult(boolean permissionGranted)
+        {
+            if (permissionGranted)
+            {
+                Intent intent = new Intent(DemoEntryActivity.this, MovieRecordFullScreenActivity.class);
+                DemoEntryActivity.this.startActivity(intent);
+            }
+            else
+            {
+                String msg = TuSdkContext.getString("lsq_camera_no_access", ContextUtils.getAppName(DemoEntryActivity.this));
+
+                TuSdkViewHelper.alert(permissionAlertDelegate, DemoEntryActivity.this, TuSdkContext.getString("lsq_camera_alert_title"),
+                        msg, TuSdkContext.getString("lsq_button_close"), TuSdkContext.getString("lsq_button_setting")
+                );
+            }
+        }
+    };
+
+    /**
+     * 权限警告提示框点击事件回调
+     */
+    protected TuSdkViewHelper.AlertDelegate permissionAlertDelegate = new TuSdkViewHelper.AlertDelegate()
+    {
+        @Override
+        public void onAlertConfirm(AlertDialog dialog)
+        {
+            Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                    Uri.fromParts("package", DemoEntryActivity.this.getPackageName(), null));
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+
+        @Override
+        public void onAlertCancel(AlertDialog dialog)
+        {
+
+        }
+    };
 }

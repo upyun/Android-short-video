@@ -21,7 +21,7 @@ import java.util.List;
 public class ConfigViewParams 
 {
 	/** 调节栏参数集合 */
-	private List<ConfigViewArg> mArgs = new ArrayList<ConfigViewParams.ConfigViewArg>();
+	private List<ConfigViewArg> mArgs = new ArrayList<ConfigViewArg>();
 	
 	/**
 	 * 添加一个浮点参数 (默认:minValue=0.0f, maxValue=1.0f)

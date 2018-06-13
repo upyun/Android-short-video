@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">TuSDK Video</string>
+    
+    <!-- SDK -->
+    <string name="lsq_sdk_name">TuSDK</string>
+    <string name="lsq_exit_info">Press again to quit the application</string>
+    <string name="lsq_text">TuSDK Video</string>
+    <string name="lsq_reset">Reset</string>
+    <string name="lsq_initing">Initializing</string>
+    <string name="lsq_inited">Initialized</string>
+    <string name="lsq_carema_no_access">Unable to access the system camera\r\nPlease open camera as following setting:\r\nSettings &#045;&#062;Application&#045;&#062;Permission</string>
+    
+    <!-- refreshListView -->
+    <string name="lsq_refresh_list_view_state_visible">Pull to refresh</string>
+    <string name="lsq_refresh_list_view_state_hidden">Loading completed</string>
+    <string name="lsq_refresh_list_view_state_triggered">Release to refresh</string>
+    <string name="lsq_refresh_list_view_state_loading">Loading&#8230;</string>
+    <string name="lsq_refresh_list_view_state_lasttime">The last refresh time：</string>
+    <string name="lsq_refresh_list_view_state_load_more">Loading more&#8230;</string>
+    
+    <string name="lsq_filter_set_smoothing">Smoothing</string>
+    <string name="lsq_filter_set_whitening">Whitening</string>
+    <string name="lsq_filter_set_mixied">Mixied</string>
+    <string name="lsq_filter_set_vignette">Vignette</string>
+
+
+    <string name="beauty_on">Beauty Mode On</string>
+    <string name="beauty_off">Beauty Mode Off</string>
+	
+    <!-- 滤镜 -->
+    <string name="lsq_filter_Original">Original</string>
+    <string name="lsq_filter_Fair01">Fair</string>
+    <string name="lsq_filter_Pink01">Pink</string>
+    <string name="lsq_filter_Forest01">Forest</string>
+    <string name="lsq_filter_Sundown">Sundown</string>
+    <string name="lsq_filter_Sakura">Sakura</string>
+    <string name="lsq_filter_Paul01">Paul</string>
+    <string name="lsq_filter_Lavender">Lavender</string>
+    <string name="lsq_filter_Manhattan">Manhattan</string>
+    <string name="lsq_filter_Dusk">Dusk</string>
+    <string name="lsq_filter_TinyTimes">TinyTimes</string>
+    <string name="lsq_filter_Vivid01">Vivid</string>
+    <string name="lsq_filter_Year1950">Year1950</string>
+    <string name="lsq_filter_Missing01">Missing</string>
+    <string name="lsq_filter_Grapefruit01">Grapefruit</string>
+    <string name="lsq_filter_BabyPink001">BabyPink</string>
+    
+    <string name="live_camera_sample">Live camera sample</string>
+    <string name="record_camera_sample">Record Camera Sample</string>
+    <string name="edit_camera_sample">Movie editor sample</string>
+    
+    
+    <!-- 提示 -->
+    <string name="new_movie_saving">Saving video...</string>
+    <string name="new_movie_audio_effect_loading">Loading Audio</string>
+    <string name="new_movie_saved">Video saved successfully</string>
+    <string name="new_movie_error_saving">Saving video error</string>
+    <string name="lsq_loadvideo_failed">Do not support the video format or video height too large </string>
+    <string name="over_max_recordTime">More than max recording time</string>
+    <string name="min_recordTime">Less than min recording time </string>
+    <string name="max_recordTime">Recording time is equal to max time </string>
+    <string name="lsq_video_save_ok">Save video successfully</string>
+    <string name="lsq_video_del_ok">Delete video successfully</string>
+    <string name="lsq_image_save_ok">Save image Successfuly</string>
+    <string name="lsq_image_del_ok">Delete image successfuly</string>
+    <string name="lsq_record_movie_error">Record video error</string>
+    <string name="lsq_record_time_invalid">Record time error</string>  
+  
+    <!-- 1.8.0 -->
+    <string name="lsq_filter_SkinPink010">Pink</string>
+    <string name="lsq_filter_SkinJelly010">Jelly</string>
+    <string name="lsq_filter_Fair010">Fair</string>
+    <string name="lsq_filter_Pink010">Elegant</string>
+    <string name="lsq_filter_Forest010">Forest</string>
+    
+    <string name="lsq_filter_SkinPink011">Pink</string>
+    <string name="lsq_filter_SkinJelly011">Jelly</string>
+    <string name="lsq_filter_Pink011">Elegant</string>
+    <string name="lsq_filter_Fair011">Fair</string>
+    <string name="lsq_filter_Forest011">Forest</string>
+    
+    <string name="lsq_dermabrasion">Smoothing</string>
+    <string name="lsq_big_eyes">Eye size</string>
+    <string name="lsq_thin_face">Chin size</string>
+
+    <!-- 短视频厂商合作滤镜 -->
+    <string name="lsq_filter_nature">Nature</string>
+    <string name="lsq_filter_pink">Pink</string>
+    <string name="lsq_filter_jelly">Jelly</string>
+    <string name="lsq_filter_ruddy">Ruddy</string>
+    <string name="lsq_filter_sugar">Sugar</string>
+    <string name="lsq_filter_honey">Honey</string>
+    <string name="lsq_filter_clear">Clear</string>
+    <string name="lsq_filter_timber">Timber</string>
+    <string name="lsq_filter_whitening">Whitening</string>
+    <string name="lsq_filter_porcelain">Porcelain</string>
+
+    <!-- 短视频编辑滤镜 -->
+    <string name="lsq_filter_Olympus_1">Olympus</string>
+    <string name="lsq_filter_Leica_1">Leica</string>
+    <string name="lsq_filter_Gold_1">Gold</string>
+    <string name="lsq_filter_Cheerful_1">Cheerful</string>
+    <string name="lsq_filter_White_1">White</string>
+    <string name="lsq_filter_s1950_1">1950</string>
+    <string name="lsq_filter_Blurred_1">Blurred</string>
+    <string name="lsq_filter_Newborn_1">Newborn</string>
+    <string name="lsq_filter_Fade_1">Fade_1</string>
+    <string name="lsq_filter_NewYork_1">NewYork</string>
+
+    <!-- 场景特效 -->
+    <string name="lsq_filter_LiveShake01">LiveShake</string>
+    <string name="lsq_filter_LiveMegrim01">LiveMegrim</string>
+    <string name="lsq_filter_EdgeMagic01">EdgeMagic</string>
+    <string name="lsq_filter_LiveFancy01_1">70s</string>
+    <string name="lsq_filter_LiveSoulOut01">LiveSoulOut</string>
+    <string name="lsq_filter_LiveSignal01">LiveSignal</string>
+    
+    <!-- video editor -->
+    <string name="lsq_text_record">Record Video</string>
+    <string name="lsq_text_import">Import Video</string>
+    <string name="lsq_text_sticker">Sticker</string>
+    <string name="lsq_text_filter">Filter</string>
+
+   	<string name="lsq_text_time_tv">00:00</string>
+   	<string name="lsq_tusdk">TuSDK</string>
+    <string name="lsq_back">Back</string>
+    <string name="lsq_clip">Clip</string>
+    <string name="lsq_next">Next</string>
+    <string name="lsq_stepback">Back</string>
+    <string name="lsq_text_confirm">Save</string>
+    <string name="lsq_save">Save</string>
+    <string name="lsq_add_filter">Movie Editor</string>
+    
+    <string name="lsq_video_empty_error">Video path is null</string>
+    <string name="lsq_video_play_error">Play video error</string>
+    <string name="lsq_video_read_prepare">Loading video,Please waite...</string>
+    <string name="lsq_video_entry_company">Hangzhou WeiHeXun Tech Co., Ltd</string>
+    <string name="lsq_button_done">I Know</string>
+    <string name="lsq_carema_alert_title">Open Camera Failed</string>
+    <string name="lsq_album_import">Album</string>
+        
+    <string name="lsq_beauty_text">Beauty</string>
+    <string name="lsq_text_beauty">Beauty</string>
+    <string name="lsq_filter_text">Filter</string>
+    <string name="lsq_text_MV">MV</string>
+    <string name="lsq_text_effect">Effect</string>
+
+    <!-- MV -->
+    <string name="lsq_mv_小猫玩球">Cat</string>
+    <string name="lsq_mv_无语乌鸦">Crow</string>
+    <string name="lsq_mv_怪兽">Monster</string>
+    <string name="lsq_mv_none">No effect</string>
+    <string name="lsq_mv_汤圆">Dumplings</string>
+    <string name="lsq_mv_儿童节">Children Day</string>
+    
+    <string name="lsq_mv_圆形遮罩">Mask</string>
+    <string name="lsq_mv_流光">Streamer</string>
+    <string name="lsq_mv_老电影">Movies</string>
+        
+	<!-- 主页面 -->
+    <string name="lsq_text_recordEdit">Record Video</string>
+    <string name="lsq_text_componentList">Component List</string>
+    <string name="lsq_edit_component">Editor Component</string>
+
+    <!-- 录音权限  -->
+    <string name="lsq_record_dialog_title">Hint</string>
+    <string name="lsq_record_dialog_message">Grant recording authority</string>
+    <string name="lsq_record_dialog_confirm">Confirm</string>
+    <string name="lsq_record_dialog_cancel">Cancel</string>    
+    <string name="lsq_text_delete">Delete</string>
+    
+    <!-- 功能列表  -->
+    <string name="lsq_composite_components">Composite Components</string>
+    <string name="lsq_common_components">Common Components</string>
+    <string name="lsq_custom_components">Custom Components</string>
+    <string name="lsq_api_usage_example">API Usage Examples</string>
+    <string name="lsq_record_video">Record Video</string>
+    <string name="lsq_video_preview_editor">Edit Video Compenent</string>
+    <string name="lsq_capture_record_camera">Record Camera Component</string>
+    <string name="lsq_keep_record_camera">Record Video Camera Component</string>
+    <string name="lsq_normal_record_camera">Normal Record Camera Component</string>
+    <string name="lsq_album_video_timecut">Cut Video By Time Component</string>
+    <string name="lsq_album_video_editor">Video Filter Editor Component</string>
+    <string name="lsq_full_screen_record_preview_editor">Full Screen：Record Compenent</string>
+    <string name="lsq_full_screen_ratio_cut_editor">Full Screen： Edit Video Compenent（Ratio Adapted)</string>
+    <string name="lsq_full_screen_album_video_timecut_editor">Full Screen：Video Cut Time Editor</string>
+    <string name="lsq_audio_mixed">Multiple Audio Mixed</string>
+    <string name="lsq_video_bgm">Audio and Video Mixing</string>
+    <string name="lsq_gain_thumbnail">Gain Thumb</string>
+    <string name="lsq_video_mixed">Contact Two Video</string>
+    <string name="lsq_album_video_timecut_save">Cut Video</string>
+    <string name="lsq_audio_file_recorder">Record Audio</string>    
+
+    <!-- 配音音乐 -->
+    <string name="lsq_mixing_lively">Lively</string>
+    <string name="lsq_mixing_oldmovie">Old Movie</string>
+    <string name="lsq_mixing_relieve">Relieve</string>
+    <!-- 录音 -->
+    <string name="lsq_mixing_nosound">No BGM</string>
+    <string name="lsq_mixing_soundrecording">Record</string>
+    <string name="lsq_audio_record_complete">Record Finish</string>
+    <string name="lsq_audio_record_mintime">Min Time: 1s</string>
+    <string name="lsq_text_dubbing">Dubbing</string>
+    <string name="lsq_none_dubbing">No BGM</string>
+    <string name="lsq_mixing_recording">Recoding</string>
+    <string name="lsq_congfigview_set_originIntensity">Audio</string>
+    <string name="lsq_congfigview_set_dubbingIntensity">Dub</string>
+    <string name="lsq_voiceRcording_timeRemaining">7 seconds remained</string>
+    
+    <!-- API Example -->
+    <string name="lsq_cut">Cut</string>
+    <string name="lsq_movie_thumb">Gain Thumb</string>
+    <string name="lsq_audio_delete_hint">Please delete recording</string>
+    <string name="lsq_audio_initialization_failed_hint">Record failed,Please check RECORD_AUDIO permission</string>
+    <string name="lsq_audio_mixer_hint">Please adjust the music volume, and then click 「Start Mix」 to generate a new music. Remember to turn on the system volume</string>
+    <string name="lsq_audio_mixer_start">Start Mixing</string>
+    <string name="lsq_audio_mixer_delete">Delete Audio</string>
+    <string name="lsq_audio_mixer_play">Play Audio</string>
+    <string name="lsq_audio_mixer_pause">Pause</string>
+    <string name="lsq_movie_thumb_loading">Loading Thumb</string>
+    <string name="lsq_audio_mixer_text">Audio Mixture</string>
+    <string name="lsq_congfigview_set_origin">Origin Audio</string>
+    <string name="lsq_congfigview_set_dubbingone">Audio One</string>
+    <string name="lsq_congfigview_set_dubbingtwo">Audio Two</string>
+    <string name="lsq_audio_record_hint">Click 「Start Recording」 button to start recording audio, click 「Finish Recording」 to generate a new audio ，then click 「Play Audio」 to play the audio</string>
+    <string name="lsq_audio_record_start">StartRecord</string>
+    <string name="lsq_audio_record_stop">FinishRecord</string>
+    <string name="lsq_audio_record_play">Play Audio</string>
+    <string name="lsq_audio_record_text">Record Audio</string>
+    <string name="lsq_audio_record_recording">Recoding</string>
+    <string name="lsq_audio_record_stopped">Record completely,Please play audio</string>
+    <string name="lsq_audio_record_playing">Playing recording</string>
+    <string name="lsq_audio_record_played">Play recording completely</string>
+    <string name="lsq_movie_mixer_text">Add BGM To Video</string>
+    <string name="lsq_movie_mixer_start">Mix Video</string>
+    <string name="lsq_movie_mixer_hint">Click the 「Video Splicing」 button to make the video. After save successly check the new video in the system album</string>
+    <string name="lsq_movie_splicer_processing">Contacting two video</string>
+    
+    <string name="lsq_movie_splicer">Splice Videos</string>
+    <string name="lsq_movie_splicer_success">Operation is done，check the new video in the DCIM</string>
+    <string name="lsq_movie_splicer_error">Operation is failed</string>
+    <string name="lsq_movie_splicer_text">Splice Videos</string>
+    <string name="lsq_movie_cut_start">Cutting Video</string>
+    <string name="lsq_movie_cut_cancel">Cancel movie cut</string>
+    <string name="lsq_movie_cut_error">Cut Video error</string>
+    <string name="lsq_movie_cut_done">Cut video completely</string>
+    <string name="lsq_movie_cut_text">Cut Video</string>
+    <string name="lsq_audio_mixer_delete_success">Delete Mixed Audio successfully</string>
+    <string name="lsq_audio_mixer_delete_failed">Delete mixed audio failure</string>
+    <string name="lsq_cut_choose_cutrange">Please select cut Range Before cut</string>
+
+    <string name="lsq_video_selected">Select Video</string>
+    <string name="lsq_select_video_hint">Please select video</string>
+    <string name="lsq_obtain_permission_failed">Failed to obtain permissions</string>
+    <!-- 权限提示 -->
+    <string name="lsq_album_no_access">Can’t access album. Please turn the external storage permission on in Settings.</string>
+    <string name="lsq_album_alert_title">Can’t access album</string>
+    <string name="lsq_button_close">Close</string>
+    <string name="lsq_button_setting">Setting</string>
+
+    <string name="lsq_camera_no_access">Lack of permission， Please turn the external storage、camera and record audio permission on in Settings</string>
+    <string name="lsq_camera_alert_title">Lack of permission</string>
+
+    <string name="lsq_camera_permission_denied">Open camera failed,it may be system Settings or security software that closes permissions. Please turn the external storage、camera and record audio permission on in Settings</string>
+    <string name="lsq_camera_denied_title">Open camera failed</string>
+
+    <string name="lsq_repeal">Repeal</string>
+
+    <!-- 2.0 快慢速 -->
+    <string name="lsq_camera_speed_rate_slow">Slow</string>
+    <string name="lsq_camera_speed_rate_slow2">Super Slow</string>
+    <string name="lsq_camera_speed_rate_normal">Normal</string>
+    <string name="lsq_camera_speed_rate_fast">Fast</string>
+    <string name="lsq_camera_speed_rate_fast2">Super Fast</string>
+
+    <!-- 2.0 魔法特效 -->
+
+    <!-- 魔法特效 Code 名称 -->
+    <string name="lsq_filter_snow01">Snow</string>
+    <string name="lsq_filter_Love">Love</string>
+    <string name="lsq_filter_Bubbles">Bubbles</string>
+    <string name="lsq_filter_Music">Music</string>
+    <string name="lsq_filter_Star">Star</string>
+    <string name="lsq_filter_Surprise">Surprise</string>
+    <string name="lsq_filter_Flower">Flower</string>
+    <string name="lsq_filter_Magic">Magic</string>
+    <string name="lsq_filter_Money">Money</string>
+    <string name="lsq_filter_Burning">Burning</string>
+    <string name="lsq_filter_Fireball">Fireball</string>
+
+    <string name="lsq_editor_magic">Magic</string>
+    <string name="lsq_magic_size">Size</string>
+    <string name="lsq_magic_color">Color</string>
+    <string name="lsq_magic_text">Magic</string>
+
+
+</resources>

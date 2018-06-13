@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
 import com.upyun.shortvideo.R;
 

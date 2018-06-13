@@ -9,10 +9,10 @@ import org.lasque.tusdk.core.TuSdkContext;
 import org.lasque.tusdk.core.utils.StringHelper;
 import org.lasque.tusdk.core.utils.TLog;
 import org.lasque.tusdk.core.utils.image.AlbumHelper;
-import org.lasque.tusdk.movie.muxer.TuSDKMovieSplicer;
-import org.lasque.tusdk.movie.muxer.TuSDKMovieSplicer.TuSDKMovieSegment;
-import org.lasque.tusdk.movie.muxer.TuSDKMovieSplicer.TuSDKMovieSplicerOption;
-import org.lasque.tusdk.movie.player.TuSDKMoviePlayer;
+import org.lasque.tusdk.api.movie.postproc.muxer.TuSDKMovieSplicer;
+import org.lasque.tusdk.api.movie.postproc.muxer.TuSDKMovieSplicer.TuSDKMovieSegment;
+import org.lasque.tusdk.api.movie.postproc.muxer.TuSDKMovieSplicer.TuSDKMovieSplicerOption;
+import org.lasque.tusdk.api.movie.player.TuSDKMoviePlayer;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -209,7 +209,7 @@ public class MovieSplicerActivity extends Activity
 		}
 		
 		@Override
-		public void onError(Exception exception)
+		public void onError(TuSDKMovieSplicer.ErrorCode errorType)
 		{
 			String hintMsg = getResources().getString(com.upyun.shortvideo.R.string.lsq_movie_splicer_error);
 			TuSdk.messageHub().showError(MovieSplicerActivity.this, hintMsg);

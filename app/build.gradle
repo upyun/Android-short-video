@@ -1,36 +1,44 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
+    compileSdkVersion 26
     buildToolsVersion "26.0.2"
-
     defaultConfig {
         applicationId "com.upyun.shortvideo"
         minSdkVersion 18
-        targetSdkVersion 22
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-
     buildTypes {
         release {
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
+            minifyEnabled false
+            //Zipalign优化
+//            zipAlignEnabled true
+            // 移除无用的resource文件
+//            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    defaultConfig {
-        ndk {
-            abiFilters "armeabi", "armeabi-v7a"
-        }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
     }
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:recyclerview-v7:25.1.1'
-    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
-    compile 'com.upyun:upyun-android-sdk:2.0.4'
-//    compile files('libs/TuSDKCore-2.8.3.jar')
-//    compile files('libs/TuSDKFace-1.0.0.jar')
-//    compile files('libs/TuSDKVideo-1.8.0.jar')
-//    compile files('libs/bugly_crash_release_2.6.5.jar')
-    compile project(':upplayer')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    testCompile 'junit:junit:4.12'
+    compile files('libs/bugly_crash_release_2.6.5.jar')
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile files('libs/TuSDKVideo-2.0.0.jar')
+    compile files('libs/TuSDKCore-2.9.1.jar')
+    compile files('libs/TuSDKFace-2.0.0.jar')
+    compile 'com.android.support:recyclerview-v7:26.0.1'
+    implementation 'com.android.support:appcompat-v7:26.0.1'
+    implementation project(':upplayer')
 }

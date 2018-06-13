@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_marginLeft="2dp"
+    android:layout_marginRight="2dp"
+    android:layout_marginBottom="4dp"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/lsq_video_thumb_view"
+        android:layout_width="122dp"
+        android:layout_height="122dp"
+        android:scaleType="centerCrop"
+        android:background="@color/lsq_color_black"
+        />
+
+    <View
+        android:id="@+id/lsq_movie_selected_icon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/lsq_video_album_picture_unselected"
+        android:layout_margin="3dp"
+        android:layout_alignBottom="@id/lsq_video_thumb_view"
+        android:layout_alignRight="@id/lsq_video_thumb_view"
+        android:layout_gravity="bottom|right"
+      />
+</RelativeLayout>

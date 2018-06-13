@@ -9,59 +9,6 @@
  */
 package com.upyun.shortvideo.views.record;
 
-import java.io.File;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.lasque.tusdk.core.TuSdk;
-import org.lasque.tusdk.core.TuSdkContext;
-import org.lasque.tusdk.core.secret.TuSDKOnlineStickerDownloader;
-import org.lasque.tusdk.core.secret.TuSDKOnlineStickerDownloader.TuSDKOnlineStickerDownloaderDelegate;
-import org.lasque.tusdk.core.seles.SelesParameters;
-import org.lasque.tusdk.core.seles.SelesParameters.FilterArg;
-import org.lasque.tusdk.core.seles.sources.SelesOutInput;
-import org.lasque.tusdk.core.seles.sources.SelesVideoCameraInterface;
-import org.lasque.tusdk.core.struct.TuSdkSize;
-import org.lasque.tusdk.core.type.DownloadTaskStatus;
-import org.lasque.tusdk.core.utils.FileHelper;
-import org.lasque.tusdk.core.utils.RectHelper;
-import org.lasque.tusdk.core.utils.TLog;
-import org.lasque.tusdk.core.utils.ThreadHelper;
-import org.lasque.tusdk.core.utils.hardware.CameraConfigs.CameraFlash;
-import org.lasque.tusdk.core.utils.hardware.TuSDKRecordVideoCamera;
-import org.lasque.tusdk.core.utils.hardware.TuSDKRecordVideoCamera.RecordError;
-import org.lasque.tusdk.core.utils.hardware.TuSDKRecordVideoCamera.RecordState;
-import org.lasque.tusdk.core.utils.image.AlbumHelper;
-import org.lasque.tusdk.core.utils.json.JsonHelper;
-import org.lasque.tusdk.core.utils.sqllite.ImageSqlHelper;
-import org.lasque.tusdk.core.video.TuSDKVideoResult;
-import org.lasque.tusdk.core.view.recyclerview.TuSdkTableView;
-import org.lasque.tusdk.core.view.recyclerview.TuSdkTableView.TuSdkTableViewItemClickDelegate;
-import org.lasque.tusdk.core.view.widget.button.TuSdkTextButton;
-import org.lasque.tusdk.impl.view.widget.TuSeekBar;
-import org.lasque.tusdk.modules.view.widget.sticker.StickerGroup;
-import org.lasque.tusdk.modules.view.widget.sticker.StickerLocalPackage;
-import org.lasque.tusdk.movie.player.TuSDKMoviePlayer;
-import org.lasque.tusdk.movie.player.TuSDKMoviePlayer.PlayerState;
-import org.lasque.tusdk.movie.player.TuSDKMoviePlayer.TuSDKMoviePlayerDelegate;
-
-import com.upyun.shortvideo.utils.ClickAndLongPressedInterface;
-import com.upyun.shortvideo.utils.ClickAndLongPressedListener;
-import com.upyun.shortvideo.utils.Constants;
-import com.upyun.shortvideo.views.CompoundDrawableTextView;
-import com.upyun.shortvideo.views.ConfigViewSeekBar;
-import com.upyun.shortvideo.views.FilterCellView;
-import com.upyun.shortvideo.views.FilterConfigSeekbar;
-import com.upyun.shortvideo.views.FilterConfigView;
-import com.upyun.shortvideo.views.FilterListView;
-import com.upyun.shortvideo.views.RoundProgressBar;
-import com.upyun.shortvideo.views.StickerCellView;
-import com.upyun.shortvideo.views.StickerListView;
-
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -80,15 +27,62 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.LinearInterpolator;
-import android.view.animation.RotateAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.upyun.shortvideo.utils.ClickAndLongPressedInterface;
+import com.upyun.shortvideo.utils.ClickAndLongPressedListener;
+import com.upyun.shortvideo.utils.Constants;
+import com.upyun.shortvideo.views.CompoundDrawableTextView;
+import com.upyun.shortvideo.views.ConfigViewSeekBar;
+import com.upyun.shortvideo.views.FilterCellView;
+import com.upyun.shortvideo.views.FilterConfigSeekbar;
+import com.upyun.shortvideo.views.FilterConfigView;
+import com.upyun.shortvideo.views.FilterListView;
+import com.upyun.shortvideo.views.RoundProgressBar;
+import com.upyun.shortvideo.views.StickerCellView;
+import com.upyun.shortvideo.views.StickerListView;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.lasque.tusdk.core.TuSdk;
+import org.lasque.tusdk.core.TuSdkContext;
+import org.lasque.tusdk.core.seles.SelesParameters;
+import org.lasque.tusdk.core.seles.SelesParameters.FilterArg;
+import org.lasque.tusdk.core.seles.sources.SelesVideoCameraInterface;
+import org.lasque.tusdk.core.seles.tusdk.FilterWrap;
+import org.lasque.tusdk.core.struct.TuSdkSize;
+import org.lasque.tusdk.core.utils.FileHelper;
+import org.lasque.tusdk.core.utils.RectHelper;
+import org.lasque.tusdk.core.utils.TLog;
+import org.lasque.tusdk.core.utils.ThreadHelper;
+import org.lasque.tusdk.core.utils.hardware.CameraConfigs.CameraFlash;
+import org.lasque.tusdk.core.utils.hardware.TuSDKRecordVideoCamera;
+import org.lasque.tusdk.core.utils.hardware.TuSDKRecordVideoCamera.RecordError;
+import org.lasque.tusdk.core.utils.hardware.TuSDKRecordVideoCamera.RecordState;
+import org.lasque.tusdk.core.utils.hardware.TuSdkStillCameraAdapter.CameraState;
+import org.lasque.tusdk.core.utils.image.AlbumHelper;
+import org.lasque.tusdk.core.utils.json.JsonHelper;
+import org.lasque.tusdk.core.utils.sqllite.ImageSqlHelper;
+import org.lasque.tusdk.core.video.TuSDKVideoResult;
+import org.lasque.tusdk.core.view.recyclerview.TuSdkTableView.TuSdkTableViewItemClickDelegate;
+import org.lasque.tusdk.core.view.widget.button.TuSdkTextButton;
+import org.lasque.tusdk.impl.view.widget.TuSeekBar;
+import org.lasque.tusdk.modules.view.widget.sticker.StickerGroup;
+import org.lasque.tusdk.modules.view.widget.sticker.StickerLocalPackage;
+import org.lasque.tusdk.api.movie.player.TuSDKMoviePlayer;
+import org.lasque.tusdk.api.movie.player.TuSDKMoviePlayer.PlayerState;
+import org.lasque.tusdk.api.movie.player.TuSDKMoviePlayer.TuSDKMoviePlayerDelegate;
+
+import java.io.File;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * 多功能相机界面视图
@@ -138,7 +132,7 @@ public class MultipleCameraView extends FrameLayout
 	private int mFocusPostion = 1;
 
 	// 记录当前滤镜
-    private SelesOutInput mSelesOutInput;
+    private FilterWrap mSelesOutInput;
 
 	// 滤镜Tab
 	private TuSdkTextButton mFilterTab;
@@ -185,15 +179,11 @@ public class MultipleCameraView extends FrameLayout
 	private TuSDKMoviePlayer mMoviePlayer;
 	/** 拍照获得的Bitmap */
 	private Bitmap mCaptureBitmap;
-	/** 上一次选中的贴纸项 */
-	private RelativeLayout mLastStickerView;
 	private Activity mActivity;
 	private ClickAndLongPressedListener mClickAndLongPressListener = new ClickAndLongPressedListener();
 	/** 录制视频动作委托 */
 	private TuSDKMultipleCameraDelegate mDelegate;
-	/** 贴纸下载器 */
-	private TuSDKOnlineStickerDownloader mDownloader;
-	
+
 	/**
 	 * 录制视频动作委托
 	 */
@@ -274,6 +264,9 @@ public class MultipleCameraView extends FrameLayout
 		mChinSizeBarLayout.getTitleView().setText(com.upyun.shortvideo.R.string.lsq_thin_face);
 		mChinSizeBarLayout.getSeekbar().setDelegate(mTuSeekBarDelegate);
 		
+		initFilterListView();
+		initStickerListView();
+		
 		//贴纸视图
 		mStickerBottomView = (RelativeLayout) findViewById(com.upyun.shortvideo.R.id.lsq_sticker_group_bottom_view);
 		mStickerBottomView.setVisibility(View.INVISIBLE);
@@ -303,9 +296,6 @@ public class MultipleCameraView extends FrameLayout
 		mDeltButton.setOnTouchListener(mOnTouchListener);
 		mSaveButton.setOnTouchListener(mOnTouchListener);
 		
-		initStickerListView();
-		initFilterListView();
-		
 		// 设置弹窗提示是否在隐藏虚拟键的情况下使用
 		TuSdk.messageHub().applyToViewWithNavigationBarHidden(true);
 	}
@@ -316,9 +306,6 @@ public class MultipleCameraView extends FrameLayout
 	protected void initFilterListView() 
 	{
 		getFilterListView();
-
-		if (mFilterListView == null)
-			return;
 
 		this.mFilterListView.setModeList(Arrays.asList(Constants.VIDEOFILTERS));
 	    ThreadHelper.postDelayed(new Runnable(){
@@ -388,9 +375,40 @@ public class MultipleCameraView extends FrameLayout
 	 * 
 	 * @param code
 	 */
-	protected void changeVideoFilterCode(String code) 
+	protected void changeVideoFilterCode(final String code) 
 	{
-		mTuSDKVideoCamera.switchFilter(code);
+		if (mTuSDKVideoCamera != null && mTuSDKVideoCamera.getState() != CameraState.StateUnknow
+				&& mTuSDKVideoCamera.getState() != CameraState.StateStarting)
+		{
+			ThreadHelper.runThread(new Runnable() {
+
+				@Override
+				public void run() {
+					mTuSDKVideoCamera.switchFilter(code);
+				}
+			});
+		}
+		else
+		{
+			ThreadHelper.postDelayed(new Runnable() {
+
+				@Override
+				public void run() {
+
+					ThreadHelper.runThread(new Runnable() {
+
+						@Override
+						public void run() {
+							if (mTuSDKVideoCamera != null
+									&& mTuSDKVideoCamera.getState() != CameraState.StateUnknow
+									&& mTuSDKVideoCamera.getState() != CameraState.StateStarting)
+								mTuSDKVideoCamera.switchFilter(code);
+						}
+					});
+				}
+
+			}, 800);
+		}
 	}
 	
 	/**
@@ -412,9 +430,6 @@ public class MultipleCameraView extends FrameLayout
 	 */
 	protected void initStickerListView() 
 	{
-		mDownloader = new TuSDKOnlineStickerDownloader();
-		mDownloader.setDelegate(mDownloaderDelegate);
-		
 		getStickerListView();
 
 		refetchStickerList();
@@ -504,8 +519,8 @@ public class MultipleCameraView extends FrameLayout
 	/**
 	 * 贴纸组列表点击事件
 	 */
-	private TuSdkTableView.TuSdkTableViewItemClickDelegate<StickerGroup, StickerCellView>
-	             mStickerTableItemClickDelegate = new TuSdkTableView.TuSdkTableViewItemClickDelegate<StickerGroup, StickerCellView>() {
+	private TuSdkTableViewItemClickDelegate<StickerGroup, StickerCellView>
+	             mStickerTableItemClickDelegate = new TuSdkTableViewItemClickDelegate<StickerGroup, StickerCellView>() {
 		@Override
 		public void onTableViewItemClick(StickerGroup itemData,
 				StickerCellView itemView, int position) {
@@ -523,134 +538,50 @@ public class MultipleCameraView extends FrameLayout
 	protected void onStickerGroupSelected(StickerGroup itemData,
 			StickerCellView itemView, int position) 
 	{
-		// 清除上一个选中贴纸的背景
-		if (mLastStickerView != null) {
-			mLastStickerView.setBackground(null);
-		}
-
-		RelativeLayout stickerLayout = (RelativeLayout) itemView
-				.findViewById(com.upyun.shortvideo.R.id.lsq_item_wrap);
-		stickerLayout.setBackground(TuSdkContext
-				.getDrawable(com.upyun.shortvideo.R.drawable.sticker_cell_background));
-
-		// 记录下选中的贴纸
-		mLastStickerView = stickerLayout;
-
 		// 设置点击贴纸时呈现或是隐藏贴纸
 		if (position == 0)
 		{
 			mTuSDKVideoCamera.removeAllLiveSticker();
+			mStickerListView.setSelectedPosition(position);
 			return;
-		}
-		
-		if (mDownloader.isDownloading(itemData.groupId))
-			return;
-		else if (!mDownloader.isDownloaded(itemData.groupId))
-		{
-			showProgressAnimation(itemView);
-			mDownloader.downloadStickerGroup(itemData);
 		}
 
-		else
-		{  
-		    itemData = StickerLocalPackage.shared().getStickerGroup(itemData.groupId);
+		// 如果贴纸已被下载到本地
+		if (mStickerListView.isDownloaded(itemData))
+		{
+			mStickerListView.setSelectedPosition(position);
+			itemData = StickerLocalPackage.shared().getStickerGroup(itemData.groupId);
 			mTuSDKVideoCamera.showGroupSticker(itemData);
-		}
-	}
-
-	/**
-	 * 贴纸下载委托
-	 */
-	private TuSDKOnlineStickerDownloaderDelegate mDownloaderDelegate = new TuSDKOnlineStickerDownloaderDelegate()
-	{
-
-		@Override
-		public void onDownloadProgressChanged(long stickerGroupId,float progress, DownloadTaskStatus status)
+		}else
 		{
-			showStickerProgress(stickerGroupId,status);
+			mStickerListView.downloadStickerGroup(itemData);
 		}
-		
-	};
+	}
 
-	/**
-	 * 显示贴纸进度条
-	 * @param stickerGroupId
-	 *            贴纸分组
-	 * @param status
-	 *            下载状态
-	 */
-	public void showStickerProgress(long stickerGroupId,DownloadTaskStatus status)
-	{
-
-		StickerCellView item = (StickerCellView) getStickerListView().getStickCellView(stickerGroupId);
-		if (item == null) return;
-		
-		ImageView view = (ImageView) item.findViewById(com.upyun.shortvideo.R.id.lsq_progress_image);
-		if (view == null) return;
-		
-		if (status == DownloadTaskStatus.StatusDowning)
-		{
-			showProgressAnimation(item);
-		}
-		else if (status == DownloadTaskStatus.StatusDowned)
-		{
-			hideProgressAnimation(item);
-			
-			int postion = (Integer) item.getTag();
-			StickerGroup itemData = StickerLocalPackage.shared().getStickerGroup(stickerGroupId);
-			if (itemData == null) return;
-			onStickerGroupSelected(itemData, item, postion);
-		}
- 
-	}
-	
-	/**
-	 * 显示进度动画
-	 */
-	public void showProgressAnimation(View item)
-	{
-		ImageView view = (ImageView) item.findViewById(com.upyun.shortvideo.R.id.lsq_progress_image);
-		
-		if (view == null || view.getVisibility() == View.VISIBLE) return;	
-		
-		view.setVisibility(View.VISIBLE);
-	    RotateAnimation rotate  = new RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);  
-        LinearInterpolator lin = new LinearInterpolator();    
-        rotate.setInterpolator(lin);  
-        rotate.setDuration(2000);
-        rotate.setRepeatCount(-1);
-        rotate.setFillAfter(true); 
-        view.setAnimation(rotate);  
-        
-        ImageView downloaderImageView = (ImageView)item.findViewById(com.upyun.shortvideo.R.id.lsq_item_state_image);
-        downloaderImageView.setVisibility(View.GONE);
-	}
-	
-	/**
-	 * 隐藏进度显示动画
-	 */
-	public void hideProgressAnimation(View item)
-	{
-		ImageView view = (ImageView) item.findViewById(com.upyun.shortvideo.R.id.lsq_progress_image);
-		
-		if (view == null) return;
-		
-		view.clearAnimation();
-		view.setVisibility(View.GONE);
-	}
-	
 	/**
 	 * 传递录制相机对象
 	 * 
-	 * @param camera
 	 */
 	public void setUpCamera(Activity activity,TuSDKRecordVideoCamera tuSDKRecordVideoCamera)
 	{
 		this.mActivity = activity;
 		this.mTuSDKVideoCamera = tuSDKRecordVideoCamera;
+	    
+	    ThreadHelper.postDelayed(new Runnable(){
+
+			@Override
+			public void run()
+			{
+				if (!mIsFirstEntry) return;
+
+				mIsFirstEntry = false;
+				changeVideoFilterCode(Arrays.asList(Constants.VIDEOFILTERS).get(mFocusPostion));
+			}
+			
+	    }, 1000);
 	}
 	
-	private View.OnClickListener mButtonListener=new View.OnClickListener() 
+	private OnClickListener mButtonListener=new OnClickListener()
 	{
 		@Override
 		public void onClick(View v)
@@ -706,10 +637,6 @@ public class MultipleCameraView extends FrameLayout
 			imgId = clickable ? com.upyun.shortvideo.R.drawable.lsq_flash_open
 					: com.upyun.shortvideo.R.drawable.lsq_flash_closed;
 			break;
-
-//		case R.id.lsq_beautyBtn:
-//			imgId = clickable ? R.drawable.lsq_style_default_btn_beauty_selected
-//					: R.drawable.lsq_style_default_btn_beauty_unselected;
 
 		default:
 			break;
@@ -791,7 +718,7 @@ public class MultipleCameraView extends FrameLayout
 	};
 	
 	@SuppressLint("ClickableViewAccessibility") 
-	private View.OnTouchListener mOnTouchListener = new OnTouchListener()
+	private OnTouchListener mOnTouchListener = new OnTouchListener()
 	{
 		@Override
 		public boolean onTouch(View v, MotionEvent event) {
@@ -818,62 +745,62 @@ public class MultipleCameraView extends FrameLayout
 			return true;
 		}
 	};
-	
+
 	/** 滤镜拖动条监听事件 */
-    private FilterConfigView.FilterConfigViewSeekBarDelegate mConfigSeekBarDelegate = new FilterConfigView.FilterConfigViewSeekBarDelegate()
-    {
+	private FilterConfigView.FilterConfigViewSeekBarDelegate mConfigSeekBarDelegate = new FilterConfigView.FilterConfigViewSeekBarDelegate()
+	{
 
 		@Override
 		public void onSeekbarDataChanged(FilterConfigSeekbar seekbar, FilterArg arg)
 		{
 			if (arg == null) return;
-			
-    		if (arg.equalsKey("smoothing"))
-    			mSmoothingProgress = arg.getPrecentValue();
-    		else if (arg.equalsKey("eyeSize"))
-    			mEyeSizeProgress = arg.getPrecentValue();
-    		else if (arg.equalsKey("chinSize"))
-    			mChinSizeProgress = arg.getPrecentValue();
-    		else if (arg.equalsKey("mixied"))
-    			mMixiedProgress = arg.getPrecentValue();
+
+			if (arg.equalsKey("smoothing"))
+				mSmoothingProgress = arg.getPrecentValue();
+			else if (arg.equalsKey("eyeSize"))
+				mEyeSizeProgress = arg.getPrecentValue();
+			else if (arg.equalsKey("chinSize"))
+				mChinSizeProgress = arg.getPrecentValue();
+			else if (arg.equalsKey("mixied"))
+				mMixiedProgress = arg.getPrecentValue();
 		}
-    	
-    };
-    
+
+	};
+
 	/** 美颜拖动条监听事件 */
 	private TuSeekBar.TuSeekBarDelegate mTuSeekBarDelegate = new TuSeekBar.TuSeekBarDelegate()
 	{
 
-        @Override
-        public void onTuSeekBarChanged(TuSeekBar seekBar, float progress) 
-        {
-            if (seekBar == mSmoothingBarLayout.getSeekbar())
-            {
-          	  mSmoothingProgress = progress;
-          	  applyFilter(mSmoothingBarLayout,"smoothing",progress);
-            }
-            else if (seekBar == mEyeSizeBarLayout.getSeekbar())
-            {
-          	  mEyeSizeProgress = progress;
-          	  applyFilter(mEyeSizeBarLayout,"eyeSize",progress);
-            }
-            else if (seekBar == mChinSizeBarLayout.getSeekbar())
-            {
-          	  mChinSizeProgress = progress;
-          	  applyFilter(mChinSizeBarLayout,"chinSize",progress);
-            }
-        }
+		@Override
+		public void onTuSeekBarChanged(TuSeekBar seekBar, float progress)
+		{
+			if (seekBar == mSmoothingBarLayout.getSeekbar())
+			{
+				mSmoothingProgress = progress;
+				applyFilter(mSmoothingBarLayout,"smoothing",progress);
+			}
+			else if (seekBar == mEyeSizeBarLayout.getSeekbar())
+			{
+				mEyeSizeProgress = progress;
+				applyFilter(mEyeSizeBarLayout,"eyeSize",progress);
+			}
+			else if (seekBar == mChinSizeBarLayout.getSeekbar())
+			{
+				mChinSizeProgress = progress;
+				applyFilter(mChinSizeBarLayout,"chinSize",progress);
+			}
+		}
 	};
-    
-    private void applyFilter(ConfigViewSeekBar viewSeekBar,String key,float progress)
-    {
-    	if (viewSeekBar == null || mSelesOutInput == null) return;
-    	
-    	viewSeekBar.getConfigValueView().setText((int)(progress*100) + "%");
-        SelesParameters params = mSelesOutInput.getParameter();
-        params.setFilterArg(key, progress);
-        mSelesOutInput.submitParameter();
-    }
+
+	private void applyFilter(ConfigViewSeekBar viewSeekBar,String key,float progress)
+	{
+		if (viewSeekBar == null || mSelesOutInput == null) return;
+
+		viewSeekBar.getConfigValueView().setText((int)(progress*100) + "%");
+		SelesParameters params = mSelesOutInput.getFilterParameter();
+		params.setFilterArg(key, progress);
+		mSelesOutInput.submitFilterParameter();
+	}
     
 	/**
 	 * 更新贴纸栏相关视图的显示状态
@@ -921,20 +848,6 @@ public class MultipleCameraView extends FrameLayout
 
         return mConfigView;
 	} 
-	
-//	/**
-//	 * 美颜调节SeekBar
-//	 * @return
-//	 */
-//	private TuSeekBar getBeautyBar()
-//	{
-//		if(mBeautyBar == null)
-//		{
-//			mBeautyBar = (TuSeekBar) findViewById(R.id.lsq_seekBar);
-//			mBeautyBar.setDelegate(mTuSeekBarDelegate);
-//		}
-//		return mBeautyBar;
-//	}
 	
 	/**
 	 * 设置返回按钮是否隐藏
@@ -1154,7 +1067,7 @@ public class MultipleCameraView extends FrameLayout
 			return;
 		}
 		
-		SelesParameters params = mSelesOutInput.getParameter();
+		SelesParameters params = mSelesOutInput.getFilterParameter();
 		if (params == null)
 		{
 			setEnableAllSeekBar(false);
@@ -1206,7 +1119,7 @@ public class MultipleCameraView extends FrameLayout
 
 				@Override
 				public void run() {
-					getFilterConfigView().setSelesFilter(mSelesOutInput);
+					getFilterConfigView().setSelesFilter(mSelesOutInput.getFilter());
 					getFilterConfigView().setVisibility(View.VISIBLE);
 				}});
 			
@@ -1334,7 +1247,7 @@ public class MultipleCameraView extends FrameLayout
 	 */
 	private void updateFilterBorderView(FilterCellView lastFilter,boolean isHidden)
 	{
-		RelativeLayout filterBorderView = lastFilter.getBorderView();
+		View filterBorderView = lastFilter.getBorderView();
 		filterBorderView.setVisibility(isHidden ? View.GONE : View.VISIBLE);
 	}
 	
@@ -1342,7 +1255,6 @@ public class MultipleCameraView extends FrameLayout
 	 * 录制错误时更新视图显示
 	 * 
 	 * @param error
-	 * @param isRecording
 	 */
 	public void updateViewOnMovieRecordFailed(RecordError error)
 	{
@@ -1361,8 +1273,7 @@ public class MultipleCameraView extends FrameLayout
 	 * 录制状态发生改变时更新视图显示
 	 * 
 	 * @param state
-	 * @param isRecording
-	 */
+ 	 */
 	public void updateViewOnMovieRecordStateChanged(RecordState state)
 	{
         if (state == RecordState.Recording)
@@ -1385,7 +1296,6 @@ public class MultipleCameraView extends FrameLayout
 	/**
 	 * 录制完成时更新视图显示
 	 * 
-	 * @param isRecording
 	 */
 	public void updateViewOnMovieRecordComplete(TuSDKVideoResult result)
 	{
@@ -1398,41 +1308,40 @@ public class MultipleCameraView extends FrameLayout
 	 * 滤镜变化时改变滤镜调节栏
 	 * @param selesOutInput
 	 */
-	public void updateViewOnFilterChanged(SelesOutInput selesOutInput)
+	public void updateViewOnFilterChanged(FilterWrap selesOutInput)
 	{
     	if (selesOutInput == null) return;
-    	
-    	SelesParameters params = selesOutInput.getParameter();
+
+    	// 设置滤镜参数
+    	SelesParameters params = selesOutInput.getFilterParameter();
     	List<FilterArg> list = params.getArgs();
     	for (FilterArg arg : list)
     	{
     		if (arg.equalsKey("smoothing") && mSmoothingProgress != -1.0f)
     			arg.setPrecentValue(mSmoothingProgress);
-    		else if (arg.equalsKey("eyeSize")&& mEyeSizeProgress != -1.0f)
-    			arg.setPrecentValue(mEyeSizeProgress);
-    		else if (arg.equalsKey("chinSize")&& mChinSizeProgress != -1.0f)
-    			arg.setPrecentValue(mChinSizeProgress);
     		else if (arg.equalsKey("smoothing") && mSmoothingProgress == -1.0f)
     			mSmoothingProgress = arg.getPrecentValue();
-    		else if (arg.equalsKey("eyeSize") && mEyeSizeProgress == -1.0f)
-    			mEyeSizeProgress = arg.getPrecentValue();
-    		else if (arg.equalsKey("chinSize") && mChinSizeProgress == -1.0f)
-    			mChinSizeProgress = arg.getPrecentValue();
     		else if (arg.equalsKey("mixied") && mMixiedProgress !=  -1.0f)
     			arg.setPrecentValue(mMixiedProgress);
     		else if (arg.equalsKey("mixied") && mMixiedProgress == -1.0f)
-    			mMixiedProgress = arg.getPrecentValue(); 
+    			mMixiedProgress = arg.getPrecentValue();
+			else if (arg.equalsKey("eyeSize")&& mEyeSizeProgress != -1.0f)
+				arg.setPrecentValue(mEyeSizeProgress);
+			else if (arg.equalsKey("chinSize")&& mChinSizeProgress != -1.0f)
+				arg.setPrecentValue(mChinSizeProgress);
+			else if (arg.equalsKey("eyeSize") && mEyeSizeProgress == -1.0f)
+				mEyeSizeProgress = arg.getPrecentValue();
+			else if (arg.equalsKey("chinSize") && mChinSizeProgress == -1.0f)
+				mChinSizeProgress = arg.getPrecentValue();
     	}
-    	selesOutInput.setParameter(params);
+    	selesOutInput.setFilterParameter(params);
     	
         mSelesOutInput = selesOutInput;
         
-        if (selesOutInput != null && getFilterConfigView() != null)
-        {
-            getFilterConfigView().setSelesFilter(selesOutInput);
-        }
-        
-        if (mIsFirstEntry)
+        if (getFilterConfigView() != null)
+            getFilterConfigView().setSelesFilter(mSelesOutInput.getFilter());
+
+        if (mIsFirstEntry || (mBeautyLayout!=null && mBeautyLayout.getVisibility() == View.VISIBLE))
         {
         	mIsFirstEntry = false;
         	showBeautySeekBar();
@@ -1488,8 +1397,7 @@ public class MultipleCameraView extends FrameLayout
 	private void createSurfaceViewOnPreviewLayout()
 	{
 		mSurfaceView = new SurfaceView(mActivity);
-		FrameLayout.LayoutParams params = new FrameLayout
-                .LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,FrameLayout.LayoutParams.MATCH_PARENT);
+		LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 		mPreviewVideoLayout.setLayoutParams(params);	
 		mPreviewVideoLayout.addView(mSurfaceView);
 	}

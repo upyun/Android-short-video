@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.upyun.shortvideo.views.CompoundConfigView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="wrap_content" >
 
     <LinearLayout
         android:id="@+id/lsq_configWrap"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:orientation="vertical" >
 
@@ -14,7 +14,7 @@
             android:id="@+id/lsq_seekbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            layout="@layout/tusdk_config_seekbar" />
+            layout="@layout/tusdk_config_seekbar_one" />
     </LinearLayout>
 
 </com.upyun.shortvideo.views.CompoundConfigView>

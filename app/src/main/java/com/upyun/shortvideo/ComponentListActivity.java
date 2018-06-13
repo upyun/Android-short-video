@@ -9,28 +9,33 @@
  */
 package com.upyun.shortvideo;
 
-import org.lasque.tusdk.core.TuSdk;
+
+import android.Manifest;
+import android.annotation.TargetApi;
+import android.app.AlertDialog;
+import android.app.ExpandableListActivity;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.provider.Settings;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.ExpandableListView;
+import android.widget.ExpandableListView.OnGroupClickListener;
+
+import com.upyun.shortvideo.utils.AlbumUtils;
+import com.upyun.shortvideo.utils.PermissionUtils;
+
 import org.lasque.tusdk.core.TuSdkContext;
 import org.lasque.tusdk.core.utils.ContextUtils;
-import org.lasque.tusdk.core.utils.StringHelper;
-import org.lasque.tusdk.core.utils.hardware.CameraHelper;
 import org.lasque.tusdk.core.view.TuSdkViewHelper;
 import org.lasque.tusdk.core.view.widget.TuSdkNavigatorBar.NavigatorBarButtonInterface;
 import org.lasque.tusdk.core.view.widget.TuSdkNavigatorBar.NavigatorBarButtonType;
 import org.lasque.tusdk.core.view.widget.TuSdkNavigatorBar.TuSdkNavigatorBarDelegate;
 import org.lasque.tusdk.impl.view.widget.TuNavigatorBar;
 import org.lasque.tusdk.video.TuSDKVideo;
-import com.upyun.shortvideo.utils.UriUtils;
-
-import android.app.ExpandableListActivity;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
-import android.view.View;
-import android.widget.ExpandableListView;
-import android.widget.ExpandableListView.OnGroupClickListener;
 
 /**
  * 功能列表界面
@@ -58,7 +63,10 @@ public class ComponentListActivity extends ExpandableListActivity implements TuS
 	
 	private String mClassName;
 
-    @Override
+	/** 需要开启相机的类名 */
+	private String mNeedCameraClassName;
+
+	@Override
     public void onCreate(Bundle icicle) 
     {
         super.onCreate(icicle);
@@ -152,18 +160,22 @@ public class ComponentListActivity extends ExpandableListActivity implements TuS
         
         mClassName = sample.className;
         
-        // 需要先打开相册选取
+       // 需要先打开相册选取
         if(sample.needOpenAlbum)
         {
-        	openSystemAlbum();
+			AlbumUtils.openVideoAlbum(mClassName);
             return super.onChildClick(parent, view, group, child, id);
         }
         
         // 需要先判断是否有相机权限
         if(sample.needOpenCamera)
         {
-        	if(CameraHelper.showAlertIfNotSupportCamera(this, true)) 
-        		return super.onChildClick(parent, view, group, child, id);
+			if (!PermissionUtils.hasRequiredPermissions(this, getRequiredPermissions()))
+			{
+				PermissionUtils.requestRequiredPermissions(this, getRequiredPermissions());
+				mNeedCameraClassName = sample.className;
+				return super.onChildClick(parent, view, group, child, id);
+			}
         }
         
         startActivityWithClassName(sample.className, null);
@@ -171,35 +183,81 @@ public class ComponentListActivity extends ExpandableListActivity implements TuS
         return super.onChildClick(parent, view, group, child, id);
     }
 
-    /**
-     * 打开系统相册选取视频
-     */
-	private void openSystemAlbum()
+	/**
+	 * 组件运行需要的权限列表
+	 *
+	 * @return
+	 *            列表数组
+	 */
+	@TargetApi(Build.VERSION_CODES.M)
+	protected String[] getRequiredPermissions()
 	{
-		Intent pickIntent = new Intent(Intent.ACTION_GET_CONTENT);
-		pickIntent.setType("video/*");
-		pickIntent.addCategory(Intent.CATEGORY_OPENABLE);
-		startActivityForResult(pickIntent, IMAGE_PICKER_SELECT);
+		String[] permissions = new String[]{
+				Manifest.permission.READ_EXTERNAL_STORAGE,
+				Manifest.permission.WRITE_EXTERNAL_STORAGE,
+				Manifest.permission.CAMERA,
+				Manifest.permission.RECORD_AUDIO
+		};
+
+		return permissions;
 	}
-	
-	public void onActivityResult(int requestCode, int resultCode, Intent data)
+
+	/**
+	 * 处理用户的许可结果
+	 */
+	@Override
+	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults)
 	{
-		if (resultCode == RESULT_OK) 
+		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+		PermissionUtils.handleRequestPermissionsResult(requestCode, permissions, grantResults, this, mGrantedResultDelgate);
+	}
+
+	/**
+	 * 授予权限的结果，在对话结束后调用
+	 *
+	 * @param permissionGranted
+	 *            true or false, 用户是否授予相应权限
+	 */
+	protected PermissionUtils.GrantedResultDelgate mGrantedResultDelgate = new PermissionUtils.GrantedResultDelgate()
+	{
+		@Override
+		public void onPermissionGrantedResult(boolean permissionGranted)
 		{
-		    Uri selectedMediaUri = data.getData();
-		    
-		    String path = UriUtils.getFileAbsolutePath(getApplicationContext(), selectedMediaUri);
-		    
-		    if(!StringHelper.isEmpty(path) && mClassName != null)
-		    {
-			    startActivityWithClassName(mClassName, path);
-		    }
-		    else
-		    {
-		    	TuSdk.messageHub().showToast(getApplicationContext(), R.string.lsq_video_empty_error);
-		    }
+			if (permissionGranted)
+			{
+				startActivityWithClassName(mNeedCameraClassName, null);
+			}
+			else
+			{
+				String msg = TuSdkContext.getString("lsq_camera_no_access", ContextUtils.getAppName(ComponentListActivity.this));
+
+				TuSdkViewHelper.alert(permissionAlertDelegate, ComponentListActivity.this, TuSdkContext.getString("lsq_camera_alert_title"),
+						msg, TuSdkContext.getString("lsq_button_close"), TuSdkContext.getString("lsq_button_setting")
+				);
+			}
 		}
-	}
+	};
+
+	/**
+	 * 权限警告提示框点击事件回调
+	 */
+	protected TuSdkViewHelper.AlertDelegate permissionAlertDelegate = new TuSdkViewHelper.AlertDelegate()
+	{
+		@Override
+		public void onAlertConfirm(AlertDialog dialog)
+		{
+			Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+					Uri.fromParts("package", ComponentListActivity.this.getPackageName(), null));
+			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			startActivity(intent);
+		}
+
+		@Override
+		public void onAlertCancel(AlertDialog dialog)
+		{
+
+		}
+	};
 
 	/**
 	 * 根据 className 打开对应 Activity

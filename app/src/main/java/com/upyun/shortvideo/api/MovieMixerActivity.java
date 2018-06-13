@@ -19,21 +19,20 @@ import org.lasque.tusdk.core.utils.StringHelper;
 import org.lasque.tusdk.core.utils.TLog;
 import org.lasque.tusdk.core.utils.image.AlbumHelper;
 import org.lasque.tusdk.core.video.TuSDKVideoResult;
-import org.lasque.tusdk.movie.player.TuSDKMoviePlayer;
-import org.lasque.tusdk.movie.player.TuSDKMoviePlayer.PlayerState;
-import org.lasque.tusdk.movie.player.TuSDKMoviePlayer.TuSDKMoviePlayerDelegate;
-import org.lasque.tusdk.movie.player.TuSDKMutiAudioPlayer;
-import org.lasque.tusdk.movie.player.TuSDKMutiAudioPlayer.TuSDKMutiAudioPlayerDelegate;
-import org.lasque.tusdk.video.mixer.TuSDKAudioEntry;
-import org.lasque.tusdk.video.mixer.TuSDKMP4MovieMixer;
-import org.lasque.tusdk.video.mixer.TuSDKMP4MovieMixer.ErrorCode;
-import org.lasque.tusdk.video.mixer.TuSDKMP4MovieMixer.OnMP4MovieMixerDelegate;
-import org.lasque.tusdk.video.mixer.TuSDKMP4MovieMixer.State;
-import org.lasque.tusdk.video.mixer.TuSDKMediaDataSource;
+import org.lasque.tusdk.api.movie.player.TuSDKMoviePlayer;
+import org.lasque.tusdk.api.movie.player.TuSDKMoviePlayer.PlayerState;
+import org.lasque.tusdk.api.movie.player.TuSDKMoviePlayer.TuSDKMoviePlayerDelegate;
+import org.lasque.tusdk.api.audio.player.TuSDKMutiAudioPlayer;
+import org.lasque.tusdk.api.audio.player.TuSDKMutiAudioPlayer.TuSDKMutiAudioPlayerDelegate;
+import org.lasque.tusdk.api.audio.preproc.mixer.TuSDKAudioEntry;
+import org.lasque.tusdk.api.movie.preproc.mixer.TuSDKMP4MovieMixer;
+import org.lasque.tusdk.api.movie.preproc.mixer.TuSDKMP4MovieMixer.ErrorCode;
+import org.lasque.tusdk.api.movie.preproc.mixer.TuSDKMP4MovieMixer.OnMP4MovieMixerDelegate;
+import org.lasque.tusdk.api.movie.preproc.mixer.TuSDKMP4MovieMixer.State;
+import org.lasque.tusdk.core.common.TuSDKMediaDataSource;
 
 import com.upyun.shortvideo.views.CompoundConfigView;
 import com.upyun.shortvideo.views.ConfigViewParams;
-import com.upyun.shortvideo.views.ConfigViewParams.ConfigViewArg;
 import com.upyun.shortvideo.views.ConfigViewSeekBar;
 
 import android.app.Activity;
@@ -44,7 +43,6 @@ import android.os.Bundle;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
@@ -250,7 +248,7 @@ public class MovieMixerActivity extends Activity implements OnMP4MovieMixerDeleg
 			mMoviePreviewLayout = (SurfaceView) findViewById(com.upyun.shortvideo.R.id.lsq_movie_mixer_preview);
 			int movieWidth = TuSdkContext.getScreenSize().width;
 			int movieHeight = movieWidth*9/16;
-			LinearLayout.LayoutParams lp =  (LayoutParams) mMoviePreviewLayout.getLayoutParams();
+			LayoutParams lp =  (LayoutParams) mMoviePreviewLayout.getLayoutParams();
 			lp.width = movieWidth;
 			lp.height = movieHeight;
 		}
@@ -338,11 +336,11 @@ public class MovieMixerActivity extends Activity implements OnMP4MovieMixerDeleg
 	/**
 	 * 原音配音调节栏委托事件
 	 */
-	private ConfigViewSeekBar.ConfigSeekbarDelegate mVoiceConfigSeekbarDelegate = new ConfigViewSeekBar.ConfigSeekbarDelegate() 
+	private ConfigViewSeekBar.ConfigSeekbarDelegate mVoiceConfigSeekbarDelegate = new ConfigViewSeekBar.ConfigSeekbarDelegate()
 	{
 		
 		@Override
-		public void onSeekbarDataChanged(ConfigViewSeekBar seekbar, ConfigViewArg arg) 
+		public void onSeekbarDataChanged(ConfigViewSeekBar seekbar, ConfigViewParams.ConfigViewArg arg)
 		{
 			if (arg.getKey().equals("origin"))
 				setSeekBarProgress(0,arg.getPercentValue());
@@ -357,7 +355,7 @@ public class MovieMixerActivity extends Activity implements OnMP4MovieMixerDeleg
 	{
 		if (mVoiceConfigView == null)
 		{
-			mVoiceConfigView = (CompoundConfigView) findViewById(com.upyun.shortvideo.R.id.lsq_voice_config_view);
+			mVoiceConfigView = (CompoundConfigView) findViewById(com.upyun.shortvideo.R.id.lsq_voice_volume_config_view);
 		}
 
 		return mVoiceConfigView;

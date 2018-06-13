@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.upyun.shortvideo"
-    android:versionCode="20171221"
-    android:versionName="1.8.1">
+    android:versionCode="20180316"
+    android:versionName="2.0.0" xmlns:tools="http://schemas.android.com/tools">
 
     <uses-sdk
-        android:minSdkVersion="18"
+        android:minSdkVersion="11"
         android:targetSdkVersion="22" />
 
     <!-- 访问网络 -->
@@ -29,28 +28,28 @@
     <!-- 访问麦克风 -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-
+    
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
     <uses-feature android:name="android.hardware.camera.flash" />
-
+    
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_LOGS" />
-
-    <application
+	
+	<application
         android:name=".TuApplication"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
-        android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+        android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         <activity
-            android:name=".DemoEntryActivity"
+            android:name="com.upyun.shortvideo.DemoEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize">
+            android:windowSoftInputMode="stateHidden|adjustResize" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -64,125 +63,132 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />
-
+        
         <!-- 示例 -->
         <activity
             android:name=".MovieRecordAndImportEditorActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />
-
+        
         <activity
             android:name=".component.MovieEditorActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />
-
+        
         <activity
             android:name=".suite.MoviePreviewAndCutActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
-
+            android:windowSoftInputMode="stateHidden|adjustResize" />       
+             
         <activity
             android:name=".component.MultipleCameraActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
-
+            android:windowSoftInputMode="stateHidden|adjustResize" />    
+            
         <activity
             android:name=".ComponentListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
-
+            android:windowSoftInputMode="stateHidden|adjustResize" />  
+             
         <activity
             android:name=".api.MovieSplicerActivity"
+            android:theme="@style/lsq_sdkTheme"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/lsq_sdkTheme"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
-
+            android:windowSoftInputMode="stateHidden|adjustResize" />   
+            
         <activity
             android:name=".api.AudioRecordActivity"
+            android:theme="@style/lsq_sdkTheme"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/lsq_sdkTheme"
             android:windowSoftInputMode="stateHidden|adjustResize" />
 
         <activity
             android:name=".custom.MovieRecordFullScreenActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
-
+            android:windowSoftInputMode="stateHidden|adjustResize" /> 
+            
         <activity
             android:name=".suite.MovieRecordAndPreviewEditorActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
-
+            android:windowSoftInputMode="stateHidden|adjustResize" /> 
+            
         <activity
             android:name=".component.MovieRecordKeepModeActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
-
+            android:windowSoftInputMode="stateHidden|adjustResize" /> 
+            
         <activity
             android:name=".component.MovieRecordNormalModeActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
+            android:windowSoftInputMode="stateHidden|adjustResize" /> 
 
-        <activity
+          <activity
             android:name=".custom.MoviePreviewAndCutFullScreenActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
-
-        <activity
+            android:windowSoftInputMode="stateHidden|adjustResize" /> 
+            
+          <activity
             android:name=".custom.MovieEditorFullScreenActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
-
-        <activity
+            android:windowSoftInputMode="stateHidden|adjustResize" /> 
+            
+          <activity
             android:name=".custom.MultipleCameraRatioActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
-
-        <activity
+            android:windowSoftInputMode="stateHidden|adjustResize" /> 
+            
+          <activity
             android:name=".custom.MoviePreviewAndCutRatioActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
-
-        <activity
+            android:windowSoftInputMode="stateHidden|adjustResize" /> 
+            
+          <activity
             android:name=".api.MovieMixerActivity"
+            android:theme="@style/lsq_sdkTheme"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/lsq_sdkTheme"
             android:windowSoftInputMode="stateHidden|adjustResize" />
-
-        <activity
+          
+          <activity
             android:name=".api.MovieThumbActivity"
+            android:theme="@style/lsq_sdkTheme"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/lsq_sdkTheme"
             android:windowSoftInputMode="stateHidden|adjustResize" />
-
-        <activity
+          
+          <activity
             android:name=".api.AudioMixerActivity"
+            android:theme="@style/lsq_sdkTheme"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+          
+          <activity
+            android:name=".api.MovieCutActivity"
             android:theme="@style/lsq_sdkTheme"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />
 
         <activity
-            android:name=".api.MovieCutActivity"
+            android:name=".album.MovieAlbumActivity"
+            android:theme="@style/lsq_sdkTheme"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/lsq_sdkTheme"
             android:windowSoftInputMode="stateHidden|adjustResize" />
 
         <activity

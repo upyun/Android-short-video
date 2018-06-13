@@ -10,9 +10,9 @@ import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.upyun.shortvideo.custom.MovieEditorFullScreenActivity;
 import com.upyun.shortvideo.suite.MoviePreviewAndCutActivity;
 import com.upyun.shortvideo.utils.UriUtils;
-import com.upyun.shortvideo.views.MyRadioView;
 import com.upyun.shortvideo.views.SettingEditView;
 
 import org.lasque.tusdk.core.TuSdk;
@@ -110,7 +110,7 @@ public class EditorSettingActivity extends AppCompatActivity implements View.OnC
         String path = UriUtils.getFileAbsolutePath(getApplicationContext(), selectedMediaUri);
 
         if (!StringHelper.isEmpty(path)) {
-            Intent intent = new Intent(this, MoviePreviewAndCutActivity.class);
+            Intent intent = new Intent(this, MovieEditorFullScreenActivity.class);
             intent.putExtra("videoPath", path);
             startActivity(intent);
         } else {

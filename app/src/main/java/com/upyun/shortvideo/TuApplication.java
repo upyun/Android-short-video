@@ -9,8 +9,10 @@
  */
 package com.upyun.shortvideo;
 
-import org.lasque.tusdk.core.TuSdkApplication;
+import org.lasque.tusdk.core.*;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.tencent.bugly.crashreport.CrashReport;
 
 /**
@@ -48,9 +50,11 @@ public class TuApplication extends TuSdkApplication
 		 * 
 		 * 开发文档:http://tusdk.com/doc
 		 */
-		
+
+		ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(this));
+
 		// 初始化 Bugly SDK
-		CrashReport.initCrashReport(getApplicationContext(), "4ec0dd4b40", true);
+//		CrashReport.initCrashReport(getApplicationContext(), "4ec0dd4b40", true);
 
 		// 设置资源类，当 Application id 与 Package Name 不相同时，必须手动调用该方法, 且在 init 之前执行。
 		// TuSdk.setResourcePackageClazz(org.lasque.tusdkdemo.R.class);
@@ -66,8 +70,7 @@ public class TuApplication extends TuSdkApplication
 	     *
 	     *  @param appkey 应用秘钥 (请前往 http://tusdk.com 申请秘钥)
 	     */
-//		this.initPreLoader(this.getApplicationContext(), "c863a73a6e0294bc-04-ewdjn1");
-		this.initPreLoader(this.getApplicationContext(), "f012a13bc0ba127d-01-dmlup1");
+		this.initPreLoader(this.getApplicationContext(), "53ac4e1062299ef3-03-dmlup1");
 
 
 		/**
@@ -83,5 +86,8 @@ public class TuApplication extends TuSdkApplication
 		// TuSdk.init(this.getApplicationContext(), "12aa4847a3a9ce68-04-ewdjn1");
 		// 需要指定开发模式 需要与lsq_tusdk_configs.json中masters.key匹配， 如果找不到devType将默认读取master字段
 		// TuSdk.init(this.getApplicationContext(), "12aa4847a3a9ce68-04-ewdjn1", "debug");
+
+
+
 	}
 }

@@ -28,7 +28,8 @@ public class FilterListView extends TuSdkTableView<String, FilterCellView>
 	
 	/** 默认选择第几项 */
 	private int mSelectedPosition = 0;
-	
+
+
 	public FilterListView(Context context, AttributeSet attrs, int defStyle)
 	{
 		super(context, attrs, defStyle);
@@ -58,7 +59,7 @@ public class FilterListView extends TuSdkTableView<String, FilterCellView>
 	
     public void selectPosition(int position) {
         mSelectedPosition = position;
-        getAdapter().notifyDataSetChanged();
+        getSdkAdapter().notifyDataSetChanged();
     }
 	
 	@Override

@@ -130,7 +130,7 @@
                 android:button="@null"
                 android:gravity="center"
                 android:text="低清"
-                android:textColor="@color/setting_radio_text_selector"
+                android:textColor="@drawable/setting_radio_text_selector"
                 android:textSize="12sp" />
 
             <RadioButton
@@ -144,7 +144,7 @@
                 android:button="@null"
                 android:gravity="center"
                 android:text="标清"
-                android:textColor="@color/setting_radio_text_selector"
+                android:textColor="@drawable/setting_radio_text_selector"
                 android:textSize="12sp" />
 
             <RadioButton
@@ -158,7 +158,7 @@
                 android:button="@null"
                 android:gravity="center"
                 android:text="高清"
-                android:textColor="@color/setting_radio_text_selector"
+                android:textColor="@drawable/setting_radio_text_selector"
                 android:textSize="12sp" />
 
             <RadioButton
@@ -171,7 +171,7 @@
                 android:button="@null"
                 android:gravity="center"
                 android:text="超高清"
-                android:textColor="@color/setting_radio_text_selector"
+                android:textColor="@drawable/setting_radio_text_selector"
                 android:textSize="12sp" />
         </RadioGroup>
 

@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<lint>
-    <issue id="ContentDescription">
-        <ignore path="res/layout/live_streaming_activity.xml" />
-    </issue>
-</lint>

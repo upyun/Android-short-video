@@ -12,9 +12,11 @@
        
     <!-- 录音界面 -->
     <include 
-        android:id="@+id/lsq_editor_voiceRecording_layout"
+        android:id="@+id/lsq_editor_dubbing_record_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         layout="@layout/movie_editor_voice_recording"/>
+
+
 
 </RelativeLayout>

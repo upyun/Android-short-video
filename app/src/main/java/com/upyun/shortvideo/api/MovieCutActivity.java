@@ -10,28 +10,6 @@
 
 package com.upyun.shortvideo.api;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.lasque.tusdk.core.TuSdk;
-import org.lasque.tusdk.core.TuSdkContext;
-import org.lasque.tusdk.core.struct.TuSdkSize;
-import org.lasque.tusdk.core.utils.RectHelper;
-import org.lasque.tusdk.core.utils.StringHelper;
-import org.lasque.tusdk.core.utils.ThreadHelper;
-import org.lasque.tusdk.core.utils.image.AlbumHelper;
-import org.lasque.tusdk.movie.muxer.TuSDKMovieClipper;
-import org.lasque.tusdk.movie.muxer.TuSDKMovieClipper.TuSDKMovieClipperListener;
-import org.lasque.tusdk.movie.muxer.TuSDKMovieClipper.TuSDKMovieClipperOption;
-import org.lasque.tusdk.movie.muxer.TuSDKMovieClipper.TuSDKMovieSegment;
-import org.lasque.tusdk.video.editor.TuSDKTimeRange;
-import org.lasque.tusdk.video.editor.TuSDKVideoImageExtractor;
-import org.lasque.tusdk.video.editor.TuSDKVideoImageExtractor.TuSDKVideoImageExtractorDelegate;
-import org.lasque.tusdk.video.mixer.TuSDKMediaDataSource;
-
-import com.upyun.shortvideo.views.MovieRangeSelectionBar;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -56,6 +34,30 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import org.lasque.tusdk.api.movie.postproc.muxer.TuSDKMovieClipper;
+import org.lasque.tusdk.api.movie.postproc.muxer.TuSDKMovieClipper.TuSDKMovieClipperListener;
+import org.lasque.tusdk.api.movie.postproc.muxer.TuSDKMovieClipper.TuSDKMovieClipperOption;
+import org.lasque.tusdk.api.movie.postproc.muxer.TuSDKMovieClipper.TuSDKMovieSegment;
+import org.lasque.tusdk.api.video.retriever.TuSDKVideoImageExtractor;
+import org.lasque.tusdk.api.video.retriever.TuSDKVideoImageExtractor.TuSDKVideoImageExtractorDelegate;
+import org.lasque.tusdk.core.TuSdk;
+import org.lasque.tusdk.core.TuSdkContext;
+import org.lasque.tusdk.core.common.TuSDKMediaDataSource;
+import org.lasque.tusdk.core.struct.TuSdkSize;
+import org.lasque.tusdk.core.utils.RectHelper;
+import org.lasque.tusdk.core.utils.StringHelper;
+import org.lasque.tusdk.core.utils.ThreadHelper;
+import org.lasque.tusdk.core.utils.image.AlbumHelper;
+import org.lasque.tusdk.video.editor.TuSDKTimeRange;
+
+import com.upyun.shortvideo.views.MovieRangeSelectionBar;
+import com.upyun.shortvideo.views.MovieRangeSelectionBar.OnCursorChangeListener;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * 视频时间裁剪
@@ -117,9 +119,7 @@ public class MovieCutActivity extends Activity
      *  false 
      */
 	private boolean isFirstLoadVideo = false;
-	/** 记录缩略图列表容器  */
-	private List<Bitmap> list;
-	
+
 	/** 裁剪后视频时长,单位s*/
 	private TuSDKTimeRange mCuTimeRange;
 
@@ -180,8 +180,8 @@ public class MovieCutActivity extends Activity
 	/** 加载视频缩略图 */
 	public void loadVideoThumbList()
 	{
-		if(mRangeSelectionBar != null &&
-				mRangeSelectionBar.getList() == null){
+		if(mRangeSelectionBar != null && mRangeSelectionBar.getVideoThumbList() == null)
+		{
 			TuSdkSize tuSdkSize = TuSdkSize.create(TuSdkContext.dip2px(56),
 					TuSdkContext.dip2px(56));
 			TuSDKVideoImageExtractor extractor = TuSDKVideoImageExtractor.createExtractor();
@@ -190,20 +190,16 @@ public class MovieCutActivity extends Activity
 					 .setVideoDataSource(TuSDKMediaDataSource.create(mVideoPathUri))
 					 .setExtractFrameCount(6);
 			
-			list = new ArrayList<Bitmap>();
-			mRangeSelectionBar.setList(list);
-			extractor.asyncExtractImageList(new TuSDKVideoImageExtractorDelegate() 
+			extractor.asyncExtractImageList(new TuSDKVideoImageExtractorDelegate()
 			{
 				@Override   
 				public void onVideoImageListDidLoaded(List<Bitmap> images) {
-					list = images;
-					mRangeSelectionBar.invalidate();
 				}
 				
 				@Override
 				public void onVideoNewImageLoaded(Bitmap bitmap){
-					list.add(bitmap);
-					mRangeSelectionBar.invalidate();
+
+					mRangeSelectionBar.drawVideoThumb(bitmap);
 				}
 				
 			});	
@@ -422,12 +418,6 @@ public class MovieCutActivity extends Activity
 	 */
 	private void startMovieClipper()
 	{
-		if (mCuTimeRange.duration() == 0)
-		{
-			String hintMsg = getResources().getString(com.upyun.shortvideo.R.string.lsq_cut_choose_cutrange);
-			TuSdk.messageHub().showToast(this, hintMsg);
-			return;
-		}
 	    if (mMovieClipper == null)
 	    {
 			TuSDKMovieClipperOption option = new TuSDKMovieClipperOption();
@@ -436,22 +426,79 @@ public class MovieCutActivity extends Activity
 			option.listener = mClipperProgressListener;
 			mMovieClipper = new TuSDKMovieClipper(option);
 	    }
-	    	
-		// 添加需要移除的片段到list容器中
-	    List<TuSDKMovieSegment> segmentList = new ArrayList<TuSDKMovieSegment>();
-	    for (int i = 0; i < 2; i++) 
-	    {
-	    	TuSDKMovieSegment segment = null;
-	    	if (i ==0)
-		    	segment = mMovieClipper.createSegment(0,(long) mCuTimeRange.start*1000000);
-	    	else if (i == 1)
-	    		segment = mMovieClipper.createSegment((long) mCuTimeRange.end*1000000,mVideoTotalTime*1000);
-	 	    segmentList.add(segment);
-		}
-	    
-	    mMovieClipper.startEdit(segmentList);
+
+		// 裁剪的情况有三种: 只裁前部分, 只裁后部分, 裁前后部分;
+		// startSegment 和 endSegment代表需要裁掉的部分
+		// 一次性创建两个segment, 然后筛选掉的无效片段。
+
+		List<TuSDKMovieSegment> segmentList = getSegmentList(mCuTimeRange);
+
+		filterInvalidSegment(segmentList);
+
+		mMovieClipper.startEdit(segmentList);
 	}
-	
+
+	/**
+	 * 根据选择的裁剪时间区域创建片段集合
+	 *
+	 * @param range
+	 * @return
+	 */
+	public List<TuSDKMovieSegment> getSegmentList(TuSDKTimeRange range)
+	{
+		if (range == null || mMovieClipper == null) return null;
+
+		TuSDKMovieSegment startSegment = mMovieClipper.createSegment(0,(long) mCuTimeRange.start*1000000);
+		TuSDKMovieSegment endSegment = mMovieClipper.createSegment((long) mCuTimeRange.end*1000000, mVideoTotalTime*1000);
+
+		List<TuSDKMovieSegment> segmentList = new ArrayList<TuSDKMovieSegment>();
+		segmentList.add(startSegment);
+		segmentList.add(endSegment);
+
+		return segmentList;
+	}
+
+	/**
+	 * 过滤无效的片段
+	 *
+	 * @param segmentList
+	 * @return
+	 */
+	public List<TuSDKMovieSegment> filterInvalidSegment(List<TuSDKMovieSegment> segmentList)
+	{
+		if (segmentList == null ) return null;
+
+		Iterator<TuSDKMovieSegment> iterator = segmentList.iterator();
+		while (iterator.hasNext())
+		{
+			TuSDKMovieSegment nextSegment = iterator.next();
+			if (!isValid(nextSegment))
+				iterator.remove();
+		}
+
+		return segmentList;
+	}
+
+	/**
+	 * 验证开始时间与结束时间是否合法
+	 */
+	private boolean isValid (TuSDKMovieSegment segment)
+	{
+		if (segment == null) return false;
+
+		float startTime = segment.getStartTime();
+		float endTime = segment.getEndTime();
+
+		startTime = Math.min(startTime, mVideoTotalTime * 1000);
+		endTime = Math.min(endTime, mVideoTotalTime * 1000);
+
+		if (startTime >= endTime || startTime < 0 || endTime <= 0)
+		{
+			return false;
+		}
+		return true;
+	}
+
 	/**
 	 * 视频裁剪事件监听
 	 */
@@ -590,9 +637,9 @@ public class MovieCutActivity extends Activity
         public void surfaceDestroyed(SurfaceHolder holder)
         {
         	destoryMediaPlayer();
-    		if(mRangeSelectionBar!=null){
-    			mRangeSelectionBar.destroyBitmap();
-    		}
+
+    		if (mRangeSelectionBar != null)
+    			mRangeSelectionBar.clearVideoThumbList();
         }
 	};
 	
@@ -687,7 +734,7 @@ public class MovieCutActivity extends Activity
     };
     
     /** 用于监听裁剪控件  */
-	private MovieRangeSelectionBar.OnCursorChangeListener mOnCursorChangeListener = new MovieRangeSelectionBar.OnCursorChangeListener()
+	private OnCursorChangeListener mOnCursorChangeListener = new OnCursorChangeListener()
 	{
 		
 		@Override

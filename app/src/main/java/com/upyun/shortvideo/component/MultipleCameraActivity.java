@@ -9,8 +9,13 @@
  */
 package com.upyun.shortvideo.component;
 
+import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
+import android.os.Bundle;
+
+import com.upyun.shortvideo.SimpleCameraActivity;
+
 import org.lasque.tusdk.core.encoder.video.TuSDKVideoEncoderSetting;
-import org.lasque.tusdk.core.seles.sources.SelesOutInput;
 import org.lasque.tusdk.core.seles.sources.SelesVideoCameraInterface;
 import org.lasque.tusdk.core.seles.tusdk.FilterWrap;
 import org.lasque.tusdk.core.struct.TuSdkSize;
@@ -22,18 +27,8 @@ import org.lasque.tusdk.core.utils.hardware.TuSDKVideoCamera.TuSDKVideoCameraDel
 import org.lasque.tusdk.core.utils.hardware.TuSdkStillCameraAdapter.CameraState;
 import org.lasque.tusdk.core.video.TuSDKVideoResult;
 
-import com.upyun.shortvideo.SimpleCameraActivity;
-import com.upyun.shortvideo.views.FilterConfigView;
-import com.upyun.shortvideo.views.FilterListView;
-import com.upyun.shortvideo.views.StickerListView;
 import com.upyun.shortvideo.views.record.MultipleCameraView;
 import com.upyun.shortvideo.views.record.MultipleCameraView.TuSDKMultipleCameraDelegate;
-
-import android.annotation.SuppressLint;
-import android.graphics.Bitmap;
-import android.os.Bundle;
-import android.widget.RelativeLayout;
-
 /**
  * 多功能相机示例，点击拍照，长按录像
  * 
@@ -46,13 +41,7 @@ public class MultipleCameraActivity extends SimpleCameraActivity implements TuSD
 	private final int MAX_RECORDING_TIME = 8;
 	/** 最小录制时间 */
 	private final int MIN_RECORDING_TIME = 0;
-	
-	/** 参数调节视图 */
-	protected FilterConfigView mConfigView;
-	/** 滤镜栏视图 */
-	protected FilterListView mFilterListView;
-	/** 贴纸栏视图 */
-	protected StickerListView mStickerListView;
+
 	/** 录制界面视图 */
 	private MultipleCameraView mMultipleCameraView;
 	
@@ -65,18 +54,6 @@ public class MultipleCameraActivity extends SimpleCameraActivity implements TuSD
 		
 		initCamera();
 		getMultipleCameraView();
-		
-		RelativeLayout cameraView = (RelativeLayout) findViewById(com.upyun.shortvideo.R.id.lsq_cameraView);
-	    // 延迟启动相机，确认视图已经初始化完毕
-	    cameraView.post(new Runnable()
-	    {
-	    	@Override
-	    	public void run()
-	    	{
-	    		startCameraLater();
-	    	}
-	    });		   
-
 	}
 	
     @Override
@@ -160,10 +137,10 @@ public class MultipleCameraActivity extends SimpleCameraActivity implements TuSD
 	 */
 	protected TuSDKVideoCameraDelegate mVideoCameraDelegate = new TuSDKVideoCameraDelegate() 
     {
-		@Override
+        @Override
         public void onFilterChanged(FilterWrap selesOutInput)
         {
-        	mMultipleCameraView.updateViewOnFilterChanged(selesOutInput.getFilter());
+        	mMultipleCameraView.updateViewOnFilterChanged(selesOutInput);
         }
 
 		@Override
@@ -207,11 +184,6 @@ public class MultipleCameraActivity extends SimpleCameraActivity implements TuSD
             mMultipleCameraView.updateViewOnMovieRecordStateChanged(state);
         }
 	};
-
-	private void startCameraLater()
-	{
-		startCameraCapture();
-	}
 
 	@Override
 	public void onMovieSaveSucceed(String videoPath)

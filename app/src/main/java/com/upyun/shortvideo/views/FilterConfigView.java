@@ -11,6 +11,7 @@ package com.upyun.shortvideo.views;
 
 import java.util.ArrayList;
 
+import org.lasque.tusdk.core.TuSdkContext;
 import org.lasque.tusdk.core.seles.SelesParameters;
 import org.lasque.tusdk.core.seles.SelesParameters.FilterArg;
 import org.lasque.tusdk.core.seles.SelesParameters.FilterParameterInterface;
@@ -18,7 +19,6 @@ import org.lasque.tusdk.core.seles.sources.SelesOutInput;
 import org.lasque.tusdk.core.view.TuSdkRelativeLayout;
 import org.lasque.tusdk.core.view.TuSdkViewHelper;
 import org.lasque.tusdk.core.view.TuSdkViewHelper.OnSafeClickListener;
-import com.upyun.shortvideo.views.FilterConfigSeekbar.FilterConfigSeekbarDelegate;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -106,12 +106,14 @@ public class FilterConfigView extends TuSdkRelativeLayout
         return mConfigWrap;
     }
 
-    @Override
-    public void loadView()
+    /**
+     * 设置拖动条高度
+     *
+     * @param seekbarHeight
+     */
+    public void setSeekBarHeight(int seekbarHeight)
     {
-        super.loadView();
-        // 拖动条高度
-        this.mSeekHeigth = getMeasuredHeight();
+        this.mSeekHeigth = seekbarHeight;
     }
 
     /**
@@ -144,7 +146,7 @@ public class FilterConfigView extends TuSdkRelativeLayout
     /**
      * 拖动条高度
      */
-    private int mSeekHeigth;
+    private int mSeekHeigth = TuSdkContext.dip2px(32);
 
     /**
      * 配置视图
@@ -170,7 +172,7 @@ public class FilterConfigView extends TuSdkRelativeLayout
 
         for (FilterArg arg : params.getArgs())
         {
-        	if (arg.equalsKey("smoothing")) continue;
+        	if (checkIgnoredKey(arg, getIgnoredKeys())) continue;
         	
             FilterConfigSeekbar seekbar = this.buildAppendSeekbar(configWrap, this.mSeekHeigth);
             if (seekbar != null)
@@ -181,6 +183,29 @@ public class FilterConfigView extends TuSdkRelativeLayout
                 mSeekbars.add(seekbar);
             }
         }
+    }
+
+    /**
+     * 检查key是否需要忽略
+     * @param arg
+     *          滤镜参数
+     * @param ignoredKeys
+     *            忽略的Key
+     * @return
+     */
+    private boolean checkIgnoredKey(FilterArg arg, String[] ignoredKeys)
+    {
+        for (String key : ignoredKeys)
+        {
+            if (arg.equalsKey(key)) return true;
+        }
+
+        return false;
+    }
+
+    private String[] getIgnoredKeys()
+    {
+        return new String[]{"smoothing", "eyeSize", "chinSize"};
     }
 
     /**
@@ -204,7 +229,7 @@ public class FilterConfigView extends TuSdkRelativeLayout
     /**
      * 滤镜配置拖动栏委托
      */
-    protected FilterConfigSeekbarDelegate mFilterConfigSeekbarDelegate = new FilterConfigSeekbarDelegate()
+    protected FilterConfigSeekbar.FilterConfigSeekbarDelegate mFilterConfigSeekbarDelegate = new FilterConfigSeekbar.FilterConfigSeekbarDelegate()
     {
         /**
          * 配置数据改变

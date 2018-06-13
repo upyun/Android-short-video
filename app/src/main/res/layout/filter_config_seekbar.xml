@@ -8,11 +8,12 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
 		android:layout_alignParentRight="true"
-        android:layout_marginRight="13dp"
+        android:layout_marginRight="12dp"
         android:lines="1"
         android:text="50%"
         android:textColor="@color/lsq_seekbar_drag_color"
-        android:textSize="14sp"/>
+        android:textSize="12sp"/>
+
     <include
         android:id="@+id/lsq_seekView"
         android:layout_width="match_parent"
@@ -28,7 +29,7 @@
         android:id="@+id/lsq_titleWrapView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginLeft="13dp"
+        android:layout_marginLeft="12dp"
         android:layout_alignParentLeft="true" >
 
         <TextView
@@ -39,7 +40,7 @@
             android:ellipsize="end"
             android:gravity="center"
             android:lines="1"
-            android:text="@string/lsq_strength"
+            android:text="@string/lsq_filter_set_mixied"
             android:textColor="@color/lsq_seekbar_drag_color"
             android:textSize="14sp" />
 

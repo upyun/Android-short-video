@@ -1,15 +1,12 @@
 package com.upyun.shortvideo;
 
 import android.app.Activity;
-import android.app.Service;
-import android.media.AudioManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.MediaController;
 import android.widget.TableLayout;
 
-import com.upyun.upplayer.widget.UpVideoView;
 import com.upyun.upplayer.widget.UpVideoView2;
 
 

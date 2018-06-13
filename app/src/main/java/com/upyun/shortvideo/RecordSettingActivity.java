@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.upyun.shortvideo.custom.MovieRecordFullScreenActivity;
 import com.upyun.shortvideo.utils.Constants;
 import com.upyun.shortvideo.views.MyRadioView;
 import com.upyun.shortvideo.views.SettingEditView;
@@ -63,7 +64,7 @@ public class RecordSettingActivity extends AppCompatActivity implements View.OnC
                 Config.RECORDFPS = Integer.parseInt(sevFps.getValue());
 
                 Config.POSITION = myRadioView.getPosition();
-                Intent intent = new Intent(this, MovieRecordAndImportEditorActivity.class);
+                Intent intent = new Intent(this, MovieRecordFullScreenActivity.class);
                 this.startActivity(intent);
                 break;
 

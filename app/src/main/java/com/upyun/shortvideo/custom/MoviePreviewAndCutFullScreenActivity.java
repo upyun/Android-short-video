@@ -47,7 +47,7 @@ public class MoviePreviewAndCutFullScreenActivity extends MoviePreviewAndCutRati
         titleLayout.setBackgroundColor(TuSdkContext.getColor(com.upyun.shortvideo.R.color.lsq_color_transparent));
         
         FrameLayout moviePreviewLayout = (FrameLayout) findViewById(com.upyun.shortvideo.R.id.movie_layout);
-        FrameLayout.LayoutParams lp = (LayoutParams) moviePreviewLayout.getLayoutParams();
+        LayoutParams lp = (LayoutParams) moviePreviewLayout.getLayoutParams();
         lp.width = LayoutParams.MATCH_PARENT;
         lp.height = LayoutParams.MATCH_PARENT;
         

@@ -9,26 +9,27 @@
  */
 package com.upyun.shortvideo.suite;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.lasque.tusdk.core.TuSdkContext;
 import org.lasque.tusdk.core.struct.TuSdkSize;
 import org.lasque.tusdk.core.utils.RectHelper;
 import org.lasque.tusdk.core.view.TuSdkViewHelper;
-import org.lasque.tusdk.movie.player.TuSDKMoviePlayer;
-import org.lasque.tusdk.movie.player.TuSDKMoviePlayer.OnSeekToPreviewListener;
-import org.lasque.tusdk.movie.player.TuSDKMoviePlayer.PlayerState;
-import org.lasque.tusdk.movie.player.TuSDKMoviePlayer.TuSDKMoviePlayerDelegate;
-import org.lasque.tusdk.video.editor.TuSDKVideoImageExtractor;
-import org.lasque.tusdk.video.editor.TuSDKVideoImageExtractor.TuSDKVideoImageExtractorDelegate;
-import org.lasque.tusdk.video.mixer.TuSDKMediaDataSource;
+import org.lasque.tusdk.api.movie.player.TuSDKMoviePlayer;
+import org.lasque.tusdk.api.movie.player.TuSDKMoviePlayer.OnSeekToPreviewListener;
+import org.lasque.tusdk.api.movie.player.TuSDKMoviePlayer.PlayerState;
+import org.lasque.tusdk.api.movie.player.TuSDKMoviePlayer.TuSDKMoviePlayerDelegate;
+import org.lasque.tusdk.api.video.retriever.TuSDKVideoImageExtractor;
+import org.lasque.tusdk.api.video.retriever.TuSDKVideoImageExtractor.TuSDKVideoImageExtractorDelegate;
+import org.lasque.tusdk.core.common.TuSDKMediaDataSource;
 
 import com.upyun.shortvideo.SimpleCameraActivity;
 import com.upyun.shortvideo.component.MovieEditorActivity;
 import com.upyun.shortvideo.views.HVScrollView;
 import com.upyun.shortvideo.views.HVScrollView.OnScrollChangeListener;
 import com.upyun.shortvideo.views.MovieRangeSelectionBar;
+import com.upyun.shortvideo.views.MovieRangeSelectionBar.OnCursorChangeListener;
+import com.upyun.shortvideo.views.MovieRangeSelectionBar.Type;
 
 import android.content.Intent;
 import android.content.res.Resources;
@@ -178,10 +179,13 @@ public class MoviePreviewAndCutActivity extends SimpleCameraActivity implements 
 	
 	private void initMoviePlayer()
 	{
+		if (mVideoPath == null) return;
+		
         mPlayer = TuSDKMoviePlayer.createMoviePlayer();
         mPlayer.setLooping(false);
         
-        Uri uri = mVideoPath == null ? null : Uri.fromFile(new File(mVideoPath));
+        Uri uri = Uri.fromFile(new File(mVideoPath));
+		
         mPlayer.initVideoPlayer(this, uri, mSurfaceView);
         mPlayer.setDelegate(this);
 	}
@@ -190,7 +194,7 @@ public class MoviePreviewAndCutActivity extends SimpleCameraActivity implements 
 	{
         mRangeSelectionBar = (MovieRangeSelectionBar) this.findViewById(com.upyun.shortvideo.R.id.lsq_seekbar);
         mRangeSelectionBar.setShowPlayCursor(false);
-        mRangeSelectionBar.setType(MovieRangeSelectionBar.Type.Clip);
+        mRangeSelectionBar.setType(Type.Clip);
         mRangeSelectionBar.setLeftSelection(0);
         mRangeSelectionBar.setPlaySelection(0);
         mRangeSelectionBar.setRightSelection(100);
@@ -202,9 +206,9 @@ public class MoviePreviewAndCutActivity extends SimpleCameraActivity implements 
 	/** 加载视频缩略图 */
 	public void loadVideoThumbList()
 	{
-		if (mRangeSelectionBar != null && mRangeSelectionBar.getList() == null)
-		{
-			TuSdkSize tuSdkSize = TuSdkSize.create(TuSdkContext.dip2px(56),TuSdkContext.dip2px(56));
+		if (mRangeSelectionBar == null || mRangeSelectionBar.getVideoThumbList().size() > 0) return;
+
+		TuSdkSize tuSdkSize = TuSdkSize.create(TuSdkContext.dip2px(56),TuSdkContext.dip2px(56));
 			
 			TuSDKVideoImageExtractor extractor = TuSDKVideoImageExtractor.createExtractor();
 			
@@ -212,24 +216,18 @@ public class MoviePreviewAndCutActivity extends SimpleCameraActivity implements 
 					.setVideoDataSource(TuSDKMediaDataSource.create(mVideoPath))
 					.setExtractFrameCount(6);
 			
-			
-			mThumbList = new ArrayList<Bitmap>();
-			mRangeSelectionBar.setList(mThumbList);
-			extractor.asyncExtractImageList(new TuSDKVideoImageExtractorDelegate() 
+			extractor.asyncExtractImageList(new TuSDKVideoImageExtractorDelegate()
 			{
 				@Override   
 				public void onVideoImageListDidLoaded(List<Bitmap> images) {
-					mThumbList = images;
-					mRangeSelectionBar.invalidate();
 				}
 				
 				@Override
-				public void onVideoNewImageLoaded(Bitmap bitmap){
-					mThumbList.add(bitmap);
-					mRangeSelectionBar.invalidate();
+				public void onVideoNewImageLoaded(Bitmap bitmap)
+				{
+					mRangeSelectionBar.drawVideoThumb(bitmap);
 				}
-			});	
-		}
+			});
 	}
 
 	/** 开始播放 */
@@ -318,7 +316,7 @@ public class MoviePreviewAndCutActivity extends SimpleCameraActivity implements 
 	}
 	
 	/** 点击下一步按钮  */
-	private void handleClickNextButton()
+	protected void handleClickNextButton()
 	{
 		Intent intent = new Intent(this, mIntentClass);
 		intent.putExtra("startTime", mStartTime);
@@ -337,7 +335,17 @@ public class MoviePreviewAndCutActivity extends SimpleCameraActivity implements 
 		if (clazz == null) clazz = MovieEditorActivity.class;
 		this.mIntentClass = clazz;
 	}
-	
+
+	protected Class<?> getIntentClass()
+	{
+		return mIntentClass;
+	}
+
+	protected String getVideoPath()
+	{
+		return mVideoPath;
+	}
+
     @Override
     protected void onResume()
     {
@@ -410,7 +418,7 @@ public class MoviePreviewAndCutActivity extends SimpleCameraActivity implements 
 	};
 
     /** 用于监听裁剪控件  */
-	private MovieRangeSelectionBar.OnCursorChangeListener mOnCursorChangeListener = new MovieRangeSelectionBar.OnCursorChangeListener()
+	private OnCursorChangeListener mOnCursorChangeListener = new OnCursorChangeListener()
 	{
 		
 		@Override

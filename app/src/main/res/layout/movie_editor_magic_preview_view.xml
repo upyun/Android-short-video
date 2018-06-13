@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.upyun.shortvideo.views.MagicEditorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lsq_color_transparent">
+
+    <!-- Top Bar -->
+  <RelativeLayout
+      android:id="@+id/lsq_magic_preview_top_bar"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+      <ImageView
+          android:id="@+id/lsq_magic_back"
+          android:layout_width="40dp"
+          android:layout_height="40dp"
+          android:scaleType="center"
+          android:src="@drawable/lsq_magic_close"/>
+
+      <TextView
+          android:id="@+id/lsq_title"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/lsq_editor_magic"
+          android:textColor="@color/lsq_color_white"
+          android:textSize="@dimen/lsq_font_size_36"
+          android:gravity="center"
+          android:layout_centerInParent="true"/>
+
+  </RelativeLayout>
+
+    <!-- timeline view  -->
+    <com.upyun.shortvideo.views.MagicEffectsTimelineView
+        android:id="@+id/lsq_magic_preview_timelineView"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginBottom="@dimen/lsq__space_20"
+        android:layout_alignParentBottom="true"/>
+
+    <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+        android:id="@+id/lsq_magic_preview_cell_undo_btn"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:drawablePadding="5dp"
+        android:gravity="center"
+        android:drawableTop="@drawable/edit_ic_back"
+        android:textSize="12sp"
+        android:textColor="@color/lsq_filter_title_color"
+        android:text="@string/lsq_repeal"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="80dp"
+        android:layout_alignParentBottom="true"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="80dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp">
+        <RelativeLayout
+            android:id="@+id/lsq_editor_color_wrap"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:gravity="center_vertical">
+        <ImageView
+            android:id="@+id/lsq_magic_edit_color_btn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/lsq_edit_color" />
+
+            <RelativeLayout
+                android:id="@+id/lsq_color_seek_bar_wrap"
+                android:layout_width="280dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="80dp"
+                android:visibility="gone"
+                android:background="@drawable/magic_size_seek_bar_background">
+                <include
+                    android:id="@+id/lsq_color_seek_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_centerVertical="true"
+                    layout="@layout/tusdk_config_seekbar_two"/>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/lsq_editor_size_wrap"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/lsq__space_20"
+            android:layout_below="@+id/lsq_editor_color_wrap">
+        <ImageView
+            android:id="@+id/lsq_magic_edit_size_btn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/lsq_edit_size"
+            android:scaleType="fitXY"
+            android:layout_alignParentRight="true"/>
+
+        <RelativeLayout
+            android:id="@+id/lsq_size_seek_bar_wrap"
+            android:layout_width="280dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="80dp"
+            android:visibility="gone"
+            android:background="@drawable/magic_size_seek_bar_background">
+        <include
+            android:id="@+id/lsq_size_seek_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
+            layout="@layout/tusdk_config_seekbar_two"/>
+
+        </RelativeLayout>
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/lsq_magic_edit_play_btn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="@dimen/lsq__space_20"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/lsq_edit_play"
+            android:scaleType="fitXY"
+            android:layout_below="@+id/lsq_editor_size_wrap"/>
+    </RelativeLayout>
+
+</com.upyun.shortvideo.views.MagicEditorLayout>

@@ -7,9 +7,9 @@
         <shape>
             <corners android:radius="0dip" />
             <gradient
-                android:startColor="#e5e5e5"
-                android:centerColor="#e5e5e5"
-                android:endColor="#e5e5e5"
+                android:startColor="#ededed"
+                android:centerColor="#ededed"
+                android:endColor="#ededed"
                 />
         </shape>
     </item>
@@ -20,9 +20,9 @@
         <shape>
             <corners android:radius="0dip" />
             <gradient
-                android:startColor="#31b0e4"
-                android:centerColor="#31b0e4"
-                android:endColor="#31b0e4" />
+                android:startColor="#f2a11a"
+                android:centerColor="#f2a11a"
+                android:endColor="#f2a11a" />
         </shape>
         </clip>
     </item>

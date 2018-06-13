@@ -9,11 +9,6 @@
  */
 package com.upyun.shortvideo.views;
 
-import org.lasque.tusdk.core.TuSdkContext;
-import org.lasque.tusdk.core.seles.tusdk.FilterLocalPackage;
-import org.lasque.tusdk.core.view.TuSdkImageView;
-import org.lasque.tusdk.core.view.listview.TuSdkCellRelativeLayout;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.AttributeSet;
@@ -22,11 +17,17 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import org.lasque.tusdk.core.TuSdkContext;
+import org.lasque.tusdk.core.seles.tusdk.FilterLocalPackage;
+import org.lasque.tusdk.core.view.TuSdkImageView;
+import org.lasque.tusdk.core.view.listview.TuSdkCellRelativeLayout;
+import org.lasque.tusdk.core.view.listview.TuSdkListSelectableCellViewInterface;
+
 /**
  * @author Yanlin
  *
  */
-public class FilterCellView extends TuSdkCellRelativeLayout<String>
+public class FilterCellView extends TuSdkCellRelativeLayout<String> implements TuSdkListSelectableCellViewInterface
 {
 	/** 缩略图 */
 	private TuSdkImageView mThumbView;
@@ -35,7 +36,7 @@ public class FilterCellView extends TuSdkCellRelativeLayout<String>
 	private TextView mTitlebView;
 	
 	/** 滤镜边框*/
-	private RelativeLayout mFilterBorderView ;
+	private View mFilterBorderView ;
 	
 	// 标记该滤镜项是否被选中
 	private int flag = -1;
@@ -58,49 +59,106 @@ public class FilterCellView extends TuSdkCellRelativeLayout<String>
 	@Override
 	protected void bindModel() 
 	{
+		bindModelTypeOne();
+
+		bindModelTypeTwo();
+	}
+
+	/**
+	 * 绑定第一种类型的数据
+	 */
+	protected void bindModelTypeOne()
+	{
 		String filterCode = this.getModel();
-		
+
 		if (filterCode == null) return;
-		
+
 		filterCode = filterCode.toLowerCase();
-		
-		String filterImageName = "lsq_filter_thumb_" + filterCode;
-		
+
+		String filterImageName = getThumbPrefix() + filterCode;
+
 		Bitmap filterImage = TuSdkContext.getRawBitmap(filterImageName);
-		
+
 		if (this.getImageView() != null && filterImage != null)
 		{
 			getImageView().setImageBitmap(filterImage);
 		}
-		
+
 		if (this.getTitleView() != null)
 		{
-			getTitleView().setText(TuSdkContext.getString("lsq_filter_" + filterCode));
+			getTitleView().setText(TuSdkContext.getString(getTextPrefix()+ filterCode));
 		}
-		
-		RelativeLayout layout = (RelativeLayout) this.findViewById(com.upyun.shortvideo.R.id.lsq_none_layout);
-		ImageView imageView = (ImageView) this.findViewById(com.upyun.shortvideo.R.id.lsq_item_none);
+	}
+
+	/**
+	 * 绑定第二种类型的数据
+	 */
+	protected void bindModelTypeTwo()
+	{
+		RelativeLayout layout =  this.findViewById(com.upyun.shortvideo.R.id.lsq_none_layout);
+		ImageView imageView = this.findViewById(com.upyun.shortvideo.R.id.lsq_item_none);
 		if (layout != null)
 		{
 			layout.setVisibility(((Integer)getTag() == 0)?View.VISIBLE:View.GONE);
 			imageView.setVisibility(((Integer)getTag() == 0)?View.VISIBLE:View.GONE);
 		}
 	}
-	
+
+	/**
+	 * 缩略图前缀
+	 *
+	 * @return
+	 */
+	protected String getThumbPrefix()
+	{
+		return "lsq_filter_thumb_";
+	}
+
+	/**
+	 * Item名称前缀
+	 *
+	 * @return
+	 */
+	protected String getTextPrefix()
+	{
+		return "lsq_filter_";
+	}
+
+	@Override
+	public void onCellSelected(int position)
+	{
+		View filterBorderView = getBorderView();
+		filterBorderView.setVisibility(View.VISIBLE);
+
+		TextView titleView = getTitleView();
+		titleView.setBackground(TuSdkContext.getDrawable("tusdk_view_filter_selected_text_roundcorner"));
+	}
+
+	@Override
+	public void onCellDeselected()
+	{
+		View filterBorderView = getBorderView();
+		filterBorderView.setVisibility(View.GONE);
+
+		setFlag(-1);
+		getTitleView().setBackground(TuSdkContext.getDrawable("tusdk_view_filter_unselected_text_roundcorner"));
+		getImageView().invalidate();
+	}
+
 	public TuSdkImageView getImageView()
 	{
 		if (mThumbView == null)
 		{
-			mThumbView = (TuSdkImageView)findViewById(com.upyun.shortvideo.R.id.lsq_item_image);
+			mThumbView = findViewById(com.upyun.shortvideo.R.id.lsq_item_image);
 		}
 		return mThumbView;
 	}
 	
-	public RelativeLayout getBorderView()
+	public View getBorderView()
 	{
 		if (mFilterBorderView == null)
 		{
-			 mFilterBorderView = (RelativeLayout)findViewById(com.upyun.shortvideo.R.id.lsq_item_border);
+			 mFilterBorderView = findViewById(com.upyun.shortvideo.R.id.lsq_item_border);
 		}
 		return mFilterBorderView;
 	}
@@ -109,7 +167,7 @@ public class FilterCellView extends TuSdkCellRelativeLayout<String>
 	{
 		if (mTitlebView == null)
 		{
-			mTitlebView = (TextView)findViewById(com.upyun.shortvideo.R.id.lsq_item_title);
+			mTitlebView = findViewById(com.upyun.shortvideo.R.id.lsq_item_title);
 		}
 		return mTitlebView;
 	}

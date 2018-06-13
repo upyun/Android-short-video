@@ -16,7 +16,7 @@
 	    android:layout_marginTop="20dp"/>
 	
 	<include
-        android:id="@+id/lsq_voice_config_view"
+        android:id="@+id/lsq_voice_volume_config_view"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         layout="@layout/tusdk_config_view" 

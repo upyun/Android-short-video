@@ -10,16 +10,19 @@
 
 package com.upyun.shortvideo.custom;
 
+import android.os.Bundle;
+import android.widget.ProgressBar;
+
+import com.upyun.shortvideo.Config;
+import com.upyun.shortvideo.component.MovieRecordKeepModeActivity;
+
 import org.lasque.tusdk.core.TuSdk;
 import org.lasque.tusdk.core.TuSdkContext;
 import org.lasque.tusdk.core.encoder.video.TuSDKVideoEncoderSetting;
 import org.lasque.tusdk.core.struct.TuSdkSize;
 import org.lasque.tusdk.core.video.TuSDKVideoResult;
 
-import com.upyun.shortvideo.component.MovieRecordKeepModeActivity;
 import com.upyun.shortvideo.views.record.MovieRecordView;
-
-import android.os.Bundle;
 
 /**
  * 断点续拍全屏 + 视频编辑全屏
@@ -32,7 +35,7 @@ public class MovieRecordFullScreenActivity extends MovieRecordKeepModeActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		
+
 		// 设置录制界面背景为透明色
 		setRecordViewBackgroundColor(getRecordView());
 		getRecordView().setSquareSticker(false);
@@ -40,7 +43,13 @@ public class MovieRecordFullScreenActivity extends MovieRecordKeepModeActivity
 		hideNavigationBar();
         TuSdk.messageHub().applyToViewWithNavigationBarHidden(true);
 	}
-	
+
+	@Override
+	protected int getLayoutId()
+	{
+		return com.upyun.shortvideo.R.layout.movie_record_full_screen_activity;
+	}
+
 	@Override
 	protected void onResume() 
 	{
@@ -53,6 +62,10 @@ public class MovieRecordFullScreenActivity extends MovieRecordKeepModeActivity
 		/** 全透明 colorId */
 		int transparentColorId = com.upyun.shortvideo.R.color.lsq_color_transparent;
 		int semiTransparentColorId = com.upyun.shortvideo.R.color.lsq_color_semitransparent;
+		
+		ProgressBar bar = (ProgressBar) recordView.findViewById(com.upyun.shortvideo.R.id.lsq_record_progressbar);
+		if (bar != null)
+			bar.setProgressDrawable(TuSdkContext.getDrawable(com.upyun.shortvideo.R.drawable.tusdk_view_widget_full_screen_progress_video_timer));
 		
 		recordView.getFilterBottomView().setBackgroundColor(TuSdkContext.getColor(semiTransparentColorId));
 		recordView.getStickerBottomView().setBackgroundColor(TuSdkContext.getColor(semiTransparentColorId));
@@ -78,14 +91,17 @@ public class MovieRecordFullScreenActivity extends MovieRecordKeepModeActivity
     	encoderSetting.videoSize = TuSdkSize.create(0, 0);
     	// 输出较高画质
     	encoderSetting.videoQuality = TuSDKVideoEncoderSetting.VideoQuality.RECORD_MEDIUM2;
+
+//    	if (Config.POSITION != null) {
+//            mVideoCamera.setWaterMarkPosition(Config.POSITION);
+//        }
     	
     	mVideoCamera.setVideoEncoderSetting(encoderSetting);
 	}
-	
+
 	@Override
-	protected void startCameraLater()
+	protected void changeCameraRegionRatio()
 	{
-		startCameraCapture();
 	}
 
 	@Override

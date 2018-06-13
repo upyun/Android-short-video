@@ -9,10 +9,6 @@
  */
 package com.upyun.shortvideo.views;
 
-import java.util.List;
-
-import org.lasque.tusdk.core.TuSdkContext;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -26,6 +22,12 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+
+import org.lasque.tusdk.core.TuSdkContext;
+import org.lasque.tusdk.core.utils.image.BitmapHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 
@@ -70,7 +72,7 @@ public class MovieRangeSelectionBar extends View
     }
     
     /** 缩略图列表  */
-    private List<Bitmap> mThumbList;
+    private List<Bitmap> mVideoThumbList;
     /** 最新滑动的X坐标 */
 	private float mLastX = 0;
 	/** 记录左光标滑动的百分数 */
@@ -88,9 +90,9 @@ public class MovieRangeSelectionBar extends View
 	/** 进度条背景颜色 */
 	private String mSeekBarColorBg = "#9fa0a0";
 	/**当前进度条选择范围的颜色 */
-	private String mSeekBarSelectColorBg = "#22bbf4";
+	private String mSeekBarSelectColorBg = "#f4a11a";
 	/** 当前播放点位置的填充色 */
-	private String mPlayCursorColorBg = "#ffffff";
+	private String mPlayCursorColorBg = "#f4a11a";
     /** 左光标移动指针ID */
     private int mLeftPointerID = -1;
     /** 右光标移动指针ID */
@@ -108,7 +110,7 @@ public class MovieRangeSelectionBar extends View
     /** 最新X滑动距离 */
     private float mDeltaX;
     /** 裁剪进度条控件高度 */
-    private int mSelectionBarHeight = 130;
+    private int mSelectionBarHeight;
     /** 控件背景矩形框 */
     private RectF mSelectionBarRect;
     /** 控件选择矩形框 */
@@ -501,8 +503,8 @@ public class MovieRangeSelectionBar extends View
         mSelectionBarRect.top = 0;
         mSelectionBarRect.bottom = mSelectionBarRect.top + mSelectionBarHeight;
         
-        mSelectionBarSelectedRect.left = mLeftCursorRect.left;
-        mSelectionBarSelectedRect.right = mRightCursorRect.right;
+        mSelectionBarSelectedRect.left = 0;
+        mSelectionBarSelectedRect.right = getWidth();
         mSelectionBarSelectedRect.top = mSelectionBarRect.top;
         mSelectionBarSelectedRect.bottom = mSelectionBarRect.bottom;
         
@@ -517,7 +519,7 @@ public class MovieRangeSelectionBar extends View
     private void initUpdate()
     {
     	
-    	mSelectionBarHeight = TuSdkContext.dip2px(65);
+    	mSelectionBarHeight = getHeight() > 0 ? getHeight() : TuSdkContext.dip2px(65);
     	mPlayCursorOffsetW = TuSdkContext.dip2px(3);
     	mLeftCursorOffsetW = TuSdkContext.dip2px(20);
     	mRightCursorOffsetW = TuSdkContext.dip2px(20);
@@ -561,6 +563,7 @@ public class MovieRangeSelectionBar extends View
         mSelectionBarFillRect.bottom = mSelectionBarFillRect.top + mSelectionBarHeight-2*mFillOffsetY;
         invalidate();
     }
+
     public void delegateUpdate(int index,int percent)
     {
         if (index == CLICK_PLAY_CURSOR)
@@ -619,6 +622,17 @@ public class MovieRangeSelectionBar extends View
         
         invalidate();
     }
+
+    public int getLeftCursorPercent()
+    {
+        return mLeftPercent;
+    }
+
+    public int getRightCursorPercent()
+    {
+        return mRightPercent;
+    }
+
     /**
      * 
      * 设置MovieRangeSelectionBar的使用情况
@@ -637,29 +651,29 @@ public class MovieRangeSelectionBar extends View
     	final float radius = 0;
         mPaint.setColor(Color.parseColor(mSeekBarColorBg));
         canvas.drawRoundRect(mSelectionBarRect, radius, radius, mPaint);
-        
+
         /*** Draw ClipSeekBar Select Background*/
         mPaint.setColor(Color.parseColor(mSeekBarSelectColorBg));
         canvas.drawRoundRect(mSelectionBarSelectedRect, radius, radius, mPaint);
-        
+
         /**Draw ClipSeekBar Select Fill Background*/
         mPaint.setColor(Color.parseColor(mSeekBarColorBg));
         canvas.drawRoundRect(mSelectionBarFillRect, radius, radius, mPaint);
         
         /**Draw Bitmap */
-        if(mThumbList!=null)
+        if(mVideoThumbList != null)
         {
-            int size = mThumbList.size();
+            int size = mVideoThumbList.size();
         	for (int i = 0 ; i< size ; i++)
         	{
-        		Bitmap bitmap = mThumbList.get(i);
+        		Bitmap bitmap = mVideoThumbList.get(i);
         		if (bitmap == null) continue;
         		
         		Rect rect = new Rect();
         		rect.left = i * mRangeSelectionBarWidth / size;
         		rect.right = rect.left + bitmap.getWidth();
            		rect.top = (int) mSelectionBarFillRect.top;
-           		rect.bottom = rect.top + bitmap.getHeight();
+           		rect.bottom = (int)mSelectionBarFillRect.bottom;
 
                 canvas.drawBitmap(bitmap, null, rect, null);
         	}        	
@@ -711,19 +725,15 @@ public class MovieRangeSelectionBar extends View
     	canvas.drawRect(mRect, mShadowPaint);
     }
     
-    public void destroyBitmap()
+    public void clearVideoThumbList()
     {
-        if(mThumbList != null)
+        if(mVideoThumbList != null)
         {
-            int size = mThumbList.size();
-        	for (int i = 0; i < size; i++)
-        	{
-        		Bitmap bitmap = mThumbList.get(i);
-        		bitmap.recycle();
-        		bitmap = null;
-        	}
-        	mThumbList.clear();
-        	mThumbList = null;
+            for (Bitmap bitmap : mVideoThumbList)
+                BitmapHelper.recycled(bitmap);
+
+            mVideoThumbList.clear();
+            mVideoThumbList = null;
         }
     }
     
@@ -750,7 +760,7 @@ public class MovieRangeSelectionBar extends View
     public static interface OnCursorChangeListener 
     {
     	
-    	void onSeeekBarChanged(int width,int height);
+    	void onSeeekBarChanged(int width, int height);
     	
         void onLeftCursorChanged(int percent);
         
@@ -774,16 +784,25 @@ public class MovieRangeSelectionBar extends View
 		invalidate();
 	}
 	
-	public List<Bitmap> getList()
+	public List<Bitmap> getVideoThumbList()
 	{
-		return mThumbList;
+        if (this.mVideoThumbList == null)
+                this.mVideoThumbList = new ArrayList<>(5);
+
+		return mVideoThumbList;
 	}
 
-	public void setList(List<Bitmap> list)
+	public void drawVideoThumbList(List<Bitmap> list)
 	{
-		this.mThumbList = list;
+        this.mVideoThumbList = list;
 		invalidate();
 	}
+
+	public void drawVideoThumb(Bitmap bitmap)
+    {
+        this.getVideoThumbList().add(bitmap);
+        invalidate();
+    }
 
 	public String getSeekBarColorBg()
 	{

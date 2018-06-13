@@ -2,37 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+	android:gravity="center_vertical"
     android:orientation="vertical" >
-     <LinearLayout
-	      android:id="@+id/lsq_filter_layout"
-	      android:layout_width="match_parent"
-	      android:layout_height="wrap_content"
-	      android:orientation="vertical" 
-	     >
-	 		<!-- 滤镜调节栏和磨皮强度调节栏 -->  
-	         <RelativeLayout
-	             android:layout_width="match_parent"
-	             android:layout_height="67dp" >
-	           <include
-	               android:id="@+id/lsq_filter_config_view"
-	               android:layout_width="match_parent"
-	               android:layout_height="67dp"
-	               android:layout_centerInParent="true"
-	               layout="@layout/filter_config_view" />
-	           
-	         </RelativeLayout>
-	  		<!-- 滤镜列表 -->  
-	         <LinearLayout
-	          style="@style/lsq_editor_filter_list_view"
-	          android:orientation="horizontal"
-	          android:paddingLeft="8dp" >
+]
+	<com.upyun.shortvideo.views.FilterListView
+		android:id="@+id/lsq_filter_list_view"
+		style="@style/lsq_editor_filter_list_view"
+		android:paddingLeft="8dp"
+		android:paddingTop="@dimen/lsq__space_10"
+		/>
 
-	
-	           <com.upyun.shortvideo.views.FilterListView
-	               android:id="@+id/lsq_filter_list_view"
-	               style="@style/lsq_editor_filter_list_view"
-	               android:paddingLeft="8dp" 
-	           />
-	         </LinearLayout>
-	      </LinearLayout> 
 </LinearLayout>

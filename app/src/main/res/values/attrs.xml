@@ -23,6 +23,15 @@
         <attr name="drawableTop" format="reference"/>
     </declare-styleable>
 
+    <declare-styleable name="ColorSelector">
+        <attr name="dragBarRadius" format="dimension" />
+        <attr name="colorIndicatorWidth" format="dimension"/>
+        <attr name="colorIndicatorHeight" format="dimension"/>
+        <attr name="colorListWidth" format="dimension"/>
+        <attr name="colorListHeight" format="dimension"/>
+        <attr name="colorListPaddingTop" format="dimension"/>
+    </declare-styleable>
+
     <declare-styleable name="SettingEditView">
         <attr name="keyText" format="string" />
         <attr name="valueText" format="string"/>
