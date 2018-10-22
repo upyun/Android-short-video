@@ -8,19 +8,21 @@
  */
 package com.upyun.shortvideo.utils;
 
+import com.upyun.shortvideo.R;
+
 public class Constants {
     /**
      * 最大录制时长 (单位：秒)
      */
-    public static int MAX_RECORDING_TIME = 20;
+    public static final int MAX_RECORDING_TIME = 20;
 
     /**
      * 最小录制时长 (单位：秒)
      */
-    public static int MIN_RECORDING_TIME = 2;
+    public static final int MIN_RECORDING_TIME = 2;
 
 
-    public static int[] AUDIO_EFFECTS = new int[]{com.upyun.shortvideo.R.raw.lsq_audio_lively, com.upyun.shortvideo.R.raw.lsq_audio_oldmovie, com.upyun.shortvideo.R.raw.lsq_audio_relieve};
+    public static int[] AUDIO_EFFECTS = new int[]{R.raw.lsq_audio_lively, R.raw.lsq_audio_oldmovie, R.raw.lsq_audio_relieve};
 
     /**
      * 滤镜 filterCode 列表
@@ -40,7 +42,7 @@ public class Constants {
      * 场景特效code 列表
      */
     public static String[] SCENE_EFFECT_CODES = {"None", "LiveShake01", "LiveMegrim01", "EdgeMagic01", "LiveFancy01_1", "LiveSoulOut01",
-            "LiveSignal01"};
+            "LiveSignal01", "LiveLightning01", "LiveXRay01", "LiveHeartbeat01", "LiveMirrorImage01", "LiveSlosh01", "LiveOldTV01"};
 
 
     /**

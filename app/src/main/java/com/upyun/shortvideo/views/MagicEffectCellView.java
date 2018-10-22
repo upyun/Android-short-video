@@ -7,6 +7,7 @@ import android.util.AttributeSet;
 
 import org.lasque.tusdk.core.TuSdkContext;
 import org.lasque.tusdk.core.view.widget.button.TuSdkTextButton;
+import com.upyun.shortvideo.R;
 
 /**
  * 魔法效果列表Item视图管理
@@ -55,7 +56,7 @@ public class MagicEffectCellView extends FilterCellView
         // 当前是否为撤销 Cell
         boolean isUndoCell = (Integer) getTag() == 0;
 
-        findViewById(com.upyun.shortvideo.R.id.lsq_border_layout).setVisibility( isUndoCell ? GONE : VISIBLE);
+        findViewById(R.id.lsq_border_layout).setVisibility( isUndoCell ? GONE : VISIBLE);
 
         getUndoButton().setVisibility(isUndoCell ? VISIBLE : GONE);
     }
@@ -64,7 +65,7 @@ public class MagicEffectCellView extends FilterCellView
     {
         if ( mUndoButton == null)
         {
-            mUndoButton = (TuSdkTextButton) findViewById(com.upyun.shortvideo.R.id.lsq_magic_effect_cell_undo_btn);
+            mUndoButton = (TuSdkTextButton) findViewById(R.id.lsq_magic_effect_cell_undo_btn);
         }
         return mUndoButton;
     }
@@ -76,13 +77,13 @@ public class MagicEffectCellView extends FilterCellView
      */
     public void updateUndoButton(boolean isEnableClicked)
     {
-        Drawable cancelUnClickedDrawable = getResources().getDrawable(com.upyun.shortvideo.R.drawable.edit_ic_back);
+        Drawable cancelUnClickedDrawable = getResources().getDrawable(R.drawable.edit_ic_back);
         cancelUnClickedDrawable.setAlpha(isEnableClicked ? 255 : 66);
         // 这一步必须要做,否则不会显示
         cancelUnClickedDrawable.setBounds(0, 0, cancelUnClickedDrawable.getMinimumWidth(), cancelUnClickedDrawable.getMinimumHeight());
         getUndoButton().setCompoundDrawables(null, cancelUnClickedDrawable, null, null);
 
         getUndoButton().setEnabled(isEnableClicked);
-        getUndoButton().setTextColor(getResColor(isEnableClicked ? com.upyun.shortvideo.R.color.lsq_filter_title_color : com.upyun.shortvideo.R.color.lsq_filter_title_color_alpha_20));
+        getUndoButton().setTextColor(getResColor(isEnableClicked ? R.color.lsq_filter_title_color : R.color.lsq_filter_title_color_alpha_20));
     }
 }

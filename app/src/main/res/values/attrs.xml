@@ -31,10 +31,4 @@
         <attr name="colorListHeight" format="dimension"/>
         <attr name="colorListPaddingTop" format="dimension"/>
     </declare-styleable>
-
-    <declare-styleable name="SettingEditView">
-        <attr name="keyText" format="string" />
-        <attr name="valueText" format="string"/>
-        <attr name="unitText" format="string" />
-    </declare-styleable>
 </resources>

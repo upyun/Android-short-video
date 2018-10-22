@@ -32,7 +32,7 @@
   </RelativeLayout>
 
     <!-- timeline view  -->
-    <com.upyun.shortvideo.views.MagicEffectsTimelineView
+    <com.upyun.shortvideo.views.EffectsTimelineView
         android:id="@+id/lsq_magic_preview_timelineView"
         android:layout_width="match_parent"
         android:layout_height="30dp"

@@ -13,6 +13,7 @@ import android.view.MotionEvent;
 import android.widget.SeekBar;
 
 import org.lasque.tusdk.core.TuSdkContext;
+import com.upyun.shortvideo.R;
 
 /**
  * Created by LiuHang on 7/27/2017.
@@ -95,13 +96,13 @@ public class ColorSelector extends SeekBar
     protected void applyStyle(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes)
     {
         mContext = context;
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, com.upyun.shortvideo.R.styleable.ColorSelector, defStyleAttr, defStyleRes);
-        mColorListHeight = typedArray.getDimension(com.upyun.shortvideo.R.styleable.ColorSelector_colorListHeight, TuSdkContext.dip2px(10));
-        mColorListWidth = typedArray.getDimension(com.upyun.shortvideo.R.styleable.ColorSelector_colorListWidth, TuSdkContext.dip2px(290));
-        mDragBarRadius = typedArray.getDimension(com.upyun.shortvideo.R.styleable.ColorSelector_dragBarRadius, TuSdkContext.dip2px(10));
-        getmColorIndicatorHeight = typedArray.getDimension(com.upyun.shortvideo.R.styleable.ColorSelector_colorIndicatorHeight, TuSdkContext.dip2px(20));
-        mColorIndicatorWidth = typedArray.getDimension(com.upyun.shortvideo.R.styleable.ColorSelector_colorIndicatorWidth, TuSdkContext.dip2px(20));
-        mColorListPaddingTop = typedArray.getDimension(com.upyun.shortvideo.R.styleable.ColorSelector_colorListPaddingTop, TuSdkContext.dip2px(5));
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ColorSelector, defStyleAttr, defStyleRes);
+        mColorListHeight = typedArray.getDimension(R.styleable.ColorSelector_colorListHeight, TuSdkContext.dip2px(10));
+        mColorListWidth = typedArray.getDimension(R.styleable.ColorSelector_colorListWidth, TuSdkContext.dip2px(290));
+        mDragBarRadius = typedArray.getDimension(R.styleable.ColorSelector_dragBarRadius, TuSdkContext.dip2px(10));
+        getmColorIndicatorHeight = typedArray.getDimension(R.styleable.ColorSelector_colorIndicatorHeight, TuSdkContext.dip2px(20));
+        mColorIndicatorWidth = typedArray.getDimension(R.styleable.ColorSelector_colorIndicatorWidth, TuSdkContext.dip2px(20));
+        mColorListPaddingTop = typedArray.getDimension(R.styleable.ColorSelector_colorListPaddingTop, TuSdkContext.dip2px(5));
         typedArray.recycle();
     }
 

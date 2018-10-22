@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.upyun.shortvideo.api.TestMovieEditorActivity">
+
+    <RelativeLayout
+        android:id="@+id/lsq_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/lsq_color_white"></RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/content_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_above="@+id/content_2"
+        >
+
+        <Button
+            android:id="@+id/lsq_btn_transCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="转码"
+            android:visibility="gone" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onStartPlay"
+            android:text="播放" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onPausePlay"
+            android:text="暂停" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onSeek"
+            android:text="Seek" />
+
+        <EditText
+            android:id="@+id/lsq_edit_seek"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:hint="Seek"
+            android:inputType="number" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="addSceneEffect"
+            android:text="addScene" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="removeSceneEffect"
+            android:text="rvScene" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/content_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/content_3"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="添加MV"
+            android:onClick="addMVEffect"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="删除MV"
+            android:onClick="removeMVEffect"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="倒序"
+            android:onClick="onRever"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="反复"
+            android:onClick="onRepeatedly"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="慢动作"
+            android:onClick="onSlow"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="快动作"
+            android:onClick="onQuickly"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/content_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        >
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="倒序慢动作"
+            android:onClick="onReverseSlow"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="倒序快动作"
+            android:onClick="onReverseQuick"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="保存"
+            android:onClick="onSave"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="转码"
+            android:onClick="onTransCoder"
+            />
+    </LinearLayout>
+</RelativeLayout>

@@ -3,9 +3,11 @@ package com.upyun.shortvideo.views;
 import android.content.Context;
 import android.util.AttributeSet;
 
+import com.upyun.shortvideo.utils.Constants;
+
+import org.lasque.tusdk.core.seles.sources.TuSdkMovieEditorImpl;
 import org.lasque.tusdk.core.view.TuSdkRelativeLayout;
 import com.upyun.shortvideo.R;
-import com.upyun.shortvideo.utils.Constants;
 
 import java.util.Arrays;
 
@@ -15,8 +17,10 @@ import java.util.Arrays;
 
 public class SceneEffectLayout extends TuSdkRelativeLayout
 {
+    private TuSdkMovieEditorImpl mMovieEditor;
+
     /** 场景特效时间轴视图 */
-    private SceneEffectsTimelineView mSceneEffectsTimelineView;
+    private EffectsTimelineView mSceneEffectsTimelineView;
 
     /** 场景特效列表视图 */
     private SceneEffectListView mListView;
@@ -27,9 +31,7 @@ public class SceneEffectLayout extends TuSdkRelativeLayout
 
     }
 
-    /**
-     * 加载视图
-     */
+    /** 加载视图 */
     @Override
     public void loadView()
     {
@@ -37,6 +39,7 @@ public class SceneEffectLayout extends TuSdkRelativeLayout
 
         // 动画时间轴视图
         mSceneEffectsTimelineView = getViewById(R.id.lsq_scence_effect_timelineView);
+        mSceneEffectsTimelineView.setDelegate(mEffectsTimelineViewDelegate);
 
         /** 场景特效列表视图 */
         mListView = getViewById(R.id.lsq_scene_effect_list_view);
@@ -54,7 +57,7 @@ public class SceneEffectLayout extends TuSdkRelativeLayout
      *
      * @return
      */
-    public SceneEffectsTimelineView getSceneEffectsTimelineView()
+    public EffectsTimelineView getSceneEffectsTimelineView()
     {
         return mSceneEffectsTimelineView;
     }
@@ -80,12 +83,34 @@ public class SceneEffectLayout extends TuSdkRelativeLayout
     }
 
     /**
-     * 设置场景特效时间轴动画委托
-     *
-     * @param delegate
+     * 设置MovieEditor
+     * @param movieEditor
      */
-    public void setDelegate(SceneEffectsTimelineView.EffectsTimelineViewDelegate delegate)
+    public void setMovieEditor(TuSdkMovieEditorImpl movieEditor)
     {
-        mSceneEffectsTimelineView.setDelegate(delegate);
+        this.mMovieEditor = movieEditor;
     }
+
+    /** 场景特效时间轴变化 */
+    protected EffectsTimelineView.EffectsTimelineViewDelegate mEffectsTimelineViewDelegate = new EffectsTimelineView.EffectsTimelineViewDelegate()
+    {
+        @Override
+        public void onProgressCursorWillChaned()
+        {
+            mMovieEditor.getEditorPlayer().pausePreview();
+        }
+
+        @Override
+        public void onProgressChaned(final float progress)
+        {
+            mMovieEditor.getEditorPlayer().pausePreview();
+            mMovieEditor.getEditorPlayer().seekTimeUs((long)(mMovieEditor.getEditorPlayer().getTotalTimeUS() * progress));
+        }
+
+        @Override
+        public void onEffectNumChanged(int effectNum)
+        {
+            mListView.updateUndoButtonState(effectNum == 0 ? false :true);
+        }
+    };
 }

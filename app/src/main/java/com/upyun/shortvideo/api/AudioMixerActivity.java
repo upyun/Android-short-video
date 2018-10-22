@@ -10,11 +10,23 @@
 
 package com.upyun.shortvideo.api;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+import android.app.Activity;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
+import com.upyun.shortvideo.views.CompoundConfigView;
+import com.upyun.shortvideo.views.ConfigViewParams;
+import com.upyun.shortvideo.views.ConfigViewParams.ConfigViewArg;
+import com.upyun.shortvideo.views.ConfigViewSeekBar;
 
+import org.lasque.tusdk.api.audio.player.TuSDKMutiAudioPlayer;
+import org.lasque.tusdk.api.audio.preproc.mixer.TuSDKAudioEntry;
+import org.lasque.tusdk.api.audio.preproc.mixer.TuSDKAudioMixer;
+import org.lasque.tusdk.api.audio.preproc.mixer.TuSDKAudioMixer.OnAudioMixerDelegate;
+import org.lasque.tusdk.api.audio.preproc.mixer.TuSDKAverageAudioMixer;
 import org.lasque.tusdk.core.TuSdk;
 import org.lasque.tusdk.core.TuSdkContext;
 import org.lasque.tusdk.core.decoder.TuSDKAudioInfo;
@@ -22,23 +34,11 @@ import org.lasque.tusdk.core.encoder.audio.TuSDKAACAudioFileEncoder;
 import org.lasque.tusdk.core.encoder.audio.TuSDKAudioEncoderSetting;
 import org.lasque.tusdk.core.utils.StringHelper;
 import org.lasque.tusdk.core.utils.image.AlbumHelper;
-import org.lasque.tusdk.api.audio.preproc.mixer.TuSDKAudioEntry;
-import org.lasque.tusdk.api.audio.preproc.mixer.TuSDKAudioMixer;
-import org.lasque.tusdk.api.audio.preproc.mixer.TuSDKAudioMixer.OnAudioMixerDelegate;
-import org.lasque.tusdk.api.audio.preproc.mixer.TuSDKAverageAudioMixer;
-import org.lasque.tusdk.api.audio.player.TuSDKMutiAudioPlayer;
+import com.upyun.shortvideo.R;
 
-import com.upyun.shortvideo.views.CompoundConfigView;
-import com.upyun.shortvideo.views.ConfigViewParams;
-import com.upyun.shortvideo.views.ConfigViewParams.ConfigViewArg;
-import com.upyun.shortvideo.views.ConfigViewSeekBar;
-
-import android.app.Activity;
-import android.net.Uri;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 多音轨混合
@@ -48,7 +48,7 @@ import android.widget.TextView;
  */
 public class AudioMixerActivity extends Activity
 {
-	private int[] mAudioEntries = new int[]{com.upyun.shortvideo.R.raw.lsq_audio_lively, com.upyun.shortvideo.R.raw.lsq_audio_oldmovie, com.upyun.shortvideo.R.raw.lsq_audio_relieve};
+	private int[] mAudioEntries = new int[]{R.raw.lsq_audio_lively, R.raw.lsq_audio_oldmovie, R.raw.lsq_audio_relieve};
 	
 	private TextView mBackBtn;
 	private Button mAudioMixerButton;
@@ -72,7 +72,7 @@ public class AudioMixerActivity extends Activity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(com.upyun.shortvideo.R.layout.audio_mixer_activity);
+		setContentView(R.layout.audio_mixer_activity);
 		// 初始化多音轨播放器 用于播放混音后的音频
 		initMutiAudioPlayer();
 		
@@ -83,17 +83,17 @@ public class AudioMixerActivity extends Activity
 	
 	private void initView() 
 	{
-		mBackBtn = (TextView) findViewById(com.upyun.shortvideo.R.id.lsq_back);
+		mBackBtn = (TextView) findViewById(R.id.lsq_back);
 		mBackBtn.setOnClickListener(mOnClickListener);
-		TextView titleView = (TextView) findViewById(com.upyun.shortvideo.R.id.lsq_title);
+		TextView titleView = (TextView) findViewById(R.id.lsq_title);
 		titleView.setText(TuSdkContext.getString("lsq_audio_mixer_text"));
-		TextView nextBtn = (TextView) findViewById(com.upyun.shortvideo.R.id.lsq_next);
+		TextView nextBtn = (TextView) findViewById(R.id.lsq_next);
 		nextBtn.setVisibility(View.GONE);
 		initVoiceConfigView();
-		mAudioMixerButton = (Button) findViewById(com.upyun.shortvideo.R.id.lsq_audio_mixer_btn);
-		mDeleteMixingButton = (Button) findViewById(com.upyun.shortvideo.R.id.lsq_delete_mixing_btn);
-		mPlayMixingButton = (Button) findViewById(com.upyun.shortvideo.R.id.lsq_play_mixing_btn);
-		mPauseMixingButton = (Button) findViewById(com.upyun.shortvideo.R.id.lsq_pause_mixing_btn);
+		mAudioMixerButton = (Button) findViewById(R.id.lsq_audio_mixer_btn);
+		mDeleteMixingButton = (Button) findViewById(R.id.lsq_delete_mixing_btn);
+		mPlayMixingButton = (Button) findViewById(R.id.lsq_play_mixing_btn);
+		mPauseMixingButton = (Button) findViewById(R.id.lsq_pause_mixing_btn);
 		mAudioMixerButton.setOnClickListener(mOnClickListener);
 		mDeleteMixingButton.setOnClickListener(mOnClickListener);
 		mPlayMixingButton.setOnClickListener(mOnClickListener);
@@ -104,7 +104,7 @@ public class AudioMixerActivity extends Activity
 	{
 		if (mVoiceConfigView == null)
 		{
-			mVoiceConfigView = (CompoundConfigView) findViewById(com.upyun.shortvideo.R.id.lsq_voice_volume_config_view);
+			mVoiceConfigView = (CompoundConfigView) findViewById(R.id.lsq_voice_volume_config_view);
 		}
 
 		return mVoiceConfigView;
@@ -168,7 +168,7 @@ public class AudioMixerActivity extends Activity
 	 */
 	private String getMixedAudioPath()
 	{
-		mMixedAudioPath = new File(AlbumHelper.getAblumPath(),String.format("lsq_%s.aac", StringHelper.timeStampString())).getPath();		
+		mMixedAudioPath = new File(AlbumHelper.getAblumPath(),String.format("lsq_%s.aac", StringHelper.timeStampString())).getPath();
 		return mMixedAudioPath;
 	}
 	
@@ -216,7 +216,7 @@ public class AudioMixerActivity extends Activity
 		new File(mMixedAudioPath).delete();
 		if(!new File(mMixedAudioPath).exists())
 		{
-			String hintMsg = getResources().getString(com.upyun.shortvideo.R.string.lsq_audio_mixer_delete_success);
+			String hintMsg = getResources().getString(R.string.lsq_audio_mixer_delete_success);
 			TuSdk.messageHub().showToast(this, hintMsg);
 			for(int i = 0; i < getVoiceConfigView().getSeekBarList().size(); i++ )
 			{
@@ -225,7 +225,7 @@ public class AudioMixerActivity extends Activity
 		}
 		else 
 		{
-			String hintMsg = getResources().getString(com.upyun.shortvideo.R.string.lsq_audio_mixer_delete_failed);
+			String hintMsg = getResources().getString(R.string.lsq_audio_mixer_delete_failed);
 			TuSdk.messageHub().showToast(this, hintMsg);
 		}
 	}
@@ -233,13 +233,13 @@ public class AudioMixerActivity extends Activity
 	/**
 	 * 音频混合Delegate
 	 */
-	private OnAudioMixerDelegate mAudioMixerDelegate = new OnAudioMixerDelegate() 
+	private OnAudioMixerDelegate mAudioMixerDelegate = new OnAudioMixerDelegate()
 	{
 		/**
 		 * 混合状态改变事件
 		 */
 		@Override
-		public void onStateChanged(TuSDKAudioMixer.State state) 
+		public void onStateChanged(TuSDKAudioMixer.State state)
 		{
 			if (state == TuSDKAudioMixer.State.Complete)
 			{
@@ -250,7 +250,7 @@ public class AudioMixerActivity extends Activity
 				
 			}else if(state == TuSDKAudioMixer.State.Decoding || state == TuSDKAudioMixer.State.Mixing)
 			{
-				TuSdk.messageHub().setStatus(AudioMixerActivity.this, "混合中");		
+				TuSdk.messageHub().setStatus(AudioMixerActivity.this, "混合中");
 				
 			}else if(state == TuSDKAudioMixer.State.Cancelled)
 			{
@@ -381,11 +381,11 @@ public class AudioMixerActivity extends Activity
 	/**
 	 * 原音配音调节栏委托事件
 	 */
-	private ConfigViewSeekBar.ConfigSeekbarDelegate mFilterConfigSeekbarDelegate = new ConfigViewSeekBar.ConfigSeekbarDelegate() 
+	private ConfigViewSeekBar.ConfigSeekbarDelegate mFilterConfigSeekbarDelegate = new ConfigViewSeekBar.ConfigSeekbarDelegate()
 	{
 		
 		@Override
-		public void onSeekbarDataChanged(ConfigViewSeekBar seekbar, ConfigViewArg arg) 
+		public void onSeekbarDataChanged(ConfigViewSeekBar seekbar, ConfigViewArg arg)
 		{
 			if (arg.getKey().equals("origin"))
 					setSeekBarProgress(0,arg.getPercentValue());

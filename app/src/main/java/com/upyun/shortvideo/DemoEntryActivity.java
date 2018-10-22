@@ -48,7 +48,9 @@ public class DemoEntryActivity extends TuFragmentActivity {
      */
     public static final int layoutId = com.upyun.shortvideo.R.layout.entry_activity;
 
-    /** 编辑类ClassName */
+    /**
+     * 编辑类ClassName
+     */
     public static final String EDITOR_CLASS = MovieEditorFullScreenActivity.class.getName();
 
 
@@ -146,13 +148,10 @@ public class DemoEntryActivity extends TuFragmentActivity {
 ////        Intent intent = new Intent(this, RecordSettingActivity.class);
 //        this.startActivity(intent);
 
-        if (PermissionUtils.hasRequiredPermissions(this, getRequiredPermissions()))
-        {
+        if (PermissionUtils.hasRequiredPermissions(this, getRequiredPermissions())) {
             Intent intent = new Intent(this, MovieRecordFullScreenActivity.class);
             this.startActivity(intent);
-        }
-        else
-        {
+        } else {
             PermissionUtils.requestRequiredPermissions(this, getRequiredPermissions());
         }
     }
@@ -166,7 +165,7 @@ public class DemoEntryActivity extends TuFragmentActivity {
     }
 
     private void handleImportButton() {
-        AlbumUtils.openVideoAlbum(EDITOR_CLASS);
+        AlbumUtils.openVideoAlbum(EDITOR_CLASS, 1);
 
 //        Intent pickIntent = new Intent(Intent.ACTION_GET_CONTENT);
 //        pickIntent.setType("video/*");
@@ -198,12 +197,10 @@ public class DemoEntryActivity extends TuFragmentActivity {
     /**
      * 组件运行需要的权限列表
      *
-     * @return
-     *            列表数组
+     * @return 列表数组
      */
     @TargetApi(Build.VERSION_CODES.M)
-    protected String[] getRequiredPermissions()
-    {
+    protected String[] getRequiredPermissions() {
         String[] permissions = new String[]{
                 Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -215,8 +212,7 @@ public class DemoEntryActivity extends TuFragmentActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
-    {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         PermissionUtils.handleRequestPermissionsResult(requestCode, permissions, grantResults, this, mGrantedResultDelgate);
     }
@@ -225,20 +221,15 @@ public class DemoEntryActivity extends TuFragmentActivity {
      * 授予权限的结果，在对话结束后调用
      *
      * @param permissionGranted
-     *            true or false, 用户是否授予相应权限
+     * true or false, 用户是否授予相应权限
      */
-    protected PermissionUtils.GrantedResultDelgate mGrantedResultDelgate = new PermissionUtils.GrantedResultDelgate()
-    {
+    protected PermissionUtils.GrantedResultDelgate mGrantedResultDelgate = new PermissionUtils.GrantedResultDelgate() {
         @Override
-        public void onPermissionGrantedResult(boolean permissionGranted)
-        {
-            if (permissionGranted)
-            {
+        public void onPermissionGrantedResult(boolean permissionGranted) {
+            if (permissionGranted) {
                 Intent intent = new Intent(DemoEntryActivity.this, MovieRecordFullScreenActivity.class);
                 DemoEntryActivity.this.startActivity(intent);
-            }
-            else
-            {
+            } else {
                 String msg = TuSdkContext.getString("lsq_camera_no_access", ContextUtils.getAppName(DemoEntryActivity.this));
 
                 TuSdkViewHelper.alert(permissionAlertDelegate, DemoEntryActivity.this, TuSdkContext.getString("lsq_camera_alert_title"),
@@ -251,11 +242,9 @@ public class DemoEntryActivity extends TuFragmentActivity {
     /**
      * 权限警告提示框点击事件回调
      */
-    protected TuSdkViewHelper.AlertDelegate permissionAlertDelegate = new TuSdkViewHelper.AlertDelegate()
-    {
+    protected TuSdkViewHelper.AlertDelegate permissionAlertDelegate = new TuSdkViewHelper.AlertDelegate() {
         @Override
-        public void onAlertConfirm(AlertDialog dialog)
-        {
+        public void onAlertConfirm(AlertDialog dialog) {
             Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
                     Uri.fromParts("package", DemoEntryActivity.this.getPackageName(), null));
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -263,8 +252,7 @@ public class DemoEntryActivity extends TuFragmentActivity {
         }
 
         @Override
-        public void onAlertCancel(AlertDialog dialog)
-        {
+        public void onAlertCancel(AlertDialog dialog) {
 
         }
     };

@@ -17,6 +17,4 @@
         android:layout_height="match_parent"
         layout="@layout/movie_editor_voice_recording"/>
 
-
-
 </RelativeLayout>

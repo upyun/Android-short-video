@@ -9,8 +9,6 @@
  */
 package com.upyun.shortvideo.views;
 
-import java.util.List;
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -48,6 +46,11 @@ import android.view.ViewParent;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.animation.AnimationUtils;
 import android.widget.ScrollView;
+
+import com.upyun.shortvideo.R;
+
+import java.util.List;
+
 /**
  * TuSDKMovieMuxerFragment.java
  * HVScrollView can scroll horizontal and vertical
@@ -219,12 +222,12 @@ public class HVScrollView extends ViewGroup implements NestedScrollingParent,
         initScrollView();
 
         final TypedArray a = context.obtainStyledAttributes(
-                attrs, com.upyun.shortvideo.R.styleable.HVScrollView, defStyleAttr, 0);
+                attrs, R.styleable.HVScrollView, defStyleAttr, 0);
 
-        mChildLayoutCenter = a.getBoolean(com.upyun.shortvideo.R.styleable.HVScrollView_childLayoutCenter, false);
-        mFillViewportH = a.getBoolean(com.upyun.shortvideo.R.styleable.HVScrollView_fillViewportH, false);
-        mFillViewportV = a.getBoolean(com.upyun.shortvideo.R.styleable.HVScrollView_fillViewportV, false);
-        mScrollOrientation = a.getInt(com.upyun.shortvideo.R.styleable.HVScrollView_scrollOrientation, SCROLL_ORIENTATION_BOTH);
+        mChildLayoutCenter = a.getBoolean(R.styleable.HVScrollView_childLayoutCenter, false);
+        mFillViewportH = a.getBoolean(R.styleable.HVScrollView_fillViewportH, false);
+        mFillViewportV = a.getBoolean(R.styleable.HVScrollView_fillViewportV, false);
+        mScrollOrientation = a.getInt(R.styleable.HVScrollView_scrollOrientation, SCROLL_ORIENTATION_BOTH);
 
         a.recycle();
 

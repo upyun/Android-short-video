@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.upyun.shortvideo.views.TextEffectLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <RelativeLayout
+        android:id="@+id/lsq_bar_topBar"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal" >
+
+        <org.lasque.tusdk.core.view.widget.button.TuSdkImageButton
+            android:id="@+id/lsq_bar_cancelButton"
+            android:layout_width="44dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:scaleType="center"
+            android:src="@drawable/lsq_editor_text_button_close" />
+
+
+        <TextView
+            android:id="@+id/lsq_text_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lsq_edit_text_title"
+            android:textColor="@color/lsq_color_white"
+            android:textSize="@dimen/lsq_font_size_36"
+            android:gravity="center"
+            android:layout_centerInParent="true"/>
+
+        <org.lasque.tusdk.core.view.widget.button.TuSdkImageButton
+            android:id="@+id/lsq_bar_completeButton"
+            android:layout_width="44dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp"
+            android:scaleType="center"
+            android:src="@drawable/lsq_editor_text_button_completed" />
+    </RelativeLayout>
+
+
+    <org.lasque.tusdk.core.view.widget.TuMaskRegionView
+        android:id="@+id/lsq_cutRegionView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:layout_above="@+id/lsq_featureBar"/>
+
+    <org.lasque.tusdk.core.view.widget.TuSdkEditText
+        android:id="@+id/lsq_editTextView"
+        android:hint="@string/lsq_edit_text_sticker_default_text"
+        android:inputType="textMultiLine"
+        android:lines="2"
+        android:gravity="center_vertical"
+        android:layout_above="@+id/lsq_color_bar_bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <RelativeLayout
+        android:id="@+id/lsq_color_bar_bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="39dp"
+        android:layout_above="@+id/lsq_featureBar"
+        android:visibility="gone"
+        android:orientation="horizontal"
+        android:background="@color/lsq_background_option_bar"
+        >
+
+        <org.lasque.tusdk.core.view.widget.button.TuSdkImageButton
+            android:id="@+id/lsq_bar_backButton"
+            android:layout_width="44dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:scaleType="center"
+            android:src="@drawable/lsq_editor_text_button_back" />
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/lsq_featureBar"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        android:background="@color/lsq_background_option_bar"
+        android:layout_above="@+id/lsq_movie_seekbar_content" >
+
+        <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+            android:id="@+id/lsq_feature_add"
+            style="@style/lsq_edit_textFeatureButton"
+            android:drawableTop="@drawable/lsq_editor_text_button_add"
+            />
+
+        <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+            android:id="@+id/lsq_feature_color"
+            style="@style/lsq_edit_textFeatureButton"
+            android:drawableTop="@drawable/lsq_editor_text_button_color"
+            />
+
+        <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+            android:id="@+id/lsq_feature_style"
+            style="@style/lsq_edit_textFeatureButton"
+            android:drawableTop="@drawable/lsq_editor_text_button_fontstyle"
+            />
+
+    </LinearLayout>
+
+    <HorizontalScrollView
+        android:id="@+id/lsq_styleWrap"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_above="@+id/lsq_movie_seekbar_content"
+        android:background="@color/lsq_background_option_bar" >
+
+        <LinearLayout
+            android:id="@+id/lsq_actions_wrapview"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+                android:id="@+id/lsq_styleToRight"
+                style="@style/lsq_edit_entryOptionButton"
+                android:layout_width="80dp"
+                android:drawableTop="@drawable/lsq_editor_icon_toright_font"
+                android:text="@string/lsq_text_style_left_to_right" />
+
+            <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+                android:id="@+id/lsq_styleToLeft"
+                style="@style/lsq_edit_entryOptionButton"
+                android:layout_width="80dp"
+                android:drawableTop="@drawable/lsq_editor_icon_toleft_font"
+                android:text="@string/lsq_text_style_right_to_left" />
+
+            <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+                android:id="@+id/lsq_styleUnderline"
+                style="@style/lsq_edit_entryOptionButton"
+                android:layout_width="80dp"
+                android:drawableTop="@drawable/lsq_editor_text_underline"
+                android:text="@string/lsq_text_style_underline" />
+
+            <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+                android:id="@+id/lsq_styleAlignLeft"
+                style="@style/lsq_edit_entryOptionButton"
+                android:layout_width="80dp"
+                android:drawableTop="@drawable/lsq_editor_text_left"
+                android:text="@string/lsq_text_style_alignleft" />
+
+            <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+                android:id="@+id/lsq_styleAlignRight"
+                style="@style/lsq_edit_entryOptionButton"
+                android:layout_width="80dp"
+                android:drawableTop="@drawable/lsq_editor_text_right"
+                android:text="@string/lsq_text_style_alignright" />
+
+            <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+                android:id="@+id/lsq_styleAlignCenter"
+                style="@style/lsq_edit_entryOptionButton"
+                android:layout_width="80dp"
+                android:drawableTop="@drawable/lsq_editor_text_center"
+                android:text="@string/lsq_text_style_aligncenter" />
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <org.lasque.tusdk.core.view.TuSdkLinearLayout
+        android:id="@+id/lsq_colorWrap"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="vertical"
+        android:background="@color/lsq_background_option_bar"
+        android:layout_above="@+id/lsq_movie_seekbar_content" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp">
+
+            <com.upyun.shortvideo.views.TuSdkColorSelectorBar
+                android:id="@+id/lsq_colorSelector"
+                android:layout_centerHorizontal="true"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_centerInParent="true"
+                />
+
+        </RelativeLayout>
+
+        <org.lasque.tusdk.core.view.TuSdkLinearLayout
+            android:id="@+id/lsq_colorParamView"
+            android:layout_width="match_parent"
+            android:layout_height="28dp"
+            android:orientation="horizontal" >
+
+            <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+                android:id="@+id/lsq_fontColorButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:lines="1"
+                android:text="@string/lsq_text_sticker_font_color"
+                android:textColor="@color/lsq_scence_effect_color_title"
+                android:textSize="14sp" />
+
+            <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+                android:id="@+id/lsq_bgColorButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:lines="1"
+                android:text="@string/lsq_text_sticker_background_color"
+                android:textColor="@color/lsq_seekbar_drag_color"
+                android:textSize="14sp" />
+
+            <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+                android:id="@+id/lsq_strokeColorButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:lines="1"
+                android:text="@string/lsq_text_sticker_stroke_color"
+                android:textColor="@color/lsq_seekbar_drag_color"
+                android:textSize="14sp" />
+
+        </org.lasque.tusdk.core.view.TuSdkLinearLayout>
+
+
+    </org.lasque.tusdk.core.view.TuSdkLinearLayout>
+
+
+
+    <!--时间区域视图-->
+    <FrameLayout
+        android:id="@+id/lsq_movie_seekbar_content"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/lsq__space_50"
+        android:layout_alignParentBottom="true"
+        android:background="@color/lsq_background_option_bar"
+        >
+
+        <com.upyun.shortvideo.views.MovieRangeSelectionBar
+            android:id="@+id/lsq_movie_seekbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/lsq__space_30" />
+    </FrameLayout>
+
+</com.upyun.shortvideo.views.TextEffectLayout>

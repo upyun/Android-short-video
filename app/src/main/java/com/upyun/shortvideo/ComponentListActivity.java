@@ -42,7 +42,7 @@ import org.lasque.tusdk.video.TuSDKVideo;
  * 
  * @author Bonan
  */
-public class ComponentListActivity extends ExpandableListActivity implements TuSdkNavigatorBarDelegate 
+public class ComponentListActivity extends ExpandableListActivity implements TuSdkNavigatorBarDelegate
 {
 	/** 最大滑动速度 */
 	public static final int MAX_SLIDE_SPEED = 1000;
@@ -161,9 +161,9 @@ public class ComponentListActivity extends ExpandableListActivity implements TuS
         mClassName = sample.className;
         
        // 需要先打开相册选取
-        if(sample.needOpenAlbum)
+        if(sample.OpenAlbumForPicNum >= 1)
         {
-			AlbumUtils.openVideoAlbum(mClassName);
+			AlbumUtils.openVideoAlbum(mClassName,sample.OpenAlbumForPicNum);
             return super.onChildClick(parent, view, group, child, id);
         }
         
@@ -271,7 +271,7 @@ public class ComponentListActivity extends ExpandableListActivity implements TuS
 
         try {
             intent = new Intent(ComponentListActivity.this, Class.forName(className));
-            intent.putExtra("videoPath", path);
+			intent.putExtra("videoPath", path);
         } catch (ClassNotFoundException e) {
         	e.printStackTrace();
         }

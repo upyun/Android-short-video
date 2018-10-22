@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 
 import org.lasque.tusdk.core.view.TuSdkLinearLayout;
+import com.upyun.shortvideo.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,9 +41,9 @@ public class DubbingLayout extends TuSdkLinearLayout
     {
         if (mAudioEffectListView == null)
         {
-            mAudioEffectListView = findViewById(com.upyun.shortvideo.R.id.lsq_mixing_list_view);
+            mAudioEffectListView = findViewById(R.id.lsq_mixing_list_view);
             mAudioEffectListView.loadView();
-            mAudioEffectListView.setCellLayoutId(com.upyun.shortvideo.R.layout.movie_editor_audio_effect_cell_view);
+            mAudioEffectListView.setCellLayoutId(R.layout.movie_editor_audio_effect_cell_view);
 //            mAudioEffectListView.setItemClickDelegate(mMixingTableItemClickDelegate);
 
             mAudioEffectListView.setModeList(getDubbingListData());

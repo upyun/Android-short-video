@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:id="@+id/lsq_cut_rect"
+    android:background="@color/lsq_color_semitransparent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_margin="@dimen/lsq__space_10"
+        android:text="@string/lsq_cut_drawable_area_limit"
+        android:textColor="@color/lsq_color_white"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:hint="left"
+            android:id="@+id/lsq_draw_rect_left_et"
+            style="@style/lsq_edit_input" />
+
+        <EditText
+            android:hint="top"
+            android:id="@+id/lsq_draw_rect_top_et"
+            style="@style/lsq_edit_input" />
+
+        <EditText
+            android:hint="right"
+            android:id="@+id/lsq_draw_rect_right_et"
+            style="@style/lsq_edit_input" />
+
+        <EditText
+            android:hint="bottom"
+            android:id="@+id/lsq_draw_rect_bottom_et"
+            style="@style/lsq_edit_input"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_margin="@dimen/lsq__space_10"
+        android:text="@string/lsq_cut_cut_area_limit"
+        android:textColor="@color/lsq_color_white"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:hint="left"
+            android:id="@+id/lsq_cut_rect_left_et"
+            style="@style/lsq_edit_input" />
+
+        <EditText
+            android:hint="top"
+            android:id="@+id/lsq_cut_rect_top_et"
+            style="@style/lsq_edit_input" />
+
+        <EditText
+            android:hint="right"
+            android:id="@+id/lsq_cut_rect_right_et"
+            style="@style/lsq_edit_input" />
+
+        <EditText
+            android:hint="bottom"
+            android:id="@+id/lsq_cut_rect_bottom_et"
+            style="@style/lsq_edit_input"/>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.upyun.shortvideo.views.TimeEffectsLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.upyun.shortvideo.views.MovieRangScrollerBar
+        android:id="@+id/lsq_time_scroller_bar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_above="@+id/lsq_time_effect_list_view"
+        />
+
+    <com.upyun.shortvideo.views.TimeEffectListView
+        android:id="@+id/lsq_time_effect_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:paddingLeft="8dp"
+        android:paddingTop="@dimen/lsq__space_10" />
+
+</com.upyun.shortvideo.views.TimeEffectsLayout>

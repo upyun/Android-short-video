@@ -8,28 +8,6 @@
  *
  */
 package com.upyun.shortvideo.suite;
-import java.io.File;
-import java.util.List;
-
-import org.lasque.tusdk.core.TuSdkContext;
-import org.lasque.tusdk.core.struct.TuSdkSize;
-import org.lasque.tusdk.core.utils.RectHelper;
-import org.lasque.tusdk.core.view.TuSdkViewHelper;
-import org.lasque.tusdk.api.movie.player.TuSDKMoviePlayer;
-import org.lasque.tusdk.api.movie.player.TuSDKMoviePlayer.OnSeekToPreviewListener;
-import org.lasque.tusdk.api.movie.player.TuSDKMoviePlayer.PlayerState;
-import org.lasque.tusdk.api.movie.player.TuSDKMoviePlayer.TuSDKMoviePlayerDelegate;
-import org.lasque.tusdk.api.video.retriever.TuSDKVideoImageExtractor;
-import org.lasque.tusdk.api.video.retriever.TuSDKVideoImageExtractor.TuSDKVideoImageExtractorDelegate;
-import org.lasque.tusdk.core.common.TuSDKMediaDataSource;
-
-import com.upyun.shortvideo.SimpleCameraActivity;
-import com.upyun.shortvideo.component.MovieEditorActivity;
-import com.upyun.shortvideo.views.HVScrollView;
-import com.upyun.shortvideo.views.HVScrollView.OnScrollChangeListener;
-import com.upyun.shortvideo.views.MovieRangeSelectionBar;
-import com.upyun.shortvideo.views.MovieRangeSelectionBar.OnCursorChangeListener;
-import com.upyun.shortvideo.views.MovieRangeSelectionBar.Type;
 
 import android.content.Intent;
 import android.content.res.Resources;
@@ -48,6 +26,30 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.upyun.shortvideo.SimpleCameraActivity;
+import com.upyun.shortvideo.component.MovieEditorActivity;
+import com.upyun.shortvideo.views.HVScrollView;
+import com.upyun.shortvideo.views.HVScrollView.OnScrollChangeListener;
+import com.upyun.shortvideo.views.MovieRangeSelectionBar;
+import com.upyun.shortvideo.views.MovieRangeSelectionBar.OnCursorChangeListener;
+import com.upyun.shortvideo.views.MovieRangeSelectionBar.Type;
+
+import org.lasque.tusdk.api.movie.player.TuSDKMoviePlayer;
+import org.lasque.tusdk.api.movie.player.TuSDKMoviePlayer.OnSeekToPreviewListener;
+import org.lasque.tusdk.api.movie.player.TuSDKMoviePlayer.PlayerState;
+import org.lasque.tusdk.api.movie.player.TuSDKMoviePlayer.TuSDKMoviePlayerDelegate;
+import org.lasque.tusdk.api.video.retriever.TuSDKVideoImageExtractor;
+import org.lasque.tusdk.api.video.retriever.TuSDKVideoImageExtractor.TuSDKVideoImageExtractorDelegate;
+import org.lasque.tusdk.core.TuSdkContext;
+import org.lasque.tusdk.core.common.TuSDKMediaDataSource;
+import org.lasque.tusdk.core.struct.TuSdkSize;
+import org.lasque.tusdk.core.utils.RectHelper;
+import org.lasque.tusdk.core.view.TuSdkViewHelper;
+import com.upyun.shortvideo.R;
+
+import java.io.File;
+import java.util.List;
 
 /**
  * 视频预览 + 获取视频裁剪范围
@@ -133,7 +135,7 @@ public class MoviePreviewAndCutActivity extends SimpleCameraActivity implements 
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(com.upyun.shortvideo.R.layout.movie_range_selection_activity);
+		setContentView(R.layout.movie_range_selection_activity);
 		initView();
 		setIntentClass(MovieEditorActivity.class);
 	}
@@ -143,33 +145,33 @@ public class MoviePreviewAndCutActivity extends SimpleCameraActivity implements 
 	{
 		mVideoPath = getIntent().getStringExtra("videoPath");
 
-		mBackTextView = (TextView) this.findViewById(com.upyun.shortvideo.R.id.lsq_back);
+		mBackTextView = (TextView) this.findViewById(R.id.lsq_back);
 		mBackTextView.setOnClickListener(mOnClickListener);
 		
-		mTitleTextView = (TextView) this.findViewById(com.upyun.shortvideo.R.id.lsq_title);
-		mTitleTextView.setText(com.upyun.shortvideo.R.string.lsq_clip);
+		mTitleTextView = (TextView) this.findViewById(R.id.lsq_title);
+		mTitleTextView.setText(R.string.lsq_clip);
 		
-		mNextTextView = (TextView) this.findViewById(com.upyun.shortvideo.R.id.lsq_next);
+		mNextTextView = (TextView) this.findViewById(R.id.lsq_next);
 		mNextTextView.setOnClickListener(mOnClickListener);
 		
-		mPlayTextView  = (TextView) this.findViewById(com.upyun.shortvideo.R.id.lsq_play_time);
-		mLeftTextView  = (TextView) this.findViewById(com.upyun.shortvideo.R.id.lsq_left_time);
-		mRightTextView  = (TextView) this.findViewById(com.upyun.shortvideo.R.id.lsq_right_time);
+		mPlayTextView  = (TextView) this.findViewById(R.id.lsq_play_time);
+		mLeftTextView  = (TextView) this.findViewById(R.id.lsq_left_time);
+		mRightTextView  = (TextView) this.findViewById(R.id.lsq_right_time);
 		
-		mPlayTextView.setText(com.upyun.shortvideo.R.string.lsq_text_time_tv);
-		mLeftTextView.setText(com.upyun.shortvideo.R.string.lsq_text_time_tv);
-		mRightTextView.setText(com.upyun.shortvideo.R.string.lsq_text_time_tv);
+		mPlayTextView.setText(R.string.lsq_text_time_tv);
+		mLeftTextView.setText(R.string.lsq_text_time_tv);
+		mRightTextView.setText(R.string.lsq_text_time_tv);
 		
-        mPlayButton = (Button) this.findViewById(com.upyun.shortvideo.R.id.lsq_play_btn);
+        mPlayButton = (Button) this.findViewById(R.id.lsq_play_btn);
         mPlayButton.setOnClickListener(mOnClickListener);
         
-        mHVScrollView = (HVScrollView) this.findViewById(com.upyun.shortvideo.R.id.hvScrollView);
+        mHVScrollView = (HVScrollView) this.findViewById(R.id.hvScrollView);
         
-        mSurfaceView = (SurfaceView) this.findViewById(com.upyun.shortvideo.R.id.lsq_video_view);
+        mSurfaceView = (SurfaceView) this.findViewById(R.id.lsq_video_view);
         mSurfaceView.setOnClickListener(mOnClickListener);
         
-        mMovieLayout = (FrameLayout) this.findViewById(com.upyun.shortvideo.R.id.movie_layout);
-        mSelectTimeLayout = (LinearLayout) this.findViewById(com.upyun.shortvideo.R.id.time_layout);
+        mMovieLayout = (FrameLayout) this.findViewById(R.id.movie_layout);
+        mSelectTimeLayout = (LinearLayout) this.findViewById(R.id.time_layout);
         
         showPlayButton();
         
@@ -192,7 +194,7 @@ public class MoviePreviewAndCutActivity extends SimpleCameraActivity implements 
 	
 	private void initRangeSelectionBar()
 	{
-        mRangeSelectionBar = (MovieRangeSelectionBar) this.findViewById(com.upyun.shortvideo.R.id.lsq_seekbar);
+        mRangeSelectionBar = (MovieRangeSelectionBar) this.findViewById(R.id.lsq_seekbar);
         mRangeSelectionBar.setShowPlayCursor(false);
         mRangeSelectionBar.setType(Type.Clip);
         mRangeSelectionBar.setLeftSelection(0);
@@ -208,7 +210,7 @@ public class MoviePreviewAndCutActivity extends SimpleCameraActivity implements 
 	{
 		if (mRangeSelectionBar == null || mRangeSelectionBar.getVideoThumbList().size() > 0) return;
 
-		TuSdkSize tuSdkSize = TuSdkSize.create(TuSdkContext.dip2px(56),TuSdkContext.dip2px(56));
+		TuSdkSize tuSdkSize = TuSdkSize.create(TuSdkContext.dip2px(56), TuSdkContext.dip2px(56));
 			
 			TuSDKVideoImageExtractor extractor = TuSDKVideoImageExtractor.createExtractor();
 			
@@ -267,7 +269,7 @@ public class MoviePreviewAndCutActivity extends SimpleCameraActivity implements 
 		if (mPlayButton != null)
 		{   
 			mPlayButton.setVisibility(View.VISIBLE);
-			mPlayButton.setBackgroundResource(com.upyun.shortvideo.R.drawable.lsq_style_default_crop_btn_record);
+			mPlayButton.setBackgroundResource(R.drawable.lsq_style_default_crop_btn_record);
 		}		
 	}
 	
@@ -400,14 +402,14 @@ public class MoviePreviewAndCutActivity extends SimpleCameraActivity implements 
 		{
 			switch (v.getId())
 			{
-			case com.upyun.shortvideo.R.id.lsq_back:
+			case R.id.lsq_back:
 				onBackPressed();
 				break;
-			case com.upyun.shortvideo.R.id.lsq_play_btn:
-			case com.upyun.shortvideo.R.id.lsq_video_view:
+			case R.id.lsq_play_btn:
+			case R.id.lsq_video_view:
 				handleClickSurfaceView();
 				break;
-			case com.upyun.shortvideo.R.id.lsq_next:
+			case R.id.lsq_next:
 				handleClickNextButton();
 				break;
 
@@ -533,7 +535,7 @@ public class MoviePreviewAndCutActivity extends SimpleCameraActivity implements 
 			
 			@Override
 			public void onScrollChange(HVScrollView v, int scrollX, int scrollY,
-					int oldScrollX, int oldScrollY)
+                                       int oldScrollX, int oldScrollY)
 			{
 				mScrollViewContentOffseX = (scrollX > w-mScreenWidth) ? (w-mScreenWidth) : scrollX;
 				mScrollViewContentOffseY = (scrollY > h-mScreenWidth) ? (h-mScreenWidth) : scrollY;
@@ -649,7 +651,7 @@ public class MoviePreviewAndCutActivity extends SimpleCameraActivity implements 
         
          Resources resources=getResources();
         // 显示title布局高度 ,单位像素
-        int titleHeight = (int) resources.getDimension(com.upyun.shortvideo.R.dimen.lsq_title_height);
+        int titleHeight = (int) resources.getDimension(R.dimen.lsq_title_height);
         // 显示时间选择范围布局高度
         int selectTimeHeight = (int) (mScreenHeight - titleHeight-mScreenWidth);
         RectF boundingRect = new RectF();

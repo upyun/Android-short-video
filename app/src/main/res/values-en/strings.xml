@@ -58,6 +58,7 @@
     <string name="new_movie_saved">Video saved successfully</string>
     <string name="new_movie_error_saving">Saving video error</string>
     <string name="lsq_loadvideo_failed">Do not support the video format or video height too large </string>
+    <string name="lsq_compress_failed">Do not support the video compress which are not H.264</string>
     <string name="over_max_recordTime">More than max recording time</string>
     <string name="min_recordTime">Less than min recording time </string>
     <string name="max_recordTime">Recording time is equal to max time </string>
@@ -116,6 +117,12 @@
     <string name="lsq_filter_LiveFancy01_1">70s</string>
     <string name="lsq_filter_LiveSoulOut01">LiveSoulOut</string>
     <string name="lsq_filter_LiveSignal01">LiveSignal</string>
+    <string name="lsq_filter_LiveLightning01">LiveLightning</string>
+    <string name="lsq_filter_LiveXRay01">LiveXRay</string>
+    <string name="lsq_filter_LiveHeartbeat01">LiveHeartbeat</string>
+    <string name="lsq_filter_LiveMirrorImage01">LiveMirrorImage</string>
+    <string name="lsq_filter_LiveSlosh01">LiveSlosh</string>
+    <string name="lsq_filter_LiveOldTV01">LiveOldTV</string>
     
     <!-- video editor -->
     <string name="lsq_text_record">Record Video</string>
@@ -146,6 +153,7 @@
     <string name="lsq_filter_text">Filter</string>
     <string name="lsq_text_MV">MV</string>
     <string name="lsq_text_effect">Effect</string>
+    <string name="lsq_text_text_effect">Text</string>
 
     <!-- MV -->
     <string name="lsq_mv_小猫玩球">Cat</string>
@@ -224,6 +232,7 @@
     <string name="lsq_congfigview_set_origin">Origin Audio</string>
     <string name="lsq_congfigview_set_dubbingone">Audio One</string>
     <string name="lsq_congfigview_set_dubbingtwo">Audio Two</string>
+    <string name="lsq_congfigview_set_dubbingthree">Audio Three</string>
     <string name="lsq_audio_record_hint">Click 「Start Recording」 button to start recording audio, click 「Finish Recording」 to generate a new audio ，then click 「Play Audio」 to play the audio</string>
     <string name="lsq_audio_record_start">StartRecord</string>
     <string name="lsq_audio_record_stop">FinishRecord</string>
@@ -251,8 +260,36 @@
     <string name="lsq_audio_mixer_delete_failed">Delete mixed audio failure</string>
     <string name="lsq_cut_choose_cutrange">Please select cut Range Before cut</string>
 
+    <!-- 播放器 -->
+    <string name="lsq_muti_audio_player">Muti Audio Player</string>
+    <string name="lsq_media_player">Media Player</string>
+    <string name="lsq_media_player_speed">Speed</string>
+    <string name="lsq_media_player_pitch">Pitch</string>
+    <string name="lsq_video_format">Video Format</string>
+    <string name="lsq_cut_drawable_area">Drawable Area</string>
+    <string name="lsq_cut_cut_area">Cut Area</string>
+    <string name="lsq_cut_drawable_area_limit">Drawable Area(0~1)</string>
+    <string name="lsq_cut_cut_area_limit">Cut Area(0~1)</string>
+    <string name="lsq_default">Default</string>
+
+    <!-- 视频压缩 -->
+    <string name="lsq_compresser_compress_start">Compress Start</string>
+    <string name="lsq_compresser_compress">Compress Video</string>
+    <string name="lsq_compresser_compress_complete">Compress Complete</string>
+    <string name="lsq_compresser_compressing">Compressing...</string>
+    <string name="lsq_compresser_before_compress">Before Compress:</string>
+    <string name="lsq_compresser_after_compress">After Compress:</string>
+
+    <!-- 视频转码 -->
+    <string name="lsq_transcode_start">Transcode Start</string>
+    <string name="lsq_transcode_transcode">Transcode Video</string>
+    <string name="lsq_transcode_complete">Transcode Complete</string>
+    <string name="lsq_transcode_transcoding">Transcoding...</string>
+    <string name="lsq_transcode_iskeyframe">Output in Full KeyFrame</string>
+
     <string name="lsq_video_selected">Select Video</string>
     <string name="lsq_select_video_hint">Please select video</string>
+    <string name="lsq_select_video_max">Over Max</string>
     <string name="lsq_obtain_permission_failed">Failed to obtain permissions</string>
     <!-- 权限提示 -->
     <string name="lsq_album_no_access">Can’t access album. Please turn the external storage permission on in Settings.</string>
@@ -294,6 +331,24 @@
     <string name="lsq_magic_size">Size</string>
     <string name="lsq_magic_color">Color</string>
     <string name="lsq_magic_text">Magic</string>
+    <string name="lsq_time_effect_text">TimeEffect</string>
+
+
+    <!-- 文字特效 -->
+    <string name="lsq_edit_text_title">Text</string>
+    <string name="lsq_style_default_edit_icon_text_add">Add</string>
+    <string name="lsq_style_default_edit_icon_text_color">Color</string>
+    <string name="lsq_style_default_edit_icon_text_font">Style</string>
+    <string name="lsq_edit_text_sticker_default_text">Click to edit</string>
+    <string name="lsq_text_sticker_font_color">Text</string>
+    <string name="lsq_text_sticker_background_color">Background</string>
+    <string name="lsq_text_sticker_stroke_color">Stroke</string>
+    <string name="lsq_text_style_right_to_left">RightToLeft</string>
+    <string name="lsq_text_style_left_to_right">LeftToRight</string>
+    <string name="lsq_text_style_underline">Underline</string>
+    <string name="lsq_text_style_alignleft">AlignmentLeft</string>
+    <string name="lsq_text_style_alignright">AlignmentRight</string>
+    <string name="lsq_text_style_aligncenter">AlignmentCenter</string>
 
 
 </resources>

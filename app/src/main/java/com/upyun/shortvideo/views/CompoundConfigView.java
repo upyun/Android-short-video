@@ -9,15 +9,18 @@
  */
 package com.upyun.shortvideo.views;
 
-import java.util.ArrayList;
+import android.content.Context;
+import android.util.AttributeSet;
+import android.widget.LinearLayout;
+
+import com.upyun.shortvideo.views.ConfigViewParams.ConfigViewArg;
+import com.upyun.shortvideo.views.ConfigViewSeekBar.ConfigSeekbarDelegate;
 
 import org.lasque.tusdk.core.TuSdkContext;
 import org.lasque.tusdk.core.view.TuSdkRelativeLayout;
 import org.lasque.tusdk.core.view.TuSdkViewHelper;
 
-import android.content.Context;
-import android.util.AttributeSet;
-import android.widget.LinearLayout;
+import java.util.ArrayList;
 
 /**
  * 可以生成多个调节栏
@@ -39,7 +42,7 @@ public class CompoundConfigView extends TuSdkRelativeLayout
     private ArrayList<ConfigViewSeekBar> mSeekbars;
     
     /** 调节栏委托事件 */
-    private ConfigViewSeekBar.ConfigSeekbarDelegate mDelegate;
+    private ConfigSeekbarDelegate mDelegate;
     
     /** SeekBar标题框的宽度 */
     private int mSeekBarTitleWidth;
@@ -59,7 +62,7 @@ public class CompoundConfigView extends TuSdkRelativeLayout
         super(context, attrs, defStyle);
     }
 
-    public void setDelegate(ConfigViewSeekBar.ConfigSeekbarDelegate delegate)
+    public void setDelegate(ConfigSeekbarDelegate delegate)
     {
 		this.mDelegate = delegate;
 	}
@@ -115,7 +118,7 @@ public class CompoundConfigView extends TuSdkRelativeLayout
 
         mSeekbars = new ArrayList<ConfigViewSeekBar>(params.size());
 
-        for (ConfigViewParams.ConfigViewArg arg : params.getArgs())
+        for (ConfigViewArg arg : params.getArgs())
         {
         	ConfigViewSeekBar seekbar = this.buildAppendSeekbar(configWrap, this.mSeekBarHeigth);
         	

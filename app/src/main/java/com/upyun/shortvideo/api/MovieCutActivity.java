@@ -1,6 +1,5 @@
 /**
  * TuSDKVideoDemo
- * MovieCutActivity.java
  *
  * @author  LiuHang
  * @Date  Jul 13, 2017 16:52:11 PM
@@ -10,15 +9,15 @@
 
 package com.upyun.shortvideo.api;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Rect;
-import android.media.AudioAttributes;
+import android.graphics.RectF;
 import android.media.AudioManager;
+import android.media.MediaCodecInfo;
+import android.media.MediaFormat;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnPreparedListener;
@@ -32,32 +31,44 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import org.lasque.tusdk.api.movie.postproc.muxer.TuSDKMovieClipper;
-import org.lasque.tusdk.api.movie.postproc.muxer.TuSDKMovieClipper.TuSDKMovieClipperListener;
-import org.lasque.tusdk.api.movie.postproc.muxer.TuSDKMovieClipper.TuSDKMovieClipperOption;
-import org.lasque.tusdk.api.movie.postproc.muxer.TuSDKMovieClipper.TuSDKMovieSegment;
+import com.upyun.shortvideo.views.MovieRangeSelectionBar;
+import com.upyun.shortvideo.views.MovieRangeSelectionBar.OnCursorChangeListener;
+
 import org.lasque.tusdk.api.video.retriever.TuSDKVideoImageExtractor;
 import org.lasque.tusdk.api.video.retriever.TuSDKVideoImageExtractor.TuSDKVideoImageExtractorDelegate;
 import org.lasque.tusdk.core.TuSdk;
 import org.lasque.tusdk.core.TuSdkContext;
+import org.lasque.tusdk.core.api.extend.TuSdkMediaProgress;
 import org.lasque.tusdk.core.common.TuSDKMediaDataSource;
+import org.lasque.tusdk.core.common.TuSDKMediaUtils;
+import org.lasque.tusdk.core.decoder.TuSDKVideoInfo;
+import org.lasque.tusdk.core.media.codec.extend.TuSdkMediaFormat;
+import org.lasque.tusdk.core.media.codec.extend.TuSdkMediaTimeSlice;
+import org.lasque.tusdk.core.media.suit.TuSdkMediaSuit;
+import org.lasque.tusdk.core.struct.TuSdkMediaDataSource;
 import org.lasque.tusdk.core.struct.TuSdkSize;
 import org.lasque.tusdk.core.utils.RectHelper;
 import org.lasque.tusdk.core.utils.StringHelper;
 import org.lasque.tusdk.core.utils.ThreadHelper;
 import org.lasque.tusdk.core.utils.image.AlbumHelper;
+import org.lasque.tusdk.core.utils.image.ImageOrientation;
 import org.lasque.tusdk.video.editor.TuSDKTimeRange;
-
-import com.upyun.shortvideo.views.MovieRangeSelectionBar;
-import com.upyun.shortvideo.views.MovieRangeSelectionBar.OnCursorChangeListener;
+import com.upyun.shortvideo.R;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+
+import at.grabner.circleprogress.CircleProgressView;
 
 /**
  * 视频时间裁剪
@@ -65,9 +76,8 @@ import java.util.List;
  * @author LiuHang
  *
  */
-public class MovieCutActivity extends Activity 
+public class MovieCutActivity extends Activity
 {
-	/** requestCode */
 	private static final int REQUEST_CODE  = 0;
 	/** 播放  Button */
 	private Button mPlayButton;
@@ -81,6 +91,10 @@ public class MovieCutActivity extends Activity
 	private TextView mLeftTextView;
 	/** RIGHT TIME TextView */
 	private TextView mRightTextView;
+	/** 视频输出宽度 **/
+	private EditText outputWidth;
+	/** 视频输出高度 **/
+	private EditText outputHeight;
 	/** 视频裁剪控件  */
 	private MovieRangeSelectionBar mRangeSelectionBar;
 	/** 记录裁剪控件的宽度  */
@@ -123,51 +137,165 @@ public class MovieCutActivity extends Activity
 	/** 裁剪后视频时长,单位s*/
 	private TuSDKTimeRange mCuTimeRange;
 
+	/** 视频路径 */
+	private String mInputPath;
+
+	/** 剪切进度 */
+	private CircleProgressView mCircleView;
+
+	/** 剪裁区域设置 */
+	private LinearLayout mCutRect;
+
+	/** 视频格式设置 */
+	private LinearLayout mVideoFormatBar;
+
+	/** 帧率组 */
+	private RadioGroup fpsGroup;
+
+	/** 码率组 */
+	private RadioGroup bitrateGroup;
+
+	/** 剪裁区域输入框 */
+	private List<EditText> editTexts = new ArrayList<>();
+
+	/** 裁剪进度回调  **/
+	private TuSdkMediaProgress mCuterMediaProgress = new TuSdkMediaProgress()
+	{
+
+		@Override
+		public void onProgress(float progress, TuSdkMediaDataSource mediaDataSource,
+							   int index, int total)
+		{
+			mCircleView.setText((progress * 100)+"%");
+			mCircleView.setValue(progress);
+		}
+
+		@Override
+		public void onCompleted(Exception e, TuSdkMediaDataSource outputFile, int total)
+		{
+			Toast.makeText(getBaseContext(),e == null ? getResources().getString(R.string.lsq_movie_cut_done) : getResources().getString(R.string.lsq_movie_cut_error),Toast.LENGTH_SHORT).show();
+			mCircleView.setVisibility(View.GONE);
+			mCircleView.setText("0%");
+			mCircleView.setValue(0);
+
+			try {
+				mMediaPlayer.reset();
+				mMediaPlayer.setDataSource(outputFile.getPath());
+				mMediaPlayer.prepareAsync();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		}
+	};
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(com.upyun.shortvideo.R.layout.movie_range_selection_activity);
+		setContentView(R.layout.movie_cut_activity);
+
 		initView();
+		initEdit();
 	}
-	
+
+	/**
+	 * 初始化输入框
+	 */
+	private void initEdit()
+	{
+		EditText rectLeft = findViewById(R.id.lsq_draw_rect_left_et);
+		EditText rectTop = findViewById(R.id.lsq_draw_rect_top_et);
+		EditText rectRight = findViewById(R.id.lsq_draw_rect_right_et);
+		EditText rectBottom = findViewById(R.id.lsq_draw_rect_bottom_et);
+		EditText cutLeft = findViewById(R.id.lsq_cut_rect_left_et);
+		EditText cutTop = findViewById(R.id.lsq_cut_rect_top_et);
+		EditText cutRight = findViewById(R.id.lsq_cut_rect_right_et);
+		EditText cutBottom = findViewById(R.id.lsq_cut_rect_bottom_et);
+		outputWidth = findViewById(R.id.lsq_output_width);
+		outputHeight = findViewById(R.id.lsq_output_height);
+
+		editTexts.add(rectLeft);
+		editTexts.add(rectTop);
+		editTexts.add(rectRight);
+		editTexts.add(rectBottom);
+		editTexts.add(cutLeft);
+		editTexts.add(cutTop);
+		editTexts.add(cutRight);
+		editTexts.add(cutBottom);
+
+		TuSDKVideoInfo videoInfo = TuSDKMediaUtils.getVideoInfo(mInputPath);
+
+
+		TuSdkSize videoSize = TuSdkSize.create(videoInfo.width,videoInfo.height);
+
+		// 如果视频拍摄的是有方向的
+        if (videoInfo.videoOrientation == ImageOrientation.Right || videoInfo.videoOrientation == ImageOrientation.Left)
+            videoSize = TuSdkSize.create(videoSize.height,videoSize.width);
+
+		outputWidth.setText(String.valueOf(videoSize.width));
+		outputHeight.setText(String.valueOf(videoSize.height));
+	}
+
 	/**
 	 * 初始化视图
 	 */
 	protected void initView()
 	{
-		mVideoPathUri = Uri.parse("android.resource://" + getPackageName() + "/" + com.upyun.shortvideo.R.raw.tusdk_sample_video);
-		mBackTextView = (TextView) this.findViewById(com.upyun.shortvideo.R.id.lsq_back);
+		mInputPath = getIntent().getStringExtra("videoPath");
+
+		mVideoPathUri = Uri.parse(mInputPath);
+		mBackTextView = (TextView) this.findViewById(R.id.lsq_back);
 		mBackTextView.setOnClickListener(mClickListener);
 		
-		mCutTextView = (TextView) this.findViewById(com.upyun.shortvideo.R.id.lsq_next);
+		mCutTextView = (TextView) this.findViewById(R.id.lsq_next);
 		mCutTextView.setText(TuSdkContext.getString("lsq_cut"));
 		mCutTextView.setOnClickListener(mClickListener);
 		
-		mPlayTextView  = (TextView) this.findViewById(com.upyun.shortvideo.R.id.lsq_play_time);
-		mLeftTextView  = (TextView) this.findViewById(com.upyun.shortvideo.R.id.lsq_left_time);
-		mRightTextView  = (TextView) this.findViewById(com.upyun.shortvideo.R.id.lsq_right_time);
+		mPlayTextView  = (TextView) this.findViewById(R.id.lsq_play_time);
+		mLeftTextView  = (TextView) this.findViewById(R.id.lsq_left_time);
+		mRightTextView  = (TextView) this.findViewById(R.id.lsq_right_time);
+
+		mPlayTextView.setText(R.string.lsq_text_time_tv);
+		mLeftTextView.setText(R.string.lsq_text_time_tv);
+		mRightTextView.setText(R.string.lsq_text_time_tv);
 		
-		mPlayTextView.setText(com.upyun.shortvideo.R.string.lsq_text_time_tv);
-		mLeftTextView.setText(com.upyun.shortvideo.R.string.lsq_text_time_tv);
-		mRightTextView.setText(com.upyun.shortvideo.R.string.lsq_text_time_tv);
-		
-        mPlayButton = (Button) this.findViewById(com.upyun.shortvideo.R.id.lsq_play_btn);
+        mPlayButton = (Button) this.findViewById(R.id.lsq_play_btn);
         mPlayButton.setOnClickListener(mClickListener);
         
-        mSurfaceView = (SurfaceView) this.findViewById(com.upyun.shortvideo.R.id.lsq_video_view);
+        mSurfaceView = (SurfaceView) this.findViewById(R.id.lsq_video_view);
         mSurfaceView.setOnClickListener(mClickListener);
       
-        mRangeSelectionBar = (MovieRangeSelectionBar) this.findViewById(com.upyun.shortvideo.R.id.lsq_seekbar);
+        mRangeSelectionBar = (MovieRangeSelectionBar) this.findViewById(R.id.lsq_seekbar);
         mRangeSelectionBar.setShowPlayCursor(false);
         mRangeSelectionBar.setLeftSelection(0);
         mRangeSelectionBar.setPlaySelection(0);
         mRangeSelectionBar.setRightSelection(100);
         mRangeSelectionBar.setOnCursorChangeListener(mOnCursorChangeListener);
         
-        TextView titleTextView = (TextView) findViewById(com.upyun.shortvideo.R.id.lsq_title);
-        titleTextView.setText(getResources().getString(com.upyun.shortvideo.R.string.lsq_movie_cut_text));
-        
+        TextView titleTextView = (TextView) findViewById(R.id.lsq_title);
+        titleTextView.setText(getResources().getString(R.string.lsq_movie_cut_text));
+
+		mVideoFormatBar = findViewById(R.id.lsq_video_format);
+		mVideoFormatBar.setVisibility(View.GONE);
+		fpsGroup = findViewById(R.id.lsq_fps_group);
+		fpsGroup.setOnCheckedChangeListener(checkedChangeListener);
+		RadioButton fpsNormal = findViewById(R.id.lsq_fps_normal);
+		fpsNormal.setChecked(true);
+		bitrateGroup = findViewById(R.id.lsq_bitrate_group);
+		bitrateGroup.setOnCheckedChangeListener(checkedChangeListener);
+		RadioButton bitNormal = findViewById(R.id.lsq_bit_normal);
+		bitNormal.setChecked(true);
+
+		mCircleView = findViewById(R.id.circleView);
+		mCircleView.setTextSize(50);
+		mCircleView.setAutoTextSize(true);
+		mCircleView.setTextColor(Color.WHITE);
+		mCircleView.setVisibility(View.GONE);
+
+		mCutRect = findViewById(R.id.lsq_cut_rect);
+		mCutRect.setVisibility(View.GONE);
+
+
         // 加载视频缩略图 
         loadVideoThumbList();
         showPlayButton();
@@ -176,6 +304,48 @@ public class MovieCutActivity extends Activity
         // 裁剪后视频时长
         mCuTimeRange = new TuSDKTimeRange();
 	}
+
+	private int mFps = 0;
+	private int mBitrate = 0;
+
+	/**
+	 * 视频格式单选框
+	 */
+	private RadioGroup.OnCheckedChangeListener checkedChangeListener = new RadioGroup.OnCheckedChangeListener()
+	{
+
+		@Override
+		public void onCheckedChanged(RadioGroup group, int checkedId)
+		{
+			switch (checkedId)
+			{
+				case R.id.lsq_fps_normal:
+					mFps = 0;
+					break;
+				case R.id.lsq_fps_10:
+					mFps = 10;
+					break;
+				case R.id.lsq_fps_20:
+					mFps = 20;
+					break;
+				case R.id.lsq_fps_30:
+					mFps = 30;
+					break;
+				case R.id.lsq_bit_normal:
+					mBitrate = 0;
+					break;
+				case R.id.lsq_bit_1000:
+					mBitrate = 1000*1000;
+					break;
+				case R.id.lsq_bit_2000:
+					mBitrate = 2*1000*1000;
+					break;
+				case R.id.lsq_bit_3000:
+					mBitrate = 3*1000*1000;
+					break;
+			}
+		}
+	};
 	
 	/** 加载视频缩略图 */
 	public void loadVideoThumbList()
@@ -193,12 +363,13 @@ public class MovieCutActivity extends Activity
 			extractor.asyncExtractImageList(new TuSDKVideoImageExtractorDelegate()
 			{
 				@Override   
-				public void onVideoImageListDidLoaded(List<Bitmap> images) {
+				public void onVideoImageListDidLoaded(List<Bitmap> images)
+				{
+
 				}
 				
 				@Override
 				public void onVideoNewImageLoaded(Bitmap bitmap){
-
 					mRangeSelectionBar.drawVideoThumb(bitmap);
 				}
 				
@@ -220,7 +391,7 @@ public class MovieCutActivity extends Activity
         // 设置需要播放的视频 
         try
         {
-        	setDataSource(com.upyun.shortvideo.R.raw.tusdk_sample_video);
+        	setDataSource(mInputPath);
             mMediaPlayer.prepareAsync();  
 
         } catch (Exception e){e.printStackTrace();}
@@ -231,26 +402,17 @@ public class MovieCutActivity extends Activity
         mMediaPlayer.setOnCompletionListener(mOnCompletionListener);
 
     }
-	
-    @SuppressLint("NewApi") 
-    private void setDataSource(int resid)
+
+    private void setDataSource(String mInputPath)
     {
     	if (mMediaPlayer == null) mMediaPlayer = new MediaPlayer();
-    	try {
-            AssetFileDescriptor afd = this.getResources().openRawResourceFd(resid);
-            if (afd == null) return;
-            
-            final AudioAttributes aa = new AudioAttributes.Builder().build();
-            mMediaPlayer.setAudioAttributes(aa);
-            mMediaPlayer.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
-            afd.close();
-    	}
-    	catch(Exception e)
-    	{
-    		e.printStackTrace();
-    	}
-    }
-    
+		try {
+			mMediaPlayer.setDataSource(mInputPath);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	/** 销毁播放器 */
     public void destoryMediaPlayer()
     {
@@ -267,14 +429,16 @@ public class MovieCutActivity extends Activity
 	 * 方式选用异步方式加载(即使用prepareAsync()方式加载,
 	 * 在onPrepared()方法中开始播放)
 	 */
-    public void preparePlay(){
-        if(!isInit){
-            TuSdk.messageHub().showToast(this, com.upyun.shortvideo.R.string.lsq_video_read_prepare);
+    public void preparePlay()
+	{
+        if(!isInit)
+        {
+            TuSdk.messageHub().showToast(this, R.string.lsq_video_read_prepare);
             return;
         }
         if(mMediaPlayer==null)
         {
-            TuSdk.messageHub().showToast(this, com.upyun.shortvideo.R.string.lsq_video_empty_error);
+            TuSdk.messageHub().showToast(this, R.string.lsq_video_empty_error);
             return;
         }
       
@@ -284,12 +448,12 @@ public class MovieCutActivity extends Activity
         try
         {   
             // 设置播放资源路径，准备播放 
-        	setDataSource(com.upyun.shortvideo.R.raw.tusdk_sample_video);
+        	setDataSource(mInputPath);
             // 设置异步播放
             mMediaPlayer.prepareAsync();
         } catch (Exception e)
         {
-            TuSdk.messageHub().showToast(this, com.upyun.shortvideo.R.string.lsq_video_read_prepare);
+            TuSdk.messageHub().showToast(this, R.string.lsq_video_read_prepare);
             e.printStackTrace();
         }
     }
@@ -303,12 +467,12 @@ public class MovieCutActivity extends Activity
 	public void playVideo()
 	{
 		if(!isInit){
-			TuSdk.messageHub().showToast(this, com.upyun.shortvideo.R.string.lsq_video_read_prepare);
+			TuSdk.messageHub().showToast(this, R.string.lsq_video_read_prepare);
 			return;
 		}
         if(mMediaPlayer==null)
         {
-        	TuSdk.messageHub().showToast(this, com.upyun.shortvideo.R.string.lsq_video_empty_error);
+        	TuSdk.messageHub().showToast(this, R.string.lsq_video_empty_error);
         	return;
         }
         isPlay = true;
@@ -380,7 +544,7 @@ public class MovieCutActivity extends Activity
 		if(mPlayButton!=null)
 		{   
 			mPlayButton.setVisibility(View.VISIBLE);
-			mPlayButton.setBackgroundResource(com.upyun.shortvideo.R.drawable.lsq_style_default_crop_btn_record);
+			mPlayButton.setBackgroundResource(R.drawable.lsq_style_default_crop_btn_record);
 		}		
 	}
 	
@@ -407,137 +571,118 @@ public class MovieCutActivity extends Activity
 	/** 点击下一步按钮  */
 	private void handleCutButton()
 	{
+		// 自定义裁剪
 		startMovieClipper();
 	}
-	
-	/** 视频裁剪 */
-	private TuSDKMovieClipper mMovieClipper;
-	
+
+
 	/**
-	 * 开始裁剪视频
+	 * 自定义裁剪
 	 */
 	private void startMovieClipper()
 	{
-	    if (mMovieClipper == null)
-	    {
-			TuSDKMovieClipperOption option = new TuSDKMovieClipperOption();
-			option.savePath = getOutPutFilePath();
-			option.srcUri = mVideoPathUri;
-			option.listener = mClipperProgressListener;
-			mMovieClipper = new TuSDKMovieClipper(option);
-	    }
-
-		// 裁剪的情况有三种: 只裁前部分, 只裁后部分, 裁前后部分;
-		// startSegment 和 endSegment代表需要裁掉的部分
-		// 一次性创建两个segment, 然后筛选掉的无效片段。
-
-		List<TuSDKMovieSegment> segmentList = getSegmentList(mCuTimeRange);
-
-		filterInvalidSegment(segmentList);
-
-		mMovieClipper.startEdit(segmentList);
-	}
-
-	/**
-	 * 根据选择的裁剪时间区域创建片段集合
-	 *
-	 * @param range
-	 * @return
-	 */
-	public List<TuSDKMovieSegment> getSegmentList(TuSDKTimeRange range)
-	{
-		if (range == null || mMovieClipper == null) return null;
-
-		TuSDKMovieSegment startSegment = mMovieClipper.createSegment(0,(long) mCuTimeRange.start*1000000);
-		TuSDKMovieSegment endSegment = mMovieClipper.createSegment((long) mCuTimeRange.end*1000000, mVideoTotalTime*1000);
-
-		List<TuSDKMovieSegment> segmentList = new ArrayList<TuSDKMovieSegment>();
-		segmentList.add(startSegment);
-		segmentList.add(endSegment);
-
-		return segmentList;
-	}
-
-	/**
-	 * 过滤无效的片段
-	 *
-	 * @param segmentList
-	 * @return
-	 */
-	public List<TuSDKMovieSegment> filterInvalidSegment(List<TuSDKMovieSegment> segmentList)
-	{
-		if (segmentList == null ) return null;
-
-		Iterator<TuSDKMovieSegment> iterator = segmentList.iterator();
-		while (iterator.hasNext())
+		if(!isInputRight())
 		{
-			TuSDKMovieSegment nextSegment = iterator.next();
-			if (!isValid(nextSegment))
-				iterator.remove();
+			Toast.makeText(MovieCutActivity.this,"输入有误",Toast.LENGTH_SHORT).show();
+			return;
 		}
 
-		return segmentList;
+		TuSDKVideoInfo videoInfo = TuSDKMediaUtils.getVideoInfo(mInputPath);
+
+		MediaFormat ouputVideoFormat = getOutputVideoFormat(videoInfo);
+		MediaFormat ouputAudioFormat = getOutputAudioFormat();
+
+		TuSdkMediaTimeSlice timeSlice = new TuSdkMediaTimeSlice(mCuTimeRange.getStartTimeUS(),mCuTimeRange.getEndTimeUS());
+
+		RectF rectDrawF = new RectF(inputFormat(0),inputFormat(1),inputFormat(2),inputFormat(3));
+		RectF rectCutF = new RectF(inputFormat(4),inputFormat(5),inputFormat(6),inputFormat(7));
+
+		TuSdkMediaSuit.cuter(new TuSdkMediaDataSource(mInputPath), getOutPutFilePath(), ouputVideoFormat, ouputAudioFormat, ImageOrientation.Up,
+				rectDrawF, rectCutF, timeSlice,mCuterMediaProgress );
+		mCircleView.setVisibility(View.VISIBLE);
 	}
 
-	/**
-	 * 验证开始时间与结束时间是否合法
-	 */
-	private boolean isValid (TuSDKMovieSegment segment)
+	private boolean isInputRight()
 	{
-		if (segment == null) return false;
-
-		float startTime = segment.getStartTime();
-		float endTime = segment.getEndTime();
-
-		startTime = Math.min(startTime, mVideoTotalTime * 1000);
-		endTime = Math.min(endTime, mVideoTotalTime * 1000);
-
-		if (startTime >= endTime || startTime < 0 || endTime <= 0)
+		for (int i = 0; i < editTexts.size(); i++)
 		{
-			return false;
+			if(!editTexts.get(i).getText().toString().equals(""))
+			{
+				float inputF = Float.valueOf(editTexts.get(i).getText().toString());
+				if(inputF < 0 || inputF >1) return false;
+			}
 		}
 		return true;
 	}
 
+	private float inputFormat(int position)
+	{
+		if(editTexts.get(position).getText().toString().equals(""))
+		{
+			return 0;
+		}
+		else
+		{
+			return Float.valueOf(editTexts.get(position).getText().toString());
+		}
+	}
+
 	/**
-	 * 视频裁剪事件监听
+	 * 获取输出视频大小
+	 * @return 输出视频大小
 	 */
-	TuSDKMovieClipperListener mClipperProgressListener = new TuSDKMovieClipperListener() 
+	private TuSdkSize getOutputSize()
 	{
 
-		@Override
-		public void onStart()
+		int width = 0;
+		int height = 0;
+
+		if(outputWidth.getText().toString().equals(""))
 		{
-			String hintMsg = getResources().getString(com.upyun.shortvideo.R.string.lsq_movie_cut_start);
-			TuSdk.messageHub().setStatus(MovieCutActivity.this, hintMsg);
+			width = 0;
 		}
 
-		@Override
-		public void onCancel()
+		if(outputHeight.getText().toString().equals(""))
 		{
-			String hintMsg = getResources().getString(com.upyun.shortvideo.R.string.lsq_movie_cut_cancel);
-			TuSdk.messageHub().showToast(MovieCutActivity.this, hintMsg);
-		}
-		
-		@Override
-		public void onDone(String outputFilePath)
-		{
-			String hintMsg = getResources().getString(com.upyun.shortvideo.R.string.lsq_movie_cut_done);
-			TuSdk.messageHub().showToast(MovieCutActivity.this, hintMsg);
+			height = 0;
 		}
 
-		@Override
-		public void onError(Exception exception)
-		{
-			String hintMsg = getResources().getString(com.upyun.shortvideo.R.string.lsq_movie_cut_error);
-			TuSdk.messageHub().showError(MovieCutActivity.this, hintMsg);
-		}
-	};
-	
+		width = Integer.valueOf(outputWidth.getText().toString());
+		height = Integer.valueOf(outputHeight.getText().toString());
+
+		return TuSdkSize.create(width,height);
+	}
+
+	/**
+	 * 获取输出文件的视频格式信息
+	 * @param videoInfo 当前的音频信息
+	 * @return MediaFormat
+	 */
+	protected MediaFormat getOutputVideoFormat(TuSDKVideoInfo videoInfo)
+	{
+		int fps = mFps==0 ? videoInfo.fps : mFps;
+		int bitrate = mBitrate==0 ? videoInfo.bitrate : mBitrate;
+
+		MediaFormat mediaFormat = TuSdkMediaFormat.buildSafeVideoEncodecFormat(getOutputSize().width, getOutputSize().height,
+				fps, bitrate, MediaCodecInfo.CodecCapabilities.COLOR_FormatSurface, 0,1);
+
+		return mediaFormat;
+	}
+
+	/**
+	 * 获取输出的音频格式信息
+	 * @return MediaFormat
+	 */
+	protected MediaFormat getOutputAudioFormat()
+	{
+		MediaFormat audioFormat = TuSdkMediaFormat.buildSafeAudioEncodecFormat();
+		return audioFormat;
+	}
+
 	private String getOutPutFilePath()
 	{
 		return new File(AlbumHelper.getAblumPath(),
-				String.format("lsq_%s.mp4", StringHelper.timeStampString())).toString();
+				String.format("lsq_cut_%s.mp4", StringHelper.timeStampString())).toString();
 	}
 	
     @Override
@@ -582,12 +727,12 @@ public class MovieCutActivity extends Activity
 		{
 			switch (v.getId())
 			{
-			case com.upyun.shortvideo.R.id.lsq_back:
+			case R.id.lsq_back:
 				// 返回  
 				onBackPressed();
 				break;
-			case com.upyun.shortvideo.R.id.lsq_play_btn:
-			case com.upyun.shortvideo.R.id.lsq_video_view:
+			case R.id.lsq_play_btn:
+			case R.id.lsq_video_view:
 				if(!isPlay)
 				{
 					// 准备播放
@@ -600,7 +745,7 @@ public class MovieCutActivity extends Activity
 				}
 
 				break;
-			case com.upyun.shortvideo.R.id.lsq_next:
+			case R.id.lsq_next:
 				// 下一步
 				handleCutButton();
 				break;
@@ -611,7 +756,8 @@ public class MovieCutActivity extends Activity
 		}
 	};
 	
-	public void seekToStart(){
+	public void seekToStart()
+	{
 		isMoveStartTime = true;
 		mStart_time =(mStart_time>1)?mStart_time:1;
     	mMediaPlayer.seekTo((int) mStart_time);
@@ -652,8 +798,10 @@ public class MovieCutActivity extends Activity
 			if(!isFirstLoadVideo){
 				isFirstLoadVideo = true;
                 // 获取视频总时长
-                mVideoTotalTime  = mMediaPlayer.getDuration(); 
+                mVideoTotalTime  = mMediaPlayer.getDuration();
                 mEnd_time  = mVideoTotalTime;
+                mCuTimeRange.setStartTime(0.0f);
+                mCuTimeRange.setEndTime(mVideoTotalTime);
                 setBarSpace();
                 updatePlayTime();
             	updateRightTime();
@@ -751,10 +899,10 @@ public class MovieCutActivity extends Activity
 			isMoveLeft = true;
 			if (mMediaPlayer != null)
 			{
-				mCuTimeRange.start = percent*mVideoTotalTime/(100*1000);
-				mMediaPlayer.seekTo((int) mCuTimeRange.start*1000);
+				mCuTimeRange.setStartTime( percent*mVideoTotalTime/(100*1000));
+				mMediaPlayer.seekTo((int) mCuTimeRange.getStartTime()*1000);
 				mMediaPlayer.start();
-				mStart_time = (int) mCuTimeRange.start*1000;
+				mStart_time = (int) mCuTimeRange.getStartTime()*1000;
 				updateLeftTime();
 				updatePlayTime();
 			}
@@ -775,10 +923,10 @@ public class MovieCutActivity extends Activity
 			isMoveRight = true;
 			if (mMediaPlayer != null)
 			{
-				mCuTimeRange.end = percent*mVideoTotalTime/(100*1000);
-				mMediaPlayer.seekTo((int) mCuTimeRange.end*1000);
+				mCuTimeRange.setEndTime( percent*mVideoTotalTime/(100*1000));
+				mMediaPlayer.seekTo((int) mCuTimeRange.getEndTime()*1000);
 				mMediaPlayer.start();
-				mEnd_time = (int) mCuTimeRange.end*1000;
+				mEnd_time = (int) mCuTimeRange.getEndTime()*1000;
 				updateRightTime();
 				updatePlayTime();
 			}
@@ -907,4 +1055,24 @@ public class MovieCutActivity extends Activity
   	         }
   	     }
     };
+
+	/**
+	 * 设置剪裁区域
+	 * @param view
+	 */
+	public void showCutRect(View view)
+	{
+		mVideoFormatBar.setVisibility(View.GONE);
+		mCutRect.setVisibility(mCutRect.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
+	}
+
+	/**
+	 * 设置视频格式
+	 * @param view
+	 */
+	public void showVideoFormat(View view)
+	{
+		mCutRect.setVisibility(View.GONE);
+		mVideoFormatBar.setVisibility(mVideoFormatBar.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
+	}
 }

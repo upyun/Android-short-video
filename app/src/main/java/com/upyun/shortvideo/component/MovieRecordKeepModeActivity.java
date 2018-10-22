@@ -17,6 +17,8 @@ import android.widget.RelativeLayout;
 import com.upyun.shortvideo.SimpleCameraActivity;
 import com.upyun.shortvideo.utils.Constants;
 import com.upyun.shortvideo.views.CompoundDrawableTextView;
+import com.upyun.shortvideo.views.record.MovieRecordView;
+import com.upyun.shortvideo.views.record.MovieRecordView.TuSDKMovieRecordDelegate;
 
 import org.lasque.tusdk.core.TuSdkContext;
 import org.lasque.tusdk.core.encoder.video.TuSDKVideoEncoderSetting;
@@ -27,9 +29,7 @@ import org.lasque.tusdk.core.utils.hardware.TuSDKRecordVideoCamera.RecordMode;
 import org.lasque.tusdk.core.utils.hardware.TuSDKRecordVideoCamera.RecordState;
 import org.lasque.tusdk.core.utils.hardware.TuSDKRecordVideoCamera.TuSDKRecordVideoCameraDelegate;
 import org.lasque.tusdk.core.video.TuSDKVideoResult;
-
-import com.upyun.shortvideo.views.record.MovieRecordView;
-import com.upyun.shortvideo.views.record.MovieRecordView.TuSDKMovieRecordDelegate;
+import com.upyun.shortvideo.R;
 
 /**
  * 断点续拍模式录制相机
@@ -43,7 +43,7 @@ public class MovieRecordKeepModeActivity extends SimpleCameraActivity implements
 
 	protected int getLayoutId()
 	{
-		return com.upyun.shortvideo.R.layout.movie_record_activity;
+		return R.layout.movie_record_activity;
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public class MovieRecordKeepModeActivity extends SimpleCameraActivity implements
 
         getRecordView();
 
-		RelativeLayout cameraView = (RelativeLayout)findViewById(com.upyun.shortvideo.R.id.lsq_cameraView);
+		RelativeLayout cameraView = (RelativeLayout)findViewById(R.id.lsq_cameraView);
 		// 确认视图初始化完毕
 		cameraView.post(new Runnable()
 		{
@@ -94,7 +94,7 @@ public class MovieRecordKeepModeActivity extends SimpleCameraActivity implements
 	{
 		if (mRecordView == null)
 		{
-			mRecordView = (MovieRecordView) findViewById(com.upyun.shortvideo.R.id.lsq_movie_record_view);
+			mRecordView = (MovieRecordView) findViewById(R.id.lsq_movie_record_view);
 			mRecordView.setActived(true);
 			mRecordView.setDelegate(this);
 			mRecordView.setUpCamera(this, mVideoCamera);
@@ -212,7 +212,7 @@ public class MovieRecordKeepModeActivity extends SimpleCameraActivity implements
 
 	/** ----------- 注意事项：如果视频录制完成后需要跳转到视频编辑页面,需要将录制视频页面销毁掉; 视频编辑跳转视频录制也是如此 ---------------------------*/
 	@Override
-	public void onMovieRecordComplete(TuSDKVideoResult result) 
+	public void onMovieRecordComplete(TuSDKVideoResult result)
 	{
 		mRecordView.updateViewOnMovieRecordComplete(isRecording());
 	}
@@ -283,5 +283,15 @@ public class MovieRecordKeepModeActivity extends SimpleCameraActivity implements
 	public void finishRecordActivity()
 	{
 		this.finish();
+	}
+
+	@Override
+	protected void onDestroy()
+	{
+		super.onDestroy();
+
+		// 销毁页面时记得销毁下载器
+		if (mRecordView != null)
+			mRecordView.getStickerListView().getStickerDownLoader().destroy();
 	}
 }

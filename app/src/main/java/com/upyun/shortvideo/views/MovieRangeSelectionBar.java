@@ -58,8 +58,8 @@ public class MovieRangeSelectionBar extends View
     private final int CLICK_LEFT_CURSOR = 1;
     private final int CLICK_RIGHT_CURSOR = 2;
     private final int CLICK_PLAY_CURSOR = 3;
-    
-	/** 定义滑动方向  */
+
+    /** 定义滑动方向  */
     private enum DIRECTION 
     {
         LEFT , RIGHT;
@@ -83,16 +83,20 @@ public class MovieRangeSelectionBar extends View
     private int mPlayPercent = 50;
     /** View宽度 */
     private int mRangeSelectionBarWidthMeasure;
+    /** View高度 */
+    private int mRangeSelectionBarHeightMeasure;
 	/** MovieRangeSelectionBar WIDTH */
     private int mRangeSelectionBarWidth;
 	/** MovieRangeSelectionBar HEIGHT */
     private int mRangeSelectionBarHeight;
 	/** 进度条背景颜色 */
-	private String mSeekBarColorBg = "#9fa0a0";
-	/**当前进度条选择范围的颜色 */
+    private String mSeekBarColorBg = "#9fa0a0";
+    /**当前进度条选择范围的颜色 */
 	private String mSeekBarSelectColorBg = "#f4a11a";
 	/** 当前播放点位置的填充色 */
 	private String mPlayCursorColorBg = "#f4a11a";
+    /** 蒙层的颜色**/
+    private String mShadowColor = "#231815";
     /** 左光标移动指针ID */
     private int mLeftPointerID = -1;
     /** 右光标移动指针ID */
@@ -159,6 +163,8 @@ public class MovieRangeSelectionBar extends View
     private boolean isShowPlayCursor;
     /** View绘制画笔 */
     private Paint mPaint;
+    /** Bar背景绘制画笔 */
+    private Paint mBarPaint;
     /** 左右光标监听接口 */
     private OnCursorChangeListener mListener;
 
@@ -206,13 +212,29 @@ public class MovieRangeSelectionBar extends View
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setAntiAlias(true);
         mPaint.setStyle(Style.FILL);
+
+        mBarPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mBarPaint.setAntiAlias(true);
+        mBarPaint.setStyle(Style.FILL);
         
-        int shadowColor=TuSdkContext.getColor("shadow_color");
         mShadowPaint.setAntiAlias(true);
-        mShadowPaint.setColor(shadowColor);
+        mShadowPaint.setColor(Color.parseColor(getShadowColor()));
         mShadowPaint.setAlpha(153);
     }
-    
+
+    public void setShadowColor(String colorId){
+        mShadowColor = colorId;
+        if(mShadowPaint !=null)
+        {
+            mShadowPaint.setColor(Color.parseColor(mShadowColor));
+            postInvalidate();
+        }
+    }
+
+    public String getShadowColor(){
+        return mShadowColor;
+    }
+
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
@@ -349,7 +371,7 @@ public class MovieRangeSelectionBar extends View
             {
             	mRightCursorOffsetX = mDeltaX ;
             	mRightCursorX = mRightCursorRect.left;
-            	mLastX = mRightCursorX + mRightCursorOffsetX;
+            	mLastX = mRightCursorX + mRightCursorOffsetX + mRightCursorRect.right - mRightCursorRect.left;
             	if (mRightCursorRect.left + mRightCursorOffsetX <= mLeftCursorRect.right)
             	{
             		mRightCursorOffsetX = 0;
@@ -362,7 +384,7 @@ public class MovieRangeSelectionBar extends View
               		mRightCursorX  = mSelectionBarRect.right - mRightCursorOffsetW;
               		mLastX = mRangeSelectionBarWidth;
             	}
-              	mRightPercent = (int) (100 * mLastX / mRangeSelectionBarWidth);
+              	mRightPercent = (int) (100 * mLastX  / mRangeSelectionBarWidth);
               	trggleRightCallback(mRightPercent);
             }
        	
@@ -433,7 +455,9 @@ public class MovieRangeSelectionBar extends View
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
     {
         mRangeSelectionBarWidthMeasure = MeasureSpec.getSize(widthMeasureSpec);
-        
+        mRangeSelectionBarHeightMeasure = MeasureSpec.getSize(heightMeasureSpec);
+
+
         mRangeSelectionBarWidth = ((int) (mSelectionBarRect.right - mSelectionBarRect.left));
         mRangeSelectionBarHeight = ((int) (mSelectionBarRect.top - mSelectionBarRect.bottom)); 
         if (mListener != null)
@@ -441,9 +465,9 @@ public class MovieRangeSelectionBar extends View
         	mListener.onSeeekBarChanged(mRangeSelectionBarWidth, mRangeSelectionBarHeight);
         }
         
-        initUpdate();
+
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        
+        initUpdate();
     }
     
     private void trggleLeftCallback(int percent)
@@ -520,6 +544,7 @@ public class MovieRangeSelectionBar extends View
     {
     	
     	mSelectionBarHeight = getHeight() > 0 ? getHeight() : TuSdkContext.dip2px(65);
+    	mSelectionBarHeight = mRangeSelectionBarHeightMeasure;
     	mPlayCursorOffsetW = TuSdkContext.dip2px(3);
     	mLeftCursorOffsetW = TuSdkContext.dip2px(20);
     	mRightCursorOffsetW = TuSdkContext.dip2px(20);
@@ -646,19 +671,25 @@ public class MovieRangeSelectionBar extends View
     protected void onDraw(Canvas canvas)
     {
     	super.onDraw(canvas);
-    	
+
     	/*** Draw ClipSeekBar Background***/
     	final float radius = 0;
-        mPaint.setColor(Color.parseColor(mSeekBarColorBg));
-        canvas.drawRoundRect(mSelectionBarRect, radius, radius, mPaint);
+        mBarPaint.setColor(Color.parseColor(mSeekBarColorBg));
+        canvas.drawRoundRect(mSelectionBarRect, radius, radius, mBarPaint);
 
         /*** Draw ClipSeekBar Select Background*/
-        mPaint.setColor(Color.parseColor(mSeekBarSelectColorBg));
-        canvas.drawRoundRect(mSelectionBarSelectedRect, radius, radius, mPaint);
+        mBarPaint.setColor(Color.parseColor(mSeekBarSelectColorBg));
+        canvas.drawRoundRect(mSelectionBarSelectedRect, radius, radius, mBarPaint);
 
         /**Draw ClipSeekBar Select Fill Background*/
-        mPaint.setColor(Color.parseColor(mSeekBarColorBg));
-        canvas.drawRoundRect(mSelectionBarFillRect, radius, radius, mPaint);
+        mBarPaint.setColor(Color.parseColor(mSeekBarColorBg));
+        canvas.drawRoundRect(mSelectionBarFillRect, radius, radius, mBarPaint);
+
+        mBarPaint.setColor(Color.parseColor(mSeekBarColorBg));
+        canvas.drawRoundRect(new RectF(0,mSelectionBarRect.top,mSelectionBarFillRect.left,mSelectionBarRect.bottom), radius, radius, mBarPaint);
+
+        mBarPaint.setColor(Color.parseColor(mSeekBarColorBg));
+        canvas.drawRoundRect(new RectF(mSelectionBarFillRect.right,mSelectionBarRect.top,mSelectionBarRect.right,mSelectionBarSelectedRect.bottom), radius, radius, mBarPaint);
         
         /**Draw Bitmap */
         if(mVideoThumbList != null)
@@ -695,16 +726,16 @@ public class MovieRangeSelectionBar extends View
         path.moveTo(mLeftTglVertexX, mLeftTglVertexY);
         path.lineTo(mLeftTglVertexX, mLeftTglVertexY + mTglSize * 2);
         path.lineTo(mLeftTglVertexX + mTglSize, mLeftTglVertexY + mTglSize);
-        path.close(); 
+        path.close();
         canvas.drawPath(path, mPaint);
-        
+
         /**Draw Right Triangle*/
         mPaint.setColor(Color.WHITE);
         path = new Path();
         path.moveTo(mRightTglVertexX, mRightTglVertexY);
         path.lineTo(mRightTglVertexX, mRightTglVertexY + mTglSize * 2);
         path.lineTo(mRightTglVertexX - mTglSize, mRightTglVertexY + mTglSize);
-        path.close(); 
+        path.close();
         canvas.drawPath(path, mPaint);
         
         if (mType == Type.MV)

@@ -18,7 +18,7 @@
         <item name="android:src">@drawable/tusdk_button_info_icon_dot</item>
         <item name="android:background">@color/lsq_color_transparent</item>
     </style>
-
+    
     <style name="lsq_badgeView">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">15dp</item>
@@ -104,7 +104,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
-
+    
     <style name="lsq_editor_filter_list_view">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
@@ -138,17 +138,48 @@
         <item name="android:layout_marginTop">20dp</item>
     </style>
 
-    <style name="MyEditText" parent="Theme.AppCompat.Light">
-        <item name="colorControlNormal">#dcdcdc</item>
-        <item name="colorControlActivated">#dcdcdc</item>
+    <!-- edit entry Option -->
+    <style name="lsq_edit_entryOptionButton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingTop">18dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:textColor">@color/lsq_scence_effect_color_title</item>
+        <item name="android:textSize">10sp</item>
+
     </style>
 
-    <style name="titleText">
-        <item name="android:layout_width">wrap_content</item>
+    <style name="lsq_edit_textFeatureButton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingTop">18dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:textColor">@color/lsq_color_white</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="lsq_edit_input">
+        <item name="android:inputType">numberDecimal</item>
+        <item name="android:maxLength">5</item>
+        <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/setting_text_color</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="lsq_video_format">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:textColor">@color/lsq_color_white</item>
     </style>
 
 </resources>

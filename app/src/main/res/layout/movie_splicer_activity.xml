@@ -1,38 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:CircleProgressView="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/lsq_color_white"
-    android:orientation="vertical" >
-    
-    <include
-       layout="@layout/title_item_layout"/> 
-       
-    <SurfaceView 
-        android:id="@+id/lsq_movie_preview_one"
-        android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:layout_marginTop="10dp"/>
-    <SurfaceView 
-        android:id="@+id/lsq_movie_preview_two"
-        android:layout_width="match_parent"
-        android:layout_height="170dp"/>
+    android:background="@color/lsq_color_white">
 
-    <Button
-	   android:id="@+id/lsq_movie_mixer_btn"
-       style="@style/lsq_audio_mixer_button"
-       android:layout_width="200dp"
-       android:layout_marginTop="30dp"
-       android:layout_gravity="center_horizontal"
-       android:text="@string/lsq_movie_splicer"/>
-    
-    <TextView 
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:textColor="@color/lsq_color_black"
-        android:text="@string/lsq_movie_mixer_hint"/>
+        android:layout_height="match_parent">
+
+        <include
+            layout="@layout/title_item_layout"/>
+
+        <SurfaceView
+            android:id="@+id/lsq_movie_preview_one"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:layout_marginTop="10dp"/>
+        <SurfaceView
+            android:id="@+id/lsq_movie_preview_two"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"/>
+
+        <Button
+            android:id="@+id/lsq_movie_mixer_btn"
+            style="@style/lsq_audio_mixer_button"
+            android:layout_width="200dp"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/lsq_movie_splicer"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/lsq_color_black"
+            android:text="@string/lsq_movie_mixer_hint"/>
+
+    </LinearLayout>
+
+    <at.grabner.circleprogress.CircleProgressView
+        android:id="@+id/circleView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerInParent="true"
+        CircleProgressView:cpv_autoTextSize="true"
+        CircleProgressView:cpv_barColor="@color/primary"
+        CircleProgressView:cpv_barWidth="15dp"
+        CircleProgressView:cpv_innerContourSize="0dp"
+        CircleProgressView:cpv_maxValue="1"
+        CircleProgressView:cpv_outerContourSize="0dp"
+        CircleProgressView:cpv_rimColor="@color/primary_light"
+        CircleProgressView:cpv_rimWidth="15dp"
+        CircleProgressView:cpv_seekMode="true"
+        CircleProgressView:cpv_showUnit="true"
+        CircleProgressView:cpv_spinColor="@color/primary"
+        CircleProgressView:cpv_textColor="@color/lsq_color_white"
+        CircleProgressView:cpv_textScale="1"
+        CircleProgressView:cpv_unit="%"
+        CircleProgressView:cpv_unitColor="@color/primary_light"
+        CircleProgressView:cpv_unitPosition="right_top"
+        CircleProgressView:cpv_unitScale="1"
+        CircleProgressView:cpv_value="0" />
     
-</LinearLayout>
+</RelativeLayout>

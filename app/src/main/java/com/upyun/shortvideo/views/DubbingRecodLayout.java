@@ -11,16 +11,19 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.upyun.shortvideo.utils.AudioTimingRunnable;
+
+import org.lasque.tusdk.api.audio.preproc.processor.TuSDKAudioProcessor;
 import org.lasque.tusdk.core.TuSdk;
 import org.lasque.tusdk.core.TuSdkContext;
 import org.lasque.tusdk.core.audio.TuSDKAudioFileRecorder;
+import org.lasque.tusdk.core.media.codec.audio.TuSdkAudioInfo;
 import org.lasque.tusdk.core.utils.FileHelper;
 import org.lasque.tusdk.core.utils.TLog;
 import org.lasque.tusdk.core.utils.ThreadHelper;
 import org.lasque.tusdk.core.view.TuSdkImageView;
 import org.lasque.tusdk.core.view.TuSdkRelativeLayout;
-
-import com.upyun.shortvideo.utils.AudioTimingRunnable;
+import com.upyun.shortvideo.R;
 
 import java.io.File;
 
@@ -139,24 +142,24 @@ public class DubbingRecodLayout extends TuSdkRelativeLayout
     @SuppressLint("ClickableViewAccessibility")
     private void initAudioRecordingView()
     {
-        mAudioRecordCloseButton = (TuSdkImageView) findViewById(com.upyun.shortvideo.R.id.lsq_voice_close_button);
-        mAudioRecordButton = (TuSdkImageView) findViewById(com.upyun.shortvideo.R.id.lsq_voice_record_button);
-        mAudioRecordCancelButton = (TuSdkImageView) findViewById(com.upyun.shortvideo.R.id.lsq_voice_cancel_button);
+        mAudioRecordCloseButton = (TuSdkImageView) findViewById(R.id.lsq_voice_close_button);
+        mAudioRecordButton = (TuSdkImageView) findViewById(R.id.lsq_voice_record_button);
+        mAudioRecordCancelButton = (TuSdkImageView) findViewById(R.id.lsq_voice_cancel_button);
         mAudioRecordCancelButton.setOnClickListener(mClickListener);
-        mAudioRecordSaveButton = (TuSdkImageView) findViewById(com.upyun.shortvideo.R.id.lsq_voice_record_save_button);
+        mAudioRecordSaveButton = (TuSdkImageView) findViewById(R.id.lsq_voice_record_save_button);
         mAudioRecordCloseButton.setOnClickListener(mClickListener);
         mAudioRecordButton.setOnTouchListener(mAudioRecordButtonOnTouchListener);
         mAudioRecordSaveButton.setOnClickListener(mClickListener);
 
-        Button minTimeButton = (Button) findViewById(com.upyun.shortvideo.R.id.lsq_minTimeBtn);
+        Button minTimeButton = (Button) findViewById(R.id.lsq_minTimeBtn);
         LayoutParams minTimeLayoutParams = (LayoutParams) minTimeButton.getLayoutParams();
         minTimeLayoutParams.leftMargin =(int)(((float) MIN_AUDIO_RECORD_TIME * TuSdkContext.getScreenSize().width) / mMaxRecordTime)
-                -TuSdkContext.dip2px(minTimeButton.getWidth());
+                - TuSdkContext.dip2px(minTimeButton.getWidth());
 
-        mAudioTimeRemainingText = (TextView) findViewById(com.upyun.shortvideo.R.id.lsq_voiceRrecord_timeRemaining_text);
+        mAudioTimeRemainingText = (TextView) findViewById(R.id.lsq_voiceRrecord_timeRemaining_text);
         updateAudioTimeRemaining(0.0f);
 
-        mAudioRecordProgressBar = (ProgressBar) findViewById(com.upyun.shortvideo.R.id.lsq_record_progressbar);
+        mAudioRecordProgressBar = (ProgressBar) findViewById(R.id.lsq_record_progressbar);
         updateAudioProgressBar(0.0f);
 
     }
@@ -197,6 +200,35 @@ public class DubbingRecodLayout extends TuSdkRelativeLayout
         mAudioRecorder = new TuSDKAudioFileRecorder();
         mAudioRecorder.setOutputFormat(TuSDKAudioFileRecorder.OutputFormat.AAC);
         mAudioRecorder.setAudioRecordDelegate(mRecordAudioDelegate);
+    }
+
+    /**
+     * 设置输入音频信息
+     * @param audioInfo
+     */
+    public void setInputAudioInfo(TuSdkAudioInfo audioInfo)
+    {
+        if(mAudioRecorder == null || audioInfo == null) return;
+        mAudioRecorder.setInputAudioInfo(audioInfo);
+    }
+
+    /**
+     * 设置要处理的音效类型
+     * @param soundType
+     */
+    public void setSoundType(TuSDKAudioProcessor.TuSDKSoundType soundType)
+    {
+        if(mAudioRecorder == null || soundType == null) return;
+        mAudioRecorder.setSoundType(soundType);
+    }
+
+    /**
+     * 设置音效类型改变回调
+     * @param soundTypeChangeListener 音效类型改变回调
+     */
+    public void setSoundTypeChangeListener(TuSDKAudioProcessor.TuSDKSoundTypeChangeListener soundTypeChangeListener) {
+        if(mAudioRecorder == null || soundTypeChangeListener == null) return;
+        this.mAudioRecorder.setSoundTypeChangeListener(soundTypeChangeListener);
     }
 
     /** 停止录音 */
@@ -339,7 +371,7 @@ public class DubbingRecodLayout extends TuSdkRelativeLayout
     private void updateVoiceRecordButton(boolean isRecording)
     {
         int imgId = 0;
-        imgId = isRecording ? com.upyun.shortvideo.R.drawable.tusdk_view_dubbing_record_selected_button : com.upyun.shortvideo.R.drawable.tusdk_view_dubbing_record_unselected_button;
+        imgId = isRecording ? R.drawable.tusdk_view_dubbing_record_selected_button : R.drawable.tusdk_view_dubbing_record_unselected_button;
         mAudioRecordButton.setImageResource(imgId);
     }
 

@@ -20,6 +20,7 @@ import android.widget.Button;
 import org.lasque.tusdk.core.TuSdkContext;
 import org.lasque.tusdk.core.utils.hardware.TuSDKRecordVideoCamera;
 import org.lasque.tusdk.core.view.widget.button.TuSdkTextButton;
+import com.upyun.shortvideo.R;
 
 /**
  * 断点续拍全屏录制视图
@@ -48,7 +49,7 @@ public class MovieRecordFullScreenView extends MovieRecordView
 	@Override
 	protected int getLayoutId()
 	{
-		return com.upyun.shortvideo.R.layout.movie_record_full_screen_view;
+		return R.layout.movie_record_full_screen_view;
 	}
 
 	@Override
@@ -60,7 +61,7 @@ public class MovieRecordFullScreenView extends MovieRecordView
 		updateButtonStatus(mConfirmButton, false);
 
 		// 速度控制条
-		mSpeedModeBar = findViewById(com.upyun.shortvideo.R.id.lsq_movie_speed_bar);
+		mSpeedModeBar = findViewById(R.id.lsq_movie_speed_bar);
 
 		int childCount = mSpeedModeBar.getChildCount();
 
@@ -140,8 +141,8 @@ public class MovieRecordFullScreenView extends MovieRecordView
 		Drawable drawable = TuSdkContext.getDrawable(imgId);
 		switch (button.getId())
 		{
-			case com.upyun.shortvideo.R.id.lsq_confirmWrap:
-			case com.upyun.shortvideo.R.id.lsq_backWrap:
+			case R.id.lsq_confirmWrap:
+			case R.id.lsq_backWrap:
 				if (!clickable)
 					drawable.setAlpha((int) (MAX_ALPHA * ALPHA_RATIO));
 				else
@@ -160,72 +161,72 @@ public class MovieRecordFullScreenView extends MovieRecordView
 	@Override
 	protected int getFilterSelectedDrawable()
 	{
-		return com.upyun.shortvideo.R.drawable.lsq_filter_full;
+		return R.drawable.lsq_filter_full;
 	}
 
 	@Override
 	protected int getFilterUnselectedDrawable()
 	{
-		return com.upyun.shortvideo.R.drawable.lsq_filter_full;
+		return R.drawable.lsq_filter_full;
 	}
 
 	@Override
 	protected int getStickerSelectedDrawable()
 	{
-		return com.upyun.shortvideo.R.drawable.lsq_sticker_full;
+		return R.drawable.lsq_sticker_full;
 	}
 
 	@Override
 	protected int getStickerUnselectedDrawable()
 	{
-		return com.upyun.shortvideo.R.drawable.lsq_sticker_full;
+		return R.drawable.lsq_sticker_full;
 	}
 
 	@Override
 	protected int getConfirmSelectedDrawable()
 	{
-		return com.upyun.shortvideo.R.drawable.lsq_finish_full;
+		return R.drawable.lsq_finish_full;
 	}
 
 	@Override
 	protected int getConfirmUnselectedDrawable()
 	{
-		return com.upyun.shortvideo.R.drawable.lsq_finish_full;
+		return R.drawable.lsq_finish_full;
 	}
 
 	@Override
 	protected int getCancelSelectedDrawable()
 	{
-		return com.upyun.shortvideo.R.drawable.lsq_cancel_full;
+		return R.drawable.lsq_cancel_full;
 	}
 
 	@Override
 	protected int getCancelUnselectedDrawable()
 	{
-		return com.upyun.shortvideo.R.drawable.lsq_cancel_full;
+		return R.drawable.lsq_cancel_full;
 	}
 
 	@Override
 	protected int getRecordSelectedDrawable()
 	{
-		return com.upyun.shortvideo.R.drawable.lsq_recording_full;
+		return R.drawable.lsq_recording_full;
 	}
 
 	@Override
 	protected int getRecordUnselectedDrawable()
 	{
-		return com.upyun.shortvideo.R.drawable.lsq_record_pause_full;
+		return R.drawable.lsq_record_pause_full;
 	}
 
 	@Override
 	protected int getFlashSelectedDrawable()
 	{
-		return com.upyun.shortvideo.R.drawable.lsq_lamp_on_full;
+		return R.drawable.lsq_lamp_on_full;
 	}
 
 	@Override
 	protected int getFlashUnselectedDrawable()
 	{
-		return com.upyun.shortvideo.R.drawable.lsq_lamp_off_full;
+		return R.drawable.lsq_lamp_off_full;
 	}
 }

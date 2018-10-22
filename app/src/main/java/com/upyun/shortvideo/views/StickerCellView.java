@@ -26,6 +26,7 @@ import org.lasque.tusdk.core.view.listview.TuSdkCellRelativeLayout;
 import org.lasque.tusdk.core.view.listview.TuSdkListSelectableCellViewInterface;
 import org.lasque.tusdk.modules.view.widget.sticker.StickerGroup;
 import org.lasque.tusdk.modules.view.widget.sticker.StickerLocalPackage;
+import com.upyun.shortvideo.R;
 
 /**
  * @author Yanlin
@@ -158,7 +159,7 @@ public class StickerCellView extends TuSdkCellRelativeLayout<StickerGroup> imple
 	private ImageView getImageView()
 	{
 		if (mThumbView == null)
-			mThumbView = (ImageView) findViewById(com.upyun.shortvideo.R.id.lsq_item_image);
+			mThumbView = (ImageView) findViewById(R.id.lsq_item_image);
 
 		return mThumbView;
 	}
@@ -166,7 +167,7 @@ public class StickerCellView extends TuSdkCellRelativeLayout<StickerGroup> imple
 	public ImageView getDownloadImageView()
 	{
 		if (mDownloadView == null)
-			mDownloadView = (ImageView) findViewById(com.upyun.shortvideo.R.id.lsq_item_state_image);
+			mDownloadView = (ImageView) findViewById(R.id.lsq_item_state_image);
 
 		return mDownloadView;
 	}
@@ -180,7 +181,7 @@ public class StickerCellView extends TuSdkCellRelativeLayout<StickerGroup> imple
 	{
 		if (mStickerBorderView == null)
 		{
-			mStickerBorderView = (RelativeLayout) findViewById(com.upyun.shortvideo.R.id.lsq_item_wrap);
+			mStickerBorderView = (RelativeLayout) findViewById(R.id.lsq_item_wrap);
 		}
 		return mStickerBorderView;
 	}
@@ -189,7 +190,7 @@ public class StickerCellView extends TuSdkCellRelativeLayout<StickerGroup> imple
 	{
 		if (mDownloadProgressView == null)
 		{
-			mDownloadProgressView = findViewById(com.upyun.shortvideo.R.id.lsq_progress_image);
+			mDownloadProgressView = findViewById(R.id.lsq_progress_image);
 		}
 		return mDownloadProgressView;
 	}
@@ -209,7 +210,7 @@ public class StickerCellView extends TuSdkCellRelativeLayout<StickerGroup> imple
 	@Override
 	public void onCellSelected(int i)
 	{
-		this.getBorderView().setBackground(TuSdkContext.getDrawable(com.upyun.shortvideo.R.drawable.sticker_cell_background));
+		this.getBorderView().setBackground(TuSdkContext.getDrawable(R.drawable.sticker_cell_background));
 	}
 
 	@Override

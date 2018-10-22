@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	xmlns:app="http://schemas.android.com/apk/res-auto">
 
 	<!-- top tools -->
     <RelativeLayout
@@ -26,6 +25,17 @@
 		    android:drawableLeft="@drawable/lsq_style_default_btn_back"
 		    android:textColor="#f4a11a" 
 		    />
+		<ImageView
+			android:id="@+id/lsq_ratioButton"
+			android:layout_width="44dp"
+			android:layout_height="match_parent"
+			android:layout_centerVertical="true"
+			android:paddingLeft="@dimen/lsq_font_space_8"
+			android:paddingRight="@dimen/lsq_font_space_8"
+			android:layout_toLeftOf="@+id/lsq_flashButton"
+			android:layout_marginRight="22dp"
+			android:scaleType="center"
+			android:src="@drawable/lsq_style_default_btn_flash_off" />
 		
         <ImageView
             android:id="@+id/lsq_flashButton"

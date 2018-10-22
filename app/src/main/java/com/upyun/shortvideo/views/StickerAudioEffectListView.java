@@ -9,12 +9,12 @@
  */
 package com.upyun.shortvideo.views;
 
-import org.lasque.tusdk.core.view.recyclerview.TuSdkTableView;
-import org.lasque.tusdk.modules.view.widget.sticker.StickerGroup;
-
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
+
+import org.lasque.tusdk.core.view.recyclerview.TuSdkTableView;
+import org.lasque.tusdk.modules.view.widget.sticker.StickerGroup;
 
 /**
  * 自定义的MV列表

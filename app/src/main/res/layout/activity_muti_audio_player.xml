@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@color/lsq_color_white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="org.lasque.tusdkvideodemo.com.lasque.tusdkvideodemo.api.MutiAudioPlayerActivity">
+
+    <include
+        layout="@layout/title_item_layout"/>
+
+    <include
+        android:id="@+id/lsq_voice_volume_config_view"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        layout="@layout/tusdk_config_view" />
+
+</LinearLayout>

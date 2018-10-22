@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<org.lasque.tusdk.impl.components.widget.sticker.StickerTextItemView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/lsq_sticker_turnButton" >
+
+        <org.lasque.tusdk.core.view.TuSdkTextView
+            android:id="@+id/lsq_sticker_textView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:shadowDx="1.5"
+		    android:shadowDy="1.3"
+		    android:shadowRadius="1.6"
+            android:includeFontPadding="false"
+            android:layout_centerInParent="true"
+            android:layout_margin="12dp"
+            android:gravity="center"/>
+
+        <org.lasque.tusdk.core.view.widget.button.TuSdkImageButton
+            android:id="@+id/lsq_sticker_cancelButton"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:scaleType="center"
+            android:src="@drawable/lsq_sticker_item_text_button_close" />
+
+        <!--单纯调节大小-->
+        <org.lasque.tusdk.core.view.widget.button.TuSdkImageButton
+            android:id="@+id/lsq_sticker_resizeButton"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:scaleType="center"
+            android:visibility="gone"
+            android:src="@drawable/lsq_sticker_item_text_button_scale" />
+
+        <org.lasque.tusdk.core.view.widget.button.TuSdkImageButton
+            android:id="@+id/lsq_sticker_turnButton"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:scaleType="center"
+            android:src="@drawable/lsq_sticker_item_text_button_scale" />
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/lsq_view"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true" />
+
+
+    
+</org.lasque.tusdk.impl.components.widget.sticker.StickerTextItemView>

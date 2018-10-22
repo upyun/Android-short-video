@@ -22,6 +22,7 @@ import org.lasque.tusdk.core.seles.tusdk.FilterLocalPackage;
 import org.lasque.tusdk.core.view.TuSdkImageView;
 import org.lasque.tusdk.core.view.listview.TuSdkCellRelativeLayout;
 import org.lasque.tusdk.core.view.listview.TuSdkListSelectableCellViewInterface;
+import com.upyun.shortvideo.R;
 
 /**
  * @author Yanlin
@@ -95,8 +96,8 @@ public class FilterCellView extends TuSdkCellRelativeLayout<String> implements T
 	 */
 	protected void bindModelTypeTwo()
 	{
-		RelativeLayout layout =  this.findViewById(com.upyun.shortvideo.R.id.lsq_none_layout);
-		ImageView imageView = this.findViewById(com.upyun.shortvideo.R.id.lsq_item_none);
+		RelativeLayout layout =  this.findViewById(R.id.lsq_none_layout);
+		ImageView imageView = this.findViewById(R.id.lsq_item_none);
 		if (layout != null)
 		{
 			layout.setVisibility(((Integer)getTag() == 0)?View.VISIBLE:View.GONE);
@@ -149,7 +150,7 @@ public class FilterCellView extends TuSdkCellRelativeLayout<String> implements T
 	{
 		if (mThumbView == null)
 		{
-			mThumbView = findViewById(com.upyun.shortvideo.R.id.lsq_item_image);
+			mThumbView = findViewById(R.id.lsq_item_image);
 		}
 		return mThumbView;
 	}
@@ -158,7 +159,7 @@ public class FilterCellView extends TuSdkCellRelativeLayout<String> implements T
 	{
 		if (mFilterBorderView == null)
 		{
-			 mFilterBorderView = findViewById(com.upyun.shortvideo.R.id.lsq_item_border);
+			 mFilterBorderView = findViewById(R.id.lsq_item_border);
 		}
 		return mFilterBorderView;
 	}
@@ -167,7 +168,7 @@ public class FilterCellView extends TuSdkCellRelativeLayout<String> implements T
 	{
 		if (mTitlebView == null)
 		{
-			mTitlebView = findViewById(com.upyun.shortvideo.R.id.lsq_item_title);
+			mTitlebView = findViewById(R.id.lsq_item_title);
 		}
 		return mTitlebView;
 	}

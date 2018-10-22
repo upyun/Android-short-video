@@ -80,6 +80,12 @@
     <string name="lsq_filter_LiveFancy01_1">70s</string>
     <string name="lsq_filter_LiveSoulOut01">靈魂出竅</string>
     <string name="lsq_filter_LiveSignal01">信號</string>
+    <string name="lsq_filter_LiveLightning01">閃電</string>
+    <string name="lsq_filter_LiveXRay01">X光</string>
+    <string name="lsq_filter_LiveHeartbeat01">心跳</string>
+    <string name="lsq_filter_LiveMirrorImage01">鏡像</string>
+    <string name="lsq_filter_LiveSlosh01">晃動</string>
+    <string name="lsq_filter_LiveOldTV01">舊電視</string>
     
     <!-- 提示 -->
     <string name="new_movie_saving">正在保存視頻...</string>
@@ -87,6 +93,7 @@
     <string name="new_movie_saved">視頻已成功保存</string>
     <string name="new_movie_error_saving">視頻保存出錯</string>
     <string name="lsq_loadvideo_failed">不支持的視頻格式或視頻寬高過大</string>
+    <string name="lsq_compress_failed">不支持非H.264視頻的壓縮</string>
     <string name="over_max_recordTime">超過錄製時長</string>
     <string name="min_recordTime">錄製時長尚不足 </string>
     <string name="max_recordTime">已到達最大錄製時長 </string>
@@ -124,6 +131,7 @@
     <string name="lsq_text_beauty">美顏</string>
     <string name="lsq_filter_text">濾鏡</string>
     <string name="lsq_text_MV">MV</string>
+    <string name="lsq_text_text_effect">文字</string>
     <string name="lsq_text_effect">特效</string>
 
     <!-- MV -->
@@ -200,6 +208,7 @@
     <string name="lsq_congfigview_set_origin">原音</string>
     <string name="lsq_congfigview_set_dubbingone">素材一</string>
     <string name="lsq_congfigview_set_dubbingtwo">素材二</string>
+    <string name="lsq_congfigview_set_dubbingthree">素材三</string>
     <string name="lsq_audio_record_hint">點擊 [開始錄音] 按鈕開始錄製音頻 \r\n點擊 [結束錄音] 生成可播放的音頻文件 \r\n點擊 [播放錄音] 播放剛才錄製的音頻</string>
     <string name="lsq_audio_record_start">開始錄音</string>
     <string name="lsq_audio_record_stop">結束錄音</string>
@@ -226,8 +235,36 @@
     <string name="lsq_audio_mixer_delete_failed">混合音頻刪除失敗</string>
     <string name="lsq_cut_choose_cutrange">請先選擇裁剪區域</string>
 
+    <!-- 播放器 -->
+    <string name="lsq_muti_audio_player">多音軌音頻播放器</string>
+    <string name="lsq_media_player">媒體播放器</string>
+    <string name="lsq_media_player_speed">速度</string>
+    <string name="lsq_media_player_pitch">音調</string>
+    <string name="lsq_video_format">視頻格式</string>
+    <string name="lsq_cut_drawable_area">畫布區域</string>
+    <string name="lsq_cut_cut_area">剪裁區域</string>
+    <string name="lsq_cut_drawable_area_limit">畫布區域(0~1)</string>
+    <string name="lsq_cut_cut_area_limit">剪裁區域(0~1)</string>
+    <string name="lsq_default">默認</string>
+
+    <!-- 视频压缩 -->
+    <string name="lsq_compresser_compress_start">開始壓縮視頻</string>
+    <string name="lsq_compresser_compress">視頻壓縮</string>
+    <string name="lsq_compresser_compress_complete">操作完成，請去相冊查看視頻</string>
+    <string name="lsq_compresser_compressing">壓縮處理中...</string>
+    <string name="lsq_compresser_before_compress">原視頻：</string>
+    <string name="lsq_compresser_after_compress">壓縮后：</string>
+
+    <!-- 视频转码 -->
+    <string name="lsq_transcode_start">開始視頻轉碼</string>
+    <string name="lsq_transcode_transcode">視頻轉碼</string>
+    <string name="lsq_transcode_complete">轉碼完成，請去相冊查看視頻</string>
+    <string name="lsq_transcode_transcoding">轉碼處理中...</string>
+    <string name="lsq_transcode_iskeyframe">是否盡可能請求關鍵幀</string>
+
     <string name="lsq_video_selected">選擇視頻</string>
     <string name="lsq_select_video_hint">請您選擇視頻</string>
+    <string name="lsq_select_video_max">超過最大選擇數量</string>
     <string name="lsq_obtain_permission_failed">獲取權限失敗</string>
 
     <!--  权限提示 -->
@@ -271,5 +308,21 @@
     <string name="lsq_editor_magic">魔法</string>
     <string name="lsq_magic_size">大小</string>
     <string name="lsq_magic_color">顏色</string>
+
+    <!-- 文字 -->
+    <string name="lsq_edit_text_title">文字</string>
+    <string name="lsq_style_default_edit_icon_text_add">添加</string>
+    <string name="lsq_style_default_edit_icon_text_color">顏色</string>
+    <string name="lsq_style_default_edit_icon_text_font">樣式</string>
+    <string name="lsq_edit_text_sticker_default_text">點擊輸入內容</string>
+    <string name="lsq_text_sticker_font_color">字體</string>
+    <string name="lsq_text_sticker_background_color">背景</string>
+    <string name="lsq_text_sticker_stroke_color">線框</string>
+    <string name="lsq_text_style_right_to_left">從右到左</string>
+    <string name="lsq_text_style_left_to_right">從左到右</string>
+    <string name="lsq_text_style_underline">下劃線</string>
+    <string name="lsq_text_style_alignleft">左對齊</string>
+    <string name="lsq_text_style_alignright">右對齊</string>
+    <string name="lsq_text_style_aligncenter">居中</string>
 
 </resources>

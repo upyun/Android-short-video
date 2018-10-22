@@ -16,6 +16,9 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
+import com.upyun.shortvideo.R;
+
+
 /**
  * 自定义TextView，可以设置CompoundDrawable大小
  * @author LiuHang
@@ -40,10 +43,10 @@ public class CompoundDrawableTextView extends TextView
 	{
 		super(context, attrs);
 		
-		mTypedArray=context.obtainStyledAttributes(attrs, com.upyun.shortvideo.R.styleable.CompoundDrawableTextView);
-		mDrawableTopHeight=mTypedArray.getDimension(com.upyun.shortvideo.R.styleable.CompoundDrawableTextView_drawableTopHeight, 10);
-		mDrawableTopWidth=mTypedArray.getDimension(com.upyun.shortvideo.R.styleable.CompoundDrawableTextView_drawableTopWidth, 10);
-		mDrawableTop=mTypedArray.getDrawable(com.upyun.shortvideo.R.styleable.CompoundDrawableTextView_drawableTop);
+		mTypedArray=context.obtainStyledAttributes(attrs, R.styleable.CompoundDrawableTextView);
+		mDrawableTopHeight=mTypedArray.getDimension(R.styleable.CompoundDrawableTextView_drawableTopHeight, 10);
+		mDrawableTopWidth=mTypedArray.getDimension(R.styleable.CompoundDrawableTextView_drawableTopWidth, 10);
+		mDrawableTop=mTypedArray.getDrawable(R.styleable.CompoundDrawableTextView_drawableTop);
 		
 		// 自定义设置图片的宽高
 		if(mDrawableTop != null) mDrawableTop.setBounds(0, 0, (int)mDrawableTopWidth, (int)mDrawableTopHeight);

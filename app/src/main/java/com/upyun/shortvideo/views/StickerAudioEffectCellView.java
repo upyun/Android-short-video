@@ -22,6 +22,7 @@ import org.lasque.tusdk.core.view.listview.TuSdkCellRelativeLayout;
 import org.lasque.tusdk.core.view.listview.TuSdkListSelectableCellViewInterface;
 import org.lasque.tusdk.modules.view.widget.sticker.StickerGroup;
 import org.lasque.tusdk.modules.view.widget.sticker.StickerLocalPackage;
+import com.upyun.shortvideo.R;
 
 /**
  * 自定义的MV列表单元视图
@@ -94,7 +95,7 @@ public class StickerAudioEffectCellView extends TuSdkCellRelativeLayout<StickerG
 	{
 		if ( mThumbView == null )
 		{
-			mThumbView = (ImageView)findViewById(com.upyun.shortvideo.R.id.lsq_item_image);
+			mThumbView = (ImageView)findViewById(R.id.lsq_item_image);
 		}
 		return mThumbView;
 	}
@@ -116,7 +117,7 @@ public class StickerAudioEffectCellView extends TuSdkCellRelativeLayout<StickerG
 	{
 		if ( mMvNoneLayout == null )
 		{
-		mMvNoneLayout = findViewById(com.upyun.shortvideo.R.id.lsq_mv_none_btn);
+		mMvNoneLayout = findViewById(R.id.lsq_mv_none_btn);
 	}
 		return mMvNoneLayout;
 	}
@@ -127,7 +128,7 @@ public class StickerAudioEffectCellView extends TuSdkCellRelativeLayout<StickerG
 	{
 		if ( mMvLayout == null )
 		{
-			mMvLayout = (RelativeLayout)findViewById(com.upyun.shortvideo.R.id.lsq_mv_wrap);
+			mMvLayout = (RelativeLayout)findViewById(R.id.lsq_mv_wrap);
 		}
 		return mMvLayout;
 	}
@@ -136,7 +137,7 @@ public class StickerAudioEffectCellView extends TuSdkCellRelativeLayout<StickerG
 	{
 		if ( mMvBorderView == null )
 		{				
-			mMvBorderView = (RelativeLayout)findViewById(com.upyun.shortvideo.R.id.lsq_item_border);
+			mMvBorderView = (RelativeLayout)findViewById(R.id.lsq_item_border);		
 			
 		}
 	
@@ -147,7 +148,7 @@ public class StickerAudioEffectCellView extends TuSdkCellRelativeLayout<StickerG
 	{
 		if ( mTitleView == null )
 		{
-			mTitleView = (TextView)findViewById(com.upyun.shortvideo.R.id.lsq_item_title);
+			mTitleView = (TextView)findViewById(R.id.lsq_item_title);
 		}
 		return mTitleView;
 	}
@@ -156,7 +157,7 @@ public class StickerAudioEffectCellView extends TuSdkCellRelativeLayout<StickerG
 	{
 		if ( mBgImageView == null )
 		{
-			mBgImageView = (TuSdkImageView)findViewById(com.upyun.shortvideo.R.id.lsq_mv_bg);
+			mBgImageView = (TuSdkImageView)findViewById(R.id.lsq_mv_bg);
 		}
 		return mBgImageView;
 	}

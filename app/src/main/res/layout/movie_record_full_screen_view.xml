@@ -46,7 +46,16 @@
 			android:focusable="true"
 		    android:drawableLeft="@drawable/lsq_back_full"
 		    />
-		
+
+		<ImageView
+			android:id="@+id/lsq_ratioButton"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:focusable="true"
+			android:layout_toLeftOf="@+id/lsq_flashButton"
+			android:scaleType="center"
+			android:src="@drawable/lsq_lamp_off_full" />
+
         <ImageView
             android:id="@+id/lsq_flashButton"
             android:layout_width="wrap_content"

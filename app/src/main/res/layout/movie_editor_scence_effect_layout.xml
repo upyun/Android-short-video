@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <!-- timeline view  -->
-    <com.upyun.shortvideo.views.SceneEffectsTimelineView
+    <com.upyun.shortvideo.views.EffectsTimelineView
         android:id="@+id/lsq_scence_effect_timelineView"
         android:layout_width="match_parent"
         android:layout_height="28dp"

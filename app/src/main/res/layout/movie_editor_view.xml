@@ -4,7 +4,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
 	android:id="@+id/lsq_movie_editor_rootView"
-    android:background="@color/lsq_color_white" >
+    android:background="@color/lsq_color_white"
+	xmlns:CircleProgressView="http://schemas.android.com/apk/res-auto"
+	>
 
 	<!-- NavgationBar -->
 	<include
@@ -26,7 +28,13 @@
             android:background="@drawable/lsq_style_default_crop_btn_record"
             android:clickable="false" />
     </RelativeLayout>
-    
+
+	<org.lasque.tusdk.impl.components.widget.sticker.StickerView
+		android:id="@+id/lsq_stickerView"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_below="@+id/lsq_topBar" >
+	</org.lasque.tusdk.impl.components.widget.sticker.StickerView>
 
 	<!-- 滤镜列表 -->
 	<include
@@ -95,12 +103,58 @@
 		android:layout_marginBottom="@dimen/lsq__space_10"
       android:background="@color/lsq_color_transparent"
       layout="@layout/movie_editor_dubbing_view"/>
-   	
-   	<include 
-   	    android:id="@+id/lsq_bottom_navigator"
-   	    android:layout_width="match_parent"
-   	    android:layout_height="wrap_content"
-   	    android:layout_alignParentBottom="true"
-   	    layout="@layout/movie_editor_bottom_navigation"/>
+
+	<!-- 时间特效视图 -->
+	<include android:id="@+id/lsq_time_effects_layout"
+		android:layout_width="match_parent"
+		android:layout_height="100dp"
+		android:layout_marginBottom="@dimen/lsq__space_10"
+		android:visibility="gone"
+		android:layout_above="@+id/lsq_bottom_navigator"
+		layout="@layout/movie_editor_time_effects_layout"/>
+
+	<!-- 文字贴纸视图 -->
+	<include
+		android:id="@+id/lsq_text_effects_layout"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_above="@+id/lsq_bottom_navigator"
+		layout="@layout/movie_editor_text_effects_layout"
+		/>
+
+	<include
+		android:id="@+id/lsq_bottom_navigator"
+		layout="@layout/movie_editor_bottom_navigation"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentStart="true" />
+
+	<at.grabner.circleprogress.CircleProgressView
+		android:id="@+id/circleView"
+		android:layout_width="100dp"
+		android:layout_height="100dp"
+		android:layout_centerInParent="true"
+		CircleProgressView:cpv_autoTextSize="true"
+		CircleProgressView:cpv_barColor="@color/primary"
+		CircleProgressView:cpv_barWidth="15dp"
+		CircleProgressView:cpv_innerContourSize="0dp"
+		CircleProgressView:cpv_maxValue="1"
+		CircleProgressView:cpv_outerContourSize="0dp"
+		CircleProgressView:cpv_rimColor="@color/primary_light"
+		CircleProgressView:cpv_rimWidth="15dp"
+		CircleProgressView:cpv_seekMode="true"
+		CircleProgressView:cpv_showUnit="true"
+		CircleProgressView:cpv_spinColor="@color/primary"
+		CircleProgressView:cpv_textColor="@color/lsq_color_white"
+		CircleProgressView:cpv_textScale="1"
+		CircleProgressView:cpv_unit="%"
+		CircleProgressView:cpv_unitColor="@color/primary_light"
+		CircleProgressView:cpv_unitPosition="right_top"
+		CircleProgressView:cpv_unitScale="1"
+		CircleProgressView:cpv_value="0" />
+
+
 
 </RelativeLayout>

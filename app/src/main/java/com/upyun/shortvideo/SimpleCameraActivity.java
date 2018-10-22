@@ -66,7 +66,11 @@ public class SimpleCameraActivity extends Activity
 		mVideoCamera.setDisableContinueFoucs(true);
 		// 启用防闪烁功能，默认关闭。
 		mVideoCamera.setAntibandingMode(CameraAntibanding.Auto);
-		
+
+        // 设置检测框最小倍数  值越大性能越高,取值范围: 0.1 < x < 0.5, 默认: 0.2
+        // 默认人脸识别距离为1米左右； 设置成0.1f, 人脸识别距离可以增加至2米
+        // mVideoCamera.setDetectScale(0.1f);
+
 		// 设置水印，默认为空
 		mVideoCamera.setWaterMarkImage(BitmapHelper.getBitmapFormRaw(this, R.raw.sample_watermark));
 		mVideoCamera.setWaterMarkPosition(WaterMarkPosition.BottomRight);

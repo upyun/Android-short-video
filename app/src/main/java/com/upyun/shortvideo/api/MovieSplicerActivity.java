@@ -1,21 +1,10 @@
 package com.upyun.shortvideo.api;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.lasque.tusdk.core.TuSdk;
-import org.lasque.tusdk.core.TuSdkContext;
-import org.lasque.tusdk.core.utils.StringHelper;
-import org.lasque.tusdk.core.utils.TLog;
-import org.lasque.tusdk.core.utils.image.AlbumHelper;
-import org.lasque.tusdk.api.movie.postproc.muxer.TuSDKMovieSplicer;
-import org.lasque.tusdk.api.movie.postproc.muxer.TuSDKMovieSplicer.TuSDKMovieSegment;
-import org.lasque.tusdk.api.movie.postproc.muxer.TuSDKMovieSplicer.TuSDKMovieSplicerOption;
-import org.lasque.tusdk.api.movie.player.TuSDKMoviePlayer;
-
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.media.MediaCodecInfo;
+import android.media.MediaFormat;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.SurfaceView;
@@ -23,6 +12,32 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.upyun.shortvideo.album.MovieInfo;
+
+import org.lasque.tusdk.api.movie.player.TuSDKMoviePlayer;
+import org.lasque.tusdk.core.TuSdkContext;
+import org.lasque.tusdk.core.api.extend.TuSdkMediaProgress;
+import org.lasque.tusdk.core.common.TuSDKMediaUtils;
+import org.lasque.tusdk.core.decoder.TuSDKVideoInfo;
+import org.lasque.tusdk.core.media.codec.extend.TuSdkMediaFormat;
+import org.lasque.tusdk.core.media.suit.TuSdkMediaSuit;
+import org.lasque.tusdk.core.struct.TuSdkMediaDataSource;
+import org.lasque.tusdk.core.struct.TuSdkSize;
+import org.lasque.tusdk.core.utils.StringHelper;
+import org.lasque.tusdk.core.utils.TLog;
+import org.lasque.tusdk.core.utils.image.AlbumHelper;
+import org.lasque.tusdk.core.utils.image.ImageOrientation;
+import com.upyun.shortvideo.R;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import at.grabner.circleprogress.CircleProgressView;
+
+import static android.widget.Toast.LENGTH_SHORT;
 
 /**
  * 音视频文件拼接与裁剪
@@ -37,7 +52,11 @@ public class MovieSplicerActivity extends Activity
 	private Button mMuxerButton;
 	
 	/** 用于记录片段路径信息 */
-	private ArrayList<Uri> mMoviePathList = new ArrayList<Uri>();
+	private List<TuSdkMediaDataSource> mMoviePathList = new ArrayList<>();
+
+	/** 输入视频路径 */
+	private String mInputPath;
+	private List<MovieInfo> movieInfos;
 
 	/** 保存路径 */
 	private String mMuxerResultPath;
@@ -56,29 +75,47 @@ public class MovieSplicerActivity extends Activity
     
     /** 第二个视频播放器 */
 	private TuSDKMoviePlayer mMediaPlayerTwo;
+
+	/** 压缩进度 */
+	private CircleProgressView mCircleView;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(com.upyun.shortvideo.R.layout.movie_splicer_activity);
+        setContentView(R.layout.movie_splicer_activity);
         initView();
     }
     
     public void initView()
     {
-    	mBackBtn = (TextView) findViewById(com.upyun.shortvideo.R.id.lsq_back);
+		Intent intent = getIntent();
+    	if(intent.hasExtra("videoPath")){
+			mInputPath = getIntent().getStringExtra("videoPath");
+		}
+		else if(intent.hasExtra("videoPaths"))
+		{
+			movieInfos = (List<MovieInfo>)getIntent().getSerializableExtra("videoPaths");
+		}
+
+    	mBackBtn = (TextView) findViewById(R.id.lsq_back);
 		mBackBtn.setOnClickListener(mOnClickListener);
-		TextView titleView = (TextView) findViewById(com.upyun.shortvideo.R.id.lsq_title);
+		TextView titleView = (TextView) findViewById(R.id.lsq_title);
 		titleView.setText(TuSdkContext.getString("lsq_movie_splicer_text"));
-		TextView nextBtn = (TextView) findViewById(com.upyun.shortvideo.R.id.lsq_next);
+		TextView nextBtn = (TextView) findViewById(R.id.lsq_next);
 		nextBtn.setVisibility(View.GONE);
+
+		mCircleView = findViewById(R.id.circleView);
+		mCircleView.setTextSize(50);
+		mCircleView.setAutoTextSize(true);
+		mCircleView.setTextColor(Color.WHITE);
+		mCircleView.setVisibility(View.GONE);
     	
-    	mMuxerButton = (Button)this.findViewById(com.upyun.shortvideo.R.id.lsq_movie_mixer_btn);
+    	mMuxerButton = (Button)this.findViewById(R.id.lsq_movie_mixer_btn);
     	mMuxerButton.setOnClickListener(mOnClickListener);
-    	mPreViewOne = (SurfaceView) findViewById(com.upyun.shortvideo.R.id.lsq_movie_preview_one);
+    	mPreViewOne = (SurfaceView) findViewById(R.id.lsq_movie_preview_one);
     	mPreViewOne.getLayoutParams().height = TuSdkContext.getScreenSize().width*9/16;
-		mPreViewTwo = (SurfaceView) findViewById(com.upyun.shortvideo.R.id.lsq_movie_preview_two);
+		mPreViewTwo = (SurfaceView) findViewById(R.id.lsq_movie_preview_two);
 		mPreViewTwo.getLayoutParams().height = TuSdkContext.getScreenSize().width*9/16;
 		initMediaPlayer();
     }
@@ -87,14 +124,16 @@ public class MovieSplicerActivity extends Activity
 	{
 		mMediaPlayerOne = TuSDKMoviePlayer.createMoviePlayer();
 		mMediaPlayerOne.setLooping(true);
-		Uri firstVideoUri = Uri.parse("android.resource://" + getPackageName() + "/" + com.upyun.shortvideo.R.raw.tusdk_sample_splice_video);
-        mMoviePathList.add(firstVideoUri);
+		String firstPath = getIntent().hasExtra("videoPath") ? mInputPath : movieInfos.get(0).getPath();
+		Uri firstVideoUri = Uri.parse(firstPath);
+        mMoviePathList.add(new TuSdkMediaDataSource(firstPath));
         mMediaPlayerOne.initVideoPlayer(this, firstVideoUri, mPreViewOne);
         
         mMediaPlayerTwo = TuSDKMoviePlayer.createMoviePlayer();
         mMediaPlayerTwo.setLooping(true);
-        Uri secondVideoUri = Uri.parse("android.resource://" + getPackageName() + "/" + com.upyun.shortvideo.R.raw.tusdk_sample_video);
-        mMoviePathList.add(secondVideoUri);
+        String secondPath = getIntent().hasExtra("videoPath") ? mInputPath : movieInfos.get(1).getPath();
+        Uri secondVideoUri = Uri.parse(secondPath);
+        mMoviePathList.add(new TuSdkMediaDataSource(secondPath));
         mMediaPlayerTwo.initVideoPlayer(this, secondVideoUri, mPreViewTwo);		
 	}
 	
@@ -131,10 +170,10 @@ public class MovieSplicerActivity extends Activity
 		{
 			switch (v.getId())
 			{
-			case com.upyun.shortvideo.R.id.lsq_back:
+			case R.id.lsq_back:
 				finish();
 				break;
-			case com.upyun.shortvideo.R.id.lsq_movie_mixer_btn:
+			case R.id.lsq_movie_mixer_btn:
 				 handleMuxerMovieFragmentData(getMovieResultPath());
 			  	 break;	
 			}
@@ -160,67 +199,85 @@ public class MovieSplicerActivity extends Activity
 	 */
 	private void handleMuxerMovieFragmentData(String muxerPath)
 	{
-	    List<TuSDKMovieSegment> list = new ArrayList<TuSDKMovieSegment>();
-	    for (int i = 0; i < 2; i++)
-	    {
-	    	TuSDKMovieSegment segment = new TuSDKMovieSegment();
-            segment.sourceUri = mMoviePathList.get(i);
-            // 可以指定开始与结束时间,单位为毫秒
-            // segment.startTime = 1000;
-            // segment.endTime = 3000;
-            list.add(segment);
-	    }
-	    TuSDKMovieSplicerOption option = new TuSDKMovieSplicerOption();
-	    option.savePath = muxerPath;
-	    option.listener = mMovieSplicerListener;
-	    TuSDKMovieSplicer movieDataHelper = new TuSDKMovieSplicer(option);
-	    movieDataHelper.start(list);
+		TuSDKVideoInfo videoInfo = TuSDKMediaUtils.getVideoInfo(getIntent().hasExtra("videoPath") ? mInputPath : movieInfos.get(0).getPath());
+		MediaFormat ouputVideoFormat = getOutputVideoFormat(videoInfo);
+		MediaFormat ouputAudioFormat = getOutputAudioFormat();
+
+		TuSdkMediaSuit.merge(mMoviePathList,muxerPath,ouputVideoFormat,ouputAudioFormat,mediaProgress);
+		mCircleView.setVisibility(View.VISIBLE);
+		Toast.makeText(MovieSplicerActivity.this, R.string.lsq_movie_splicer_processing, LENGTH_SHORT).show();
 	}
-	
-	/**
-	 * 刷新图库
-	 * 
-	 * @param file
-	 */
-	 public void refreshFile(File file) 
-	 {
-		if (file == null) {
-			TLog.e("refreshFile file == null");
-			return;
-		}
-		
-		Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-		Uri uri = Uri.fromFile(file);
-		intent.setData(uri);
-		this.sendBroadcast(intent);
-	 }
-	 
+
 	/**
 	 * 视频拼接状态通知
 	 */
-	private TuSDKMovieSplicer.TuSDKMovieSplicerListener mMovieSplicerListener = new TuSDKMovieSplicer.TuSDKMovieSplicerListener()
+	private TuSdkMediaProgress mediaProgress = new TuSdkMediaProgress()
 	{
-		
 		@Override
-		public void onStart()
+		public void onProgress(float progress, TuSdkMediaDataSource mediaDataSource, int index,
+                               int total)
 		{
-			String hintMsg = getResources().getString(com.upyun.shortvideo.R.string.lsq_movie_splicer_processing);
-			TuSdk.messageHub().setStatus(MovieSplicerActivity.this, hintMsg);
+			TLog.i("onProgressChanged: " + progress);
+			mCircleView.setText((progress * 100)+"%");
+			mCircleView.setValue(progress);
 		}
-		
+
 		@Override
-		public void onError(TuSDKMovieSplicer.ErrorCode errorType)
+		public void onCompleted(Exception e, TuSdkMediaDataSource outputFile, int total)
 		{
-			String hintMsg = getResources().getString(com.upyun.shortvideo.R.string.lsq_movie_splicer_error);
-			TuSdk.messageHub().showError(MovieSplicerActivity.this, hintMsg);
+			if(e == null)
+			{
+				Toast.makeText(MovieSplicerActivity.this, R.string.lsq_movie_splicer_success, LENGTH_SHORT).show();
+			}
+			else
+			{
+				Toast.makeText(MovieSplicerActivity.this, R.string.lsq_movie_splicer_error, LENGTH_SHORT).show();
+			}
+			hideCircleView();
 		}
-		
-		@Override
-		public void onDone() 
-		{
-			String hintMsg = getResources().getString(com.upyun.shortvideo.R.string.lsq_movie_splicer_success);
-			TuSdk.messageHub().showToast(MovieSplicerActivity.this, hintMsg);
-			refreshFile(new File(mMuxerResultPath));
-		}
-	}; 
+	};
+
+	/**
+	 * 隐藏进度
+	 */
+	private void hideCircleView()
+	{
+		mCircleView.setVisibility(View.GONE);
+		mCircleView.setText("0%");
+		mCircleView.setValue(0);
+	}
+
+	private int mFps = 0;
+	private int mBitrate = 0;
+
+	/**
+	 * 获取输出文件的视频格式信息
+	 *
+	 * @return MediaFormat
+	 */
+	protected MediaFormat getOutputVideoFormat(TuSDKVideoInfo videoInfo)
+	{
+		int fps = mFps==0 ? videoInfo.fps : mFps;
+		int bitrate = mBitrate==0 ? videoInfo.bitrate : mBitrate;
+		TuSdkSize videoSize = TuSdkSize.create(videoInfo.width,videoInfo.height);
+
+		if (videoInfo.videoOrientation == ImageOrientation.Right || videoInfo.videoOrientation == ImageOrientation.Left)
+			videoSize = TuSdkSize.create(videoSize.height,videoSize.width);
+
+		MediaFormat mediaFormat = TuSdkMediaFormat.buildSafeVideoEncodecFormat(videoSize.width, videoSize.height,
+				fps, bitrate, MediaCodecInfo.CodecCapabilities.COLOR_FormatSurface, 0,1);
+
+		return mediaFormat;
+	}
+
+	/**
+	 * 获取输出的音频格式信息
+	 * @return MediaFormat
+	 */
+	protected MediaFormat getOutputAudioFormat()
+	{
+		MediaFormat audioFormat = TuSdkMediaFormat.buildSafeAudioEncodecFormat();
+		return audioFormat;
+	}
+	
 }

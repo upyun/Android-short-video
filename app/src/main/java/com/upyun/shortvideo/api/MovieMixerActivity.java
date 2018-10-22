@@ -9,32 +9,6 @@
  */
 package com.upyun.shortvideo.api;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.lasque.tusdk.core.TuSdk;
-import org.lasque.tusdk.core.TuSdkContext;
-import org.lasque.tusdk.core.utils.StringHelper;
-import org.lasque.tusdk.core.utils.TLog;
-import org.lasque.tusdk.core.utils.image.AlbumHelper;
-import org.lasque.tusdk.core.video.TuSDKVideoResult;
-import org.lasque.tusdk.api.movie.player.TuSDKMoviePlayer;
-import org.lasque.tusdk.api.movie.player.TuSDKMoviePlayer.PlayerState;
-import org.lasque.tusdk.api.movie.player.TuSDKMoviePlayer.TuSDKMoviePlayerDelegate;
-import org.lasque.tusdk.api.audio.player.TuSDKMutiAudioPlayer;
-import org.lasque.tusdk.api.audio.player.TuSDKMutiAudioPlayer.TuSDKMutiAudioPlayerDelegate;
-import org.lasque.tusdk.api.audio.preproc.mixer.TuSDKAudioEntry;
-import org.lasque.tusdk.api.movie.preproc.mixer.TuSDKMP4MovieMixer;
-import org.lasque.tusdk.api.movie.preproc.mixer.TuSDKMP4MovieMixer.ErrorCode;
-import org.lasque.tusdk.api.movie.preproc.mixer.TuSDKMP4MovieMixer.OnMP4MovieMixerDelegate;
-import org.lasque.tusdk.api.movie.preproc.mixer.TuSDKMP4MovieMixer.State;
-import org.lasque.tusdk.core.common.TuSDKMediaDataSource;
-
-import com.upyun.shortvideo.views.CompoundConfigView;
-import com.upyun.shortvideo.views.ConfigViewParams;
-import com.upyun.shortvideo.views.ConfigViewSeekBar;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -46,6 +20,34 @@ import android.widget.Button;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
+import com.upyun.shortvideo.views.CompoundConfigView;
+import com.upyun.shortvideo.views.ConfigViewParams;
+import com.upyun.shortvideo.views.ConfigViewParams.ConfigViewArg;
+import com.upyun.shortvideo.views.ConfigViewSeekBar;
+
+import org.lasque.tusdk.api.audio.player.TuSDKMutiAudioPlayer;
+import org.lasque.tusdk.api.audio.player.TuSDKMutiAudioPlayer.TuSDKMutiAudioPlayerDelegate;
+import org.lasque.tusdk.api.audio.preproc.mixer.TuSDKAudioEntry;
+import org.lasque.tusdk.api.movie.player.TuSDKMoviePlayer;
+import org.lasque.tusdk.api.movie.player.TuSDKMoviePlayer.PlayerState;
+import org.lasque.tusdk.api.movie.player.TuSDKMoviePlayer.TuSDKMoviePlayerDelegate;
+import org.lasque.tusdk.api.movie.preproc.mixer.TuSDKMP4MovieMixer;
+import org.lasque.tusdk.api.movie.preproc.mixer.TuSDKMP4MovieMixer.ErrorCode;
+import org.lasque.tusdk.api.movie.preproc.mixer.TuSDKMP4MovieMixer.OnMP4MovieMixerDelegate;
+import org.lasque.tusdk.api.movie.preproc.mixer.TuSDKMP4MovieMixer.State;
+import org.lasque.tusdk.core.TuSdk;
+import org.lasque.tusdk.core.TuSdkContext;
+import org.lasque.tusdk.core.common.TuSDKMediaDataSource;
+import org.lasque.tusdk.core.utils.StringHelper;
+import org.lasque.tusdk.core.utils.TLog;
+import org.lasque.tusdk.core.utils.image.AlbumHelper;
+import org.lasque.tusdk.core.video.TuSDKVideoResult;
+import com.upyun.shortvideo.R;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 音视频混合
  * 
@@ -55,7 +57,7 @@ import android.widget.TextView;
  */
 public class MovieMixerActivity extends Activity implements OnMP4MovieMixerDelegate
 {
-	private final static int[] AUIDOENTRY_RESIDARRAY = new int[]{com.upyun.shortvideo.R.raw.tusdk_sample_video, com.upyun.shortvideo.R.raw.lsq_audio_oldmovie, com.upyun.shortvideo.R.raw.lsq_audio_relieve};
+	private final static int[] AUIDOENTRY_RESIDARRAY = new int[]{R.raw.lsq_audio_oldmovie, R.raw.lsq_audio_relieve};
 	
 	/** MP4视频格式混合 */
 	private TuSDKMP4MovieMixer mMP4MovieMixer;
@@ -79,6 +81,9 @@ public class MovieMixerActivity extends Activity implements OnMP4MovieMixerDeleg
 	
 	/** 视频合成按钮 */
 	private Button mMovieMixerButton;
+
+	/** 输入视频路径 */
+	private String mInputPath = "";
 	
 	/** 混合后的视频地址 */
 	private String mMixedVideoPath;
@@ -87,7 +92,10 @@ public class MovieMixerActivity extends Activity implements OnMP4MovieMixerDeleg
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(com.upyun.shortvideo.R.layout.movie_mixer_activity);
+		setContentView(R.layout.movie_mixer_activity);
+
+		mInputPath = getIntent().getStringExtra("videoPath");
+
 		initView();
 		getAudioEntryList();
 		initMediaPlayer();
@@ -105,7 +113,7 @@ public class MovieMixerActivity extends Activity implements OnMP4MovieMixerDeleg
 	private TuSDKMoviePlayerDelegate mMoviePlayerDelegate = new TuSDKMoviePlayerDelegate()
 	{
 		@Override
-		public void onStateChanged(PlayerState state) 
+		public void onStateChanged(PlayerState state)
 		{
 			if (state == PlayerState.INITIALIZED)
 			{
@@ -138,7 +146,7 @@ public class MovieMixerActivity extends Activity implements OnMP4MovieMixerDeleg
 	
 	private Uri getVideoPath()
 	{
-		Uri videoPathUri = Uri.parse("android.resource://" + getPackageName() + "/" + com.upyun.shortvideo.R.raw.tusdk_sample_video);
+		Uri videoPathUri = Uri.parse(mInputPath);
 		return videoPathUri;
 	}
 
@@ -164,7 +172,7 @@ public class MovieMixerActivity extends Activity implements OnMP4MovieMixerDeleg
 	/**
 	 * 多音轨混合播放器Delegate
 	 */
-	private TuSDKMutiAudioPlayerDelegate mMutiAudioPlayerDelegate = new TuSDKMutiAudioPlayerDelegate() 
+	private TuSDKMutiAudioPlayerDelegate mMutiAudioPlayerDelegate = new TuSDKMutiAudioPlayerDelegate()
 	{
 		/**
 		 * 播放器状态改变事件
@@ -245,7 +253,7 @@ public class MovieMixerActivity extends Activity implements OnMP4MovieMixerDeleg
 	{
 		if (mMoviePreviewLayout == null)
 		{
-			mMoviePreviewLayout = (SurfaceView) findViewById(com.upyun.shortvideo.R.id.lsq_movie_mixer_preview);
+			mMoviePreviewLayout = (SurfaceView) findViewById(R.id.lsq_movie_mixer_preview);
 			int movieWidth = TuSdkContext.getScreenSize().width;
 			int movieHeight = movieWidth*9/16;
 			LayoutParams lp =  (LayoutParams) mMoviePreviewLayout.getLayoutParams();
@@ -260,13 +268,13 @@ public class MovieMixerActivity extends Activity implements OnMP4MovieMixerDeleg
 	 */
 	private void initView()
 	{
-		mBackBtn = (TextView) findViewById(com.upyun.shortvideo.R.id.lsq_back);
+		mBackBtn = (TextView) findViewById(R.id.lsq_back);
 		mBackBtn.setOnClickListener(mOnClickListener);
-		TextView titleView = (TextView) findViewById(com.upyun.shortvideo.R.id.lsq_title);
+		TextView titleView = (TextView) findViewById(R.id.lsq_title);
 		titleView.setText(TuSdkContext.getString("lsq_movie_mixer_text"));
-		TextView nextBtn = (TextView) findViewById(com.upyun.shortvideo.R.id.lsq_next);
+		TextView nextBtn = (TextView) findViewById(R.id.lsq_next);
 		nextBtn.setVisibility(View.GONE);
-		mMovieMixerButton = (Button) findViewById(com.upyun.shortvideo.R.id.lsq_movie_mixer_start);
+		mMovieMixerButton = (Button) findViewById(R.id.lsq_movie_mixer_start);
 		mMovieMixerButton.setOnClickListener(mOnClickListener);
 		TuSdk.messageHub().applyToViewWithNavigationBarHidden(false);
 
@@ -287,15 +295,17 @@ public class MovieMixerActivity extends Activity implements OnMP4MovieMixerDeleg
 		if (mAudioEntryList != null && mAudioEntryList.size() > 0) return mAudioEntryList;
 		
 		mAudioEntryList = new ArrayList<TuSDKAudioEntry>(2);
+
+		TuSDKAudioEntry audioEntry = new TuSDKAudioEntry(mInputPath);
+		audioEntry.setTrunk(true);
+		mAudioEntryList.add(audioEntry);
 		
 		for (int i = 0; i < AUIDOENTRY_RESIDARRAY.length; i++)
 		{
 			Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + AUIDOENTRY_RESIDARRAY[i]);
-			
-			TuSDKAudioEntry audioEntry = new TuSDKAudioEntry(uri);
-			audioEntry.setTrunk( i == 0 );
-			
-			mAudioEntryList.add(audioEntry);
+			TuSDKAudioEntry audio = new TuSDKAudioEntry(uri);
+			audio.setTrunk(false);
+			mAudioEntryList.add(audio);
 		}
 		
 		return mAudioEntryList;
@@ -340,7 +350,7 @@ public class MovieMixerActivity extends Activity implements OnMP4MovieMixerDeleg
 	{
 		
 		@Override
-		public void onSeekbarDataChanged(ConfigViewSeekBar seekbar, ConfigViewParams.ConfigViewArg arg)
+		public void onSeekbarDataChanged(ConfigViewSeekBar seekbar, ConfigViewArg arg)
 		{
 			if (arg.getKey().equals("origin"))
 				setSeekBarProgress(0,arg.getPercentValue());
@@ -355,7 +365,7 @@ public class MovieMixerActivity extends Activity implements OnMP4MovieMixerDeleg
 	{
 		if (mVoiceConfigView == null)
 		{
-			mVoiceConfigView = (CompoundConfigView) findViewById(com.upyun.shortvideo.R.id.lsq_voice_volume_config_view);
+			mVoiceConfigView = (CompoundConfigView) findViewById(R.id.lsq_voice_volume_config_view);
 		}
 
 		return mVoiceConfigView;
@@ -375,7 +385,7 @@ public class MovieMixerActivity extends Activity implements OnMP4MovieMixerDeleg
 		  			  .setOutputFilePath(getMixedVideoPath()) // 设置输出路径
 		  			  .setVideoSoundVolume(1.f) // 设置音乐音量
 		  			  .setClearAudioDecodeCacheInfoOnCompleted(true) // 设置音视频混合完成后是否清除缓存信息 默认：true （false:再次混合时可加快混合速度）
-		  			  .mix(TuSDKMediaDataSource.create(getVideoPath()), mAudioEntryList, false); //  mVideoDataSource : 视频路径 mAudioTracks : 待混合的音频数据 true ： 是否混合视频原音
+		  			  .mix(TuSDKMediaDataSource.create(mInputPath), mAudioEntryList, false); //  mVideoDataSource : 视频路径 mAudioTracks : 待混合的音频数据 true ： 是否混合视频原音
 	}
 
 	 public void refreshFile(File file) 
@@ -419,7 +429,7 @@ public class MovieMixerActivity extends Activity implements OnMP4MovieMixerDeleg
 	 * 混合结果回调
 	 */
 	@Override
-	public void onMixerComplete(TuSDKVideoResult result) 
+	public void onMixerComplete(TuSDKVideoResult result)
 	{
 		if(result != null)
 		{
@@ -430,7 +440,7 @@ public class MovieMixerActivity extends Activity implements OnMP4MovieMixerDeleg
 	}
 
 	@Override
-	public void onErrrCode(ErrorCode code) 
+	public void onErrrCode(ErrorCode code)
 	{
 		if(code == ErrorCode.UnsupportedVideoFormat)
 		{
@@ -446,10 +456,10 @@ public class MovieMixerActivity extends Activity implements OnMP4MovieMixerDeleg
 		{
 			switch (v.getId())
 			{
-				case com.upyun.shortvideo.R.id.lsq_movie_mixer_start:
+				case R.id.lsq_movie_mixer_start:
 					startMovieMixer();
 					break;
-				case com.upyun.shortvideo.R.id.lsq_back:
+				case R.id.lsq_back:
 					finish();
 					break;
 			}

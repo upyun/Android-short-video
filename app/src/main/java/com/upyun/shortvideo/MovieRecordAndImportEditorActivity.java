@@ -9,11 +9,12 @@
  */
 package com.upyun.shortvideo;
 
-import org.lasque.tusdk.core.video.TuSDKVideoResult;
-import com.upyun.shortvideo.component.MovieRecordKeepModeActivity;
-
 import android.os.Bundle;
 import android.view.View;
+
+import com.upyun.shortvideo.component.MovieRecordKeepModeActivity;
+
+import org.lasque.tusdk.core.video.TuSDKVideoResult;
 
 /**
  * 断点续拍录制相机 + 视频编辑
@@ -39,7 +40,7 @@ public class MovieRecordAndImportEditorActivity extends MovieRecordKeepModeActiv
 	}
 	
 	@Override
-	public void onMovieRecordComplete(TuSDKVideoResult result) 
+	public void onMovieRecordComplete(TuSDKVideoResult result)
 	{
 		super.onMovieRecordComplete(result);
 	}

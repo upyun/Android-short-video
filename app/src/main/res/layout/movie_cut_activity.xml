@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:CircleProgressView="http://schemas.android.com/apk/res-auto"
+    android:background="@color/lsq_color_white">
+    
+   <!-- movie layout --> 
+   <FrameLayout
+        android:id="@+id/movie_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/lsq_video_height"
+        android:background="@color/lsq_color_black" >
+        <com.upyun.shortvideo.views.HVScrollView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/hvScrollView"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+            android:background="#000"
+            android:fadingEdge="horizontal|vertical"
+            android:scrollbars="horizontal|vertical"
+            app:childLayoutCenter="true"
+            app:fillViewportH="false"
+            app:fillViewportV="false"
+            app:scrollOrientation="none" >
+            <RelativeLayout
+                android:id="@+id/lsq_video_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/lsq_color_black" >
+                <SurfaceView
+                    android:id="@+id/lsq_video_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal" />
+            </RelativeLayout>
+        </com.upyun.shortvideo.views.HVScrollView>
+        <Button
+            android:id="@+id/lsq_play_btn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@drawable/lsq_style_default_crop_btn_record"
+            android:visibility="visible" />
+    </FrameLayout>
+
+    <Button
+        android:layout_margin="@dimen/lsq__space_10"
+        android:layout_below="@+id/movie_layout"
+        android:text="@string/lsq_cut_cut_area"
+        android:onClick="showCutRect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/movie_layout"
+        android:layout_centerHorizontal="true"
+        >
+        <EditText
+            android:id="@+id/lsq_output_width"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="OutputWidth"
+            android:textSize="@dimen/lsq__space_10"
+            />
+        <EditText
+            android:id="@+id/lsq_output_height"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="OutputHeight"
+            android:textSize="@dimen/lsq__space_10"
+            />
+    </LinearLayout>
+
+    <Button
+        android:layout_margin="@dimen/lsq__space_10"
+        android:layout_below="@+id/movie_layout"
+        android:text="@string/lsq_video_format"
+        android:layout_alignParentRight="true"
+        android:onClick="showVideoFormat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <!-- title layout -->
+	<include
+        android:id="@+id/title"
+        layout="@layout/title_item_layout"/>
+
+    <include
+        android:layout_below="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/rect_setting"/>
+
+    <include
+        android:layout_below="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/video_format_view"/>
+
+    <!-- select time layout -->
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:id="@+id/time_layout"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical">
+		<include layout="@layout/movie_range_selection_time"/>
+    </LinearLayout>
+
+    <at.grabner.circleprogress.CircleProgressView
+        android:id="@+id/circleView"
+        android:layout_gravity="center"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerInParent="true"
+        CircleProgressView:cpv_autoTextSize="true"
+        CircleProgressView:cpv_barColor="@color/primary"
+        CircleProgressView:cpv_barWidth="15dp"
+        CircleProgressView:cpv_innerContourSize="0dp"
+        CircleProgressView:cpv_maxValue="1"
+        CircleProgressView:cpv_outerContourSize="0dp"
+        CircleProgressView:cpv_rimColor="@color/primary_light"
+        CircleProgressView:cpv_rimWidth="15dp"
+        CircleProgressView:cpv_seekMode="true"
+        CircleProgressView:cpv_showUnit="true"
+        CircleProgressView:cpv_spinColor="@color/primary"
+        CircleProgressView:cpv_textColor="@color/lsq_color_white"
+        CircleProgressView:cpv_textScale="1"
+        CircleProgressView:cpv_unit="%"
+        CircleProgressView:cpv_unitColor="@color/primary_light"
+        CircleProgressView:cpv_unitPosition="right_top"
+        CircleProgressView:cpv_unitScale="1"
+        CircleProgressView:cpv_value="0" />
+</RelativeLayout>

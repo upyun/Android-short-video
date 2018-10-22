@@ -26,6 +26,7 @@
 		        android:layout_width="match_parent"
 		        android:layout_height="@dimen/lsq__space_50"
 		        layout="@layout/tusdk_config_seekbar_one" />
+
 	    </LinearLayout>  	
 
     </FrameLayout>

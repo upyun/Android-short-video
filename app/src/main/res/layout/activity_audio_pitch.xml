@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.upyun.shortvideo.api.AudioPitchActivity">
+
+    <RelativeLayout
+        android:id="@+id/priviewWrap"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <SeekBar
+        android:id="@+id/lsq_progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/lsq__space_40"
+        android:layout_above="@+id/lsq_control_bar"
+        android:layout_margin="@dimen/lsq__space_10" />
+
+
+    <LinearLayout
+        android:id="@+id/lsq_control_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/lsq_play_btn"
+            android:layout_width="60dp"
+            android:layout_height="36dp"
+            android:layout_margin="@dimen/lsq__space_5"
+            android:text="播放" />
+
+        <Button
+            android:id="@+id/lsq_pause_btn"
+            android:layout_width="60dp"
+            android:layout_height="36dp"
+            android:layout_margin="@dimen/lsq__space_5"
+            android:text="暂停" />
+
+        <Button
+            android:id="@+id/lsq_slow_btn"
+            android:layout_width="60dp"
+            android:layout_height="36dp"
+            android:layout_margin="@dimen/lsq__space_5"
+            android:text="慢速" />
+
+        <Button
+            android:id="@+id/lsq_fast_btn"
+            android:layout_width="60dp"
+            android:layout_height="36dp"
+            android:layout_margin="@dimen/lsq__space_5"
+            android:text="快速" />
+
+        <Button
+            android:id="@+id/lsq_reverse_btn"
+            android:layout_width="60dp"
+            android:layout_height="36dp"
+            android:layout_margin="@dimen/lsq__space_5"
+            android:text="倒播" />
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -3,11 +3,13 @@ package com.upyun.shortvideo.views;
 import android.content.Context;
 import android.util.AttributeSet;
 
+import com.upyun.shortvideo.utils.Constants;
+
 import org.lasque.tusdk.core.TuSdkContext;
+import org.lasque.tusdk.core.seles.sources.TuSdkMovieEditorImpl;
 import org.lasque.tusdk.core.view.TuSdkRelativeLayout;
 import org.lasque.tusdk.core.view.recyclerview.TuSdkTableView;
-
-import com.upyun.shortvideo.utils.Constants;
+import com.upyun.shortvideo.R;
 
 import java.util.Arrays;
 
@@ -17,7 +19,9 @@ import java.util.Arrays;
 
 public class MagicEffectLayout extends TuSdkRelativeLayout
 {
-    private MagicEffectsTimelineView mTimelineView;
+    private TuSdkMovieEditorImpl mMovieEditor;
+
+    private EffectsTimelineView mTimelineView;
 
     private MagicEffectListView mMagicEffectListView;
 
@@ -36,21 +40,26 @@ public class MagicEffectLayout extends TuSdkRelativeLayout
         super.loadView();
 
         // 动画时间轴视图
-        mTimelineView = getViewById(com.upyun.shortvideo.R.id.lsq_magic_effect_timelineView);
+        mTimelineView = getViewById(R.id.lsq_magic_effect_timelineView);
+        mTimelineView.setDelegate(mEffectsTimelineViewDelegate);
         mTimelineView.setDelegate(mEffectsTimelineViewDelegate);
         initMagicEffectListView();
     }
 
-    private EffectsTimelineView.EffectsTimelineViewDelegate mEffectsTimelineViewDelegate = new EffectsTimelineView.EffectsTimelineViewDelegate()
+    /** 场景特效时间轴变化 */
+    protected EffectsTimelineView.EffectsTimelineViewDelegate mEffectsTimelineViewDelegate = new EffectsTimelineView.EffectsTimelineViewDelegate()
     {
         @Override
         public void onProgressCursorWillChaned()
         {
+            mMovieEditor.getEditorPlayer().pausePreview();
         }
 
         @Override
-        public void onProgressChaned(float progress)
+        public void onProgressChaned(final float progress)
         {
+            mMovieEditor.getEditorPlayer().pausePreview();
+            mMovieEditor.getEditorPlayer().seekTimeUs((long)(mMovieEditor.getEditorPlayer().getTotalTimeUS() * progress));
         }
 
         @Override
@@ -60,12 +69,13 @@ public class MagicEffectLayout extends TuSdkRelativeLayout
         }
     };
 
+
     /**
      * 魔法特效时间轴视图
      *
      * @return
      */
-    public MagicEffectsTimelineView getTimelineView()
+    public EffectsTimelineView getTimelineView()
     {
         return mTimelineView;
     }
@@ -92,6 +102,15 @@ public class MagicEffectLayout extends TuSdkRelativeLayout
     }
 
     /**
+     *
+     * @param movieEditor
+     */
+    public void setMovieEditor(TuSdkMovieEditorImpl movieEditor)
+    {
+        this.mMovieEditor = movieEditor;
+    }
+
+    /**
      * 魔法效果列表视图
      *
      * @return
@@ -100,12 +119,12 @@ public class MagicEffectLayout extends TuSdkRelativeLayout
     {
         if (mMagicEffectListView == null)
         {
-            mMagicEffectListView = (MagicEffectListView) findViewById(com.upyun.shortvideo.R.id.lsq_magic_effect_list_view);
+            mMagicEffectListView = (MagicEffectListView) findViewById(R.id.lsq_magic_effect_list_view);
 
             if (mMagicEffectListView == null) return null;
 
             mMagicEffectListView.loadView();
-            mMagicEffectListView.setCellLayoutId(com.upyun.shortvideo.R.layout.magic_list_cell_view);
+            mMagicEffectListView.setCellLayoutId(R.layout.magic_list_cell_view);
             mMagicEffectListView.setCellWidth(TuSdkContext.dip2px(62));
             mMagicEffectListView.reloadData();
         }

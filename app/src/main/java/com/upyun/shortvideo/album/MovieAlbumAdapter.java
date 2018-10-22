@@ -19,6 +19,10 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
+import org.lasque.tusdk.core.TuSdk;
+import com.upyun.shortvideo.R;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,6 +39,10 @@ public class MovieAlbumAdapter extends RecyclerView.Adapter<MovieAlbumAdapter.Vi
     private int mSelectedPosition = -1;
     /* 上一次选中的视频位置 */
     private int mLastSelectedPosition = -1;
+    /* 已选视频 */
+    private List<MovieInfo> selectMovieInfos;
+    /* 最多选择数量 */
+    private int mSelectMax = 1;
 
     /**
      *  Item点击事件
@@ -51,17 +59,19 @@ public class MovieAlbumAdapter extends RecyclerView.Adapter<MovieAlbumAdapter.Vi
         mOnItemClickListener = onItemClickListener;
     }
 
-    public MovieAlbumAdapter(Context context, List<MovieInfo> videoInfoList)
+    public MovieAlbumAdapter(Context context, List<MovieInfo> videoInfoList, int selectMax)
     {
         this.mContext = context;
         this.mVideoInfoList = videoInfoList;
+        this.mSelectMax = selectMax;
+        selectMovieInfos = new ArrayList<>();
         mInflater = LayoutInflater.from(context);
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
-        return new ViewHolder(mInflater.inflate(com.upyun.shortvideo.R.layout.album_select_video_item,parent,false));
+        return new ViewHolder(mInflater.inflate(R.layout.album_select_video_item,parent,false));
     }
 
     @Override
@@ -74,18 +84,18 @@ public class MovieAlbumAdapter extends RecyclerView.Adapter<MovieAlbumAdapter.Vi
         if (!TextUtils.isEmpty(path))
             Glide.with(mContext).load(path).asBitmap().into(holder.mImageView);
 
-        int drawableId = position == mSelectedPosition ? com.upyun.shortvideo.R.drawable.lsq_video_album_picture_selected : com.upyun.shortvideo.R.drawable.lsq_video_album_picture_unselected;
-        holder.mSelectorView.setBackground(mContext.getResources().getDrawable(drawableId));
+            int drawableId = selectMovieInfos.contains(mVideoInfoList.get(position)) ? R.drawable.lsq_video_album_picture_selected : R.drawable.lsq_video_album_picture_unselected;
+            holder.mSelectorView.setBackground(mContext.getResources().getDrawable(drawableId));
 
-        holder.itemView.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
+            holder.itemView.setOnClickListener(new View.OnClickListener()
             {
-                if (mOnItemClickListener == null) return;
-                mOnItemClickListener.onClick(view, holder.getPosition());
-            }
-        });
+                @Override
+                public void onClick(View view)
+                {
+                    if (mOnItemClickListener == null) return;
+                    mOnItemClickListener.onClick(view, holder.getPosition());
+                }
+            });
     }
 
     @Override
@@ -101,8 +111,8 @@ public class MovieAlbumAdapter extends RecyclerView.Adapter<MovieAlbumAdapter.Vi
         public ViewHolder(View itemView)
         {
             super(itemView);
-            mImageView = (ImageView) itemView.findViewById(com.upyun.shortvideo.R.id.lsq_video_thumb_view);
-            mSelectorView = itemView.findViewById(com.upyun.shortvideo.R.id.lsq_movie_selected_icon);
+            mImageView = (ImageView) itemView.findViewById(R.id.lsq_video_thumb_view);
+            mSelectorView = itemView.findViewById(R.id.lsq_movie_selected_icon);
         }
     }
 
@@ -113,10 +123,40 @@ public class MovieAlbumAdapter extends RecyclerView.Adapter<MovieAlbumAdapter.Vi
     {
         if (mVideoInfoList != null  && position >= 0)
         {
-            this.mLastSelectedPosition = this.mSelectedPosition;
-            this.mSelectedPosition = position;
-            notifyItemChanged(mLastSelectedPosition);
-            notifyItemChanged(mSelectedPosition);
+            if(mSelectMax == 1)
+            {
+                this.mLastSelectedPosition = this.mSelectedPosition;
+                this.mSelectedPosition = position;
+
+                if(selectMovieInfos.contains(mVideoInfoList.get(position)))
+                {
+                    selectMovieInfos.remove(mVideoInfoList.get(position));
+                }
+                else
+                {
+                    selectMovieInfos.clear();
+                    selectMovieInfos.add(mVideoInfoList.get(mSelectedPosition));
+                }
+
+                notifyItemChanged(mLastSelectedPosition);
+                notifyItemChanged(mSelectedPosition);
+            }
+            else
+            {
+                if(selectMovieInfos.contains(mVideoInfoList.get(position))){
+                    selectMovieInfos.remove(mVideoInfoList.get(position));
+                }
+                else
+                {
+                    if(selectMovieInfos.size() >= mSelectMax)
+                    {
+                        TuSdk.messageHub().showToast(mContext, R.string.lsq_select_video_max);
+                        return;
+                    }
+                    selectMovieInfos.add(mVideoInfoList.get(position));
+                }
+                notifyItemChanged(position);
+            }
         }
     }
 
@@ -125,12 +165,10 @@ public class MovieAlbumAdapter extends RecyclerView.Adapter<MovieAlbumAdapter.Vi
      *
      * @return
      */
-    public MovieInfo getSelectedVideoInfo()
+    public List<MovieInfo> getSelectedVideoInfo()
     {
-        if (mSelectedPosition < 0 || mVideoInfoList == null) return null;
-
-        MovieInfo videoInfo = null;
-        videoInfo = mVideoInfoList.get(mSelectedPosition);
-        return videoInfo;
+        if (selectMovieInfos.size() == 0) return null;
+        return selectMovieInfos;
     }
+
 }

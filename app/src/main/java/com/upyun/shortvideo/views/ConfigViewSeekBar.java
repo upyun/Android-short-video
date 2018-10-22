@@ -13,6 +13,8 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
+import com.upyun.shortvideo.views.ConfigViewParams.ConfigViewArg;
+
 import org.lasque.tusdk.core.TuSdkContext;
 import org.lasque.tusdk.core.view.TuSdkRelativeLayout;
 import org.lasque.tusdk.impl.view.widget.TuSeekBar;
@@ -24,7 +26,7 @@ import org.lasque.tusdk.impl.view.widget.TuSeekBar.TuSeekBarDelegate;
  * @author LiuHang
  *
  */
-public class ConfigViewSeekBar extends 	TuSdkRelativeLayout
+public class ConfigViewSeekBar extends TuSdkRelativeLayout
 {
 	// SeekBar默认布局
 	private static String mResID = "tusdk_config_seekbar_one";
@@ -58,7 +60,7 @@ public class ConfigViewSeekBar extends 	TuSdkRelativeLayout
 		 * @param arg
 		 *            参数
 		 */
-		void onSeekbarDataChanged(ConfigViewSeekBar seekbar, ConfigViewParams.ConfigViewArg arg);
+		void onSeekbarDataChanged(ConfigViewSeekBar seekbar, ConfigViewArg arg);
 	}
 
 	/**
@@ -89,7 +91,7 @@ public class ConfigViewSeekBar extends 	TuSdkRelativeLayout
 	private TextView mTitleView;
 	
 	/** 配置参数 */
-	private ConfigViewParams.ConfigViewArg mConfigViewArg;
+	private ConfigViewArg mConfigViewArg;
 	
 	/** 拖动栏委托 */
 	private ConfigSeekbarDelegate mDelegate;
@@ -208,7 +210,7 @@ public class ConfigViewSeekBar extends 	TuSdkRelativeLayout
 	 * -
 	 * @param arg
 	 */
-	public void setConfigViewArg(ConfigViewParams.ConfigViewArg arg)
+	public void setConfigViewArg(ConfigViewArg arg)
 	{
 		mConfigViewArg = arg;
 		if (mConfigViewArg == null) return;

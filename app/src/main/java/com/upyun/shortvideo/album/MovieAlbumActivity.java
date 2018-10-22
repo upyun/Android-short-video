@@ -31,7 +31,9 @@ import org.lasque.tusdk.core.TuSdk;
 import org.lasque.tusdk.core.TuSdkContext;
 import org.lasque.tusdk.core.utils.ContextUtils;
 import org.lasque.tusdk.core.view.TuSdkViewHelper;
+import com.upyun.shortvideo.R;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +42,7 @@ import java.util.List;
  */
 public class MovieAlbumActivity extends Activity
 {
+    private static final String MOVIE_EDIT = "MovieEditorActivity";
     /* 最小视频时长(单位：ms) */
     private static int MIN_VIDEO_DURATION = 3000;
     /* 最大视频时长(单位：ms) */
@@ -50,6 +53,8 @@ public class MovieAlbumActivity extends Activity
     private TextView mTitleTextView;
    /* 返回按钮 */
     protected TextView mBackButton;
+   /* 最大选择数量 */
+    protected int mSelectMax = 1;
 
     private RecyclerView mRecyclerView;
 
@@ -62,7 +67,7 @@ public class MovieAlbumActivity extends Activity
 
         if (PermissionUtils.hasRequiredPermissions(this, getRequiredPermissions()))
         {
-            setContentView(com.upyun.shortvideo.R.layout.movie_album_activity);
+            setContentView(R.layout.movie_album_activity);
             initView();
         }
         else
@@ -105,7 +110,7 @@ public class MovieAlbumActivity extends Activity
         {
             if (permissionGranted)
             {
-                setContentView(com.upyun.shortvideo.R.layout.movie_album_activity);
+                setContentView(R.layout.movie_album_activity);
                 initView();
             }
             else
@@ -143,20 +148,22 @@ public class MovieAlbumActivity extends Activity
 
     private void initView()
     {
-        mConfirmButton = (TextView) findViewById(com.upyun.shortvideo.R.id.lsq_next);
-        mConfirmButton.setText(com.upyun.shortvideo.R.string.lsq_text_confirm);
+        mSelectMax = getIntent().getIntExtra("selectMax",1);
+
+        mConfirmButton = (TextView) findViewById(R.id.lsq_next);
+        mConfirmButton.setText(R.string.lsq_text_confirm);
         mConfirmButton.setOnClickListener(mButtonSafeClickListener);
 
-        mTitleTextView = (TextView) findViewById(com.upyun.shortvideo.R.id.lsq_title);
-        mTitleTextView.setText(com.upyun.shortvideo.R.string.lsq_video_selected);
-        mBackButton = (TextView) findViewById(com.upyun.shortvideo.R.id.lsq_back);
+        mTitleTextView = (TextView) findViewById(R.id.lsq_title);
+        mTitleTextView.setText(R.string.lsq_video_selected);
+        mBackButton = (TextView) findViewById(R.id.lsq_back);
         mBackButton.setOnClickListener(mButtonSafeClickListener);
 
-        mRecyclerView = (RecyclerView) findViewById(com.upyun.shortvideo.R.id.lsq_movie_selector_recyclerView);
+        mRecyclerView = (RecyclerView) findViewById(R.id.lsq_movie_selector_recyclerView);
         GridLayoutManager gridLayoutManager =  new GridLayoutManager(MovieAlbumActivity.this , 3);
         mRecyclerView.setLayoutManager(gridLayoutManager);
 
-        mVideoAlbumAdapter = new MovieAlbumAdapter(MovieAlbumActivity.this,getVideoList());
+        mVideoAlbumAdapter = new MovieAlbumAdapter(MovieAlbumActivity.this,getVideoList(),mSelectMax);
         mRecyclerView.setAdapter(mVideoAlbumAdapter);
         mVideoAlbumAdapter.setOnItemClickListener(mOnItemClickListener);
     }
@@ -181,7 +188,7 @@ public class MovieAlbumActivity extends Activity
             if (v == mConfirmButton)
             {
                 if (mVideoAlbumAdapter == null || mVideoAlbumAdapter.getSelectedVideoInfo() == null)
-                    TuSdk.messageHub().showToast(MovieAlbumActivity.this, com.upyun.shortvideo.R.string.lsq_select_video_hint);
+                    TuSdk.messageHub().showToast(MovieAlbumActivity.this, R.string.lsq_select_video_hint);
                else
                     handleIntentAction();
             }
@@ -225,13 +232,25 @@ public class MovieAlbumActivity extends Activity
         // 要跳转的视频裁剪类名
         String className = getIntent().getStringExtra("cutClassName");
         // 视频路径
-        String videoPath = mVideoAlbumAdapter.getSelectedVideoInfo().getPath();
+        List<MovieInfo> videoPath = mVideoAlbumAdapter.getSelectedVideoInfo();
 
         Intent intent = null;
         try
         {
             intent = new Intent(MovieAlbumActivity.this, Class.forName(className));
-            intent.putExtra("videoPath", videoPath);
+            if(videoPath.size() == 1)
+            {
+                intent.putExtra("videoPath", videoPath.get(0).getPath());
+            }
+            else
+            {
+                intent.putExtra("videoPaths", (Serializable) videoPath);
+            }
+
+            if(MOVIE_EDIT.equals(className))
+            {
+                intent.putExtra("ratioAdaption", false);
+            }
             startActivity(intent);
             finish();
         }

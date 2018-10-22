@@ -9,14 +9,17 @@
  */
 package com.upyun.shortvideo.views;
 
-import org.lasque.tusdk.core.TuSdkContext;
-import org.lasque.tusdk.core.view.recyclerview.TuSdkTableView;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.upyun.shortvideo.views.AudioEffectCellView.MixingCellViewDelegate;
+
+import org.lasque.tusdk.core.TuSdkContext;
+import org.lasque.tusdk.core.view.recyclerview.TuSdkTableView;
+import com.upyun.shortvideo.R;
 
 /**
  * 自定义的混音列表
@@ -29,7 +32,7 @@ public class AudioEffectListView extends TuSdkTableView<AudioEffectCellView.Audi
 	/** 行视图宽度 */
 	private int mCellWidth;
 	
-	private AudioEffectCellView.MixingCellViewDelegate mDelegate;
+	private MixingCellViewDelegate mDelegate;
 	
 	public AudioEffectListView(Context context, AttributeSet attrs, int defStyle)
 	{
@@ -46,12 +49,12 @@ public class AudioEffectListView extends TuSdkTableView<AudioEffectCellView.Audi
 		super(context);
 	}
 	
-	public void setLongClickDelegate(AudioEffectCellView.MixingCellViewDelegate delegate)
+	public void setLongClickDelegate(MixingCellViewDelegate delegate)
 	{
 		this.mDelegate = delegate;
 	}
 
-	public AudioEffectCellView.MixingCellViewDelegate getLongClickDelegate()
+	public MixingCellViewDelegate getLongClickDelegate()
 	{
 		return mDelegate;
 	}
@@ -136,7 +139,7 @@ public class AudioEffectListView extends TuSdkTableView<AudioEffectCellView.Audi
 				
 				if (model.mTypeId == 1)
 				{
-					view.getTitleView().setBackground(TuSdkContext.getDrawable(com.upyun.shortvideo.R.drawable.tusdk_view_filter_selected_text_roundcorner));
+					view.getTitleView().setBackground(TuSdkContext.getDrawable(R.drawable.tusdk_view_filter_selected_text_roundcorner));
 				}
 				else if (model.mTypeId == 0) 
 				{
@@ -150,7 +153,7 @@ public class AudioEffectListView extends TuSdkTableView<AudioEffectCellView.Audi
 				view.getBorderView().setVisibility(View.GONE);
 				if (model.mTypeId == 1)
 				{
-					view.getTitleView().setBackground(TuSdkContext.getDrawable(com.upyun.shortvideo.R.drawable.tusdk_view_filter_unselected_text_roundcorner));
+					view.getTitleView().setBackground(TuSdkContext.getDrawable(R.drawable.tusdk_view_filter_unselected_text_roundcorner));
 				}
 				else if (model.mTypeId == 0)
 				{

@@ -9,12 +9,6 @@
  */
 package com.upyun.shortvideo.views;
 
-import org.lasque.tusdk.core.TuSdkContext;
-import org.lasque.tusdk.core.seles.tusdk.FilterLocalPackage;
-import org.lasque.tusdk.core.view.TuSdkImageView;
-import org.lasque.tusdk.core.view.listview.TuSdkCellRelativeLayout;
-import org.lasque.tusdk.core.view.listview.TuSdkListSelectableCellViewInterface;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -23,6 +17,13 @@ import android.view.View;
 import android.widget.ImageView.ScaleType;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import org.lasque.tusdk.core.TuSdkContext;
+import org.lasque.tusdk.core.seles.tusdk.FilterLocalPackage;
+import org.lasque.tusdk.core.view.TuSdkImageView;
+import org.lasque.tusdk.core.view.listview.TuSdkCellRelativeLayout;
+import org.lasque.tusdk.core.view.listview.TuSdkListSelectableCellViewInterface;
+import com.upyun.shortvideo.R;
 
 /**
  * 自定义的混音列表单元视图
@@ -90,29 +91,29 @@ public class AudioEffectCellView extends TuSdkCellRelativeLayout<AudioEffectCell
 	{
 
 		@Override
-		public boolean onLongClick(View v) 
+		public boolean onLongClick(View v)
 		{
 			getLongClickDelegate().onMixingCellViewLongClick(AudioEffectCellView.this);
 			return true;
 		}
-		
+
 	};
-	
-	@SuppressLint("DefaultLocale") 
+
+	@SuppressLint("DefaultLocale")
 	@Override
-	protected void bindModel() 
+	protected void bindModel()
 	{
 		AudioEffectEntity model = this.getModel();
-		
+
 		if (model == null) return;
-				
+
 		String filterImageName = "lsq_mixing_thumb_" + model.mName.toLowerCase();
-		
+
 		Drawable filterImage = TuSdkContext.getDrawable(filterImageName);
-		
+
 		if (this.getImageView() != null)
 		{
-			if (model.mTypeId == 0) 
+			if (model.mTypeId == 0)
 			{
 				LayoutParams lp = (LayoutParams) getImageView().getLayoutParams();
 				lp.width = TuSdkContext.dip2px(27);
@@ -122,12 +123,12 @@ public class AudioEffectCellView extends TuSdkCellRelativeLayout<AudioEffectCell
 			}
 			getImageView().setImageDrawable(filterImage);
 		}
-		
+
 		if (this.getTitleView() != null)
 		{
 			getTitleView().setText(TuSdkContext.getString("lsq_mixing_" + model.mName.toLowerCase()));
-			
-			if (model.mTypeId == 0) 
+
+			if (model.mTypeId == 0)
 			{
 				getTitleView().setBackground(null);
 				getTitleView().setTextColor(TuSdkContext.getColor("lsq_dubbing_unselected_color"));
@@ -136,7 +137,7 @@ public class AudioEffectCellView extends TuSdkCellRelativeLayout<AudioEffectCell
 
 		if ((Integer)getTag() < 2)
 		{
-			getViewById(com.upyun.shortvideo.R.id.lsq_default_background).setBackground(getResources().getDrawable(com.upyun.shortvideo.R.drawable.tusdk_view_dubbing_roundcorner_white_bg));
+			getViewById(R.id.lsq_default_background).setBackground(getResources().getDrawable(R.drawable.tusdk_view_dubbing_roundcorner_white_bg));
 		}
 	}
 
@@ -146,7 +147,7 @@ public class AudioEffectCellView extends TuSdkCellRelativeLayout<AudioEffectCell
 		RelativeLayout filterBorderView = getBorderView();
 		filterBorderView.setVisibility(View.VISIBLE);
 
-		AudioEffectEntity group = getModel();
+		AudioEffectCellView.AudioEffectEntity group = getModel();
 		TuSdkImageView mixingImageView = getImageView();
 		String drawableId =  ("lsq_mixing_thumb_"+group.mName.toLowerCase()+"_selected");
 		Drawable drawable = TuSdkContext.getDrawable(drawableId);
@@ -166,7 +167,7 @@ public class AudioEffectCellView extends TuSdkCellRelativeLayout<AudioEffectCell
 		RelativeLayout filterBorderView = getBorderView();
 		filterBorderView.setVisibility(View.GONE);
 
-		AudioEffectEntity group = getModel();
+		AudioEffectCellView.AudioEffectEntity group = getModel();
 		TuSdkImageView mixingImageView = getImageView();
 		String drawableId = ("lsq_mixing_thumb_"+group.mName.toLowerCase());
 		Drawable drawable = TuSdkContext.getDrawable(drawableId);
@@ -184,7 +185,7 @@ public class AudioEffectCellView extends TuSdkCellRelativeLayout<AudioEffectCell
 	{
 		if (mThumbView == null)
 		{
-			mThumbView = (TuSdkImageView)findViewById(com.upyun.shortvideo.R.id.lsq_item_image);
+			mThumbView = (TuSdkImageView)findViewById(R.id.lsq_item_image);
 		}
 		return mThumbView;
 	}
@@ -193,7 +194,7 @@ public class AudioEffectCellView extends TuSdkCellRelativeLayout<AudioEffectCell
 	{
 		if (mMixingBorderView == null)
 		{
-			 mMixingBorderView = (RelativeLayout)findViewById(com.upyun.shortvideo.R.id.lsq_item_border);
+			 mMixingBorderView = (RelativeLayout)findViewById(R.id.lsq_item_border);
 		}
 		return mMixingBorderView;
 	}
@@ -202,7 +203,7 @@ public class AudioEffectCellView extends TuSdkCellRelativeLayout<AudioEffectCell
 	{
 		if (mTitlebView == null)
 		{
-			mTitlebView = (TextView)findViewById(com.upyun.shortvideo.R.id.lsq_item_title);
+			mTitlebView = (TextView)findViewById(R.id.lsq_item_title);
 		}
 		return mTitlebView;
 	}

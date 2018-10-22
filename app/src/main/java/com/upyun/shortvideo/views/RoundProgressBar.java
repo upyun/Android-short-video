@@ -9,8 +9,6 @@
  */
 package com.upyun.shortvideo.views;
 
-import org.lasque.tusdk.core.utils.TLog;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -20,6 +18,9 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
+
+import org.lasque.tusdk.core.utils.TLog;
+import com.upyun.shortvideo.R;
 
 /**
  * 圆形进度条
@@ -70,17 +71,17 @@ public class RoundProgressBar extends View
 		
 		mPaint = new Paint();
 		TypedArray mTypedArray = context.obtainStyledAttributes(attrs,
-				com.upyun.shortvideo.R.styleable.RoundProgressBar);
+				R.styleable.RoundProgressBar);
 		
 		// 获取自定义属性和默认值
-		mRingColor = mTypedArray.getColor(com.upyun.shortvideo.R.styleable.RoundProgressBar_ringColor, Color.WHITE);
-		mInnerRoundColor= mTypedArray.getColor(com.upyun.shortvideo.R.styleable.RoundProgressBar_innerRoundColor, Color.WHITE);
-		mRingProgressColor = mTypedArray.getColor(com.upyun.shortvideo.R.styleable.RoundProgressBar_ringProgressColor, Color.GREEN);
-		mRingWidth = mTypedArray.getDimension(com.upyun.shortvideo.R.styleable.RoundProgressBar_ringWidth, 7);
-		mInnerRoundRadius= mTypedArray.getDimension(com.upyun.shortvideo.R.styleable.RoundProgressBar_innerRoundRadius, 35);
-		mMax = mTypedArray.getInteger(com.upyun.shortvideo.R.styleable.RoundProgressBar_max, 100);
-		mStyle = mTypedArray.getInt(com.upyun.shortvideo.R.styleable.RoundProgressBar_style, 0);
-		mRingProgressWidth = mTypedArray.getDimension(com.upyun.shortvideo.R.styleable.RoundProgressBar_ringProgressWidth, 85);
+		mRingColor = mTypedArray.getColor(R.styleable.RoundProgressBar_ringColor, Color.WHITE);
+		mInnerRoundColor= mTypedArray.getColor(R.styleable.RoundProgressBar_innerRoundColor, Color.WHITE);
+		mRingProgressColor = mTypedArray.getColor(R.styleable.RoundProgressBar_ringProgressColor, Color.GREEN);
+		mRingWidth = mTypedArray.getDimension(R.styleable.RoundProgressBar_ringWidth, 7);
+		mInnerRoundRadius= mTypedArray.getDimension(R.styleable.RoundProgressBar_innerRoundRadius, 35);
+		mMax = mTypedArray.getInteger(R.styleable.RoundProgressBar_max, 100);
+		mStyle = mTypedArray.getInt(R.styleable.RoundProgressBar_style, 0);
+		mRingProgressWidth = mTypedArray.getDimension(R.styleable.RoundProgressBar_ringProgressWidth, 85);
 		
 		mTypedArray.recycle();
 	}

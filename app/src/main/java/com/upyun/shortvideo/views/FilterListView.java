@@ -9,19 +9,20 @@
  */
 package com.upyun.shortvideo.views;
 
-import org.lasque.tusdk.core.TuSdkContext;
-import org.lasque.tusdk.core.view.recyclerview.TuSdkTableView;
-
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.lasque.tusdk.core.TuSdkContext;
+import org.lasque.tusdk.core.view.recyclerview.TuSdkTableView;
+import com.upyun.shortvideo.R;
+
 /**
  * @author Yanlin
  *
  */
-public class FilterListView extends TuSdkTableView<String, FilterCellView> 
+public class FilterListView extends TuSdkTableView<String, FilterCellView>
 {
 	/** 行视图宽度 */
 	private int mCellWidth;
@@ -125,12 +126,12 @@ public class FilterListView extends TuSdkTableView<String, FilterCellView>
 		if(isSelected)
 		{
 			view.getBorderView().setVisibility(View.VISIBLE);
-			view.getTitleView().setBackground(TuSdkContext.getDrawable(com.upyun.shortvideo.R.drawable.tusdk_view_filter_selected_text_roundcorner));
+			view.getTitleView().setBackground(TuSdkContext.getDrawable(R.drawable.tusdk_view_filter_selected_text_roundcorner));
 		}
 		else
 		{
 			view.getBorderView().setVisibility(View.GONE);
-			view.getTitleView().setBackground(TuSdkContext.getDrawable(com.upyun.shortvideo.R.drawable.tusdk_view_filter_unselected_text_roundcorner));
+			view.getTitleView().setBackground(TuSdkContext.getDrawable(R.drawable.tusdk_view_filter_unselected_text_roundcorner));
 		}
 	}
 }

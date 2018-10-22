@@ -9,7 +9,6 @@
     <color name="lsq_color_orange">#ff6633</color>
     <color name="lsq_color_transparent">#00000000</color>
 
-
     <!-- alpha -->
     <color name="lsq_alpha_black_66">#66000000</color>
     <color name="lsq_alpha_black_B4">#B4000000</color>
@@ -29,7 +28,7 @@
     <color name="lsq_navigator_button_title">#ffffff</color>
     <color name="lsq_navigator_button_right_title">#ff6633</color>
     <color name="lsq_navigator_split">#66000000</color>
-
+    
     <!-- text -->
     <color name="lsq_link_action">#287dfa</color>
 
@@ -64,20 +63,21 @@
     <!-- text -->
     <color name="lsq_text_group_header">#9fa0a4</color>
     <color name="lsq_text_time">#9fa0a0</color>
-
+    
     <!-- seekbar -->
     <color name="lsq_seekbar_drag_color">#f4a11a</color>
     <color name="lsq_seekbar_view_color">#d9d9d9</color>
-
+    <color name="lsq_filter_config_highlight">#f4a11a</color>
+    
     <!-- video editor-->
     <color name="lsq_background_entry_default">#f4a11a</color>
     <color name="lsq_record_title_color">#f4a11a</color>
-
+    
 	<color name="lsq_clip_title_color">#333333</color>
 	<color name="lsq_filter_title_color">#f4a11a</color>
     <color name="lsq_filter_title_color_alpha_20">#33f4a11a</color>
 	<color name="lsq_filter_title_default_color">#9fa0a0</color>
-
+	
 	<color name="lsq_filter_title_unselected_color">#d9d9d9</color>
     <color name="lsq_progress_interupt_color">#d9d9d9</color>
     <color name="shadow_color">#231815</color>
@@ -103,6 +103,12 @@
     <color name="lsq_scence_effect_color_LiveFancy01_1">#b35bf254</color>
     <color name="lsq_scence_effect_color_LiveSoulOut01">#b316cefc</color>
     <color name="lsq_scence_effect_color_LiveSignal01">#b36ea0f2</color>
+    <color name="lsq_scence_effect_color_LiveLightning01">#b36ea011</color>
+    <color name="lsq_scence_effect_color_LiveXRay01">#b3ff9be0</color>
+    <color name="lsq_scence_effect_color_LiveHeartbeat01">#b36e11f2</color>
+    <color name="lsq_scence_effect_color_LiveMirrorImage01">#b399e111</color>
+    <color name="lsq_scence_effect_color_LiveSlosh01">#b3ffefff</color>
+    <color name="lsq_scence_effect_color_LiveOldTV01">#b36efeee</color>
     <color name="lsq_scence_effect_color_title">#999999</color>
 
     <!-- v2.0 魔法特效 TimeLineView 编辑色 -->
@@ -120,7 +126,14 @@
 
     <color name="lsq_magic_size_baground">#eeeeee</color>
 
-    <color name="setting_text_color">#323333</color>
+    <color name="primary">#2196F3</color>
+    <color name="primary_dark">#1976D2</color>
+    <color name="primary_light">#BBDEFB</color>
+    <color name="accent">#455A64</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#727272</color>
+    <color name="icons">#FFFFFF</color>
+    <color name="divider">#B6B6B6</color>
 
 
 </resources>

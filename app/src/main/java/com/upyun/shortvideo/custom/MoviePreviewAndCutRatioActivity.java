@@ -8,9 +8,6 @@
  *
  */
 package com.upyun.shortvideo.custom;
-import org.lasque.tusdk.core.struct.TuSdkSize;
-import org.lasque.tusdk.core.utils.RectHelper;
-import com.upyun.shortvideo.suite.MoviePreviewAndCutActivity;
 
 import android.graphics.Rect;
 import android.media.MediaPlayer;
@@ -18,6 +15,11 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.SurfaceView;
 import android.widget.RelativeLayout;
+
+import com.upyun.shortvideo.suite.MoviePreviewAndCutActivity;
+
+import org.lasque.tusdk.core.struct.TuSdkSize;
+import org.lasque.tusdk.core.utils.RectHelper;
 
 /**
  * 视频预览 + 获取视频裁剪范围

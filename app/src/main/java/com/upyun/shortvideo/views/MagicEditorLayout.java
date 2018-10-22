@@ -12,16 +12,22 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.lasque.tusdk.core.TuSdkContext;
+import org.lasque.tusdk.core.seles.sources.TuSdkMovieEditorImpl;
 import org.lasque.tusdk.core.view.TuSdkRelativeLayout;
 import org.lasque.tusdk.core.view.widget.button.TuSdkTextButton;
+import com.upyun.shortvideo.R;
 
 /**
  * 魔法预览界面
  */
 public class MagicEditorLayout extends TuSdkRelativeLayout implements View.OnClickListener
 {
+
+    private TuSdkMovieEditorImpl mMovieEditor;
+
+
     // 魔法预览界面
-    private MagicEffectsTimelineView mTimeLineView;
+    private EffectsTimelineView mTimeLineView;
 
     // 魔法预览界面返回按钮
     private ImageView mMagicPreviewBack;
@@ -77,26 +83,34 @@ public class MagicEditorLayout extends TuSdkRelativeLayout implements View.OnCli
         super(context, attrs, defStyle);
     }
 
+    /**
+     * 设置MovieEditor
+     * @param movieEditor
+     */
+    public void setMovieEditor(TuSdkMovieEditorImpl movieEditor) {
+        this.mMovieEditor = movieEditor;
+    }
+
     @Override
     public void loadView()
     {
         super.loadView();
 
         // 动画时间轴视图
-        mTimeLineView = getViewById(com.upyun.shortvideo.R.id.lsq_magic_preview_timelineView);
-        mTimeLineView.setDelegate(mEffectsTimelineViewDelegate);
-        mMagicPreviewBack = (ImageView) findViewById(com.upyun.shortvideo.R.id.lsq_magic_back);
+        mTimeLineView = getViewById(R.id.lsq_magic_preview_timelineView);
+        mTimeLineView.setDelegate(mMagicEffectsTimelineViewDelegate);
+        mMagicPreviewBack = (ImageView) findViewById(R.id.lsq_magic_back);
         mMagicPreviewBack.setOnClickListener(this);
-        mMagicSizeBtn = (ImageView) findViewById(com.upyun.shortvideo.R.id.lsq_magic_edit_size_btn);
+        mMagicSizeBtn = (ImageView) findViewById(R.id.lsq_magic_edit_size_btn);
         mMagicSizeBtn.setOnClickListener(this);
-        mMagicColorBtn = findViewById(com.upyun.shortvideo.R.id.lsq_magic_edit_color_btn);
+        mMagicColorBtn = findViewById(R.id.lsq_magic_edit_color_btn);
         mMagicColorBtn.setOnClickListener(this);
-        mMagicPlayBtn = findViewById(com.upyun.shortvideo.R.id.lsq_magic_edit_play_btn);
+        mMagicPlayBtn = findViewById(R.id.lsq_magic_edit_play_btn);
         mMagicPlayBtn.setOnClickListener(this);
         mSizSeekBar = new SizeSeekBar();
         mColorSeekBar = new ColorSeekBar();
 
-        mUndoButton = findViewById(com.upyun.shortvideo.R.id.lsq_magic_preview_cell_undo_btn);
+        mUndoButton = findViewById(R.id.lsq_magic_preview_cell_undo_btn);
         mUndoButton.setOnClickListener(this);
         updateUndoButton(false);
     }
@@ -117,16 +131,20 @@ public class MagicEditorLayout extends TuSdkRelativeLayout implements View.OnCli
         this.mDelegate = delegate;
     }
 
-    private EffectsTimelineView.EffectsTimelineViewDelegate mEffectsTimelineViewDelegate = new EffectsTimelineView.EffectsTimelineViewDelegate()
+    /** 魔法特效时间轴变化 */
+    protected EffectsTimelineView.EffectsTimelineViewDelegate mMagicEffectsTimelineViewDelegate = new EffectsTimelineView.EffectsTimelineViewDelegate()
     {
         @Override
         public void onProgressCursorWillChaned()
         {
+            mMovieEditor.getEditorPlayer().pausePreview();
         }
 
         @Override
-        public void onProgressChaned(float progress)
+        public void onProgressChaned(final float progress)
         {
+            mMovieEditor.getEditorPlayer().seekTimeUs((long)(mMovieEditor.getEditorPlayer().getTotalTimeUS() * progress));
+            mMovieEditor.getEditorPlayer().pausePreview();
         }
 
         @Override
@@ -143,14 +161,14 @@ public class MagicEditorLayout extends TuSdkRelativeLayout implements View.OnCli
      */
     public void updateUndoButton(boolean isEnableClicked)
     {
-        Drawable cancelUnClickedDrawable = getResources().getDrawable(com.upyun.shortvideo.R.drawable.edit_ic_back);
+        Drawable cancelUnClickedDrawable = getResources().getDrawable(R.drawable.edit_ic_back);
         cancelUnClickedDrawable.setAlpha(isEnableClicked ? 255 : 66);
         // 这一步必须要做,否则不会显示
         cancelUnClickedDrawable.setBounds(0, 0, cancelUnClickedDrawable.getMinimumWidth(), cancelUnClickedDrawable.getMinimumHeight());
         mUndoButton.setCompoundDrawables(null, cancelUnClickedDrawable, null, null);
 
         mUndoButton.setEnabled(isEnableClicked);
-        mUndoButton.setTextColor(getResColor(isEnableClicked ? com.upyun.shortvideo.R.color.lsq_filter_title_color : com.upyun.shortvideo.R.color.lsq_filter_title_color_alpha_20));
+        mUndoButton.setTextColor(getResColor(isEnableClicked ? R.color.lsq_filter_title_color : R.color.lsq_filter_title_color_alpha_20));
     }
 
     /**
@@ -158,7 +176,7 @@ public class MagicEditorLayout extends TuSdkRelativeLayout implements View.OnCli
      *
      * @return
      */
-    public MagicEffectsTimelineView getTimelineView()
+    public EffectsTimelineView getTimelineView()
     {
         return mTimeLineView;
     }
@@ -178,21 +196,21 @@ public class MagicEditorLayout extends TuSdkRelativeLayout implements View.OnCli
     {
         switch (v.getId())
         {
-            case com.upyun.shortvideo.R.id.lsq_magic_back:
+            case R.id.lsq_magic_back:
                 if (mDelegate != null)
                     mDelegate.onBackAction();
                 break;
-            case com.upyun.shortvideo.R.id.lsq_magic_edit_size_btn:
+            case R.id.lsq_magic_edit_size_btn:
                 toggleMagicSizeMode(true);
                 break;
-            case com.upyun.shortvideo.R.id.lsq_magic_edit_color_btn:
+            case R.id.lsq_magic_edit_color_btn:
                 toggleMagicColorMode(true);
                 break;
-            case com.upyun.shortvideo.R.id.lsq_magic_edit_play_btn:
+            case R.id.lsq_magic_edit_play_btn:
                 if (mDelegate != null)
                     mDelegate.onMagicPreviewPlay();
                 break;
-            case  com.upyun.shortvideo.R.id.lsq_magic_preview_cell_undo_btn:
+            case  R.id.lsq_magic_preview_cell_undo_btn:
                 if (mDelegate != null)
                     mDelegate.onUndo();
                 break;
@@ -226,7 +244,7 @@ public class MagicEditorLayout extends TuSdkRelativeLayout implements View.OnCli
      *
      * @param delegate
      */
-    public void setTimelineDelegate(SceneEffectsTimelineView.EffectsTimelineViewDelegate delegate)
+    public void setTimelineDelegate(EffectsTimelineView.EffectsTimelineViewDelegate delegate)
     {
         mTimeLineView.setDelegate(delegate);
     }
@@ -251,13 +269,13 @@ public class MagicEditorLayout extends TuSdkRelativeLayout implements View.OnCli
 
         public void initView()
         {
-            mSeekBarTitle = getMaigcSizeSeekBar().findViewById(com.upyun.shortvideo.R.id.lsq_titleView);
-            mSeekBarTitle.setText(getResString(com.upyun.shortvideo.R.string.lsq_magic_size));
+            mSeekBarTitle = getMaigcSizeSeekBar().findViewById(R.id.lsq_titleView);
+            mSeekBarTitle.setText(getResString(R.string.lsq_magic_size));
             mSeekBarTitle.setOnClickListener(this);
-            TextView valueText = getMaigcSizeSeekBar().findViewById(com.upyun.shortvideo.R.id.lsq_configValueView);
+            TextView valueText = getMaigcSizeSeekBar().findViewById(R.id.lsq_configValueView);
             valueText.setVisibility(GONE);
 
-            getMaigcSizeSeekBar().getSeekbar().getBottomView().setBackground(TuSdkContext.getDrawable(com.upyun.shortvideo.R.color.lsq_magic_size_baground));
+            getMaigcSizeSeekBar().getSeekbar().getBottomView().setBackground(TuSdkContext.getDrawable(R.color.lsq_magic_size_baground));
         }
 
         @Override
@@ -279,8 +297,8 @@ public class MagicEditorLayout extends TuSdkRelativeLayout implements View.OnCli
             if (mSizeSeekBar == null)
             {
                 ConfigViewSeekBar.setLayoutId("tusdk_config_seekbar_two");
-                mSizeSeekBar = (ConfigViewSeekBar) findViewById(com.upyun.shortvideo.R.id.lsq_size_seek_bar);
-                mSizeSeekBar.setBackgroundColor(getResColor(com.upyun.shortvideo.R.color.lsq_color_transparent));
+                mSizeSeekBar = (ConfigViewSeekBar) findViewById(R.id.lsq_size_seek_bar);
+                mSizeSeekBar.setBackgroundColor(getResColor(R.color.lsq_color_transparent));
                 mSizeSeekBar.setHeight(60);
                 mSizeSeekBar.setDelegate(mSizeSeekBarDelegate);
             }
@@ -301,7 +319,7 @@ public class MagicEditorLayout extends TuSdkRelativeLayout implements View.OnCli
         public RelativeLayout getMagicSizeSeekBarWrap()
         {
             if (mSizeSeekBarWrap == null)
-                mSizeSeekBarWrap = findViewById(com.upyun.shortvideo.R.id.lsq_size_seek_bar_wrap);
+                mSizeSeekBarWrap = findViewById(R.id.lsq_size_seek_bar_wrap);
 
             return mSizeSeekBarWrap;
         }
@@ -344,15 +362,15 @@ public class MagicEditorLayout extends TuSdkRelativeLayout implements View.OnCli
 
         public void initView()
         {
-            mSeekBarTitle = getMaigcColorSeekBar().findViewById(com.upyun.shortvideo.R.id.lsq_titleView);
-            mSeekBarTitle.setText(getResString(com.upyun.shortvideo.R.string.lsq_magic_color));
+            mSeekBarTitle = getMaigcColorSeekBar().findViewById(R.id.lsq_titleView);
+            mSeekBarTitle.setText(getResString(R.string.lsq_magic_color));
             mSeekBarTitle.setOnClickListener(this);
-            TextView valueText = getMaigcColorSeekBar().findViewById(com.upyun.shortvideo.R.id.lsq_configValueView);
+            TextView valueText = getMaigcColorSeekBar().findViewById(R.id.lsq_configValueView);
             valueText.setVisibility(GONE);
 
             // 修改SeekBar背景为色度表
             mColorView = getMaigcColorSeekBar().getSeekbar().getBottomView();
-            mColorView.setBackground(TuSdkContext.getDrawable(com.upyun.shortvideo.R.drawable.lsq_color_bar));
+            mColorView.setBackground(TuSdkContext.getDrawable(R.drawable.lsq_color_bar));
             getMaigcColorSeekBar().getSeekbar().getTopView().setVisibility(GONE);
         }
 
@@ -375,8 +393,8 @@ public class MagicEditorLayout extends TuSdkRelativeLayout implements View.OnCli
             if (mSizeSeekBar == null)
             {
                 ConfigViewSeekBar.setLayoutId("tusdk_config_seekbar_two");
-                mSizeSeekBar = (ConfigViewSeekBar) findViewById(com.upyun.shortvideo.R.id.lsq_color_seek_bar);
-                mSizeSeekBar.setBackgroundColor(getResColor(com.upyun.shortvideo.R.color.lsq_color_transparent));
+                mSizeSeekBar = (ConfigViewSeekBar) findViewById(R.id.lsq_color_seek_bar);
+                mSizeSeekBar.setBackgroundColor(getResColor(R.color.lsq_color_transparent));
                 mSizeSeekBar.setHeight(60);
                 mSizeSeekBar.setDelegate(mColorSeekBarDelegate);
             }
@@ -392,7 +410,7 @@ public class MagicEditorLayout extends TuSdkRelativeLayout implements View.OnCli
         public RelativeLayout getMagicColorSeekBarWrap()
         {
             if (mColorSeekBarWrap == null)
-                mColorSeekBarWrap = findViewById(com.upyun.shortvideo.R.id.lsq_color_seek_bar_wrap);
+                mColorSeekBarWrap = findViewById(R.id.lsq_color_seek_bar_wrap);
 
             return mColorSeekBarWrap;
         }

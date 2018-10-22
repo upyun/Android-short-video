@@ -3,9 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/lsq_color_white">
-    
-   <!-- movie layout --> 
-   <FrameLayout
+
+    <!-- movie layout -->
+    <FrameLayout
         android:id="@+id/movie_layout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/lsq_video_height"
@@ -13,8 +13,8 @@
         <com.upyun.shortvideo.views.HVScrollView
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/hvScrollView"
-	        android:layout_width="match_parent"
-	        android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:background="#000"
             android:fadingEdge="horizontal|vertical"
             android:scrollbars="horizontal|vertical"
@@ -42,18 +42,18 @@
             android:background="@drawable/lsq_style_default_crop_btn_record"
             android:visibility="visible" />
     </FrameLayout>
-    
-    <!-- title layout --> 
-	<include layout="@layout/title_item_layout"/>
-        
+
+    <!-- title layout -->
+    <include layout="@layout/title_item_layout"/>
+
     <!-- select time layout -->
-    <LinearLayout 
+    <LinearLayout
         android:id="@+id/time_layout"
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:orientation="vertical"
-	    android:background="@color/lsq_color_white"
-	    android:layout_gravity="bottom" >
-		<include layout="@layout/movie_range_selection_time"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/lsq_color_white"
+        android:layout_gravity="bottom" >
+        <include layout="@layout/movie_range_selection_time"/>
     </LinearLayout>
 </FrameLayout>

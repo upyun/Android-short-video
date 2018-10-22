@@ -1,12 +1,12 @@
 package com.upyun.shortvideo.component;
 
-import com.upyun.shortvideo.views.MagicEffectModel;
-import com.upyun.shortvideo.views.SceneEffectModel;
+import com.upyun.shortvideo.views.EffectsTimelineView;
 
 import org.lasque.tusdk.video.editor.TuSDKMediaAudioEffectData;
 import org.lasque.tusdk.video.editor.TuSDKMediaEffectData;
 import org.lasque.tusdk.video.editor.TuSDKMediaStickerAudioEffectData;
 import org.lasque.tusdk.video.editor.TuSDKMediaStickerEffectData;
+import org.lasque.tusdk.video.editor.TuSDKMediaTextEffectData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,10 +31,13 @@ public class MediaEffectsManager
     private TuSDKMediaStickerAudioEffectData mStickerAudioEffectData;
 
     // 场景特效 TuSDKMediaSceneEffectData （支持添加多个）
-    private List<SceneEffectModel> mSceneEffectDataList = new ArrayList<>();
+    private List<EffectsTimelineView.EffectsTimelineSegmentViewModel> mSceneEffectDataList = new ArrayList<>();
 
     // 魔法特效 TuSDKMediaParticleEffectData （支持添加多个）
-    private List<MagicEffectModel> mMagicEffectDataList = new ArrayList<>();
+    private List<EffectsTimelineView.EffectsTimelineSegmentViewModel> mMagicEffectDataList = new ArrayList<>();
+
+    // 文字特效 TuSDKMediaTextEffectData (支持添加多个)
+    private List<TuSDKMediaTextEffectData> mTextEffectDataList = new ArrayList<>();
 
     private MediaEffectsManager(){}
 
@@ -111,12 +114,19 @@ public class MediaEffectsManager
      *
      * @param sceneEffectDataList
      */
-    public void setSceneEffectDataList(List<SceneEffectModel> sceneEffectDataList) {
+    public void setSceneEffectDataList(List<EffectsTimelineView.EffectsTimelineSegmentViewModel> sceneEffectDataList) {
 
         this.mMagicEffectDataList = null;
 
         this.mSceneEffectDataList = sceneEffectDataList;
+    }
 
+    /**
+     * 清除场景特效
+     */
+    public void clearSceneEffectDataList()
+    {
+        this.mSceneEffectDataList = null;
     }
 
     /**
@@ -124,11 +134,47 @@ public class MediaEffectsManager
      *
      * @param magicEffectDataList
      */
-    public void setMagicEffectDataList(List<MagicEffectModel> magicEffectDataList) {
+    public void setMagicEffectDataList(List<EffectsTimelineView.EffectsTimelineSegmentViewModel> magicEffectDataList)
+    {
 
         this.mSceneEffectDataList = null;
 
         this.mMagicEffectDataList = magicEffectDataList;
+    }
+
+    /**
+     * 获取所有魔法特效
+     * @return
+     */
+    public List<EffectsTimelineView.EffectsTimelineSegmentViewModel> getMagicEffectDataList()
+    {
+        return this.mMagicEffectDataList;
+    }
+
+    /**
+     * 清除魔法特效
+     */
+    public void clearMagicEffectDataList()
+    {
+        this.mMagicEffectDataList = null;
+    }
+
+    /**
+     * 添加文字特效
+     * @param textEffectData
+     */
+    public void addTextEffect(TuSDKMediaTextEffectData textEffectData)
+    {
+        if(textEffectData != null)
+            this.mTextEffectDataList.add(textEffectData);
+    }
+
+    /**
+     * 获取文字特效
+     * @return
+     */
+    public List<TuSDKMediaTextEffectData> getTextEffectDataList() {
+        return mTextEffectDataList;
     }
 
     /**
@@ -140,11 +186,18 @@ public class MediaEffectsManager
     {
          List<TuSDKMediaEffectData> effectDataList = new ArrayList<TuSDKMediaEffectData>();
 
-         if (mSceneEffectDataList != null)
-             effectDataList.addAll(mSceneEffectDataList);
+         if (mSceneEffectDataList != null){
+             for (EffectsTimelineView.EffectsTimelineSegmentViewModel effectModelInterface : mSceneEffectDataList) {
+                 effectDataList.add(effectModelInterface.getCurrentMediaEffectData());
+             }
+         }
 
-        if (mMagicEffectDataList != null)
-            effectDataList.addAll(mMagicEffectDataList);
+
+        if (mMagicEffectDataList != null){
+            for (EffectsTimelineView.EffectsTimelineSegmentViewModel effectModelInterface : mMagicEffectDataList) {
+                effectDataList.add(effectModelInterface.getCurrentMediaEffectData());
+            }
+        }
 
         if (mStickerAudioEffectData != null)
             effectDataList.add(mStickerAudioEffectData);
@@ -154,6 +207,9 @@ public class MediaEffectsManager
 
         if (mStickerEffectData != null)
             effectDataList.add(mStickerEffectData);
+
+        if(mTextEffectDataList != null)
+            effectDataList.addAll(mTextEffectDataList);
 
         return effectDataList;
     }
@@ -165,6 +221,7 @@ public class MediaEffectsManager
         this.mStickerAudioEffectData = null;
         this.mStickerEffectData = null;
         this.mAudioEffectData = null;
+        this.mTextEffectDataList.clear();
     }
 
 }

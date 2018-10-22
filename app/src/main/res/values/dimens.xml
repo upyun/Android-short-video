@@ -40,7 +40,4 @@
     <dimen name="lsq_font_space_8">8dp</dimen>
     <dimen name="lsq_font_space_6">6dp</dimen>
 
-    <dimen name="lsq_font_space_setting">70dp</dimen>
-    <dimen name="lsq_font_space_setting_qx">80dp</dimen>
-
 </resources>

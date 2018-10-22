@@ -9,12 +9,13 @@
  */
 package com.upyun.shortvideo.utils;
 
-import java.util.Calendar;
-
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+
+import java.util.Calendar;
+
 /**
  * 点击长按监听
  * 
@@ -127,7 +128,7 @@ public class ClickAndLongPressedListener implements OnTouchListener {
 		return mLongPressedAndClickInterface;
 	}
 
-	public void setLongPressedAndClickInterface(ClickAndLongPressedInterface callBack) 
+	public void setLongPressedAndClickInterface(ClickAndLongPressedInterface callBack)
 	{
 		this.mLongPressedAndClickInterface = callBack;
 	}
