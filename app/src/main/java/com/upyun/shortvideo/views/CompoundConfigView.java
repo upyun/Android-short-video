@@ -13,12 +13,11 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 
-import com.upyun.shortvideo.views.ConfigViewParams.ConfigViewArg;
-import com.upyun.shortvideo.views.ConfigViewSeekBar.ConfigSeekbarDelegate;
-
 import org.lasque.tusdk.core.TuSdkContext;
 import org.lasque.tusdk.core.view.TuSdkRelativeLayout;
 import org.lasque.tusdk.core.view.TuSdkViewHelper;
+import com.upyun.shortvideo.views.ConfigViewParams.ConfigViewArg;
+import com.upyun.shortvideo.views.ConfigViewSeekBar.ConfigSeekbarDelegate;
 
 import java.util.ArrayList;
 

@@ -19,7 +19,7 @@ public class PlayVideoActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_video);
-        mVideoView = (UpVideoView2) findViewById(R.id.uv_demo);
+        mVideoView = findViewById(R.id.uv_demo);
         //设置播放地址
         mVideoView.setVideoPath("http://uprocess.b0.upaiyun.com/demo/short_video/UPYUN_0.flv");
         //开始播放
@@ -30,7 +30,7 @@ public class PlayVideoActivity extends Activity {
         mVideoView.setMediaController(controller);
         controller.setMediaPlayer(mVideoView);
 
-        mHudView = (TableLayout) findViewById(R.id.hud_view);
+        mHudView = findViewById(R.id.hud_view);
         mVideoView.setHudView(mHudView);
         mHudView.setVisibility(View.GONE);
     }

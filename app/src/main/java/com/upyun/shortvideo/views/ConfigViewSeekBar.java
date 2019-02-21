@@ -13,12 +13,11 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-import com.upyun.shortvideo.views.ConfigViewParams.ConfigViewArg;
-
 import org.lasque.tusdk.core.TuSdkContext;
 import org.lasque.tusdk.core.view.TuSdkRelativeLayout;
 import org.lasque.tusdk.impl.view.widget.TuSeekBar;
 import org.lasque.tusdk.impl.view.widget.TuSeekBar.TuSeekBarDelegate;
+import com.upyun.shortvideo.views.ConfigViewParams.ConfigViewArg;
 
 /**
  * 调节栏SeekBar
@@ -26,7 +25,7 @@ import org.lasque.tusdk.impl.view.widget.TuSeekBar.TuSeekBarDelegate;
  * @author LiuHang
  *
  */
-public class ConfigViewSeekBar extends TuSdkRelativeLayout
+public class ConfigViewSeekBar extends 	TuSdkRelativeLayout
 {
 	// SeekBar默认布局
 	private static String mResID = "tusdk_config_seekbar_one";

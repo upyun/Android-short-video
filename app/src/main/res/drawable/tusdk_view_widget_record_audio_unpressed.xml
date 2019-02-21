@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <shape>
+            <solid android:color="@color/lsq_color_transparent"/>
+            <corners android:radius="100dp"/>
+        </shape>
+    </item>
+
+    <item
+        android:bottom="@dimen/lsq__space_5"
+        android:left="@dimen/lsq__space_5"
+        android:right="@dimen/lsq__space_5"
+        android:top="@dimen/lsq__space_5">
+        <shape>
+            <solid android:color="@color/lsq_widget_record_button_circle"/>
+            <corners android:radius="100dp"/>
+        </shape>
+    </item>
+
+    <item
+        android:bottom="@dimen/lsq__space_15"
+        android:left="@dimen/lsq__space_15"
+        android:right="@dimen/lsq__space_15"
+        android:top="@dimen/lsq__space_15">
+        <shape>
+            <solid android:color="@color/lsq_widget_record_button_center"/>
+            <corners android:radius="100dp"/>
+        </shape>
+
+    </item>
+
+    <item
+        android:bottom="@dimen/lsq__space_25"
+        android:left="@dimen/lsq__space_25"
+        android:right="@dimen/lsq__space_25"
+        android:top="@dimen/lsq__space_25">
+        <bitmap android:src="@drawable/edit_ic_tape"/>
+    </item>
+
+
+</layer-list>

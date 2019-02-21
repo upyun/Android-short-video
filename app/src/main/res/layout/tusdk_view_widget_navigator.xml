@@ -20,11 +20,11 @@
 
     <org.lasque.tusdk.core.view.widget.button.TuSdkNavigatorBackButton
         android:id="@+id/lsq_backButton"
-        android:layout_width="45dp"
-        android:layout_height="32dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
-        android:background="@drawable/lsq_style_default_nav_bar_back"
+        android:background="@drawable/lsq_nav_bar_back"
         android:maxLines="1"
         android:paddingLeft="5dp" />
 

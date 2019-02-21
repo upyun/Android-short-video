@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/lsq_record_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lsq_color_transparent">
+
+    <RelativeLayout
+        android:id="@+id/lsq_process_container"
+        android:layout_width="match_parent"
+        android:layout_height="4dp">
+
+        <com.upyun.shortvideo.views.HorizontalProgressBar
+            android:id="@+id/lsq_record_progressbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:progressColor="@color/lsq_widget_speedbar_button_bg"
+            app:background="@color/lsq_alpha_white_4d"/>
+
+        <Button
+            android:id="@+id/lsq_minTimeBtn"
+            android:layout_width="3dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:background="#fff" />
+
+        <RelativeLayout
+            android:id="@+id/interuptLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </RelativeLayout>
+
+    <!-- top tools -->
+    <LinearLayout
+        android:id="@+id/lsq_topBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lsq_process_container"
+        android:layout_marginTop="@dimen/lsq__space_10"
+        android:orientation="horizontal">
+
+        <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+            android:id="@+id/lsq_closeButton"
+            style="@style/lsq_camera_OptionButton_full_screen"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/video_nav_ic_close" />
+
+        <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+            android:id="@+id/lsq_switchButton"
+            style="@style/lsq_camera_OptionButton_full_screen"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/video_nav_ic_turn" />
+
+        <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+            android:id="@+id/lsq_beautyButton"
+            style="@style/lsq_camera_OptionButton_full_screen"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/video_nav_ic_beauty" />
+
+        <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+            android:id="@+id/lsq_speedButton"
+            style="@style/lsq_camera_OptionButton_full_screen"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/video_nav_ic_speed" />
+
+        <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+            android:id="@+id/lsq_moreButton"
+            style="@style/lsq_camera_OptionButton_full_screen"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/video_nav_ic_more" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/lsq_bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/lsq__space_50"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp">
+
+        <LinearLayout
+            android:id="@+id/lsq_movie_speed_bar"
+            android:layout_width="300dp"
+            android:layout_height="30dp"
+            android:layout_above="@+id/lsq_recordButton"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/lsq__space_40"
+            android:background="@drawable/tusdk_view_widget_speedbar_bg"
+            android:orientation="horizontal"
+            android:weightSum="5"
+            android:visibility="gone">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:tag="4"
+                android:text="@string/lsq_camera_speed_rate_slow2"
+                android:textAlignment="center"
+                android:textColor="@color/lsq_color_white"
+                android:textSize="@dimen/lsq_font_size_26" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:tag="3"
+                android:text="@string/lsq_camera_speed_rate_slow"
+                android:textColor="@color/lsq_color_white"
+                android:textSize="@dimen/lsq_font_size_26" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/tusdk_view_widget_speed_button_bg"
+                android:tag="0"
+                android:text="@string/lsq_camera_speed_rate_normal"
+                android:textColor="@color/lsq_color_white"
+                android:textSize="@dimen/lsq_font_size_26" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:tag="1"
+                android:text="@string/lsq_camera_speed_rate_fast"
+                android:textColor="@color/lsq_color_white"
+                android:textSize="@dimen/lsq_font_size_26" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:tag="2"
+                android:text="@string/lsq_camera_speed_rate_fast2"
+                android:textColor="@color/lsq_color_white"
+                android:textSize="@dimen/lsq_font_size_26" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lsq_button_wrap_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
+            <!-- 贴纸按钮 -->
+            <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+                android:id="@+id/lsq_stickerWrap"
+                style="@style/lsq_camera_OptionButton_full_screen"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:drawableTop="@drawable/video_ic_sticker" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="2" />
+
+            <!--滤镜按钮-->
+            <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+                android:id="@+id/lsq_tab_filter_btn"
+                style="@style/lsq_camera_OptionButton_full_screen"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:drawableTop="@drawable/video_ic_filter" />
+
+            <!--保存按钮-->
+            <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+                android:id="@+id/lsq_confirmWrap"
+                style="@style/lsq_camera_OptionButton_full_screen"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:visibility="gone"
+                android:drawableTop="@drawable/video_ic_save" />
+
+        </LinearLayout>
+
+        <!--录制按钮-->
+        <ImageButton
+            android:id="@+id/lsq_recordButton"
+            android:layout_width="@dimen/lsq__space_80"
+            android:layout_height="@dimen/lsq__space_80"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/tusdk_view_widget_record_unpressed" />
+
+    </RelativeLayout>
+
+    <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+        android:id="@+id/lsq_backWrap"
+        style="@style/lsq_camera_OptionButton_full_screen"
+        android:layout_height="@dimen/lsq__space_40"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/lsq__space_10"
+        android:drawableTop="@drawable/video_ic_undo"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/lsq_record_mode_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/lsq__space_10"
+        android:orientation="horizontal">
+
+        <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+            android:id="@+id/lsq_shootButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/lsq_longButton"
+            android:gravity="center"
+            android:padding="@dimen/lsq_font_space_8"
+            android:text="@string/lsq_capture"
+            android:textColor="@color/lsq_alpha_white_66"
+            android:textSize="@dimen/lsq_font_size_28" />
+
+        <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+            android:id="@+id/lsq_longButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:padding="@dimen/lsq_font_space_8"
+            android:text="@string/lsq_long_click_shoot"
+            android:textColor="@color/lsq_color_white"
+            android:textSize="@dimen/lsq_font_size_28" />
+
+        <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+            android:id="@+id/lsq_clickButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/lsq_longButton"
+            android:gravity="center"
+            android:padding="@dimen/lsq_font_space_8"
+            android:text="@string/lsq_click_shoot"
+            android:textColor="@color/lsq_alpha_white_66"
+            android:textSize="@dimen/lsq_font_size_28" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/lsq_filter_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/lsq_alpha_white_99"
+        android:layout_marginTop="@dimen/lsq__space_110"
+        android:textSize="@dimen/lsq_font_size_40"
+        android:gravity="center"/>
+
+    <include layout="@layout/record_more_config_layout"
+        android:visibility="gone"/>
+
+    <include layout="@layout/record_beauty_wrap_layout"
+        android:visibility="gone"/>
+
+    <include layout="@layout/record_preview_image_layout"
+        android:visibility="gone"/>
+
+    <include layout="@layout/lsq_record_filter_list_config_view"/>
+
+    <include layout="@layout/record_sticker_layout" />
+
+</RelativeLayout>

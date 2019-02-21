@@ -13,7 +13,7 @@ package com.upyun.shortvideo;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
-import android.app.ExpandableListActivity;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -22,11 +22,9 @@ import android.provider.Settings;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ExpandableListView;
-import android.widget.ExpandableListView.OnGroupClickListener;
-
-import com.upyun.shortvideo.utils.AlbumUtils;
-import com.upyun.shortvideo.utils.PermissionUtils;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import org.lasque.tusdk.core.TuSdkContext;
 import org.lasque.tusdk.core.utils.ContextUtils;
@@ -34,15 +32,18 @@ import org.lasque.tusdk.core.view.TuSdkViewHelper;
 import org.lasque.tusdk.core.view.widget.TuSdkNavigatorBar.NavigatorBarButtonInterface;
 import org.lasque.tusdk.core.view.widget.TuSdkNavigatorBar.NavigatorBarButtonType;
 import org.lasque.tusdk.core.view.widget.TuSdkNavigatorBar.TuSdkNavigatorBarDelegate;
+import org.lasque.tusdk.impl.TuSpecialScreenHelper;
 import org.lasque.tusdk.impl.view.widget.TuNavigatorBar;
 import org.lasque.tusdk.video.TuSDKVideo;
+import com.upyun.shortvideo.album.AlbumUtils;
+import com.upyun.shortvideo.utils.PermissionUtils;
 
 /**
  * 功能列表界面
  * 
- * @author Bonan
+ * @author xujie
  */
-public class ComponentListActivity extends ExpandableListActivity implements TuSdkNavigatorBarDelegate
+public class ComponentListActivity extends ListActivity implements TuSdkNavigatorBarDelegate
 {
 	/** 最大滑动速度 */
 	public static final int MAX_SLIDE_SPEED = 1000;
@@ -50,71 +51,55 @@ public class ComponentListActivity extends ExpandableListActivity implements TuS
 	/** 最大滑动距离 */
 	public static final float MAX_SLIDE_DISTANCE = 0.3f;
 
-	private static final int IMAGE_PICKER_SELECT = 1;
-
 	/** ListView Adapter */
-    private ExpandableSamplesListAdapter mSamplesListAdapter;
+    private ListAdapter mSamplesListAdapter;
 
     /** 导航栏 实现类 */
 	private TuNavigatorBar mNavigatorBar;
 	
 	/** 滑动后退手势 */
 	private GestureDetector gdDetector;
-	
+
 	private String mClassName;
 
 	/** 需要开启相机的类名 */
 	private String mNeedCameraClassName;
 
+	private TextView tvCopyrightInfo;
+
 	@Override
     public void onCreate(Bundle icicle) 
     {
+		if(TuSpecialScreenHelper.isNotchScreen())
+		{
+			setTheme(android.R.style.Theme_NoTitleBar);
+		}
         super.onCreate(icicle);
 
-        setContentView(R.layout.main_layout);
+        setContentView(R.layout.more_layout);
         
 		// 导航栏 实现类
 		mNavigatorBar = (TuNavigatorBar) findViewById(R.id.lsq_navigatorBar);
 		TuSdkViewHelper.loadView(mNavigatorBar);
-		mNavigatorBar.setTitle(String.format("%s %s", TuSdkContext.getString(R.string.app_name), TuSDKVideo.VIDEO_VERSION));
 		mNavigatorBar.setBackButtonId(R.id.lsq_backButton);
 		mNavigatorBar.showBackButton(true);
 		mNavigatorBar.delegate = this;
-
+		tvCopyrightInfo = findViewById(R.id.tv_copyright_info);
+		tvCopyrightInfo.setText(String.format("TuSDK Video %s \n © 2018 TUTUCLOUD.COM", TuSDKVideo.VIDEO_VERSION));
 		// 滑动后退手势
 		gdDetector = new GestureDetector(this, gestureListener);
 
 		// 设置 ListView
-		initExpandableListView();
+		initListView();
     }
     
     /**
      * 初始化 ListView
      */
-	private void initExpandableListView() 
+	private void initListView()
 	{
-        getExpandableListView().setGroupIndicator(null);
-        mSamplesListAdapter = new ExpandableSamplesListAdapter(this);
+        mSamplesListAdapter = new SamplesListAdapter(this);
         setListAdapter(mSamplesListAdapter);
-        
-		int groupCount = getExpandableListView().getCount();
-		
-		// 默认展开子视图
-		for (int i = 0; i < groupCount; i++) 
-		{
-			getExpandableListView().expandGroup(i);
-		}
-
-		// 设置点击组视图时无动作
-		getExpandableListView().setOnGroupClickListener(new OnGroupClickListener() {
-
-			@Override
-			public boolean onGroupClick(ExpandableListView parent, View v,
-					int groupPosition, long id) {
-
-				return true;
-			}
-		});
 	}
 
 	/**
@@ -151,37 +136,45 @@ public class ComponentListActivity extends ExpandableListActivity implements TuS
 		}
 	};
 
-    @Override
-    public boolean onChildClick(ExpandableListView parent, View view, int group, int child, long id) 
-    {
-        ExpandableSamplesListAdapter.SampleItem sample = (ExpandableSamplesListAdapter.SampleItem) mSamplesListAdapter.getChild(group, child);
+	@Override
+	protected void onListItemClick(ListView parent, View view, int position, long id) {
+		SamplesListAdapter.SampleItem sample = (SamplesListAdapter.SampleItem) mSamplesListAdapter.getItem(position);
 
-        if(sample.className == null) return super.onChildClick(parent, view, group, child, id);
-        
-        mClassName = sample.className;
-        
-       // 需要先打开相册选取
-        if(sample.OpenAlbumForPicNum >= 1)
-        {
+		if(sample.className == null) return ;
+
+		mClassName = sample.className;
+
+		// 需要先打开相册选取
+		if(sample.OpenAlbumForPicNum >= 1)
+		{
 			AlbumUtils.openVideoAlbum(mClassName,sample.OpenAlbumForPicNum);
-            return super.onChildClick(parent, view, group, child, id);
-        }
-        
-        // 需要先判断是否有相机权限
-        if(sample.needOpenCamera)
-        {
+			return ;
+		}
+
+		// 需要先判断是否有相机权限
+		if(sample.needOpenCamera)
+		{
 			if (!PermissionUtils.hasRequiredPermissions(this, getRequiredPermissions()))
 			{
 				PermissionUtils.requestRequiredPermissions(this, getRequiredPermissions());
 				mNeedCameraClassName = sample.className;
-				return super.onChildClick(parent, view, group, child, id);
+				return ;
 			}
-        }
-        
-        startActivityWithClassName(sample.className, null);
-
-        return super.onChildClick(parent, view, group, child, id);
-    }
+		}
+		//录制跳编辑
+		if(position == mSamplesListAdapter.getCount() - 1){
+			try {
+				Intent intent = new Intent(ComponentListActivity.this, Class.forName(sample.className));
+				intent.putExtra("isDirectEdit",true);
+				startActivity(intent);
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		}else {
+			startActivityWithClassName(sample.className, null);
+		}
+		super.onListItemClick(parent, view, position, id);
+	}
 
 	/**
 	 * 组件运行需要的权限列表

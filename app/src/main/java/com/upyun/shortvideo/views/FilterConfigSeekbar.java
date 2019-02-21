@@ -21,6 +21,8 @@ import org.lasque.tusdk.core.view.TuSdkRelativeLayout;
 import org.lasque.tusdk.impl.view.widget.TuSeekBar;
 import org.lasque.tusdk.impl.view.widget.TuSeekBar.TuSeekBarDelegate;
 
+import java.math.BigDecimal;
+
 /**
  * 滤镜配置拖动栏
  * 
@@ -84,6 +86,8 @@ public class FilterConfigSeekbar extends TuSdkRelativeLayout
 	private FilterArg mFilterArg;
 	// 滤镜配置拖动栏委托
 	private FilterConfigSeekbarDelegate mDelegate;
+	// 前缀
+	private String mPrefix = "lsq_filter_set_";
 	/**
 	 * 滤镜强度值
 	 */
@@ -132,15 +136,10 @@ public class FilterConfigSeekbar extends TuSdkRelativeLayout
 	 */
 	private void onSeekbarDataChanged(float progress)
 	{
-		this.setProgress(progress);
+		this.setProgress(mFilterArg.getKey(),progress);
 		if (mDelegate != null)
 		{
 			mDelegate.onSeekbarDataChanged(this, mFilterArg);
-		}
-		if(this.getFilterValueView()!=null)
-		{
-			this.getFilterValueView().setText((int)(progress*100)+"%");
-			
 		}
 	}
 
@@ -185,6 +184,14 @@ public class FilterConfigSeekbar extends TuSdkRelativeLayout
 		return mNumberView;
 	}
 
+	public String getPrefix(){
+		return mPrefix;
+	}
+
+	public void setPrefix(String prefix){
+		this.mPrefix = prefix;
+	}
+
 	/**
 	 * 滤镜配置拖动栏委托
 	 * 
@@ -223,13 +230,9 @@ public class FilterConfigSeekbar extends TuSdkRelativeLayout
 		if (this.getTitleView() != null)
 		{
 			this.getTitleView().setText(
-					TuSdkContext.getString("lsq_filter_set_" + arg.getKey()));
+					TuSdkContext.getString(getPrefix() + arg.getKey()));
 		}
-		if(this.getFilterValueView()!=null)
-		{
-			this.getFilterValueView().setText((int)(arg.getPrecentValue()*100)+"%");
-		}
-		this.setProgress(arg.getPrecentValue());
+		this.setProgress(arg.getKey(),arg.getPrecentValue());
 		
 	}
 
@@ -238,7 +241,7 @@ public class FilterConfigSeekbar extends TuSdkRelativeLayout
 	 * 
 	 * @param progress
 	 */
-	private void setProgress(float progress)
+	private void setProgress(String key,float progress)
 	{
 		if (mFilterArg != null)
 		{
@@ -249,6 +252,30 @@ public class FilterConfigSeekbar extends TuSdkRelativeLayout
 		{
 			this.getNumberView().setText(
 					String.format("%02d", (int) (progress * 100)));
+		}
+		if(this.getFilterValueView()!=null)
+		{
+			switch (key) {
+				// 以下为改变显示进度
+				case "mouthWidth":
+					progress = progress - 0.5f;
+					break;
+				case "archEyebrow":
+					progress = progress - 0.5f;
+					break;
+				case "jawSize":
+					progress = progress - 0.5f;
+					break;
+				case "eyeAngle":
+					progress = progress - 0.5f;
+					break;
+				case "eyeDis":
+					progress = progress - 0.5f;
+					break;
+			}
+			BigDecimal bigDecimal = new BigDecimal(progress);
+			progress = bigDecimal.setScale(2, BigDecimal.ROUND_HALF_UP).floatValue();
+			this.getFilterValueView().setText((int) (progress * 100)+"%");
 		}
 	}
 

@@ -1,0 +1,46 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lsq_demo_entry_bg"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/lsq_color_black">
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.upyun.upplayer.widget.UpVideoView2
+            android:id="@+id/uv_demo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TableLayout
+            android:id="@+id/hud_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center_vertical"
+            android:background="#77000000"
+            android:padding="8dp" />
+    </FrameLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:onClick="fullScreen"
+        android:text="横竖屏" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:onClick="info"
+        android:text="info" />
+
+</RelativeLayout>

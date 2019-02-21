@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!--播放区域-->
+    <RelativeLayout
+        android:id="@+id/lsq_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.upyun.shortvideo.views.TuSDKMediaPlayer
+            android:id="@+id/lsq_media_player"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </com.upyun.shortvideo.views.TuSDKMediaPlayer>
+
+        <ImageView
+            android:id="@+id/lsq_play_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/lsq_editor_ic_play"
+            android:layout_centerInParent="true"
+            />
+
+    </RelativeLayout>
+
+    <!--标题-->
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/lsq_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/lsq_title_height"
+        >
+
+        <TextView
+            android:id="@+id/lsq_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:drawableLeft="@drawable/lsq_nav_bar_back"
+            android:gravity="left|center_vertical"
+            android:paddingRight="@dimen/lsq_font_space_15"
+            android:textColor="@color/lsq_background_entry_default"
+            android:textSize="@dimen/lsq_font_size_36"/>
+
+        <TextView
+            android:id="@+id/lsq_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/lsq__space_10"
+            android:background="@color/lsq_alpha_black_7f"
+            android:gravity="center"
+            android:paddingBottom="@dimen/lsq__space_5"
+            android:paddingLeft="@dimen/lsq__space_10"
+            android:paddingRight="@dimen/lsq__space_10"
+            android:paddingTop="@dimen/lsq__space_5"
+            android:text="@string/lsq_next"
+            android:textColor="@color/lsq_background_entry_default"
+            android:textSize="@dimen/lsq_font_size_30"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/lsq_video_add"
+        android:layout_width="@dimen/lsq__space_30"
+        android:layout_height="@dimen/lsq__space_30"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/lsq__space_15"
+        android:gravity="center"
+        android:background="@drawable/edit_heckbox_unsel_max"
+        android:textColor="@color/lsq_color_black"/>
+
+</RelativeLayout>

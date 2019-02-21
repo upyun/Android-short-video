@@ -14,8 +14,6 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.upyun.shortvideo.views.FilterConfigSeekbar.FilterConfigSeekbarDelegate;
-
 import org.lasque.tusdk.core.TuSdkContext;
 import org.lasque.tusdk.core.seles.SelesParameters;
 import org.lasque.tusdk.core.seles.SelesParameters.FilterArg;
@@ -130,10 +128,9 @@ public class FilterConfigView extends TuSdkRelativeLayout
             return;
         }
 
-
+        this.showViewIn(true);
         loadView();
         this.resetConfigView(this.getConfigWrap(), (FilterParameterInterface) filter);
-        this.showViewIn(true);
     }
 
     /**
@@ -232,7 +229,7 @@ public class FilterConfigView extends TuSdkRelativeLayout
     /**
      * 滤镜配置拖动栏委托
      */
-    protected FilterConfigSeekbarDelegate mFilterConfigSeekbarDelegate = new FilterConfigSeekbarDelegate()
+    protected FilterConfigSeekbar.FilterConfigSeekbarDelegate mFilterConfigSeekbarDelegate = new FilterConfigSeekbar.FilterConfigSeekbarDelegate()
     {
         /**
          * 配置数据改变

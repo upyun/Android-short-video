@@ -15,13 +15,18 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
+
 
 import com.bumptech.glide.Glide;
 
 import org.lasque.tusdk.core.TuSdk;
+import org.lasque.tusdk.core.media.codec.suit.mutablePlayer.AVAssetFile;
 import com.upyun.shortvideo.R;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +36,8 @@ import java.util.List;
 
 public class MovieAlbumAdapter extends RecyclerView.Adapter<MovieAlbumAdapter.ViewHolder>
 {
+    /* 最小视频时长(单位：ms) */
+    private static int MIN_VIDEO_DURATION = 3000;
     private Context mContext;
     private LayoutInflater mInflater;
     /* 视频信息列表 */
@@ -49,6 +56,7 @@ public class MovieAlbumAdapter extends RecyclerView.Adapter<MovieAlbumAdapter.Vi
      */
     public interface OnItemClickListener
     {
+        void onSelectClick(View view, int position);
         void onClick(View view, int position);
     }
 
@@ -71,7 +79,7 @@ public class MovieAlbumAdapter extends RecyclerView.Adapter<MovieAlbumAdapter.Vi
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
-        return new ViewHolder(mInflater.inflate(R.layout.album_select_video_item,parent,false));
+        return new ViewHolder(mInflater.inflate(R.layout.lsq_album_select_video_item,parent,false));
     }
 
     @Override
@@ -82,20 +90,30 @@ public class MovieAlbumAdapter extends RecyclerView.Adapter<MovieAlbumAdapter.Vi
         String path = mVideoInfoList.get(position).getPath();
 
         if (!TextUtils.isEmpty(path))
-            Glide.with(mContext).load(path).asBitmap().into(holder.mImageView);
+            Glide.with(mContext).load(path).into(holder.mImageView);
 
-            int drawableId = selectMovieInfos.contains(mVideoInfoList.get(position)) ? R.drawable.lsq_video_album_picture_selected : R.drawable.lsq_video_album_picture_unselected;
-            holder.mSelectorView.setBackground(mContext.getResources().getDrawable(drawableId));
+        int drawableId = selectMovieInfos.contains(mVideoInfoList.get(position)) ? R.drawable.edit_heckbox_sel : R.drawable.edit_heckbox_unsel;
+        holder.mSelectorView.setBackground(mContext.getResources().getDrawable(drawableId));
+        holder.mSelectorView.setText(selectMovieInfos.indexOf(mVideoInfoList.get(position)) >= 0 ? String.valueOf(selectMovieInfos.indexOf(mVideoInfoList.get(position)) + 1) : "");
+        holder.mTimeView.setText(String.format("%02d:%02d",mVideoInfoList.get(position).getDuration() / 1000 / 60,mVideoInfoList.get(position).getDuration() / 1000 - mVideoInfoList.get(position).getDuration() / 1000 / 60));
 
-            holder.itemView.setOnClickListener(new View.OnClickListener()
+        holder.mSelectorViewLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
             {
-                @Override
-                public void onClick(View view)
-                {
-                    if (mOnItemClickListener == null) return;
+                if (mOnItemClickListener != null)
+                    mOnItemClickListener.onSelectClick(view, holder.getPosition());
+            }
+        });
+        holder.itemView.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                if (mOnItemClickListener != null)
                     mOnItemClickListener.onClick(view, holder.getPosition());
-                }
-            });
+            }
+        });
     }
 
     @Override
@@ -106,13 +124,17 @@ public class MovieAlbumAdapter extends RecyclerView.Adapter<MovieAlbumAdapter.Vi
     static class ViewHolder extends RecyclerView.ViewHolder
     {
         private  ImageView mImageView;
-        private  View mSelectorView;
+        private FrameLayout mSelectorViewLayout;
+        private TextView mSelectorView;
+        private TextView mTimeView;
 
         public ViewHolder(View itemView)
         {
             super(itemView);
             mImageView = (ImageView) itemView.findViewById(R.id.lsq_video_thumb_view);
-            mSelectorView = itemView.findViewById(R.id.lsq_movie_selected_icon);
+            mSelectorViewLayout = (FrameLayout)itemView.findViewById(R.id.lsq_movie_selected_icon_layout);
+            mSelectorView = (TextView)itemView.findViewById(R.id.lsq_movie_selected_icon);
+            mTimeView = (TextView)itemView.findViewById(R.id.lsq_movie_time);
         }
     }
 
@@ -123,19 +145,28 @@ public class MovieAlbumAdapter extends RecyclerView.Adapter<MovieAlbumAdapter.Vi
     {
         if (mVideoInfoList != null  && position >= 0)
         {
+            MovieInfo movieInfo = mVideoInfoList.get(position);
             if(mSelectMax == 1)
             {
+                // 时间限制
+                if(movieInfo.getDuration() < MIN_VIDEO_DURATION){
+                    TuSdk.messageHub().showToast(mContext, R.string.lsq_album_select_min_time);
+                    return;
+                }
+                // 不可重复选择
+                if(mSelectedPosition == position)
+                    return;
                 this.mLastSelectedPosition = this.mSelectedPosition;
                 this.mSelectedPosition = position;
 
-                if(selectMovieInfos.contains(mVideoInfoList.get(position)))
+                if(selectMovieInfos.contains(movieInfo))
                 {
-                    selectMovieInfos.remove(mVideoInfoList.get(position));
+                    selectMovieInfos.remove(movieInfo);
                 }
                 else
                 {
                     selectMovieInfos.clear();
-                    selectMovieInfos.add(mVideoInfoList.get(mSelectedPosition));
+                    selectMovieInfos.add(movieInfo);
                 }
 
                 notifyItemChanged(mLastSelectedPosition);
@@ -153,9 +184,20 @@ public class MovieAlbumAdapter extends RecyclerView.Adapter<MovieAlbumAdapter.Vi
                         TuSdk.messageHub().showToast(mContext, R.string.lsq_select_video_max);
                         return;
                     }
+                    AVAssetFile assetFile = new AVAssetFile(new File(mVideoInfoList.get(position).getPath()));
+                    if(assetFile.createExtractor().getTrackCount() <= 1){
+                        TuSdk.messageHub().showToast(mContext, R.string.lsq_select_include_audio);
+                        return;
+                    }
                     selectMovieInfos.add(mVideoInfoList.get(position));
+
                 }
+
                 notifyItemChanged(position);
+
+                for (MovieInfo info:selectMovieInfos) {
+                    notifyItemChanged(mVideoInfoList.indexOf(info));
+                }
             }
         }
     }
@@ -167,8 +209,11 @@ public class MovieAlbumAdapter extends RecyclerView.Adapter<MovieAlbumAdapter.Vi
      */
     public List<MovieInfo> getSelectedVideoInfo()
     {
-        if (selectMovieInfos.size() == 0) return null;
         return selectMovieInfos;
+    }
+
+    public List<MovieInfo> getVideoInfoList(){
+        return mVideoInfoList;
     }
 
 }

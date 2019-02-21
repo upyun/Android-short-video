@@ -379,13 +379,14 @@ public class UpVideoView2 extends FrameLayout implements MediaController.MediaPl
             mMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_CODEC, "skip_loop_filter", 0);
             mMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "probesize", "64000");
             mMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec_mpeg4", 1);
+            mMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "enable-accurate-seek", 1);
 
 //            mMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec-auto-rotate", 1);
 //            mMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec-handle-resolution-change", 1);
 
 //            mMediaPlayer.setLooping(true);
 //            mMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "sync", "ext");
-            mMediaPlayer.setSpeed(1.03f);
+//            mMediaPlayer.setSpeed(1.03f);
 
             if (bufferSize != -1) {
                 mMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "max-buffer-size", bufferSize);
@@ -1121,29 +1122,29 @@ public class UpVideoView2 extends FrameLayout implements MediaController.MediaPl
             }
             activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
-            DisplayMetrics metrics = new DisplayMetrics();
-            activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
-            mRawParams = getLayoutParams();
-            ViewGroup.LayoutParams fullParams;
-            if (mRawParams instanceof RelativeLayout.LayoutParams) {
-                fullParams = new RelativeLayout.LayoutParams(metrics.widthPixels, metrics.heightPixels);
-            } else if (mRawParams instanceof LinearLayout.LayoutParams) {
-                fullParams = new LinearLayout.LayoutParams(metrics.widthPixels, metrics.heightPixels);
-            } else if (mRawParams instanceof LayoutParams) {
-                fullParams = new LayoutParams(metrics.widthPixels, metrics.heightPixels);
-            } else {
-                new AlertDialog.Builder(getContext())
-                        .setMessage("nonsupport parent layout, please do it by yourself")
-                        .setPositiveButton("OK",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int whichButton) {
-                                    }
-                                })
-                        .setCancelable(false)
-                        .show();
-                return;
-            }
-            setLayoutParams(fullParams);
+//            DisplayMetrics metrics = new DisplayMetrics();
+//            activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+//            mRawParams = getLayoutParams();
+//            ViewGroup.LayoutParams fullParams;
+//            if (mRawParams instanceof RelativeLayout.LayoutParams) {
+//                fullParams = new RelativeLayout.LayoutParams(metrics.widthPixels, metrics.heightPixels);
+//            } else if (mRawParams instanceof LinearLayout.LayoutParams) {
+//                fullParams = new LinearLayout.LayoutParams(metrics.widthPixels, metrics.heightPixels);
+//            } else if (mRawParams instanceof LayoutParams) {
+//                fullParams = new LayoutParams(metrics.widthPixels, metrics.heightPixels);
+//            } else {
+//                new AlertDialog.Builder(getContext())
+//                        .setMessage("nonsupport parent layout, please do it by yourself")
+//                        .setPositiveButton("OK",
+//                                new DialogInterface.OnClickListener() {
+//                                    public void onClick(DialogInterface dialog, int whichButton) {
+//                                    }
+//                                })
+//                        .setCancelable(false)
+//                        .show();
+//                return;
+//            }
+//            setLayoutParams(fullParams);
             isFullState = true;
         }
     }
@@ -1154,7 +1155,7 @@ public class UpVideoView2 extends FrameLayout implements MediaController.MediaPl
             if (activity.getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
                 activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
             }
-            setLayoutParams(mRawParams);
+//            setLayoutParams(mRawParams);
             isFullState = false;
         }
     }

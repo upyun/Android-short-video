@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<org.lasque.tusdk.modules.components.camera.TuFocusRangeView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <View
+        android:id="@+id/lsq_range_wrap"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:background="@drawable/lsq_video_default_camera_focus" >
+    </View>
+
+    <View
+        android:id="@+id/lsq_crosshair"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/lsq_video_default_camera_focus_crosshair" >
+    </View>
+
+</org.lasque.tusdk.modules.components.camera.TuFocusRangeView>

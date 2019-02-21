@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".component.AudioRecordActivity"
+    android:background="@color/lsq_color_black">
+
+    <!-- 导航栏 -->
+    <include
+        android:id="@+id/lsq_navigatorBar"
+        layout="@layout/tusdk_view_widget_navigator" />
+
+
+    <ImageView
+        android:id="@+id/lsq_icon_record"
+        android:layout_width="87dp"
+        android:layout_height="87dp"
+        android:layout_below="@+id/lsq_navigatorBar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="87dp"
+        android:src="@drawable/list_ic_tape" />
+
+    <TextView
+        android:id="@+id/lsq_audio_pitch_des"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lsq_icon_record"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/lsq__space_20"
+        android:layout_marginRight="@dimen/lsq__space_20"
+        android:layout_marginTop="44dp"
+        android:paddingBottom="4dp"
+        android:text="@string/lsq_audio_pitch_hint"
+        android:textColor="@color/lsq_scence_effect_color_title"
+        android:textSize="@dimen/lsq_font_size_28" />
+
+
+    <LinearLayout
+        android:layout_below="@+id/lsq_audio_pitch_des"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="46dp">
+        <!--速度控制-->
+        <LinearLayout
+            android:id="@+id/lsq_editor_audio_record_type_bar"
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/lsq__space_10"
+            android:background="@drawable/tusdk_edite_cut_speedbar_bg"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal"
+            android:layout_above="@+id/audio_record_button_layout"
+            android:weightSum="5">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:tag="0"
+                android:text="@string/lsq_monster"
+                android:textAlignment="center"
+                android:textColor="@color/lsq_color_white"
+                android:textSize="13sp"/>
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:tag="1"
+                android:text="@string/lsq_uncle"
+                android:textColor="@color/lsq_color_white"
+                android:textSize="13sp"/>
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/tusdk_edite_cut_speed_button_bg"
+                android:tag="2"
+                android:text="@string/lsq_normal"
+                android:textColor="@color/lsq_editor_cut_select_font_color"
+                android:textSize="13sp"/>
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:tag="3"
+                android:text="@string/lsq_girl"
+                android:textColor="@color/lsq_color_white"
+                android:textSize="13sp"/>
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:tag="4"
+                android:text="@string/lsq_lolita"
+                android:textColor="@color/lsq_color_white"
+                android:textSize="13sp"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/lsq_audio_record_btn"
+                style="@style/lsq_audio_mixer_button"
+                android:text="@string/lsq_audio_record_start"/>
+
+            <Button
+                android:id="@+id/lsq_audio_stop_btn"
+                style="@style/lsq_audio_mixer_button"
+                android:text="@string/lsq_audio_record_stop_and_play"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

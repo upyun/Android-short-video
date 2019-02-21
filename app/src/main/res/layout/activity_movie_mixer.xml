@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".component.MovieMixerActivity"
+    android:background="@color/lsq_color_black">
+    <!-- 导航栏 -->
+    <include
+        android:id="@+id/lsq_navigatorBar"
+        layout="@layout/tusdk_view_widget_navigator" />
+
+    <!--播放器-->
+    <RelativeLayout
+        android:id="@+id/lsq_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/lsq_navigatorBar">
+
+        <SurfaceView
+            android:id="@+id/lsq_movie_mixer_preview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+    </RelativeLayout>
+
+    <!--音量控制-->
+    <include
+        android:id="@+id/lsq_voice_volume_config_view"
+        layout="@layout/tusdk_config_view"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_below="@+id/lsq_content" />
+
+
+    <!--开始音频混合-->
+    <Button
+        android:id="@+id/lsq_movie_mixer_start"
+        android:layout_width="280dp"
+        style="@style/lsq_audio_mixer_button"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/lsq__space_40"
+        android:text="@string/lsq_movie_mixer_start" />
+
+</RelativeLayout>

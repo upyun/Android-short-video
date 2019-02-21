@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:layout_marginLeft="@dimen/lsq__space_30"
+    android:layout_marginRight="@dimen/lsq__space_30"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:weightSum="4">
+    <!--添加-->
+    <ImageView
+        android:id="@+id/lsq_editor_options_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:src="@drawable/edit_ic_add" />
+    <!--字体-->
+    <ImageView
+        android:id="@+id/lsq_editor_options_font"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:src="@drawable/edit_ic_font_disabled" />
+    <!--颜色-->
+    <ImageView
+        android:id="@+id/lsq_editor_options_color"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:src="@drawable/edit_ic_colour_disabled" />
+    <!--格式-->
+    <ImageView
+        android:id="@+id/lsq_editor_options_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:src="@drawable/edit_ic_style_disable" />
+
+</LinearLayout>

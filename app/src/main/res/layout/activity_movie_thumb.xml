@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".component.MovieThumbActivity"
+    android:background="@color/lsq_color_black">
+    <!-- 导航栏 -->
+    <include
+        android:id="@+id/lsq_navigatorBar"
+        layout="@layout/tusdk_view_widget_navigator" />
+
+    <SurfaceView
+        android:id="@+id/lsq_preview"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:id="@+id/lsq_load_thumb_btn"
+        android:layout_width="280dp"
+        style="@style/lsq_audio_mixer_button"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/lsq__space_20"
+        android:text="@string/lsq_movie_thumb" />
+
+    <GridView
+        android:id="@+id/lsq_movie_thumb_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp" />
+
+</LinearLayout>

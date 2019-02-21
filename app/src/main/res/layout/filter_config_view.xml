@@ -10,11 +10,11 @@
         android:layout_centerInParent="true"
         android:orientation="vertical" >
 
-        <include
-            android:id="@+id/lsq_filterSeekbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            layout="@layout/filter_config_seekbar" />
+        <!--<include-->
+            <!--android:id="@+id/lsq_filterSeekbar"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--layout="@layout/filter_config_seekbar" />-->
     </LinearLayout>
 
 </com.upyun.shortvideo.views.FilterConfigView>

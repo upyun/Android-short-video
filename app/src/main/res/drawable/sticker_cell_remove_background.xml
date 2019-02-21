@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <stroke android:color="@color/lsq_widget_sticker_cell_bg" android:width="4px"/>
+    <corners android:radius="@dimen/lsq__space_4"/>
+    <solid android:color="@color/lsq_alpha_black_66"></solid>
+</shape>

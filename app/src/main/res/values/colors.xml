@@ -10,25 +10,32 @@
     <color name="lsq_color_transparent">#00000000</color>
 
     <!-- alpha -->
+    <color name="lsq_alpha_black_99">#99000000</color>
     <color name="lsq_alpha_black_66">#66000000</color>
     <color name="lsq_alpha_black_B4">#B4000000</color>
     <color name="lsq_alpha_black_CO">#C0000000</color>
 
-	<color name="lsq_alpha_black_7f">#7F000000</color>
+    <color name="lsq_alpha_black_7f">#7F000000</color>
 
+    <color name="lsq_alpha_black_26">#26000000</color>
+
+    <color name="lsq_alpha_white_4d">#4dffffff</color>
+    <color name="lsq_alpha_white_26">#26ffffff</color>
+    <color name="lsq_alpha_white_66">#66ffffff</color>
     <color name="lsq_alpha_white_99">#99ffffff</color>
+    <color name="lsq_alpha_white_00">#00ffffff</color>
 
     <!-- split -->
     <color name="lsq_split_bg">#d7d8dc</color>
     <color name="lsq_split_cell">#FF3e3c41</color>
 
     <!-- navigatorBar -->
-    <color name="lsq_navigator_bg">#403e43</color>
+    <color name="lsq_navigator_bg">#000000</color>
     <color name="lsq_navigator_title">#ffffff</color>
     <color name="lsq_navigator_button_title">#ffffff</color>
     <color name="lsq_navigator_button_right_title">#ff6633</color>
     <color name="lsq_navigator_split">#66000000</color>
-    
+
     <!-- text -->
     <color name="lsq_link_action">#287dfa</color>
 
@@ -40,7 +47,7 @@
     <color name="lsq_actionsheet_text_color">#ff287dfa</color>
     <color name="lsq_actionsheet_text_stress">#fff6393f</color>
 
-    <!-- focus -->
+    <!-- 聚焦框颜色 focus -->
     <color name="lsq_focus_normal">#fff</color>
     <color name="lsq_focus_succeed">#0bff45</color>
     <color name="lsq_focus_failed">#0b72ff</color>
@@ -63,23 +70,23 @@
     <!-- text -->
     <color name="lsq_text_group_header">#9fa0a4</color>
     <color name="lsq_text_time">#9fa0a0</color>
-    
+
     <!-- seekbar -->
-    <color name="lsq_seekbar_drag_color">#f4a11a</color>
-    <color name="lsq_seekbar_view_color">#d9d9d9</color>
-    <color name="lsq_filter_config_highlight">#f4a11a</color>
-    
+    <color name="lsq_seekbar_drag_color">#FFFFFF</color>
+    <color name="lsq_seekbar_view_color">#20FFFFFF</color>
+    <color name="lsq_filter_config_highlight">#FFFFFF</color>
+
     <!-- video editor-->
-    <color name="lsq_background_entry_default">#f4a11a</color>
-    <color name="lsq_record_title_color">#f4a11a</color>
-    
-	<color name="lsq_clip_title_color">#333333</color>
-	<color name="lsq_filter_title_color">#f4a11a</color>
+    <color name="lsq_background_entry_default">#FFFFFF</color>
+    <color name="lsq_record_title_color">#ffffff</color>
+
+    <color name="lsq_clip_title_color">#333333</color>
+    <color name="lsq_filter_title_color">#f4a11a</color>
     <color name="lsq_filter_title_color_alpha_20">#33f4a11a</color>
-	<color name="lsq_filter_title_default_color">#9fa0a0</color>
-	
-	<color name="lsq_filter_title_unselected_color">#d9d9d9</color>
-    <color name="lsq_progress_interupt_color">#d9d9d9</color>
+    <color name="lsq_filter_title_default_color">#9fa0a0</color>
+
+    <color name="lsq_filter_title_unselected_color">#d9d9d9</color>
+    <color name="lsq_progress_interupt_color">#FFFFFF</color>
     <color name="shadow_color">#231815</color>
     <!-- camera&&Recording-->
     <color name="lsq_capture_selected">#f6a623</color>
@@ -93,7 +100,7 @@
     <color name="lsq_dubbing_record_selected_color">#c17111</color>
     <color name="lsq_voice_record_time_remaining_color">#4a4a4a</color>
     <color name="lsq_color_api_gray">#c0c0c0</color>
-    <color name="lsq_color_api_button">#ff9900</color>
+    <color name="lsq_color_api_button">#ffcc00</color>
 
     <!-- 场景特效编辑时颜色 -->
 
@@ -135,5 +142,17 @@
     <color name="icons">#FFFFFF</color>
     <color name="divider">#B6B6B6</color>
 
+    <!-- 3.0 -->
+    <color name="lsq_widget_speedbar_bg">#77555555</color>
+    <color name="lsq_widget_speedbar_button_bg">#ffcc00</color>
+    <color name="lsq_widget_record_button_circle">#99ffffff</color>
+    <color name="lsq_widget_record_button_center">#fe3a3a</color>
+    <color name="lsq_widget_sticker_cell_bg">#ffcc00</color>
 
+    <!-- 编辑-->
+    <color name="lsq_editor_cut_select_font_color">#ffcc00</color>
+    <color name="lsq_editor_cut_select_button_background">#80333333</color>
+    <color name="lsq_editor_next_button_background">#33000000</color>
+    <color name="lsq_editor_bottom_tab_text_color">#ffffff</color>
+    <color name="lsq_editor_video_background">#121212</color>
 </resources>

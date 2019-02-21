@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/lsq_color_black">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- 导航栏 -->
+        <include
+            android:id="@+id/lsq_navigatorBar"
+            layout="@layout/tusdk_view_widget_navigator"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <SurfaceView
+                android:id="@+id/lsq_movie_preview_one"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:layout_centerHorizontal="true"
+                />
+
+            <SurfaceView
+                android:id="@+id/lsq_movie_preview_two"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:layout_marginTop="2dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/lsq_movie_preview_one"
+                />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/lsq__space_10"
+            android:layout_marginRight="@dimen/lsq__space_10"
+            android:layout_marginTop="10dp"
+            android:text="@string/lsq_movie_mixer_hint"
+            android:textColor="@color/lsq_scence_effect_color_title"
+            android:textSize="@dimen/lsq_font_space_15"/>
+
+
+        <Button
+            android:id="@+id/lsq_movie_mixer_btn"
+            style="@style/lsq_audio_mixer_button"
+            android:layout_width="200dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="65dp"
+            android:text="@string/lsq_movie_splicer"/>
+
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/lsq_movie_splicer_prgress_content"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerInParent="true"
+        android:background="@color/lsq_alpha_black_7f"
+        android:visibility="gone"
+        >
+
+        <at.grabner.circleprogress.CircleProgressView
+            android:id="@+id/lsq_movie_splicer_progress"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            app:cpv_barColor="@color/lsq_color_white"
+            app:cpv_barWidth="2dp"
+            app:cpv_maxValue="100"
+            app:cpv_rimColor="@color/lsq_color_transparent"
+            app:cpv_rimWidth="2dp"
+            app:cpv_textColor="@color/lsq_color_transparent"
+            />
+
+    </FrameLayout>
+
+</RelativeLayout>

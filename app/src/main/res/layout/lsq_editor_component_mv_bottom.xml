@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/lsq_color_black"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/lsq_mv_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/lsq__space_20"
+            android:layout_marginRight="@dimen/lsq__space_20"
+            android:src="@drawable/edit_ic_play"/>
+
+        <com.upyun.shortvideo.views.editor.TuSdkMovieScrollPlayLineView
+            android:id="@+id/lsq_mv_lineView"
+            android:layout_width="match_parent"
+            android:layout_height="35dp">
+        </com.upyun.shortvideo.views.editor.TuSdkMovieScrollPlayLineView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/lsq_color_black"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/lsq_mv_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="@color/lsq_alpha_white_26"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/lsq_color_black">
+
+        <ImageButton
+            android:id="@+id/lsq_mv_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:background="@null"
+            android:src="@drawable/edit_ic_close"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/lsq_text_MV"
+            android:textSize="@dimen/lsq_font_size_34"/>
+
+        <ImageButton
+            android:id="@+id/lsq_mv_sure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@null"
+            android:src="@drawable/edit_ic_sure"/>
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 相机预览组件 -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lsq_preview_image_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lsq_background_editor" >
+
+    <!-- 显示的图片视图 -->
+
+    <ImageView
+        android:id="@+id/lsq_cameraPreviewImageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitCenter"/>
+
+    <RelativeLayout
+        android:id="@+id/lsq_camera_preview_actionWrap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="76dp"
+        android:layout_marginRight="76dp"
+        android:layout_marginBottom="30dp">
+
+        <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+            android:id="@+id/lsq_backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:drawablePadding="6dp"
+            android:drawableTop="@drawable/video_ic_back"
+            android:gravity="center_horizontal"
+            android:textColor="#3e3a39"
+            android:textSize="12sp" />
+
+        <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+            android:id="@+id/lsq_saveImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:drawablePadding="6dp"
+            android:drawableTop="@drawable/video_ic_sure"
+            android:gravity="center_horizontal"
+            android:textColor="#3e3a39"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+</RelativeLayout>

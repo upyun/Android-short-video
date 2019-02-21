@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.upyun.shortvideo.views.MovieEditorTabBar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/lsq_bottom_navigator"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+            android:id="@+id/lsq_tab_filter_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingTop="5dp"
+            android:drawableTop="@drawable/edit_tab_ic_filter"
+            android:gravity="center"
+            android:text="@string/lsq_filter_text"
+            android:textColor="@color/lsq_editor_bottom_tab_text_color"
+            android:textSize="11sp" />
+
+        <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+            android:id="@+id/lsq_tab_mv_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingTop="5dp"
+            android:drawableTop="@drawable/edit_tab_ic_mv"
+            android:gravity="center"
+            android:text="@string/lsq_text_MV"
+            android:textColor="@color/lsq_editor_bottom_tab_text_color"
+            android:textSize="11sp" />
+
+        <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+            android:id="@+id/lsq_tab_music_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingTop="5dp"
+            android:drawableTop="@drawable/edit_tab_ic_music"
+            android:gravity="center"
+            android:text="@string/lsq_text_dubbing"
+            android:textColor="@color/lsq_editor_bottom_tab_text_color"
+            android:textSize="11sp" />
+
+
+        <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+            android:id="@+id/lsq_tab_text_effect_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/edit_tab_ic_text"
+            android:gravity="center"
+            android:text="@string/lsq_text_text_effect"
+            android:paddingTop="5dp"
+            android:textColor="@color/lsq_editor_bottom_tab_text_color"
+            android:textSize="11sp" />
+
+        <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+            android:id="@+id/lsq_tab_effect_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/edit_tab_ic_special"
+            android:gravity="center"
+            android:text="@string/lsq_text_effect"
+            android:paddingTop="5dp"
+            android:textColor="@color/lsq_editor_bottom_tab_text_color"
+            android:textSize="11sp" />
+
+
+    </LinearLayout>
+</com.upyun.shortvideo.views.MovieEditorTabBar>

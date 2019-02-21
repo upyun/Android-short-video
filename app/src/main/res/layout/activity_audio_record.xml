@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".component.AudioRecordActivity"
+    android:background="@color/lsq_color_black">
+
+    <!-- 导航栏 -->
+    <include
+        android:id="@+id/lsq_navigatorBar"
+        layout="@layout/tusdk_view_widget_navigator" />
+
+
+    <ImageView
+        android:id="@+id/lsq_icon_record"
+        android:layout_width="87dp"
+        android:layout_height="87dp"
+        android:layout_below="@+id/lsq_navigatorBar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="87dp"
+        android:src="@drawable/list_ic_tape" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lsq_icon_record"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/lsq__space_20"
+        android:layout_marginRight="@dimen/lsq__space_20"
+        android:layout_marginTop="44dp"
+        android:paddingBottom="4dp"
+        android:text="@string/lsq_audio_record_hint"
+        android:textColor="@color/lsq_scence_effect_color_title"
+        android:textSize="@dimen/lsq_font_size_28" />
+
+
+    <include
+        layout="@layout/lsq_audio_record_button_layout"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="46dp" />
+
+
+</RelativeLayout>

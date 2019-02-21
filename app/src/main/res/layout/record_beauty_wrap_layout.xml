@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lsq_smart_beauty_layout"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true">
+
+    <include
+        android:id="@+id/lsq_beauty_plastics_config_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/lsq__space_10"
+        layout="@layout/lsq_params_config_view"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="@color/lsq_alpha_white_26">
+
+    </View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/lsq_color_semitransparent">
+        <LinearLayout
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:padding="@dimen/lsq__space_8"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="@dimen/lsq_font_size_26"
+                    android:text="@string/lsq_text_beauty"
+                    android:id="@+id/lsq_beauty_tab"
+                    android:textColor="@color/lsq_color_white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/lsq_beauty_tab_line"
+                    android:background="@color/lsq_color_white"
+                    android:layout_alignLeft="@+id/lsq_beauty_tab"
+                    android:layout_alignRight="@+id/lsq_beauty_tab"
+                    android:layout_below="@+id/lsq_beauty_tab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="2dp"
+                    android:layout_marginLeft="@dimen/lsq__space_10"
+                    android:layout_marginRight="@dimen/lsq__space_10"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:padding="@dimen/lsq__space_8"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="@dimen/lsq_font_size_26"
+                    android:text="@string/lsq_text_beauty_type"
+                    android:id="@+id/lsq_beauty_plastic_tab"
+                    android:textColor="@color/lsq_alpha_white_66"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/lsq_beauty_plastic_tab_line"
+                    android:background="@color/lsq_alpha_white_66"
+                    android:layout_alignLeft="@+id/lsq_beauty_plastic_tab"
+                    android:layout_alignRight="@+id/lsq_beauty_plastic_tab"
+                    android:layout_below="@+id/lsq_beauty_plastic_tab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="2dp"
+                    android:layout_marginLeft="@dimen/lsq__space_10"
+                    android:layout_marginRight="@dimen/lsq__space_10"/>
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/lsq_beauty_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:layout_marginTop="@dimen/lsq__space_15"
+            android:layout_marginLeft="@dimen/lsq__space_15"
+            android:layout_marginRight="@dimen/lsq__space_15"
+            android:layout_gravity="center">
+
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+
+</LinearLayout>

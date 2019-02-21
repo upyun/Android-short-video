@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".component.AudioMixedActivity"
+    android:background="@color/lsq_color_black">
+    <!-- 导航栏 -->
+    <include
+        android:id="@+id/lsq_navigatorBar"
+        layout="@layout/tusdk_view_widget_navigator" />
+
+    <!--提示信息-->
+    <TextView
+        android:id="@+id/lsq_tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/lsq__space_15"
+        android:layout_marginRight="@dimen/lsq__space_15"
+        android:layout_marginTop="@dimen/lsq__space_64"
+        android:text="@string/lsq_audio_mixer_hint" />
+
+    <!--音量控制-->
+    <include
+        android:id="@+id/lsq_voice_volume_config_view"
+        layout="@layout/tusdk_config_view"
+        android:layout_width="match_parent"
+        android:layout_height="150dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/lsq__space_20"
+        android:paddingRight="@dimen/lsq__space_20">
+
+        <!--开始音频混合-->
+        <Button
+            android:id="@+id/lsq_audio_mixer_btn"
+            style="@style/lsq_audio_mixer_button"
+            android:text="@string/lsq_audio_mixer_start" />
+
+        <!--删除混合音频-->
+        <Button
+            android:id="@+id/lsq_delete_mixing_btn"
+            style="@style/lsq_audio_mixer_button"
+            android:text="@string/lsq_audio_mixer_delete" />
+
+        <!-- 播放音频 -->
+        <Button
+            android:id="@+id/lsq_play_mixing_btn"
+            style="@style/lsq_audio_mixer_button"
+            android:text="@string/lsq_audio_mixer_play" />
+
+        <!--暂停-->
+        <Button
+            android:id="@+id/lsq_pause_mixing_btn"
+            style="@style/lsq_audio_mixer_button"
+            android:text="@string/lsq_audio_mixer_pause" />
+    </LinearLayout>
+
+
+</LinearLayout>

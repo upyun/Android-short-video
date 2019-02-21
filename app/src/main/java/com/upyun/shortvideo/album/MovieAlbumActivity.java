@@ -11,10 +11,10 @@ package com.upyun.shortvideo.album;
 
 import android.Manifest;
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.database.Cursor;
+import android.media.MediaFormat;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -25,13 +25,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.upyun.shortvideo.utils.PermissionUtils;
-
 import org.lasque.tusdk.core.TuSdk;
 import org.lasque.tusdk.core.TuSdkContext;
+import org.lasque.tusdk.core.common.TuSDKMediaDataSource;
+import org.lasque.tusdk.core.common.TuSDKMediaUtils;
+import org.lasque.tusdk.core.media.codec.video.TuSdkVideoInfo;
 import org.lasque.tusdk.core.utils.ContextUtils;
 import org.lasque.tusdk.core.view.TuSdkViewHelper;
+
+import com.upyun.shortvideo.ScreenAdapterActivity;
+import com.upyun.shortvideo.editor.MovieEditorPreviewActivity;
 import com.upyun.shortvideo.R;
+import com.upyun.shortvideo.utils.PermissionUtils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -40,17 +45,17 @@ import java.util.List;
 /**
  * 视频选择相册
  */
-public class MovieAlbumActivity extends Activity
+public class MovieAlbumActivity extends ScreenAdapterActivity
 {
-    private static final String MOVIE_EDIT = "MovieEditorActivity";
     /* 最小视频时长(单位：ms) */
     private static int MIN_VIDEO_DURATION = 3000;
     /* 最大视频时长(单位：ms) */
     private static int MAX_VIDEO_DURATION = 60000;
+    /** 最大边长限制 **/
+    private static final int MAX_SIZE = 3840;
+
     /* 确定按钮 */
     protected TextView mConfirmButton;
-    /* 标题 */
-    private TextView mTitleTextView;
    /* 返回按钮 */
     protected TextView mBackButton;
    /* 最大选择数量 */
@@ -59,6 +64,9 @@ public class MovieAlbumActivity extends Activity
     private RecyclerView mRecyclerView;
 
     private MovieAlbumAdapter mVideoAlbumAdapter;
+
+    private int mCurrentPos = -1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -151,16 +159,14 @@ public class MovieAlbumActivity extends Activity
         mSelectMax = getIntent().getIntExtra("selectMax",1);
 
         mConfirmButton = (TextView) findViewById(R.id.lsq_next);
-        mConfirmButton.setText(R.string.lsq_text_confirm);
+        mConfirmButton.setText(R.string.lsq_next);
         mConfirmButton.setOnClickListener(mButtonSafeClickListener);
 
-        mTitleTextView = (TextView) findViewById(R.id.lsq_title);
-        mTitleTextView.setText(R.string.lsq_video_selected);
         mBackButton = (TextView) findViewById(R.id.lsq_back);
         mBackButton.setOnClickListener(mButtonSafeClickListener);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.lsq_movie_selector_recyclerView);
-        GridLayoutManager gridLayoutManager =  new GridLayoutManager(MovieAlbumActivity.this , 3);
+        GridLayoutManager gridLayoutManager =  new GridLayoutManager(MovieAlbumActivity.this , 4);
         mRecyclerView.setLayoutManager(gridLayoutManager);
 
         mVideoAlbumAdapter = new MovieAlbumAdapter(MovieAlbumActivity.this,getVideoList(),mSelectMax);
@@ -169,14 +175,54 @@ public class MovieAlbumActivity extends Activity
     }
 
     /**
+     * 检测是否4K视频
+     * @param position
+     * @return
+     */
+     private boolean check4K(int position){
+         MovieInfo info = mVideoAlbumAdapter.getVideoInfoList().get(position);
+         MediaFormat mediaFormat = TuSDKMediaUtils.getVideoFormat(new TuSDKMediaDataSource(info.getPath()));
+         TuSdkVideoInfo videoInfo = new TuSdkVideoInfo(mediaFormat);
+         if(videoInfo.size.maxSide() >= MAX_SIZE){
+             TuSdkViewHelper.toast(MovieAlbumActivity.this,R.string.lsq_loadvideo_failed);
+             return true;
+         }
+         return false;
+     }
+
+    /**
      *  RecyclerView中item的点击事件，得到点击item的视频信息
      */
     private MovieAlbumAdapter.OnItemClickListener mOnItemClickListener = new MovieAlbumAdapter.OnItemClickListener()
     {
         @Override
+        public void onSelectClick(View view, int position) {
+            if(check4K(position)) return;
+
+            mVideoAlbumAdapter.updateSelectedVideoPosition(position);
+        }
+
+        @Override
         public void onClick(View view, int position)
         {
-            mVideoAlbumAdapter.updateSelectedVideoPosition(position);
+            if(check4K(position)) return;
+
+            MovieInfo info = mVideoAlbumAdapter.getVideoInfoList().get(position);
+            if(info.getDuration() < MIN_VIDEO_DURATION){
+                TuSdk.messageHub().showToast(MovieAlbumActivity.this, R.string.lsq_album_select_min_time);
+                return;
+            }
+
+            mCurrentPos = position;
+            // 视频路径
+            List<MovieInfo> videoPath = mVideoAlbumAdapter.getSelectedVideoInfo();
+            Intent intent = new Intent(MovieAlbumActivity.this, MovieEditorPreviewActivity.class);
+            // 要跳转的视频裁剪类名
+            intent.putExtra("cutClassName",getIntent().getStringExtra("cutClassName"));
+            intent.putExtra("selectMax", mSelectMax);
+            intent.putExtra("currentVideoPath", mVideoAlbumAdapter.getVideoInfoList().get(position));
+            intent.putExtra("videoPaths", (Serializable) videoPath);
+            startActivityForResult(intent,100);
         }
     };
 
@@ -187,7 +233,7 @@ public class MovieAlbumActivity extends Activity
         {
             if (v == mConfirmButton)
             {
-                if (mVideoAlbumAdapter == null || mVideoAlbumAdapter.getSelectedVideoInfo() == null)
+                if (mVideoAlbumAdapter == null || mVideoAlbumAdapter.getSelectedVideoInfo().size() <= 0)
                     TuSdk.messageHub().showToast(MovieAlbumActivity.this, R.string.lsq_select_video_hint);
                else
                     handleIntentAction();
@@ -207,13 +253,14 @@ public class MovieAlbumActivity extends Activity
         List<MovieInfo> videoInfo = new ArrayList<>();
         Cursor cursor = getContentResolver().query(
                 MediaStore.Video.Media.EXTERNAL_CONTENT_URI, null, null,
-                null, null);
+                null, "date_added desc");
         while (cursor.moveToNext())
         {
             String path = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Video.Media.DATA));
             int duration = cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Video.Media.DURATION));
 
-            if (duration > MIN_VIDEO_DURATION && duration < MAX_VIDEO_DURATION)
+            //根据时间长短加入显示列表
+            if (duration > 0 && duration < MAX_VIDEO_DURATION)
             {
                 videoInfo.add(new MovieInfo(path, duration));
             }
@@ -227,37 +274,56 @@ public class MovieAlbumActivity extends Activity
      */
     public void handleIntentAction()
     {
-        if (mVideoAlbumAdapter == null || mVideoAlbumAdapter.getSelectedVideoInfo() == null) return;
+        if (mVideoAlbumAdapter == null || mVideoAlbumAdapter.getSelectedVideoInfo().size() <= 0) return;
 
         // 要跳转的视频裁剪类名
         String className = getIntent().getStringExtra("cutClassName");
         // 视频路径
         List<MovieInfo> videoPath = mVideoAlbumAdapter.getSelectedVideoInfo();
 
+        long totalTime = 0;
+        for (MovieInfo info : videoPath){
+            totalTime += info.getDuration();
+        }
+
+        if(totalTime < MIN_VIDEO_DURATION){
+            TuSdk.messageHub().showToast(this, R.string.lsq_album_select_min_time);
+            return;
+        }
+
         Intent intent = null;
         try
         {
             intent = new Intent(MovieAlbumActivity.this, Class.forName(className));
-            if(videoPath.size() == 1)
-            {
-                intent.putExtra("videoPath", videoPath.get(0).getPath());
-            }
-            else
-            {
-                intent.putExtra("videoPaths", (Serializable) videoPath);
-            }
-
-            if(MOVIE_EDIT.equals(className))
-            {
-                intent.putExtra("ratioAdaption", false);
-            }
+            intent.putExtra("videoPaths", (Serializable) videoPath);
             startActivity(intent);
-            finish();
         }
         catch (ClassNotFoundException e)
         {
             e.printStackTrace();
         }
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 100 && resultCode == 100){
+            MovieInfo info = (MovieInfo) data.getSerializableExtra("videoInfo");
+            if(info != null && !contains(mVideoAlbumAdapter.getSelectedVideoInfo(),info))
+                mVideoAlbumAdapter.updateSelectedVideoPosition(mCurrentPos);
+            else if(info == null && contains(mVideoAlbumAdapter.getSelectedVideoInfo(),mVideoAlbumAdapter.getVideoInfoList().get(mCurrentPos)))
+                // 取消选中
+                mVideoAlbumAdapter.updateSelectedVideoPosition(mCurrentPos);
+        }
+    }
+
+    private boolean contains(List<MovieInfo> movieInfos,MovieInfo movieInfo){
+        for (MovieInfo info : movieInfos){
+            if(info.getPath().equals(movieInfo.getPath())){
+                return true;
+            }
+        }
+        return false;
     }
 }

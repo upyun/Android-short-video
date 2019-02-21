@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lsq_more_config_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/lsq_topBar"
+    android:layout_margin="@dimen/lsq__space_10"
+    android:background="@color/lsq_color_semitransparent"
+    android:clickable="true"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/lsq__space_15"
+        android:text="@string/lsq_more"
+        android:textColor="@color/lsq_color_white"
+        android:textSize="@dimen/lsq_font_size_32" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="@dimen/lsq__space_15"
+        android:layout_marginRight="@dimen/lsq__space_15"
+        android:alpha="0.1"
+        android:background="@color/lsq_color_white" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/lsq__space_15"
+            android:layout_centerVertical="true"
+            android:text="@string/lsq_radio_type"
+            android:textColor="@color/lsq_alpha_white_66"
+            android:textSize="@dimen/lsq_font_size_24" />
+
+        <ImageView
+            android:id="@+id/lsq_radio_1_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="7dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/lsq_video_popup_ic_scale_square"/>
+
+        <ImageView
+            android:id="@+id/lsq_radio_3_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="7dp"
+            android:layout_toLeftOf="@+id/lsq_radio_1_1"
+            android:layout_centerVertical="true"
+            android:src="@drawable/lsq_video_popup_ic_scale_3_4"/>
+
+        <ImageView
+            android:id="@+id/lsq_radio_full"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="7dp"
+            android:layout_toLeftOf="@+id/lsq_radio_3_4"
+            android:layout_centerVertical="true"
+            android:src="@drawable/lsq_video_popup_ic_scale_full_selected" />
+
+    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="@dimen/lsq__space_15"
+        android:layout_marginRight="@dimen/lsq__space_15"
+        android:alpha="0.1"
+        android:background="@color/lsq_color_white" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/lsq__space_15"
+            android:layout_centerVertical="true"
+            android:text="@string/lsq_auto_focus"
+            android:textColor="@color/lsq_alpha_white_66"
+            android:textSize="@dimen/lsq_font_size_24" />
+
+        <TextView
+            android:id="@+id/lsq_focus_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:padding="@dimen/lsq__space_15"
+            android:text="@string/lsq_close"
+            android:textColor="@color/lsq_color_white"
+            android:textSize="@dimen/lsq_font_size_24" />
+
+        <TextView
+            android:id="@+id/lsq_focus_open"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/lsq_focus_close"
+            android:padding="@dimen/lsq__space_15"
+            android:text="@string/lsq_open"
+            android:textColor="@color/lsq_widget_speedbar_button_bg"
+            android:textSize="@dimen/lsq_font_size_24" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="@dimen/lsq__space_15"
+        android:layout_marginRight="@dimen/lsq__space_15"
+        android:alpha="0.1"
+        android:background="@color/lsq_color_white" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/lsq__space_15"
+            android:layout_centerVertical="true"
+            android:text="@string/lsq_lighting"
+            android:textColor="@color/lsq_alpha_white_66"
+            android:textSize="@dimen/lsq_font_size_24" />
+
+        <TextView
+            android:id="@+id/lsq_lighting_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:padding="@dimen/lsq__space_15"
+            android:text="@string/lsq_close"
+            android:textColor="@color/lsq_widget_speedbar_button_bg"
+            android:textSize="@dimen/lsq_font_size_24" />
+
+        <TextView
+            android:id="@+id/lsq_lighting_open"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/lsq_lighting_close"
+            android:padding="@dimen/lsq__space_15"
+            android:text="@string/lsq_open"
+            android:textColor="@color/lsq_color_white"
+            android:textSize="@dimen/lsq_font_size_24" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="@dimen/lsq__space_15"
+        android:layout_marginRight="@dimen/lsq__space_15"
+        android:alpha="0.1"
+        android:background="@color/lsq_color_white" />
+
+    <RelativeLayout
+        android:id="@+id/lsq_audio_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/lsq__space_15"
+            android:layout_centerVertical="true"
+            android:text="@string/lsq_audio"
+            android:textColor="@color/lsq_alpha_white_66"
+            android:textSize="@dimen/lsq_font_size_24" />
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:scrollbars="none">
+            <RadioGroup
+                android:id="@+id/lsq_audio_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/lsq_audio_normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/lsq__space_15"
+                    android:text="@string/lsq_normal"
+                    android:textColor="@color/lsq_audio_radio_selector"
+                    android:textSize="@dimen/lsq_font_size_24"
+                    android:checked="true"
+                    android:button="@null"/>
+
+                <RadioButton
+                    android:id="@+id/lsq_audio_monster"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/lsq__space_15"
+                    android:text="@string/lsq_monster"
+                    android:textColor="@color/lsq_audio_radio_selector"
+                    android:textSize="@dimen/lsq_font_size_24"
+                    android:button="@null"/>
+
+                <RadioButton
+                    android:id="@+id/lsq_audio_uncle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/lsq__space_15"
+                    android:text="@string/lsq_uncle"
+                    android:textColor="@color/lsq_audio_radio_selector"
+                    android:textSize="@dimen/lsq_font_size_24"
+                    android:button="@null"/>
+
+                <RadioButton
+                    android:id="@+id/lsq_audio_girl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/lsq__space_15"
+                    android:text="@string/lsq_girl"
+                    android:textColor="@color/lsq_audio_radio_selector"
+                    android:textSize="@dimen/lsq_font_size_24"
+                    android:button="@null"/>
+
+                <RadioButton
+                    android:id="@+id/lsq_audio_lolita"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/lsq__space_15"
+                    android:text="@string/lsq_lolita"
+                    android:textColor="@color/lsq_audio_radio_selector"
+                    android:textSize="@dimen/lsq_font_size_24"
+                    android:button="@null"/>
+
+            </RadioGroup>
+
+        </ScrollView>
+
+    </RelativeLayout>
+
+</LinearLayout>

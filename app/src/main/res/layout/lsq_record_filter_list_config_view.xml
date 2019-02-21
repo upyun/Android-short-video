@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lsq_filter_content"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true">
+
+    <!--<include-->
+        <!--android:layout_marginBottom="@dimen/lsq__space_10"-->
+        <!--android:id="@+id/lsq_filter_config_view"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/lsq__space_50"-->
+        <!--layout="@layout/tusdk_config_seekbar_one"-->
+        <!--android:visibility="invisible"/>-->
+    <include
+        android:id="@+id/lsq_filter_config_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/lsq__space_10"
+        layout="@layout/lsq_params_config_view"/>
+    <LinearLayout
+        android:id="@+id/lsq_tab_layout"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lsq_filter_config_view"
+        android:background="@color/lsq_color_semitransparent">
+
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:padding="@dimen/lsq__space_8"
+                android:layout_centerHorizontal="true"
+                android:textSize="@dimen/lsq_font_size_26"
+                android:text="@string/lsq_text_comics"
+                android:id="@+id/lsq_comics_tab"
+                android:textColor="@color/lsq_color_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/lsq_comics_tab_line"
+                android:background="@color/lsq_color_white"
+                android:layout_alignLeft="@+id/lsq_comics_tab"
+                android:layout_alignRight="@+id/lsq_comics_tab"
+                android:layout_below="@+id/lsq_comics_tab"
+                android:layout_width="wrap_content"
+                android:layout_height="2dp"
+                android:layout_marginLeft="@dimen/lsq__space_10"
+                android:layout_marginRight="@dimen/lsq__space_10"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:padding="@dimen/lsq__space_8"
+                android:layout_centerHorizontal="true"
+                android:textSize="@dimen/lsq_font_size_26"
+                android:text="@string/lsq_filter_text"
+                android:id="@+id/lsq_filter_tab"
+                android:textColor="@color/lsq_alpha_white_66"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/lsq_filter_tab_line"
+                android:background="@color/lsq_alpha_white_66"
+                android:layout_alignLeft="@+id/lsq_filter_tab"
+                android:layout_alignRight="@+id/lsq_filter_tab"
+                android:layout_below="@+id/lsq_filter_tab"
+                android:layout_width="wrap_content"
+                android:layout_height="2dp"
+                android:layout_marginLeft="@dimen/lsq__space_10"
+                android:layout_marginRight="@dimen/lsq__space_10"/>
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <FrameLayout
+        android:background="@color/lsq_color_semitransparent"
+        android:layout_width="match_parent"
+        android:layout_height="95dp"
+        android:layout_below="@id/lsq_tab_layout">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/lsq_comics_filter_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/lsq__space_10"
+            android:paddingLeft="@dimen/lsq__space_10"
+            android:paddingRight="@dimen/lsq__space_10"
+            android:layout_gravity="center_vertical">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/lsq_filter_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/lsq__space_10"
+            android:paddingLeft="@dimen/lsq__space_10"
+            android:paddingRight="@dimen/lsq__space_10"
+            android:layout_gravity="center_vertical">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </FrameLayout>
+
+</RelativeLayout>

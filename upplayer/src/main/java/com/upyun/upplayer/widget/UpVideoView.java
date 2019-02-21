@@ -148,7 +148,7 @@ public class UpVideoView extends FrameLayout implements MediaController.MediaPla
     private boolean isFullState;
     private ViewGroup.LayoutParams mRawParams;
 
-//    private MonitorRecorder monitorRecorder;
+    //    private MonitorRecorder monitorRecorder;
     private float playSpeed = .0f;
 
     private long bufferTime;
@@ -349,6 +349,7 @@ public class UpVideoView extends FrameLayout implements MediaController.MediaPla
             mMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "max-buffer-size", 1024 * 1024 * 50);
             mMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "http-detect-range-support", 0);
             mMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_CODEC, "skip_loop_filter", 0);
+            mMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "enable-accurate-seek", 1);
 //            mMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "probesize", "4096");
 //            mMediaPlayer.setLooping(true);
 //            mMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "sync", "ext");
@@ -635,9 +636,9 @@ public class UpVideoView extends FrameLayout implements MediaController.MediaPla
                                 .setPositiveButton("OK",
                                         new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int whichButton) {
-                                            /* If we get here, there is no onError listener, so
-                                             * at least inform them that the video is over.
-                                             */
+                                                /* If we get here, there is no onError listener, so
+                                                 * at least inform them that the video is over.
+                                                 */
                                                 if (mOnCompletionListener != null) {
                                                     mOnCompletionListener.onCompletion(mMediaPlayer);
                                                 }
@@ -1027,29 +1028,29 @@ public class UpVideoView extends FrameLayout implements MediaController.MediaPla
             }
             activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
-            DisplayMetrics metrics = new DisplayMetrics();
-            activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
-            mRawParams = getLayoutParams();
-            ViewGroup.LayoutParams fullParams;
-            if (mRawParams instanceof RelativeLayout.LayoutParams) {
-                fullParams = new RelativeLayout.LayoutParams(metrics.widthPixels, metrics.heightPixels);
-            } else if (mRawParams instanceof LinearLayout.LayoutParams) {
-                fullParams = new LinearLayout.LayoutParams(metrics.widthPixels, metrics.heightPixels);
-            } else if (mRawParams instanceof FrameLayout.LayoutParams) {
-                fullParams = new FrameLayout.LayoutParams(metrics.widthPixels, metrics.heightPixels);
-            } else {
-                new AlertDialog.Builder(getContext())
-                        .setMessage("nonsupport parent layout, please do it by yourself")
-                        .setPositiveButton("OK",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int whichButton) {
-                                    }
-                                })
-                        .setCancelable(false)
-                        .show();
-                return;
-            }
-            setLayoutParams(fullParams);
+//            DisplayMetrics metrics = new DisplayMetrics();
+//            activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+//            mRawParams = getLayoutParams();
+//            ViewGroup.LayoutParams fullParams;
+//            if (mRawParams instanceof RelativeLayout.LayoutParams) {
+//                fullParams = new RelativeLayout.LayoutParams(metrics.widthPixels, metrics.heightPixels);
+//            } else if (mRawParams instanceof LinearLayout.LayoutParams) {
+//                fullParams = new LinearLayout.LayoutParams(metrics.widthPixels, metrics.heightPixels);
+//            } else if (mRawParams instanceof FrameLayout.LayoutParams) {
+//                fullParams = new FrameLayout.LayoutParams(metrics.widthPixels, metrics.heightPixels);
+//            } else {
+//                new AlertDialog.Builder(getContext())
+//                        .setMessage("nonsupport parent layout, please do it by yourself")
+//                        .setPositiveButton("OK",
+//                                new DialogInterface.OnClickListener() {
+//                                    public void onClick(DialogInterface dialog, int whichButton) {
+//                                    }
+//                                })
+//                        .setCancelable(false)
+//                        .show();
+//                return;
+//            }
+//            setLayoutParams(fullParams);
             isFullState = true;
         }
     }
@@ -1060,7 +1061,7 @@ public class UpVideoView extends FrameLayout implements MediaController.MediaPla
             if (activity.getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
                 activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
             }
-            setLayoutParams(mRawParams);
+//            setLayoutParams(mRawParams);
             isFullState = false;
         }
     }

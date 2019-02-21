@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lsq_color_black">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/lsq_navigatorBar"
+            layout="@layout/tusdk_view_widget_navigator" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/lsq__space_20"
+            android:layout_marginTop="@dimen/lsq__space_20"
+            android:text="@string/lsq_text_componentList"
+            android:textColor="@color/lsq_color_white"
+            android:textSize="@dimen/lsq_font_size_70" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/lsq__space_20"
+            android:layout_marginTop="@dimen/lsq__space_50"
+            android:text="@string/lsq_api_usage_example"
+            android:textColor="#666666"
+            android:textSize="@dimen/lsq_font_size_28" />
+
+        <ListView
+            android:id="@id/android:list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/lsq_navigatorBar"
+            android:layout_marginTop="@dimen/lsq__space_20"
+            android:divider="@null" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/lsq__space_25"
+        >
+
+        <TextView
+            android:id="@+id/tv_copyright_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:lineSpacingExtra="@dimen/lsq__space_5"
+            android:textColor="@color/lsq_actionsheet_title_color"
+            android:textSize="@dimen/lsq_font_size_20" />
+
+
+    </RelativeLayout>
+</RelativeLayout>

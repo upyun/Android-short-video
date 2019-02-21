@@ -10,7 +10,6 @@
 package com.upyun.shortvideo;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,10 +22,9 @@ import org.lasque.tusdk.core.TuSdkContext;
 import org.lasque.tusdk.core.utils.ContextUtils;
 import org.lasque.tusdk.core.utils.TuSdkWaterMarkOption.WaterMarkPosition;
 import org.lasque.tusdk.core.utils.hardware.CameraConfigs.CameraAntibanding;
-import org.lasque.tusdk.core.utils.hardware.TuSDKRecordVideoCamera;
+import org.lasque.tusdk.core.utils.hardware.TuSdkRecorderCameraSetting;
+import org.lasque.tusdk.core.utils.hardware.TuSdkRecorderVideoCameraImpl;
 import org.lasque.tusdk.core.utils.image.BitmapHelper;
-import org.lasque.tusdk.core.video.TuSDKVideoCaptureSetting;
-import org.lasque.tusdk.core.video.TuSDKVideoCaptureSetting.AVCodecType;
 import org.lasque.tusdk.core.view.TuSdkViewHelper;
 
 /**
@@ -34,9 +32,9 @@ import org.lasque.tusdk.core.view.TuSdkViewHelper;
  *
  * @author Yanlin
  */
-public class SimpleCameraActivity extends Activity
+public class SimpleCameraActivity extends ScreenAdapterActivity
 {
-    protected TuSDKRecordVideoCamera mVideoCamera;
+    protected TuSdkRecorderVideoCameraImpl mVideoCamera;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -53,29 +51,31 @@ public class SimpleCameraActivity extends Activity
 		RelativeLayout cameraView = (RelativeLayout) findViewById(R.id.lsq_cameraView);
 		
 		// 录制相机采集配置，目前只支持硬编
-		TuSDKVideoCaptureSetting captureSetting = new TuSDKVideoCaptureSetting();
-		captureSetting.fps = 30;
-		captureSetting.videoAVCodecType = AVCodecType.HW_CODEC;
-		
-		mVideoCamera = new TuSDKRecordVideoCamera(getBaseContext(), captureSetting, cameraView);
+        TuSdkRecorderCameraSetting captureSetting = new TuSdkRecorderCameraSetting();
+
+        //预览视图实时缩放比例 (默认:0.75, 实时预览时，缩小到全屏大小比例，提升预览效率， 0 < mPreviewEffectScale <= 1)
+        captureSetting.previewEffectScale = 0.85f;
+        // 最大预览视图
+        captureSetting.previewMaxSize = 1280;
+        // 指定为全屏画面比例
+//        captureSetting.previewRatio = 0;
+
+		mVideoCamera = new TuSdkRecorderVideoCameraImpl(getBaseContext(), cameraView,captureSetting);
 		// 是否开启动态贴纸
 		mVideoCamera.setEnableLiveSticker(true);
-		// 是否开启美颜 (默认: false)
-		mVideoCamera.setEnableBeauty(true);
 		// 禁用自动持续对焦 (默认: false)
-		mVideoCamera.setDisableContinueFoucs(true);
+		mVideoCamera.setDisableContinueFocus(false);
 		// 启用防闪烁功能，默认关闭。
 		mVideoCamera.setAntibandingMode(CameraAntibanding.Auto);
 
         // 设置检测框最小倍数  值越大性能越高,取值范围: 0.1 < x < 0.5, 默认: 0.2
         // 默认人脸识别距离为1米左右； 设置成0.1f, 人脸识别距离可以增加至2米
-        // mVideoCamera.setDetectScale(0.1f);
+//         mVideoCamera.setDetectScale(0.1f);
 
 		// 设置水印，默认为空
 		mVideoCamera.setWaterMarkImage(BitmapHelper.getBitmapFormRaw(this, R.raw.sample_watermark));
 		mVideoCamera.setWaterMarkPosition(WaterMarkPosition.BottomRight);
 		
-		mVideoCamera.initOutputSettings();
     }
     
     protected String getStringFromResource(String fieldName)

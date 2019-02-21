@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:background="@color/lsq_color_black">
+
+
+    <!--速度控制-->
+    <LinearLayout
+        android:id="@+id/lsq_editor_audio_record_type_bar"
+        android:layout_width="300dp"
+        android:layout_height="34dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/lsq__space_10"
+        android:background="@drawable/tusdk_edite_cut_speedbar_bg"
+        android:orientation="horizontal"
+        android:weightSum="5">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:tag="0"
+            android:text="@string/lsq_monster"
+            android:textAlignment="center"
+            android:textColor="@color/lsq_color_white"
+            android:textSize="13sp"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:tag="1"
+            android:text="@string/lsq_uncle"
+            android:textColor="@color/lsq_color_white"
+            android:textSize="13sp"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/tusdk_edite_cut_speed_button_bg"
+            android:tag="2"
+            android:text="@string/lsq_normal"
+            android:textColor="@color/lsq_editor_cut_select_font_color"
+            android:textSize="13sp"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:tag="3"
+            android:text="@string/lsq_girl"
+            android:textColor="@color/lsq_color_white"
+            android:textSize="13sp"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:tag="4"
+            android:text="@string/lsq_lolita"
+            android:textColor="@color/lsq_color_white"
+            android:textSize="13sp"/>
+
+    </LinearLayout>
+
+    <!--录制按钮-->
+    <ImageButton
+        android:id="@+id/lsq_recordButton"
+        android:layout_width="@dimen/lsq__space_80"
+        android:layout_height="@dimen/lsq__space_80"
+        android:layout_below="@+id/lsq_editor_audio_record_type_bar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/lsq__space_10"
+        android:background="@drawable/tusdk_view_widget_record_unpressed"/>
+
+    <!--删除按钮-->
+    <ImageView
+        android:id="@+id/lsq_record_deleted"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/lsq_recordButton"
+        android:layout_marginLeft="@dimen/lsq__space_50"
+        android:layout_marginTop="@dimen/lsq_font_size_30"
+        android:src="@drawable/edit_ic_undo"
+        android:visibility="invisible"
+        />
+
+    <!--确认按钮-->
+    <ImageView
+        android:id="@+id/lsq_record_sure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/lsq_recordButton"
+        android:layout_marginLeft="@dimen/lsq__space_50"
+        android:layout_marginTop="@dimen/lsq_font_size_30"
+        android:layout_toRightOf="@+id/lsq_recordButton"
+        android:src="@drawable/edit_ic_sure"
+        android:visibility="invisible"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/lsq__space_5"
+        android:gravity="center"
+        android:text="@string/lsq_start_audiotrecord_hint"
+        android:textColor="@color/lsq_color_white"
+        android:textSize="@dimen/lsq_font_size_30"
+        />
+
+</RelativeLayout>

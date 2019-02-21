@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.upyun.shortvideo.SplashActivity">
+
+    <ImageView
+        android:scaleType="centerCrop"
+        android:src="@drawable/lsq_home_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/lsq_app_name"
+        android:textColor="@color/lsq_color_white"
+        android:layout_marginTop="@dimen/lsq__space_100"
+        android:textSize="@dimen/lsq_font_size_70"
+        android:layout_centerHorizontal="true"
+        android:text="TUSDK  VIDEO"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_below="@+id/lsq_app_name"
+        android:textColor="@color/lsq_color_white"
+        android:layout_marginTop="@dimen/lsq__space_20"
+        android:textSize="@dimen/lsq_font_size_34"
+        android:layout_centerHorizontal="true"
+        android:text="涂图短视频"
+        android:letterSpacing="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/lsq_website"
+        android:textColor="@color/lsq_actionsheet_title_color"
+        android:textSize="@dimen/lsq_font_size_24"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/lsq__space_25"
+        android:text="© 2018 TUTUCLOUD.COM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/lsq_version"
+        android:layout_above="@+id/lsq_website"
+        android:textColor="@color/lsq_actionsheet_title_color"
+        android:textSize="@dimen/lsq_font_size_24"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/lsq__space_10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

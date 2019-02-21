@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_marginLeft="2dp"
+    android:layout_marginRight="2dp"
+    android:layout_marginBottom="4dp"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/lsq_video_thumb_view"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:scaleType="centerCrop"
+        android:background="@color/lsq_color_black" />
+    <FrameLayout
+        android:id="@+id/lsq_movie_selected_icon_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/lsq_movie_selected_icon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/edit_heckbox_unsel"
+            android:layout_marginLeft="@dimen/lsq__space_5"
+            android:layout_marginTop="@dimen/lsq__space_5"
+            android:layout_marginBottom="@dimen/lsq__space_10"
+            android:layout_marginRight="@dimen/lsq__space_10"
+            android:layout_alignTop="@id/lsq_video_thumb_view"
+            android:layout_alignLeft="@id/lsq_video_thumb_view"
+            android:gravity="center"
+            android:textColor="@color/lsq_color_black"/>
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/lsq_movie_time"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/lsq_alpha_black_66"
+        android:gravity="right"
+        android:paddingRight="@dimen/lsq__space_5"
+        android:textColor="@color/lsq_color_white"
+        android:textSize="12sp" />
+
+</RelativeLayout>

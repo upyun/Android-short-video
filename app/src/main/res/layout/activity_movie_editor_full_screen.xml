@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+    <!-- Video Content -->
+
+
+    <com.upyun.shortvideo.views.VideoContent
+        android:id="@+id/lsq_editor_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="false"
+        >
+
+        <org.lasque.tusdk.impl.components.widget.sticker.StickerView
+            android:id="@+id/lsq_stickerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+        </org.lasque.tusdk.impl.components.widget.sticker.StickerView>
+
+        <RelativeLayout
+            android:id="@+id/lsq_magic_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/lsq_play_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/lsq_editor_ic_play"
+            android:visibility="gone"
+            />
+
+        <!-- 加载进度 -->
+        <FrameLayout
+            android:id="@+id/lsq_editor_load"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerInParent="true"
+            android:background="@color/lsq_alpha_black_7f"
+            >
+
+            <at.grabner.circleprogress.CircleProgressView
+                android:id="@+id/lsq_editor_load_parogress"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                app:cpv_barColor="@color/lsq_color_white"
+                app:cpv_barWidth="2dp"
+                app:cpv_maxValue="100"
+                app:cpv_rimColor="@color/lsq_color_transparent"
+                app:cpv_rimWidth="2dp"
+                app:cpv_textColor="@color/lsq_color_transparent"
+                />
+
+        </FrameLayout>
+
+    </com.upyun.shortvideo.views.VideoContent>
+
+    <!-- Header -->
+    <FrameLayout
+        android:id="@+id/lsq_editor_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </FrameLayout>
+
+    <!-- Bottom -->
+
+    <org.lasque.tusdk.core.view.widget.TuSdkEditText
+        android:id="@+id/lsq_editTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/lsq_editor_bottom"
+        android:gravity="center_vertical"
+        android:hint="@string/lsq_edit_text_sticker_default_text"
+        android:inputType="textMultiLine"
+        android:lines="2"
+        android:visibility="gone"/>
+
+    <FrameLayout
+        android:id="@+id/lsq_editor_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        >
+
+    </FrameLayout>
+
+
+    <!-- 滤镜调节 -->
+    <include
+        android:id="@+id/lsq_filter_config_view"
+        layout="@layout/filter_config_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/lsq_editor_bottom"
+        android:layout_marginBottom="@dimen/lsq__space_10"
+        android:visibility="gone"/>
+
+    <!-- 配音音量调节参数 -->
+    <include
+        android:id="@+id/lsq_voice_volume_config_view"
+        layout="@layout/tusdk_config_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/lsq_editor_bottom"
+        android:layout_marginBottom="@dimen/lsq__space_10"
+        android:visibility="gone"/>
+
+    <!--粒子效果调节栏-->
+    <LinearLayout
+        android:id="@+id/lsq_magic_config"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        android:layout_above="@+id/lsq_editor_bottom"
+        android:visibility="gone"
+        >
+
+        <include
+            android:id="@+id/lsq_magic_color_seekbar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            layout="@layout/tusdk_config_magic_color"
+            />
+
+        <include
+            android:id="@+id/lsq_magic_size_seekbar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            layout="@layout/tusdk_config_seekbar_one" />
+
+    </LinearLayout>
+
+    <com.upyun.shortvideo.views.editor.AudioRecordLayout
+        android:id="@+id/lsq_audio_record"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        ></com.upyun.shortvideo.views.editor.AudioRecordLayout>
+
+
+</RelativeLayout>

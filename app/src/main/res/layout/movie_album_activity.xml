@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/lsq_color_white"
+    android:background="@color/lsq_color_black"
     android:orientation="vertical">
 
     <include
@@ -13,9 +13,7 @@
         android:id="@+id/lsq_movie_selector_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#fff"
-        android:overScrollMode="never"
-        android:layout_margin="5dp"
-        />
+        android:background="@color/lsq_color_transparent"
+        android:overScrollMode="never" />
 
 </LinearLayout>

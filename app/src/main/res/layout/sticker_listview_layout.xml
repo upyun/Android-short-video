@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.RecyclerView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lsq_sticker_list_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/lsq__space_10"
+    android:paddingRight="@dimen/lsq__space_10"
+    android:paddingLeft="@dimen/lsq__space_10">
+
+</android.support.v7.widget.RecyclerView>
