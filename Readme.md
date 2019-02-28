@@ -1071,54 +1071,86 @@ demo 中断点续拍相机是按照 1:1 的方形画幅录制的，如果要修�
 
 ### 使用说明
 
-1.导入上传依赖：compile 'com.upyun:upyun-android-sdk:2.0.4' 
+1.导入上传依赖：compile 'com.upyun:upyun-android-sdk:2.0.7'
 
 ### 示例代码
 * 表单上传
 
 ```
-     //表单上传
-     final Map<String, Object> paramsMap = new HashMap<>();
-     //上传空间
-     paramsMap.put(Params.BUCKET, Config.BUCKET);
-     //保存路径，任选其中一个
-     paramsMap.put(Params.SAVE_KEY, "/uploads/{year}{mon}{day}/{random32}{.suffix}");
+        //空间名
+        String SPACE = "formtest";
+        //操作员
+        String OPERATER = "one";
+        //密码
+        String PASSWORD = "***";
 
-     //上传结果回调
-     UpCompleteListener completeListener = new UpCompleteListener() {
-        @Override
-        public void onComplete(boolean isSuccess, String result) {
-             Log.e(TAG, isSuccess + ":" + result);
-        }
-     ;
-     //进度条回调
-     UpProgressListener progressListener = new UpProgressListener() {
-        @Override
-        public void onRequestProgress(final long bytesWrite, final long contentLength) {
-		//Log.e(TAG, (100 * bytesWrite) / contentLength + "%");
+        //上传路径
+        String savePath = "/uploads/{year}{mon}{day}/{random32}{.suffix}";
+
+        final Map<String, Object> paramsMap = new HashMap<>();
+        //上传空间
+        paramsMap.put(Params.BUCKET, SPACE);
+        //保存路径
+        paramsMap.put(Params.SAVE_KEY, savePath);
+        //添加 CONTENT_LENGTH 参数使用大文件表单上传
+        paramsMap.put(Params.CONTENT_LENGTH, file.length());
+
+        //可选参数（详情见api文档介绍）
+        paramsMap.put(Params.CONTENT_MD5, UpYunUtils.md5Hex(file));
+        paramsMap.put(Params.RETURN_URL, "httpbin.org/post");
+
+        //上传结果回调
+        UpCompleteListener completeListener = new UpCompleteListener() {
+            @Override
+            public void onComplete(boolean isSuccess, String result) {
+                Log.e(TAG, isSuccess + ":" + result);
+            }
         };
-    UploadEngine.getInstance().formUpload(file, paramsMap, Config.OPERATER, UpYunUtils.md5(Config.PASSWORD), completeListener, progressListener);
 
+        //进度条回调
+        UpProgressListener progressListener = new UpProgressListener() {
+            @Override
+            public void onRequestProgress(final long bytesWrite, final long contentLength) {
+                Log.e(TAG, (100 * bytesWrite) / contentLength + "%");
+            }
+        };
+
+        UploadEngine.getInstance().formUpload(file, paramsMap, OPERATER, UpYunUtils.md5(PASSWORD), completeListener, progressListener);
 ```
 
 * 断点续传
 
 ```
-    //断点续传
-    final ResumeUploader uploader = new ResumeUploader(Config.BUCKET, Config.OPERATER, UpYunUtils.md5(Config.PASSWORD));
+        //空间名
+        String SPACE = "formtest";
+        //操作员
+        String OPERATER = "one";
+        //密码
+        String PASSWORD = "***";
 
-    new Thread() {
-        @Override
-        public void run() {
-            try {
-                uploader.upload(file, "/resume/" + System.currentTimeMillis() + ".mp4", null);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (UpYunException e) {
-                 e.printStackTrace();
+        //上传路径
+        String path = "/test.mp4";
+
+        //初始化断点续传
+        ResumeUploader uploader = new ResumeUploader(SPACE, OPERATER, UpYunUtils.md5(PASSWORD));
+
+        //设置 MD5 校验
+        uploader.setCheckMD5(true);
+
+        //设置进度监听
+        uploader.setOnProgressListener(new UpProgressListener() {
+            @Override
+            public void onRequestProgress(long bytesWrite, long contentLength) {
+                Log.e(TAG, bytesWrite + ":" + contentLength);
             }
-    	}
-    }.start();
+        });
+
+        uploader.upload(file, path, null, new UpCompleteListener() {
+            @Override
+            public void onComplete(boolean isSuccess, String result) {
+                Log.e(TAG, "isSuccess:" + isSuccess + "  result:" + result);
+            }
+        });
 ```
 
 

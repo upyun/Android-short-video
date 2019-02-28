@@ -53,4 +53,5 @@ dependencies {
     implementation('com.github.jakob-grabner:Circle-Progress-View:v1.3', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    implementation 'com.upyun:upyun-android-sdk:2.0.7'
 }
