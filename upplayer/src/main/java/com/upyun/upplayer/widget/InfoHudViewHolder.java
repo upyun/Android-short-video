@@ -142,7 +142,7 @@ public class InfoHudViewHolder {
                     long videoCachedBytes    = mp.getVideoCachedBytes();
                     long audioCachedBytes    = mp.getAudioCachedBytes();
                     long tcpSpeed            = mp.getTcpSpeed();
-                    long bitRate             = mp.getBitrate();
+                    long bitRate             = mp.getBitRate();
                     long seekLoadDuration    = mp.getSeekLoadDuration();
 
                     setRowValue(R.string.v_cache, String.format(Locale.US, "%s, %s", formatedDurationMilli(videoCachedDuration), formatedSize(videoCachedBytes)));

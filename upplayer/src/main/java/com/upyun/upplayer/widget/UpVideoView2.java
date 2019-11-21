@@ -30,7 +30,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -41,15 +40,12 @@ import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.MediaController;
-import android.widget.RelativeLayout;
 import android.widget.TableLayout;
-
-import com.upyun.upplayer.common.MonitorRecorder;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import tv.danmaku.ijk.media.player.IMediaPlayer;
@@ -174,13 +170,14 @@ public class UpVideoView2 extends FrameLayout implements MediaController.MediaPl
     private boolean isFullState;
     private ViewGroup.LayoutParams mRawParams;
 
-//    private MonitorRecorder monitorRecorder;
+    //    private MonitorRecorder monitorRecorder;
     private float playSpeed = .0f;
 
     private long bufferTime;
     private long startbufferTime;
     private static int PURSUETIME = 10 * 1000;
     private boolean isAutoPursue = true;
+    private List<String> paths;
 
     public boolean isAutoPursue() {
         return isAutoPursue;
@@ -693,9 +690,9 @@ public class UpVideoView2 extends FrameLayout implements MediaController.MediaPl
                                 .setPositiveButton("OK",
                                         new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int whichButton) {
-                                            /* If we get here, there is no onError listener, so
-                                             * at least inform them that the video is over.
-                                             */
+                                                /* If we get here, there is no onError listener, so
+                                                 * at least inform them that the video is over.
+                                                 */
                                                 if (mOnCompletionListener != null) {
                                                     mOnCompletionListener.onCompletion(mMediaPlayer);
                                                 }
@@ -774,9 +771,9 @@ public class UpVideoView2 extends FrameLayout implements MediaController.MediaPl
     }
 
     /**
+     * @param l
      * @see AVAPP_EVENT_WILL_HTTP_OPEN
      * @see AVAPP_EVENT_HTTP_CODE
-     * @param l
      */
     public void setOnNativeInvokeListener(IjkMediaPlayer.OnNativeInvokeListener l) {
         mOnNativeInvokeListener = l;
@@ -861,7 +858,7 @@ public class UpVideoView2 extends FrameLayout implements MediaController.MediaPl
     };
 
     public void releaseWithoutStop() {
-        if (mMediaPlayer != null){
+        if (mMediaPlayer != null) {
             Log.i(TAG, "releaseWithoutStop");
             mMediaPlayer.setSurface(null);
         }
@@ -1242,4 +1239,22 @@ public class UpVideoView2 extends FrameLayout implements MediaController.MediaPl
             mErrorListener.onError(mMediaPlayer, -1001, 0);
         }
     };
+
+    /**
+     * Sets video paths.
+     *
+     * @param paths the path of the video.
+     */
+    public void setVideoPaths(List<String> paths,int pathIndex) {
+        this.paths = paths;
+        setVideoPath(paths.get(pathIndex));
+    }
+
+    public void setPathIndex(int pathIndex) {
+        if (paths != null && pathIndex > 0 && pathIndex < paths.size()) {
+            mSeekWhenPrepared = getCurrentPosition();
+            mUri = Uri.parse(paths.get(pathIndex));
+            openVideo();
+        }
+    }
 }
