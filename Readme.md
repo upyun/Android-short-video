@@ -2375,7 +2375,7 @@ TuSdkAudioPitchEngine
 
 #### 功能说明 
 
-* 支持在线视频协议：`HLS`, `RTMP`, `HTTP-FLV` 等，支持 `HLS` 多种分辨率切换
+* 支持在线视频协议：`HLS`, `RTMP`, `HTTP-FLV` 等
 
 * 支持本地视频播放
 
