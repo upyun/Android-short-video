@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.lasque.tusdk.modules.view.widget.sticker.StickerGroup;
 import org.lasque.tusdk.modules.view.widget.sticker.StickerLocalPackage;
 import com.upyun.shortvideo.R;
 import org.lasque.tusdkvideodemo.views.cosmetic.CosmeticPanelController;
@@ -58,7 +59,11 @@ public class EyelashPanel extends BasePanel {
             @Override
             public void onItemClick(int pos, EyelashAdapter.EyelashViewHolder holder, CosmeticTypes.EyelashType item) {
                 mCurrentType = item;
-                mController.getEffect().updateEyelash(StickerLocalPackage.shared().getStickerGroup(item.mGroupId).stickers.get(0));
+                StickerGroup group = StickerLocalPackage.shared().getStickerGroup(item.mGroupId);
+                if (group != null) {
+                    mController.getEffect().updateEyelash(group.stickers.get(0));
+                }
+//                mController.getEffect().updateEyelash(StickerLocalPackage.shared().getStickerGroup(item.mGroupId).stickers.get(0));
                 mAdapter.setCurrentPos(pos);
                 if (onPanelClickListener != null) onPanelClickListener.onClick(mType);
 

@@ -7,8 +7,11 @@ import android.widget.ImageView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.lasque.tusdk.modules.view.widget.sticker.StickerGroup;
 import org.lasque.tusdk.modules.view.widget.sticker.StickerLocalPackage;
+
 import com.upyun.shortvideo.R;
+
 import org.lasque.tusdkvideodemo.views.cosmetic.CosmeticPanelController;
 import org.lasque.tusdkvideodemo.views.cosmetic.CosmeticTypes;
 import org.lasque.tusdkvideodemo.views.cosmetic.OnItemClickListener;
@@ -36,7 +39,7 @@ public class EyeshadowPanel extends BasePanel {
 
     @Override
     protected View createView() {
-        View panel = LayoutInflater.from(mController.getContext()).inflate(R.layout.cosmetic_eyeshadow_panel,null,false);
+        View panel = LayoutInflater.from(mController.getContext()).inflate(R.layout.cosmetic_eyeshadow_panel, null, false);
         ImageView putAway = panel.findViewById(R.id.lsq_eyeshadow_put_away);
         putAway.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,12 +55,15 @@ public class EyeshadowPanel extends BasePanel {
                 clear();
             }
         });
-        mAdapter = new EyeshadowAdapter(CosmeticPanelController.mEyeshadowTypes,mController.getContext());
+        mAdapter = new EyeshadowAdapter(CosmeticPanelController.mEyeshadowTypes, mController.getContext());
         mAdapter.setOnItemClickListener(new OnItemClickListener<CosmeticTypes.EyeshadowType, EyeshadowAdapter.EyeshadowViewHolder>() {
             @Override
             public void onItemClick(int pos, EyeshadowAdapter.EyeshadowViewHolder holder, CosmeticTypes.EyeshadowType item) {
                 mCurrentType = item;
-                mController.getEffect().updateEyeshadow(StickerLocalPackage.shared().getStickerGroup(item.mGroupId).stickers.get(0));
+                StickerGroup group = StickerLocalPackage.shared().getStickerGroup(item.mGroupId);
+                if (group != null) {
+                    mController.getEffect().updateEyeshadow(group.stickers.get(0));
+                }// mController.getEffect().updateEyeshadow(StickerLocalPackage.shared().getStickerGroup(item.mGroupId).stickers.get(0));
                 mAdapter.setCurrentPos(pos);
                 if (onPanelClickListener != null) onPanelClickListener.onClick(mType);
 

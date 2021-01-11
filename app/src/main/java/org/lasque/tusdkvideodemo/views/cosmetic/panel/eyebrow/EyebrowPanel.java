@@ -8,8 +8,11 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.lasque.tusdk.modules.view.widget.sticker.StickerGroup;
 import org.lasque.tusdk.modules.view.widget.sticker.StickerLocalPackage;
+
 import com.upyun.shortvideo.R;
+
 import org.lasque.tusdkvideodemo.views.cosmetic.CosmeticPanelController;
 import org.lasque.tusdkvideodemo.views.cosmetic.CosmeticTypes;
 import org.lasque.tusdkvideodemo.views.cosmetic.OnItemClickListener;
@@ -41,7 +44,7 @@ public class EyebrowPanel extends BasePanel {
 
     @Override
     protected View createView() {
-        final View panel = LayoutInflater.from(mController.getContext()).inflate(R.layout.cosmetic_eyebrow_panel, null,false);
+        final View panel = LayoutInflater.from(mController.getContext()).inflate(R.layout.cosmetic_eyebrow_panel, null, false);
         final ImageView stateIcon = panel.findViewById(R.id.lsq_eyebrow_state_icon);
         final TextView stateTitle = panel.findViewById(R.id.lsq_eyebrow_state_title);
         stateIcon.setOnClickListener(new View.OnClickListener() {
@@ -100,7 +103,11 @@ public class EyebrowPanel extends BasePanel {
                         currentGroupId = item.mMistyGroupId;
                         break;
                 }
-                mController.getEffect().updateEyebrow(StickerLocalPackage.shared().getStickerGroup(currentGroupId).stickers.get(0));
+                StickerGroup group = StickerLocalPackage.shared().getStickerGroup(currentGroupId);
+                if (group != null) {
+                    mController.getEffect().updateEyebrow(group.stickers.get(0));
+                }
+//                mController.getEffect().updateEyebrow(StickerLocalPackage.shared().getStickerGroup(currentGroupId).stickers.get(0));
                 mAdapter.setCurrentPos(pos);
                 if (onPanelClickListener != null) onPanelClickListener.onClick(mType);
 
