@@ -63,7 +63,7 @@ public class EyeshadowPanel extends BasePanel {
                 StickerGroup group = StickerLocalPackage.shared().getStickerGroup(item.mGroupId);
                 if (group != null) {
                     mController.getEffect().updateEyeshadow(group.stickers.get(0));
-                }// mController.getEffect().updateEyeshadow(StickerLocalPackage.shared().getStickerGroup(item.mGroupId).stickers.get(0));
+                }
                 mAdapter.setCurrentPos(pos);
                 if (onPanelClickListener != null) onPanelClickListener.onClick(mType);
 

@@ -107,7 +107,6 @@ public class EyebrowPanel extends BasePanel {
                 if (group != null) {
                     mController.getEffect().updateEyebrow(group.stickers.get(0));
                 }
-//                mController.getEffect().updateEyebrow(StickerLocalPackage.shared().getStickerGroup(currentGroupId).stickers.get(0));
                 mAdapter.setCurrentPos(pos);
                 if (onPanelClickListener != null) onPanelClickListener.onClick(mType);
 

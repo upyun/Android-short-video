@@ -61,7 +61,6 @@ public class BlushPanel extends BasePanel {
                 if (group != null) {
                     mController.getEffect().updateBlush(group.stickers.get(0));
                 }
-//                mController.getEffect().updateBlush(StickerLocalPackage.shared().getStickerGroup(item.mGroupId).stickers.get(0));
                 mAdapter.setCurrentPos(pos);
                 if (onPanelClickListener != null) onPanelClickListener.onClick(mType);
             }

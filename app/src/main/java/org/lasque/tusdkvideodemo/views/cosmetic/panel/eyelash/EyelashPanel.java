@@ -63,7 +63,6 @@ public class EyelashPanel extends BasePanel {
                 if (group != null) {
                     mController.getEffect().updateEyelash(group.stickers.get(0));
                 }
-//                mController.getEffect().updateEyelash(StickerLocalPackage.shared().getStickerGroup(item.mGroupId).stickers.get(0));
                 mAdapter.setCurrentPos(pos);
                 if (onPanelClickListener != null) onPanelClickListener.onClick(mType);
 
