@@ -19,21 +19,21 @@
             android:layout_marginTop="@dimen/lsq__space_20"
             android:src="@drawable/edit_ic_play"/>
 
-        <com.upyun.shortvideo.views.editor.TuSdkMovieScrollPlayLineView
+        <org.lasque.tusdkvideodemo.views.editor.TuSdkMovieScrollPlayLineView
             android:id="@+id/lsq_editor_scene_play_range"
             android:layout_width="match_parent"
             android:layout_height="35dp"
-            android:layout_marginTop="@dimen/lsq__space_20"></com.upyun.shortvideo.views.editor.TuSdkMovieScrollPlayLineView>
+            android:layout_marginTop="@dimen/lsq__space_20"></org.lasque.tusdkvideodemo.views.editor.TuSdkMovieScrollPlayLineView>
 
     </LinearLayout>
 
     <!--文字控制content-->
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/lsq_editor_effect_scene_list"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_marginTop="@dimen/lsq__space_20"
         android:layout_marginLeft="@dimen/lsq__space_10">
-    </android.support.v7.widget.RecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>

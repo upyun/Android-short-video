@@ -29,55 +29,16 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="字体"
+                android:text="颜色"
                 android:textColor="@color/lsq_scence_effect_color_title"
                 android:textSize="@dimen/lsq_font_size_20" />
 
-            <com.upyun.shortvideo.views.editor.color.ColorView
+            <org.lasque.tusdkvideodemo.views.editor.color.ColorView
                 android:id="@+id/lsq_editor_text_color_seek_font"
                 android:layout_width="match_parent"
                 android:layout_height="20dp" />
         </LinearLayout>
 
-        <!--背景-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="23dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="背景"
-                android:textColor="@color/lsq_scence_effect_color_title"
-                android:textSize="@dimen/lsq_font_size_20" />
-
-            <com.upyun.shortvideo.views.editor.color.ColorView
-                android:id="@+id/lsq_editor_text_color_seek_background"
-                android:layout_width="match_parent"
-                android:layout_height="20dp" />
-        </LinearLayout>
-
-        <!--线条-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="23dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="线条"
-                android:textColor="@color/lsq_scence_effect_color_title"
-                android:textSize="@dimen/lsq_font_size_20" />
-
-            <com.upyun.shortvideo.views.editor.color.ColorView
-                android:id="@+id/lsq_editor_text_color_seek_line"
-                android:layout_width="match_parent"
-                android:layout_height="20dp" />
-        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

@@ -11,18 +11,18 @@
         android:layout_width="match_parent"
         android:layout_height="4dp">
 
-        <com.upyun.shortvideo.views.HorizontalProgressBar
+        <org.lasque.tusdkvideodemo.views.HorizontalProgressBar
             android:id="@+id/lsq_record_progressbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:progressColor="@color/lsq_widget_speedbar_button_bg"
-            app:background="@color/lsq_alpha_white_4d"/>
+            app:background_color="@color/lsq_alpha_white_4d"/>
 
         <Button
             android:id="@+id/lsq_minTimeBtn"
             android:layout_width="3dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
             android:background="#fff" />
 
         <RelativeLayout
@@ -192,7 +192,8 @@
             android:layout_height="@dimen/lsq__space_80"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/tusdk_view_widget_record_unpressed" />
+            android:background="@drawable/tusdk_view_widget_record_unpressed"
+            />
 
     </RelativeLayout>
 
@@ -259,6 +260,34 @@
         android:textSize="@dimen/lsq_font_size_40"
         android:gravity="center"/>
 
+    <LinearLayout
+        android:layout_marginEnd="14dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:src="@drawable/lsq_ic_light"
+            android:layout_gravity="end"
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
+        <org.lasque.tusdkvideodemo.views.VerticalSeekBar
+            android:paddingTop="20dp"
+            android:thumbOffset="0dp"
+            android:maxHeight="2dp"
+            android:thumb="@drawable/lsq_model_seekbar_thumb"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="right"
+            android:id="@+id/lsq_exposure_compensation_seek"
+            android:min="0"
+            android:progress="12"
+            android:max="24"
+            android:progressDrawable="@drawable/progress_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="160dp" />
+    </LinearLayout>
+
     <include layout="@layout/record_more_config_layout"
         android:visibility="gone"/>
 
@@ -271,5 +300,8 @@
     <include layout="@layout/lsq_record_filter_list_config_view"/>
 
     <include layout="@layout/record_sticker_layout" />
+    
+    
+
 
 </RelativeLayout>

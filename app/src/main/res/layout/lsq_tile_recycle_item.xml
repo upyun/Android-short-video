@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="52dp"
+    android:layout_height="52dp">
+
+    <org.lasque.tusdk.core.view.TuSdkImageView
+        android:id="@+id/lsq_tile_image"
+        android:background="@drawable/sticker_tile_selecte"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_marginRight="@dimen/lsq_font_space_8"
+        android:src="@drawable/sticker_10341"/>
+
+</FrameLayout>

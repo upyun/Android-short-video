@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:orientation="horizontal">
+
+    <!--返回按钮-->
+    <ImageView
+        android:id="@+id/lsq_editor_component_text_array_back"
+        android:layout_width="76dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/edit_ic_return"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:weightSum="2">
+        <!--从左到右-->
+        <LinearLayout
+            android:id="@+id/lsq_editor_text_lefttoright"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/lsq__space_20"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+                android:id="@+id/lsq_btn_left_to_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/lsq_color_white"
+                android:textSize="@dimen/lsq_font_size_20"
+                android:text="@string/lsq_text_style_left_to_right"
+                android:drawableTop="@drawable/edit_text_ic_righttoleft"/>
+
+        </LinearLayout>
+
+        <!--从右到左-->
+        <LinearLayout
+            android:id="@+id/lsq_editor_text_righttoleft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/lsq__space_20"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+                android:id="@+id/lsq_btn_right_to_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/lsq_color_white"
+                android:textSize="@dimen/lsq_font_size_20"
+                android:text="@string/lsq_text_style_right_to_left"
+                android:drawableTop="@drawable/edit_text_ic_lefttoright"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

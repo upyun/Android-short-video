@@ -23,26 +23,26 @@
             android:layout_width="0.2dp"
             android:layout_height="match_parent"
             android:background="@color/lsq_alpha_white_26"/>
-        <com.upyun.shortvideo.views.TabPagerIndicator
+        <org.lasque.tusdkvideodemo.views.TabPagerIndicator
             android:id="@+id/lsq_TabIndicator"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:line_size="6"
-            app:text_size="12"
+            app:text_size="11"
             app:line_width="@dimen/lsq__space_20">
 
-        </com.upyun.shortvideo.views.TabPagerIndicator>
+        </org.lasque.tusdkvideodemo.views.TabPagerIndicator>
 
     </LinearLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="0.2dp"
         android:background="@color/lsq_alpha_white_26"/>
-    <android.support.v4.view.ViewPager
+    <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/lsq_viewPager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    </android.support.v4.view.ViewPager>
+    </androidx.viewpager2.widget.ViewPager2>
 
 </LinearLayout>

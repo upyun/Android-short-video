@@ -28,7 +28,6 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
@@ -42,6 +41,8 @@ import android.webkit.WebView;
 import android.widget.FrameLayout;
 import android.widget.MediaController;
 import android.widget.TableLayout;
+
+import androidx.annotation.NonNull;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -1245,7 +1246,7 @@ public class UpVideoView2 extends FrameLayout implements MediaController.MediaPl
      *
      * @param paths the path of the video.
      */
-    public void setVideoPaths(List<String> paths,int pathIndex) {
+    public void setVideoPaths(List<String> paths, int pathIndex) {
         this.paths = paths;
         setVideoPath(paths.get(pathIndex));
     }

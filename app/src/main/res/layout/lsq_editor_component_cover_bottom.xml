@@ -11,12 +11,12 @@
         android:layout_height="80dp"
         android:orientation="horizontal"
         android:gravity="center_vertical">
-        <com.upyun.shortvideo.views.editor.LineView
+        <org.lasque.tusdkvideodemo.views.editor.LineView
             android:id="@+id/lsq_cover_lineView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        </com.upyun.shortvideo.views.editor.LineView>
+        </org.lasque.tusdkvideodemo.views.editor.LineView>
     </LinearLayout>
 
     <View

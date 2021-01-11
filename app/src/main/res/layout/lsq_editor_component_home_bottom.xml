@@ -1,79 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.upyun.shortvideo.views.MovieEditorTabBar xmlns:android="http://schemas.android.com/apk/res/android"
+<HorizontalScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/lsq_bottom_navigator"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:scrollbars="none"
     >
 
-    <LinearLayout
+    <org.lasque.tusdkvideodemo.views.MovieEditorTabBar
+        android:id="@+id/lsq_bottom_navigator"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        >
 
         <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
             android:id="@+id/lsq_tab_filter_btn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginLeft="16dp"
             android:layout_weight="1"
-            android:paddingTop="5dp"
             android:drawableTop="@drawable/edit_tab_ic_filter"
             android:gravity="center"
+            android:paddingTop="5dp"
             android:text="@string/lsq_filter_text"
             android:textColor="@color/lsq_editor_bottom_tab_text_color"
-            android:textSize="11sp" />
+            android:textSize="11sp"/>
 
         <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
             android:id="@+id/lsq_tab_mv_btn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginLeft="32dp"
+            android:layout_toRightOf="@+id/lsq_tab_filter_btn"
             android:layout_weight="1"
-            android:paddingTop="5dp"
             android:drawableTop="@drawable/edit_tab_ic_mv"
             android:gravity="center"
+            android:paddingTop="5dp"
             android:text="@string/lsq_text_MV"
             android:textColor="@color/lsq_editor_bottom_tab_text_color"
-            android:textSize="11sp" />
+            android:textSize="11sp"/>
 
         <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
             android:id="@+id/lsq_tab_music_btn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginLeft="32dp"
+            android:layout_toRightOf="@+id/lsq_tab_mv_btn"
             android:layout_weight="1"
-            android:paddingTop="5dp"
             android:drawableTop="@drawable/edit_tab_ic_music"
             android:gravity="center"
+            android:paddingTop="5dp"
             android:text="@string/lsq_text_dubbing"
             android:textColor="@color/lsq_editor_bottom_tab_text_color"
-            android:textSize="11sp" />
+            android:textSize="11sp"/>
 
 
         <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
             android:id="@+id/lsq_tab_text_effect_btn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginLeft="32dp"
+            android:layout_toRightOf="@+id/lsq_tab_music_btn"
             android:layout_weight="1"
             android:drawableTop="@drawable/edit_tab_ic_text"
             android:gravity="center"
-            android:text="@string/lsq_text_text_effect"
             android:paddingTop="5dp"
+            android:text="@string/lsq_text_text_effect"
             android:textColor="@color/lsq_editor_bottom_tab_text_color"
-            android:textSize="11sp" />
+            android:textSize="11sp"/>
 
         <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
             android:id="@+id/lsq_tab_effect_btn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginLeft="32dp"
+            android:layout_toRightOf="@+id/lsq_tab_text_effect_btn"
             android:layout_weight="1"
             android:drawableTop="@drawable/edit_tab_ic_special"
             android:gravity="center"
-            android:text="@string/lsq_text_effect"
             android:paddingTop="5dp"
+            android:text="@string/lsq_text_effect"
             android:textColor="@color/lsq_editor_bottom_tab_text_color"
-            android:textSize="11sp" />
+            android:textSize="11sp"/>
 
+        <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+            android:id="@+id/lsq_tab_sticker_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="32dp"
+            android:layout_toRightOf="@+id/lsq_tab_effect_btn"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/edit_tab_ic_sticker"
+            android:gravity="center"
+            android:paddingTop="5dp"
+            android:text="@string/lsq_sticker_text"
+            android:textColor="@color/lsq_editor_bottom_tab_text_color"
+            android:textSize="11sp"/>
 
-    </LinearLayout>
-</com.upyun.shortvideo.views.MovieEditorTabBar>
+        <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+            android:id="@+id/lsq_tab_trim_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="32dp"
+            android:layout_toRightOf="@+id/lsq_tab_sticker_btn"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/edit_tab_ic_crop"
+            android:gravity="center"
+            android:paddingTop="5dp"
+            android:text="@string/lsq_trim_text"
+            android:textColor="@color/lsq_editor_bottom_tab_text_color"
+            android:textSize="11sp"/>
+        <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+            android:id="@+id/lsq_tab_tr_effect_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="32dp"
+            android:layout_toRightOf="@+id/lsq_tab_trim_btn"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/edit_tab_ic_tr_effect"
+            android:gravity="center"
+            android:paddingTop="5dp"
+            android:text="@string/lsq_transitions"
+            android:textColor="@color/lsq_editor_bottom_tab_text_color"
+            android:textSize="11sp"/>
+        <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+            android:id="@+id/lsq_tab_dynamic_sticker_btn"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="16dp"
+            android:layout_toRightOf="@+id/lsq_tab_tr_effect_btn"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/edit_tab_ic_tr_effect"
+            android:gravity="center"
+            android:paddingTop="5dp"
+            android:text="动态贴纸"
+            android:textColor="@color/lsq_editor_bottom_tab_text_color"
+            android:textSize="11sp"/>
+
+    </org.lasque.tusdkvideodemo.views.MovieEditorTabBar>
+</HorizontalScrollView>

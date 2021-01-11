@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:weightSum="5"
+    android:background="@drawable/tusdk_edite_cut_speedbar_bg"
+    android:layout_height="match_parent">
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:tag="4"
+        android:text="@string/lsq_camera_speed_rate_slow2"
+        android:textAlignment="center"
+        android:textColor="@color/lsq_color_white"
+        android:textSize="@dimen/lsq_font_size_26" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:tag="3"
+        android:text="@string/lsq_camera_speed_rate_slow"
+        android:textColor="@color/lsq_color_white"
+        android:textSize="@dimen/lsq_font_size_26" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/tusdk_edite_cut_speed_button_bg"
+        android:tag="0"
+        android:text="@string/lsq_camera_speed_rate_normal"
+        android:textColor="@color/lsq_editor_cut_select_font_color"
+        android:textSize="@dimen/lsq_font_size_26" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:tag="1"
+        android:text="@string/lsq_camera_speed_rate_fast"
+        android:textColor="@color/lsq_color_white"
+        android:textSize="@dimen/lsq_font_size_26" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:tag="2"
+        android:text="@string/lsq_camera_speed_rate_fast2"
+        android:textColor="@color/lsq_color_white"
+        android:textSize="@dimen/lsq_font_size_26" />
+</LinearLayout>

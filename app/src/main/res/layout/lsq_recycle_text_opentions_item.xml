@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/lsq_text_options_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="15dp"
+        >
+
+        <ImageView
+            android:id="@+id/lsq_text_options_icon"
+            android:layout_width="45dp"
+            android:layout_height="45dp"/>
+
+        <TextView
+            android:id="@+id/lsq_text_options_text"
+            android:layout_width="45dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lsq_text_options_icon"
+            android:gravity="center"
+            android:textSize="@dimen/lsq_font_size_20"/>
+    </RelativeLayout>
+</FrameLayout>

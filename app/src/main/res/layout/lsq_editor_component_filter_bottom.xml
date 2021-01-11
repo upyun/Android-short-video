@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -8,18 +8,50 @@
     <LinearLayout
         android:background="@color/lsq_color_black"
         android:layout_width="match_parent"
-        android:layout_height="110dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/lsq_filter_list_view"
+        <LinearLayout
+            android:id="@+id/lsq_filter_panel"
+            android:background="@color/lsq_color_semitransparent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/lsq__space_25"
-            android:layout_marginLeft="@dimen/lsq__space_10"
-            android:layout_marginRight="@dimen/lsq__space_10">
+            android:layout_below="@id/lsq_filter_config_view"
+            android:orientation="vertical">
+            <LinearLayout
+                android:background="@android:color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/lsq_filter_reset"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/video_ic_nix"/>
+                <View
+                    android:layout_width="0.2dp"
+                    android:layout_height="match_parent"
+                    android:background="#26FFFFFF"/>
+                <org.lasque.tusdkvideodemo.views.TabPagerIndicator
+                    android:id="@+id/lsq_filter_tabIndicator"
+                    app:text_size="11"
+                    app:line_size="6"
+                    app:line_width="@dimen/lsq__space_12"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-        </android.support.v7.widget.RecyclerView>
+                </org.lasque.tusdkvideodemo.views.TabPagerIndicator>
+
+            </LinearLayout>
+            <androidx.viewpager2.widget.ViewPager2
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:id="@+id/lsq_filter_view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
 
     </LinearLayout>
 

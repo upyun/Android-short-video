@@ -4,7 +4,7 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:context=".component.MovieCutActivity"
+                tools:context="org.lasque.tusdkvideodemo.component.MovieCutActivity"
                 android:background="@color/lsq_color_black">
 
     <!-- 导航栏 -->
@@ -108,7 +108,7 @@
                     android:textSize="@dimen/lsq_font_size_24"/>
             </RelativeLayout>
 
-            <com.upyun.shortvideo.views.editor.LineView
+            <org.lasque.tusdkvideodemo.views.editor.LineView
                 android:id="@+id/lsq_range_line"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"

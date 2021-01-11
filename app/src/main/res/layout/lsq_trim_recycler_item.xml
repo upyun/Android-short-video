@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tool="http://schemas.android.com/tools">
+
+    <org.lasque.tusdk.core.view.widget.button.TuSdkTextButton
+        android:id="@+id/trim_btn"
+        android:layout_width="@dimen/lsq__space_50"
+        android:layout_height="@dimen/lsq__space_50"
+        android:drawableTop="@drawable/crop_1_1_nor"
+        android:gravity="center_horizontal"
+        tool:text="1:1"/>
+
+</RelativeLayout>

@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lsq_cosmetic_scroll_view"
+    android:layout_width="match_parent"
+    android:layout_height="90dp"
+    android:fillViewport="true"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:id="@+id/list_panel"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        android:animationCache="true"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/lsq_cosmetic_item_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:minWidth="60dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/makeup_not_ic" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="6dp"
+                android:text="@string/lsq_cosmetic_clear_all"
+                android:textColor="@color/lsq_color_white"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="6dp"
+        android:layout_height="6dp"
+            android:layout_marginTop="23dp"
+            android:layout_marginBottom="76dp"
+            android:background="@drawable/circle_bg" />
+
+        <LinearLayout
+            android:id="@+id/lsq_cosmetic_item_lipstick"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:minWidth="60dp"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/makeup_lipstick_ic" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="6dp"
+                android:text="@string/lsq_cosmetic_lipstick"
+                android:textColor="@color/lsq_color_white"
+                android:textSize="10sp" />
+
+            <View
+                android:id="@+id/lsq_lipstick_add"
+                android:layout_width="4dp"
+                android:layout_height="4dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="3dp"
+                android:background="@drawable/circle_bg_yellow"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/lsq_lipstick_panel"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:animateLayoutChanges="true"
+            android:visibility="gone"></RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/lsq_cosmetic_item_blush"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:minWidth="60dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/makeup_blush_ic" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="6dp"
+                android:text="@string/lsq_cosmetic_blush"
+                android:textColor="@color/lsq_color_white"
+                android:textSize="10sp" />
+
+            <View
+                android:id="@+id/lsq_blush_add"
+                android:layout_width="4dp"
+                android:layout_height="4dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="3dp"
+                android:background="@drawable/circle_bg_yellow"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/lsq_blush_panel"
+
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:visibility="gone"></RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/lsq_cosmetic_item_eyebrow"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:minWidth="60dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/makeup_eyebrow_ic" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="6dp"
+                android:text="@string/lsq_cosmetic_eyebrow"
+                android:textColor="@color/lsq_color_white"
+                android:textSize="10sp" />
+
+            <View
+                android:id="@+id/lsq_eyebrow_add"
+                android:layout_width="4dp"
+                android:layout_height="4dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="3dp"
+                android:background="@drawable/circle_bg_yellow"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/lsq_eyebrow_panel"
+
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:visibility="gone"></RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/lsq_cosmetic_item_eyeshadow"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:minWidth="60dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/makeup_eyeshadow_ic" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="6dp"
+                android:text="@string/lsq_cosmetic_eyeshadow"
+                android:textColor="@color/lsq_color_white"
+                android:textSize="10sp" />
+
+            <View
+                android:id="@+id/lsq_eyeshadow_add"
+                android:layout_width="4dp"
+                android:layout_height="4dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="3dp"
+                android:background="@drawable/circle_bg_yellow"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/lsq_eyeshadow_panel"
+
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:visibility="gone"></RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/lsq_cosmetic_item_eyeliner"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:minWidth="60dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="40dp"
+
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/makeup_eyeliner_ic" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="6dp"
+                android:text="@string/lsq_cosmetic_eyeliner"
+                android:textColor="@color/lsq_color_white"
+                android:textSize="10sp" />
+
+            <View
+                android:id="@+id/lsq_eyeliner_add"
+                android:layout_width="4dp"
+                android:layout_height="4dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="3dp"
+                android:background="@drawable/circle_bg_yellow"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/lsq_eyeliner_panel"
+            android:animateLayoutChanges="true"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:visibility="gone"></RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/lsq_cosmetic_item_eyelash"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:minWidth="60dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/makeup_eyelash_ic" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="6dp"
+                android:text="@string/lsq_cosmetic_eyelash"
+                android:textColor="@color/lsq_color_white"
+                android:textSize="10sp" />
+
+            <View
+                android:id="@+id/lsq_eyelash_add"
+                android:layout_width="4dp"
+                android:layout_height="4dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="3dp"
+                android:background="@drawable/circle_bg_yellow"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/lsq_eyelash_panel"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+        </RelativeLayout>
+    </LinearLayout>
+</HorizontalScrollView>

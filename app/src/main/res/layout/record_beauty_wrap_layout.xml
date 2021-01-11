@@ -27,7 +27,7 @@
         android:orientation="vertical"
         android:background="@color/lsq_color_semitransparent">
         <LinearLayout
-            android:weightSum="2"
+            android:weightSum="3"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -48,12 +48,11 @@
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:layout_centerHorizontal="true"
                     android:id="@+id/lsq_beauty_tab_line"
                     android:background="@color/lsq_color_white"
-                    android:layout_alignLeft="@+id/lsq_beauty_tab"
-                    android:layout_alignRight="@+id/lsq_beauty_tab"
                     android:layout_below="@+id/lsq_beauty_tab"
-                    android:layout_width="wrap_content"
+                    android:layout_width="20dp"
                     android:layout_height="2dp"
                     android:layout_marginLeft="@dimen/lsq__space_10"
                     android:layout_marginRight="@dimen/lsq__space_10"/>
@@ -76,12 +75,37 @@
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:layout_centerHorizontal="true"
                     android:id="@+id/lsq_beauty_plastic_tab_line"
                     android:background="@color/lsq_alpha_white_66"
-                    android:layout_alignLeft="@+id/lsq_beauty_plastic_tab"
-                    android:layout_alignRight="@+id/lsq_beauty_plastic_tab"
                     android:layout_below="@+id/lsq_beauty_plastic_tab"
+                    android:layout_width="20dp"
+                    android:layout_height="2dp"
+                    android:layout_marginLeft="@dimen/lsq__space_10"
+                    android:layout_marginRight="@dimen/lsq__space_10"/>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:padding="@dimen/lsq__space_8"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="@dimen/lsq_font_size_26"
+                    android:text="@string/lsq_text_cosmetic_type"
+                    android:id="@+id/lsq_cosmetic_tab"
+                    android:textColor="@color/lsq_alpha_white_66"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/lsq_cosmetic_tab_line"
+                    android:background="@color/lsq_alpha_white_66"
+                    android:layout_below="@+id/lsq_cosmetic_tab"
+                    android:layout_width="20dp"
                     android:layout_height="2dp"
                     android:layout_marginLeft="@dimen/lsq__space_10"
                     android:layout_marginRight="@dimen/lsq__space_10"/>
@@ -89,16 +113,28 @@
             </RelativeLayout>
         </LinearLayout>
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/lsq_beauty_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="90dp"
-            android:layout_marginTop="@dimen/lsq__space_15"
+            android:layout_marginTop="@dimen/lsq__space_10"
             android:layout_marginLeft="@dimen/lsq__space_15"
             android:layout_marginRight="@dimen/lsq__space_15"
             android:layout_gravity="center">
 
-        </android.support.v7.widget.RecyclerView>
+        </androidx.recyclerview.widget.RecyclerView>
+        <RelativeLayout
+            android:visibility="gone"
+            android:id="@+id/lsq_cosmetic_list"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:layout_marginTop="@dimen/lsq__space_10"
+            android:layout_marginLeft="@dimen/lsq__space_15"
+            android:layout_marginRight="@dimen/lsq__space_15"
+            android:layout_gravity="center">
+            <include layout="@layout/include_cosmetic_list"/>
+        </RelativeLayout>
+
     </LinearLayout>
 
 </LinearLayout>

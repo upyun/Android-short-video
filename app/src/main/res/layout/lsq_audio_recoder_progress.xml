@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.upyun.shortvideo.views.HorizontalProgressBar
+<org.lasque.tusdkvideodemo.views.HorizontalProgressBar
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/lsq_record_progressbar"
@@ -8,4 +8,4 @@
     app:progressColor="@color/lsq_widget_speedbar_button_bg"
     app:background="@color/lsq_alpha_white_4d">
 
-</com.upyun.shortvideo.views.HorizontalProgressBar>
+</org.lasque.tusdkvideodemo.views.HorizontalProgressBar>

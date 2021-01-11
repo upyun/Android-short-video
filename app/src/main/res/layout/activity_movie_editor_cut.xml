@@ -61,7 +61,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="160dp"
         android:layout_alignParentBottom="true"
         android:background="@color/lsq_alpha_black_7f">
 
@@ -75,8 +75,16 @@
             android:text="已选择0.0秒"
             />
 
+        <org.lasque.tusdkvideodemo.views.editor.SpeedView
+            android:id="@+id/lsq_playing_speed_bar"
+            android:layout_width="300dp"
+            android:layout_height="30dp"
+            android:layout_above="@id/lsq_range_time"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp" />
+
         <!--选择框 TuSdkMovieScrollContent-->
-        <com.upyun.shortvideo.views.editor.playview.TuSdkMovieScrollContent
+        <org.lasque.tusdkvideodemo.views.editor.playview.TuSdkMovieScrollContent
             android:id="@+id/lsq_range_line"
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -84,7 +92,7 @@
             android:layout_marginBottom="@dimen/lsq__space_10"/>
 
         <!--刻度-->
-        <com.upyun.shortvideo.views.editor.ruler.RulerView
+        <org.lasque.tusdkvideodemo.views.editor.ruler.RulerView
             android:id="@+id/lsq_rule_view"
             android:layout_width="match_parent"
             android:layout_height="30dp"

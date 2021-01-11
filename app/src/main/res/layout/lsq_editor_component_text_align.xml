@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:orientation="horizontal">
+
+    <!--返回按钮-->
+    <ImageView
+        android:id="@+id/lsq_editor_component_text_align_back"
+        android:layout_width="76dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/edit_ic_return"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <!--左对齐-->
+        <LinearLayout
+            android:id="@+id/lsq_editor_text_leftalignment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/lsq__space_20"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/edit_text_ic_left"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lsq_text_style_alignleft"
+                android:textColor="@color/lsq_color_white"
+                android:textSize="@dimen/lsq_font_size_20"/>
+        </LinearLayout>
+
+
+        <!--居中-->
+        <LinearLayout
+            android:id="@+id/lsq_editor_text_centeralignment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/lsq__space_20"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/edit_text_ic_center"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lsq_text_style_aligncenter"
+                android:textColor="@color/lsq_color_white"
+                android:textSize="@dimen/lsq_font_size_20"/>
+        </LinearLayout>
+
+
+        <!--右对齐-->
+        <LinearLayout
+            android:id="@+id/lsq_editor_text_rightalignment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/lsq__space_20"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/edit_text_ic_right"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lsq_text_style_alignright"
+                android:textColor="@color/lsq_color_white"
+                android:textSize="@dimen/lsq_font_size_20"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

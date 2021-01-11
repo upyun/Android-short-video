@@ -54,7 +54,7 @@
                 android:textSize="@dimen/lsq_font_size_24" />
         </RelativeLayout>
 
-        <com.upyun.shortvideo.views.editor.LineView
+        <org.lasque.tusdkvideodemo.views.editor.LineView
             android:id="@+id/lsq_range_line"
             android:layout_width="match_parent"
             android:layout_height="40dp"

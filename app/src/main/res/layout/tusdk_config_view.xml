@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.upyun.shortvideo.views.CompoundConfigView xmlns:android="http://schemas.android.com/apk/res/android"
+<org.lasque.tusdkvideodemo.views.CompoundConfigView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" >
 
@@ -17,4 +17,4 @@
             layout="@layout/tusdk_config_seekbar_one" />
     </LinearLayout>
 
-</com.upyun.shortvideo.views.CompoundConfigView>
+</org.lasque.tusdkvideodemo.views.CompoundConfigView>

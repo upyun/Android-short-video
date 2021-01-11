@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".component.AudioMixedActivity"
+    tools:context="org.lasque.tusdkvideodemo.component.AudioMixedActivity"
     android:background="@color/lsq_color_black">
     <!-- 导航栏 -->
     <include

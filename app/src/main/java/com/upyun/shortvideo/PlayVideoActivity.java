@@ -2,12 +2,15 @@ package com.upyun.shortvideo;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.MediaController;
 import android.widget.TableLayout;
 
+import androidx.annotation.Nullable;
+
 import com.upyun.upplayer.widget.UpVideoView2;
+
+import com.upyun.shortvideo.R;
 
 
 public class PlayVideoActivity extends Activity {

@@ -8,12 +8,12 @@
         android:id="@+id/lsq_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <com.upyun.shortvideo.views.TuSDKMediaPlayer
+        <org.lasque.tusdkvideodemo.views.TuSDKMediaPlayer
             android:id="@+id/lsq_media_player"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        </com.upyun.shortvideo.views.TuSDKMediaPlayer>
+        </org.lasque.tusdkvideodemo.views.TuSDKMediaPlayer>
 
         <ImageView
             android:id="@+id/lsq_play_btn"

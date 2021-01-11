@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:orientation="horizontal">
+
+    <!--返回按钮-->
+    <ImageView
+        android:id="@+id/lsq_editor_component_text_alpha_back"
+        android:layout_width="76dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/edit_ic_return"/>
+
+    <!--字体-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="不透明度"
+            android:textColor="@color/lsq_scence_effect_color_title"
+            android:textSize="@dimen/lsq_font_size_20"/>
+
+        <include
+            android:id="@+id/lsq_editor_text_alpha_seek_font"
+            layout="@layout/widget_seekbar"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="15dp"/>
+    </LinearLayout>
+</LinearLayout>

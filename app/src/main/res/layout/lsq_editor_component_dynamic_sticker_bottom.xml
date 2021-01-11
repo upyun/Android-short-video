@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/lsq_color_black"
+    android:orientation="vertical">
+
+    <!--播放进度-->
+    <LinearLayout
+        android:id="@+id/lsq_editor_sticker_play_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/lsq_editor_sticker_play"
+            android:layout_width="76dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="@dimen/lsq__space_20"
+            android:src="@drawable/edit_ic_play"/>
+
+        <org.lasque.tusdkvideodemo.views.editor.TuSdkMovieScrollPlayLineView
+            android:id="@+id/lsq_editor_sticker_play_range"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginTop="@dimen/lsq__space_20"></org.lasque.tusdkvideodemo.views.editor.TuSdkMovieScrollPlayLineView>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/lsq_dynamic_panel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/lsq_sticker_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="@color/lsq_alpha_white_26"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:background="@color/lsq_color_black">
+
+        <ImageButton
+            android:id="@+id/lsq_sticker_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:background="@null"
+            android:src="@drawable/edit_ic_close" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/lsq_sticker_text"
+            android:textColor="@color/lsq_color_white"
+            android:textSize="@dimen/lsq_font_size_34" />
+
+        <ImageButton
+            android:id="@+id/lsq_sticker_sure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@null"
+            android:src="@drawable/edit_ic_sure" />
+    </RelativeLayout>
+
+</LinearLayout>

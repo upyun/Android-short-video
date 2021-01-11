@@ -6,12 +6,12 @@
               android:background="@color/lsq_color_black"
               android:orientation="vertical">
     <!--特效控制content-->
-    <android.support.v4.view.ViewPager
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/lsq_editor_effect_content"
         android:layout_width="match_parent"
         android:layout_height="160dp"
         >
-    </android.support.v4.view.ViewPager>
+    </androidx.viewpager.widget.ViewPager>
 
     <View
         android:layout_width="match_parent"
@@ -32,7 +32,7 @@
             android:background="@null"
             android:src="@drawable/edit_ic_close"/>
 
-        <com.upyun.shortvideo.views.TabPagerIndicator
+        <org.lasque.tusdkvideodemo.views.TabPagerIndicator
             android:id="@+id/lsq_effect_indicator"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -44,9 +44,10 @@
             app:line_size="2"
             app:text_size="13"
             app:line_width="@dimen/lsq__space_25"
+            app:default_display_counts="3"
             app:line_color="@color/lsq_widget_speedbar_button_bg"
             app:high_light_text_color="@color/lsq_widget_speedbar_button_bg"
-            ></com.upyun.shortvideo.views.TabPagerIndicator>
+            ></org.lasque.tusdkvideodemo.views.TabPagerIndicator>
 
         <ImageButton
             android:id="@+id/lsq_effect_sure"

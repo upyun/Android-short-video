@@ -9,7 +9,6 @@
         <TextView
             android:id="@+id/lsq_beauty_level_text"
             android:layout_margin="@dimen/lsq__space_5"
-            android:background="@drawable/tusdk_view_widget_beauty_unselect"
             android:layout_centerInParent="true"
             android:text="1"
             android:textColor="@color/lsq_color_white"
@@ -20,8 +19,8 @@
         <ImageView
             android:id="@+id/lsq_beauty_level_image"
             android:src="@drawable/lsq_ic_parameter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_gravity="center"/>
 
     </FrameLayout>

@@ -1,5 +1,12 @@
 <resources>
 
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/lsq_color_white</item>
+        <item name="colorPrimaryDark">@color/lsq_color_white</item>
+        <item name="colorAccent">@color/lsq_color_white</item>
+    </style>
+
     <!-- Base application theme. -->
     <style name="lsq_sdkBaseTheme" parent="android:Theme.Light.NoTitleBar"></style>
 
@@ -38,8 +45,11 @@
         <attr name="line_width" format="dimension"></attr>
     </declare-styleable>
     <declare-styleable name="HorizontalProgressBar">
-        <attr name="backgrounds" format="color"/>
+        <attr name="background_color" format="color"/>
         <attr name="progressColor" format="color"/>
         <attr name="defaultHeight" format="dimension"/>
+    </declare-styleable>
+    
+    <declare-styleable name="TuSeekBarPressure">
     </declare-styleable>
 </resources>

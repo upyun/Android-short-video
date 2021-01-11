@@ -5,10 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.upyun.shortvideo.DemoEntryActivity;
-
 import org.lasque.tusdk.core.utils.ThreadHelper;
 import org.lasque.tusdk.video.TuSDKVideo;
+import com.upyun.shortvideo.R;
 
 /**
  * 启动页

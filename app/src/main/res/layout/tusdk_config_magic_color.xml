@@ -26,7 +26,7 @@
     </RelativeLayout>
 
 
-    <com.upyun.shortvideo.views.editor.color.ColorView
+    <org.lasque.tusdkvideodemo.views.editor.color.ColorView
         android:id="@+id/lsq_magic_color_seekView"
         android:layout_width="match_parent"
         android:layout_height="25dp"

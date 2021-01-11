@@ -1,51 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.upyun.shortvideo"
-    android:versionCode="20180316"
-    android:versionName="2.0.0" xmlns:tools="http://schemas.android.com/tools">
-
+    package="com.upyun.shortvideo">
+    <!-- 以下为必要权限 -->
     <!-- 访问网络 -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!-- 获取WIFI信息 -->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <!-- 允许访问GPS -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <!-- 允许应用程序写数据到外部存储设备（主要是SD卡） -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 获取WIFI信息 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 允许应用程序写数据到外部存储设备（主要是SD卡） -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <!-- 在sdcard中创建/删除文件的权限 -->
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-    <!-- 请求访问使用照相设备 -->
-    <uses-permission android:name="android.permission.CAMERA" />
-    <!-- 开启闪光灯权限 -->
-    <uses-permission android:name="android.permission.FLASHLIGHT" />
-
-    <!-- 访问麦克风 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- 在sdcard中创建/删除文件的权限 -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" /> <!-- 请求访问使用照相设备 -->
+    <uses-permission android:name="android.permission.CAMERA" /> <!-- 开启闪光灯权限 -->
+    <uses-permission android:name="android.permission.FLASHLIGHT" /> <!-- 访问麦克风 -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-    
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
-    <uses-feature android:name="android.hardware.camera.flash" />
-    
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-feature android:name="android.hardware.camera.flash" /> <!-- 以下为非必要权限 -->
+    <!-- 位置信息 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 允许访问GPS -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 读取本机信息 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- 读取日志 -->
     <uses-permission android:name="android.permission.READ_LOGS" />
-	
-	<application
-        android:name=".TuApplication"
+    <uses-permission android:name="android.permission.READ_LOGS" />
+
+    <application
+        android:name="com.upyun.shortvideo.MyApplication"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
-        android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+        android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
         <activity
             android:name="com.upyun.shortvideo.DemoEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize" >
+            android:windowSoftInputMode="stateHidden|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -54,80 +46,88 @@
         </activity>
 
         <activity
-            android:name=".ComponentListActivity"
+            android:name="org.lasque.tusdkvideodemo.ComponentListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize"/>
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
-            android:name=".record.MovieRecordFullScreenActivity"
+            android:name="org.lasque.tusdkvideodemo.record.MovieRecordFullScreenActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize"/>
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
-            android:name=".album.MovieAlbumActivity"
+            android:name="org.lasque.tusdkvideodemo.album.MovieAlbumActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize"/>
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
-            android:name=".editor.MovieEditorActivity"
+            android:name="org.lasque.tusdkvideodemo.album.MediaAlbumActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize"/>
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
-            android:name=".editor.MovieEditorPreviewActivity"
+            android:name="org.lasque.tusdkvideodemo.editor.MovieEditorActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize"/>
-
-        <!-- *******************公共分组控制器******************* -->
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="org.lasque.tusdkvideodemo.editor.MovieEditorPreviewActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" /> <!-- *******************公共分组控制器******************* -->
         <activity
             android:name="org.lasque.tusdk.impl.activity.TuFragmentActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize"/>
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
-            android:name=".component.MovieMixerActivity"
+            android:name="org.lasque.tusdkvideodemo.component.MovieMixerActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize"/>
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
-            android:name=".component.MovieThumbActivity"
+            android:name="org.lasque.tusdkvideodemo.component.MovieThumbActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize"/>
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
-            android:name=".component.MovieSplicerActivity"
+            android:name="org.lasque.tusdkvideodemo.component.MovieSplicerActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize"/>
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
-            android:name=".component.MovieCutActivity"
+            android:name="org.lasque.tusdkvideodemo.component.MovieCutActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize"/>
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
-            android:name=".component.AudioRecordActivity"
+            android:name="org.lasque.tusdkvideodemo.component.AudioRecordActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize"/>
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
-            android:name=".component.AudioPitchEngineActivity"
+            android:name="org.lasque.tusdkvideodemo.component.AudioPitchEngineActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize"/>
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
-            android:name=".component.AudioMixedActivity"
+            android:name="org.lasque.tusdkvideodemo.component.AudioMixedActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize"/>
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
-            android:name=".editor.MovieEditorCutActivity"
+            android:name="org.lasque.tusdkvideodemo.editor.MovieEditorCutActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize"/>
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name="org.lasque.tusdkvideodemo.album.ImagePreviewActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
 
         <activity
-            android:name=".PlayVideoActivity"
+            android:name="com.upyun.shortvideo.PlayVideoActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar"

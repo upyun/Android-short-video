@@ -2,11 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+    android:background="@color/lsq_alpha_black_7f"
+    >
     <!-- Video Content -->
 
 
-    <com.upyun.shortvideo.views.VideoContent
+    <org.lasque.tusdkvideodemo.views.VideoContent
         android:id="@+id/lsq_editor_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -20,10 +22,12 @@
             >
         </org.lasque.tusdk.impl.components.widget.sticker.StickerView>
 
+
         <RelativeLayout
             android:id="@+id/lsq_magic_content"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            >
         </RelativeLayout>
 
         <ImageView
@@ -59,7 +63,7 @@
 
         </FrameLayout>
 
-    </com.upyun.shortvideo.views.VideoContent>
+    </org.lasque.tusdkvideodemo.views.VideoContent>
 
     <!-- Header -->
     <FrameLayout
@@ -137,12 +141,12 @@
 
     </LinearLayout>
 
-    <com.upyun.shortvideo.views.editor.AudioRecordLayout
+    <org.lasque.tusdkvideodemo.views.editor.AudioRecordLayout
         android:id="@+id/lsq_audio_record"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
-        ></com.upyun.shortvideo.views.editor.AudioRecordLayout>
+        ></org.lasque.tusdkvideodemo.views.editor.AudioRecordLayout>
 
 
 </RelativeLayout>

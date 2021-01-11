@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.upyun.shortvideo.views.editor.playview.TuSdkRangeSelectionBar
+<org.lasque.tusdkvideodemo.views.editor.playview.TuSdkRangeSelectionBar
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/lsq_range_select"
     android:layout_width="match_parent"
     android:clickable="true"
     android:layout_height="45dp">
 
-    <com.upyun.shortvideo.views.editor.playview.rangeselect.TuSdkMovieGrayView
+    <org.lasque.tusdkvideodemo.views.editor.playview.rangeselect.TuSdkMovieGrayView
         android:id="@+id/lsq_left_bar"
         android:layout_width="15dp"
         android:layout_height="match_parent"
@@ -25,7 +25,7 @@
             android:background="@drawable/lsq_left_bar"
             android:layout_gravity="right"
             />
-    </com.upyun.shortvideo.views.editor.playview.rangeselect.TuSdkMovieGrayView>
+    </org.lasque.tusdkvideodemo.views.editor.playview.rangeselect.TuSdkMovieGrayView>
 
     <FrameLayout
         android:id="@+id/lsq_center"
@@ -49,7 +49,7 @@
             ></View>
     </FrameLayout>
 
-    <com.upyun.shortvideo.views.editor.playview.rangeselect.TuSdkMovieGrayView
+    <org.lasque.tusdkvideodemo.views.editor.playview.rangeselect.TuSdkMovieGrayView
         android:id="@+id/lsq_right_bar"
         android:layout_width="15dp"
         android:layout_height="match_parent"
@@ -71,6 +71,6 @@
             android:padding="5dp"
             android:layout_gravity="left"
             />
-    </com.upyun.shortvideo.views.editor.playview.rangeselect.TuSdkMovieGrayView>
+    </org.lasque.tusdkvideodemo.views.editor.playview.rangeselect.TuSdkMovieGrayView>
 
-</com.upyun.shortvideo.views.editor.playview.TuSdkRangeSelectionBar>
+</org.lasque.tusdkvideodemo.views.editor.playview.TuSdkRangeSelectionBar>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android" tools:ignore="MissingDefaultResource">
+    <!-- 按下状态-->
+    <item android:drawable="@drawable/lsq_model_seekbar_thumb_pressed" android:state_pressed="true" />
+
+    <!-- 有焦点状态 -->
+    <item android:drawable="@drawable/lsq_model_seekbar_thumb_pressed" android:state_focused="true" />
+
+    <!-- 普通状态 -->
+    <item android:drawable="@drawable/lsq_model_seekbar_thumb_pressed" />
+</selector>

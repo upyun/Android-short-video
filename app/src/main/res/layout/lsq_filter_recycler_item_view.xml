@@ -44,6 +44,7 @@
                 android:layout_height="match_parent" />
 
             <ImageView
+                android:visibility="gone"
                 android:id="@+id/lsq_filter_parameter"
                 android:padding="@dimen/lsq__space_15"
                 android:src="@drawable/lsq_ic_parameter"

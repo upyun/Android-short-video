@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="90dp">
+
+    <View
+        android:layout_marginBottom="76dp"
+        android:layout_marginTop="35dp"
+        android:layout_width="6dp"
+        android:layout_height="6dp"
+        android:background="@drawable/circle_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_marginBottom="76dp"
+        android:layout_marginTop="35dp"
+        android:id="@+id/lsq_eyeshadow_put_away"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:src="@drawable/makeup_back_ic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/lsq_eyeshadow_put_away_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="眼影"
+        android:textColor="@color/lsq_alpha_white_4d"
+        android:textSize="10sp"
+        app:layout_constraintLeft_toLeftOf="@id/lsq_eyeshadow_put_away"
+        app:layout_constraintRight_toRightOf="@id/lsq_eyeshadow_put_away"
+        app:layout_constraintTop_toBottomOf="@id/lsq_eyeshadow_put_away" />
+
+    <ImageView
+        android:id="@+id/lsq_eyeshadow_null"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:src="@drawable/not_ic"
+        app:layout_constraintBottom_toBottomOf="@id/lsq_eyeshadow_put_away"
+        app:layout_constraintLeft_toRightOf="@id/lsq_eyeshadow_put_away"
+        app:layout_constraintTop_toTopOf="@id/lsq_eyeshadow_put_away" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="无"
+        android:textColor="@color/lsq_alpha_white_4d"
+        android:textSize="10sp"
+        app:layout_constraintLeft_toLeftOf="@id/lsq_eyeshadow_null"
+        app:layout_constraintRight_toRightOf="@id/lsq_eyeshadow_null"
+        app:layout_constraintTop_toTopOf="@id/lsq_eyeshadow_put_away_title" />
+
+    <RelativeLayout
+        android:id="@+id/lsq_eyeshadow_list_panel"
+        android:layout_marginStart="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/lsq_eyeshadow_null"
+        app:layout_constraintTop_toTopOf="parent">
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_centerInParent="true"
+            android:id="@+id/lsq_eyeshadow_item_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_marginBottom="76dp"
+        android:layout_marginTop="35dp"
+        android:layout_width="6dp"
+        android:layout_height="6dp"
+        android:background="@drawable/circle_bg"
+        app:layout_constraintLeft_toRightOf="@id/lsq_eyeshadow_list_panel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

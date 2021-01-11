@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".component.MovieMixerActivity"
+    tools:context="org.lasque.tusdkvideodemo.component.MovieMixerActivity"
     android:background="@color/lsq_color_black">
     <!-- 导航栏 -->
     <include

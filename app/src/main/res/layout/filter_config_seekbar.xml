@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.upyun.shortvideo.views.FilterConfigSeekbar xmlns:android="http://schemas.android.com/apk/res/android"
+<org.lasque.tusdkvideodemo.views.FilterConfigSeekbar xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" >
     <TextView 
@@ -17,13 +17,14 @@
     <include
         android:id="@+id/lsq_seekView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="15dp"
+        android:minHeight="30dp"
         android:layout_toRightOf="@+id/lsq_titleWrapView"
         android:layout_toLeftOf="@id/lsq_filterValueView"
         android:layout_centerVertical="true"
-        layout="@layout/widget_seekbar" />
+        layout="@layout/tusdk_widget_seekbar" />
 
     <RelativeLayout
         android:id="@+id/lsq_titleWrapView"
@@ -46,4 +47,4 @@
 
     </RelativeLayout>
 
-</com.upyun.shortvideo.views.FilterConfigSeekbar>
+</org.lasque.tusdkvideodemo.views.FilterConfigSeekbar>

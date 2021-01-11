@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+    <!--播放进度-->
+    <LinearLayout
+        android:id="@+id/lsq_editor_text_play_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/lsq_editor_scene_play"
+            android:layout_width="76dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="@dimen/lsq__space_20"
+            android:src="@drawable/edit_ic_play"/>
+
+        <org.lasque.tusdkvideodemo.views.editor.TuSdkMovieScrollPlayLineView
+            android:id="@+id/lsq_editor_scene_play_range"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginTop="@dimen/lsq__space_20"></org.lasque.tusdkvideodemo.views.editor.TuSdkMovieScrollPlayLineView>
+
+    </LinearLayout>
+
+    <!--文字控制content-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/lsq_editor_effect_scene_list"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginLeft="@dimen/lsq__space_10"
+        android:layout_marginTop="@dimen/lsq__space_25">
+    </androidx.recyclerview.widget.RecyclerView>
+
+</LinearLayout>

@@ -24,6 +24,7 @@
     <color name="lsq_alpha_white_66">#66ffffff</color>
     <color name="lsq_alpha_white_99">#99ffffff</color>
     <color name="lsq_alpha_white_00">#00ffffff</color>
+    <color name="lsq_alpha_white_33">#33ffffff</color>
 
     <!-- split -->
     <color name="lsq_split_bg">#d7d8dc</color>
@@ -66,6 +67,7 @@
     <color name="lsq_background_camera_bar_alpha">#59403e43</color>
     <color name="lsq_background_editor">#2e2c30</color>
     <color name="lsq_background_editor_bottom_bar">#403e43</color>
+    <color name="lsq_background_editor_compoent">#121212</color>
 
     <!-- text -->
     <color name="lsq_text_group_header">#9fa0a4</color>
@@ -130,6 +132,21 @@
     <color name="lsq_margic_effect_color_Money">#b3fce77b</color>
     <color name="lsq_margic_effect_color_Magic">#b364fdfd</color>
     <color name="lsq_margic_effect_color_Burning">#b316cefc</color>
+
+    <!-- v3.4.1 转场特效 TimeLineView 编辑色 -->
+    <color name="lsq_scence_effect_color_TuSDKMediaTransitionTypeFadeIn">#B30AF047</color>
+    <color name="lsq_scence_effect_color_TuSDKMediaTransitionTypeFlyIn">#B30AF0C2</color>
+    <color name="lsq_scence_effect_color_TuSDKMediaTransitionTypePullInRight">#B34C61C2</color>
+    <color name="lsq_scence_effect_color_TuSDKMediaTransitionTypePullInLeft">#B3B49ED5</color>
+    <color name="lsq_scence_effect_color_TuSDKMediaTransitionTypePullInTop">#B3E158FF</color>
+    <color name="lsq_scence_effect_color_TuSDKMediaTransitionTypePullInBottom">#B35A2368</color>
+    <color name="lsq_scence_effect_color_TuSDKMediaTransitionTypeSpreadIn">#B3A203C4</color>
+    <color name="lsq_scence_effect_color_TuSDKMediaTransitionTypeFlashLight">#B3D496E4</color>
+    <color name="lsq_scence_effect_color_TuSDKMediaTransitionTypeFlip">#B36D4F74</color>
+    <color name="lsq_scence_effect_color_TuSDKMediaTransitionTypeFocusOut">#B3D2B9DD</color>
+    <color name="lsq_scence_effect_color_TuSDKMediaTransitionTypeFocusIn">#B3FF05A2</color>
+    <color name="lsq_scence_effect_color_TuSDKMediaTransitionTypeStackUp">#B3EB234A</color>
+    <color name="lsq_scence_effect_color_TuSDKMediaTransitionTypeZoom">#B3D66047</color>
 
     <color name="lsq_magic_size_baground">#eeeeee</color>
 

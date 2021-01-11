@@ -18,11 +18,11 @@
             android:layout_marginTop="@dimen/lsq__space_20"
             android:src="@drawable/edit_ic_play" />
 
-        <com.upyun.shortvideo.views.editor.TuSdkMovieScrollPlayLineView
+        <org.lasque.tusdkvideodemo.views.editor.TuSdkMovieScrollPlayLineView
             android:id="@+id/lsq_editor_text_play_range"
             android:layout_width="match_parent"
             android:layout_height="35dp"
-            android:layout_marginTop="@dimen/lsq__space_20"></com.upyun.shortvideo.views.editor.TuSdkMovieScrollPlayLineView>
+            android:layout_marginTop="@dimen/lsq__space_20"></org.lasque.tusdkvideodemo.views.editor.TuSdkMovieScrollPlayLineView>
 
     </LinearLayout>
     <!--文字控制content-->
@@ -54,6 +54,7 @@
             android:src="@drawable/edit_ic_close" />
 
         <TextView
+            android:id="@+id/lsq_text_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"

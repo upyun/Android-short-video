@@ -1,11 +1,3 @@
-/**
- * TuSDKVideoDemo
- * DemoEntryActivity.java
- *
- * @author XiaShengCui
- * @Date Jun 1, 2017 7:34:44 PM
- * @Copyright: (c) 2017 tusdk.com. All rights reserved.
- */
 package com.upyun.shortvideo;
 
 import android.Manifest;
@@ -15,14 +7,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-import com.upyun.shortvideo.editor.MovieEditorCutActivity;
-import com.upyun.shortvideo.record.MovieRecordFullScreenActivity;
-import com.upyun.shortvideo.utils.Constants;
-import com.upyun.shortvideo.utils.PermissionUtils;
+import androidx.annotation.NonNull;
 
 import org.lasque.tusdk.core.TuSdk;
 import org.lasque.tusdk.core.TuSdkContext;
@@ -34,8 +22,14 @@ import org.lasque.tusdk.core.view.TuSdkViewHelper;
 import org.lasque.tusdk.impl.activity.TuFragmentActivity;
 import org.lasque.tusdk.impl.view.widget.TuProgressHub;
 import org.lasque.tusdk.modules.components.ComponentActType;
+import com.upyun.shortvideo.R;
+import org.lasque.tusdkvideodemo.editor.MovieEditorCutActivity;
+import org.lasque.tusdkvideodemo.record.MovieRecordFullScreenActivity;
+import org.lasque.tusdkvideodemo.utils.Constants;
+import org.lasque.tusdkvideodemo.utils.PermissionUtils;
 
-import static com.upyun.shortvideo.album.AlbumUtils.openVideoAlbum;
+import static org.lasque.tusdkvideodemo.album.AlbumUtils.openVideoAlbum;
+
 
 /**
  * 首页界面
@@ -47,7 +41,7 @@ public class DemoEntryActivity extends TuFragmentActivity {
     /**
      * 布局ID
      */
-    public static final int layoutId = com.upyun.shortvideo.R.layout.entry_activity;
+    public static final int layoutId = R.layout.entry_activity;
 
     /**
      * 编辑类ClassName
@@ -68,7 +62,7 @@ public class DemoEntryActivity extends TuFragmentActivity {
         this.setRootView(layoutId, 0);
 
         // 设置应用退出信息ID 一旦设置将触发连续点击两次退出应用事件
-        this.setAppExitInfoId(com.upyun.shortvideo.R.string.lsq_exit_info);
+        this.setAppExitInfoId(R.string.lsq_exit_info);
     }
 
     /**
@@ -86,14 +80,14 @@ public class DemoEntryActivity extends TuFragmentActivity {
         TuProgressHub.setStatus(this, TuSdkContext.getString("lsq_initing"));
         TuSdk.checkFilterManager(mFilterManagerDelegate);
 
-        RelativeLayout recordLayout = (RelativeLayout) findViewById(com.upyun.shortvideo.R.id.lsq_record_layout);
+        RelativeLayout recordLayout = (RelativeLayout) findViewById(R.id.lsq_record_layout);
         recordLayout.setOnClickListener(mClickListener);
 
-        RelativeLayout editorLayout = (RelativeLayout) findViewById(com.upyun.shortvideo.R.id.lsq_editor_layout);
+        RelativeLayout editorLayout = (RelativeLayout) findViewById(R.id.lsq_editor_layout);
         editorLayout
                 .setOnClickListener(mClickListener);
 
-        RelativeLayout playLayout = (RelativeLayout) findViewById(com.upyun.shortvideo.R.id.lsq_play_layout);
+        RelativeLayout playLayout = (RelativeLayout) findViewById(R.id.lsq_play_layout);
         playLayout
                 .setOnClickListener(mClickListener);
 
@@ -118,11 +112,11 @@ public class DemoEntryActivity extends TuFragmentActivity {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-                case com.upyun.shortvideo.R.id.lsq_record_layout:
+                case R.id.lsq_record_layout:
                     handleRecordButton();
                     break;
 
-                case com.upyun.shortvideo.R.id.lsq_editor_layout:
+                case R.id.lsq_editor_layout:
                     handleEditorButton();
                     break;
 
@@ -181,7 +175,7 @@ public class DemoEntryActivity extends TuFragmentActivity {
 //            intent.putExtra("videoPath", path);
 //            startActivity(intent);
 //        } else {
-//            TuSdk.messageHub().showToast(getApplicationContext(), com.upyun.shortvideo.R.string.lsq_video_empty_error);
+//            TuSdk.messageHub().showToast(getApplicationContext(), R.string.lsq_video_empty_error);
 //        }
 //    }
 
