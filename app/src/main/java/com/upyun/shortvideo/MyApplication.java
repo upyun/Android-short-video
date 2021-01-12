@@ -4,7 +4,10 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.tencent.bugly.crashreport.CrashReport;
 
+import org.lasque.tusdk.core.TuSdk;
 import org.lasque.tusdk.core.TuSdkApplication;
+import org.lasque.tusdk.core.utils.TLog;
+import org.lasque.tusdk.core.utils.monitor.TuSdkMonitor;
 
 /**
  * TuApplication.java
@@ -18,7 +21,6 @@ public class MyApplication extends TuSdkApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-
         /**
          ************************* TuSDK 集成三部曲 *************************
          *
@@ -47,7 +49,7 @@ public class MyApplication extends TuSdkApplication {
         CrashReport.initCrashReport(getApplicationContext(), "994bb7f5ee", true);
 
         // 设置资源类，当 Application id 与 Package Name 不相同时，必须手动调用该方法, 且在 init 之前执行。
-        // TuSdk.setResourcePackageClazz(org.lasque.tusdkdemo.R.class);
+        TuSdk.setResourcePackageClazz(com.upyun.shortvideo.R.class);
 
         // 自定义 .so 文件路径，在 init 之前调用
         // NativeLibraryHelper.shared().mapLibrary(NativeLibType.LIB_CORE, "libtusdk-library.so 文件路径");
@@ -55,6 +57,15 @@ public class MyApplication extends TuSdkApplication {
 
         // 设置输出状态，建议在接入阶段开启该选项，以便定位问题。
         this.setEnableLog(true);
+        // 设置Log输出为问题  建议在接入阶段或者测试阶段打开，用于测试问题。
+        TLog.enableLog2File(false);
+
+        // 在调试集成测试阶段，可能会出现一些很难定位的问题，
+        // 开发人员可以打开如下配置，尝试在真机运行，复现该类问题 ，
+        // 然后将 sdcard 根目录下的 log/tusdk 目录日志上报给涂图开发者，以便我们更好的定位问题。
+        TuSdkMonitor.setEnableCheckGLError(false) // 开启 GL 日志检测
+                .setEnableCheckFrameImage(false); // 开启 GL 图像帧检测
+
         /**
          *  初始化SDK，应用密钥是您的应用在 TuSDK 的唯一标识符。每个应用的包名(Bundle Identifier)、密钥、资源包(滤镜、贴纸等)三者需要匹配，否则将会报错。
          *
@@ -67,7 +78,7 @@ public class MyApplication extends TuSdkApplication {
          *  指定开发模式,需要与lsq_tusdk_configs.json中masters.key匹配， 如果找不到devType将默认读取master字段
          *  如果一个应用对应多个包名，则可以使用这种方式来进行集成调试。
          */
-        // this.initPreLoader(this.getApplicationContext(), "12aa4847a3a9ce68-04-ewdjn1", "debug");
+        // this.initPreLoader(this.getApplicationContext(), "c863a73a6e0294bc-04-ewdjn1", "debug");
 
         // 如果不想继承TuSdkApplication，直接在自定义Application.onCreate()方法中调用以下方法
         // 初始化全局变量

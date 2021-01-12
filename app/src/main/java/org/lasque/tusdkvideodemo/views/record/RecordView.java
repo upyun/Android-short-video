@@ -10,17 +10,6 @@ import android.graphics.Bitmap;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-
-import androidx.annotation.DrawableRes;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.core.view.ViewCompat;
-import androidx.lifecycle.Lifecycle;
-import androidx.core.view.ViewPropertyAnimatorListener;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.widget.ViewPager2;
-
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -37,6 +26,18 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
+import androidx.annotation.DrawableRes;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.ViewPropertyAnimatorListener;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Lifecycle;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
+
+import com.upyun.shortvideo.R;
 
 import org.lasque.tusdk.api.audio.preproc.processor.TuSdkAudioPitchEngine;
 import org.lasque.tusdk.core.TuSdk;
@@ -64,14 +65,13 @@ import org.lasque.tusdk.video.editor.TuSdkMediaEffectData;
 import org.lasque.tusdk.video.editor.TuSdkMediaFilterEffectData;
 import org.lasque.tusdk.video.editor.TuSdkMediaPlasticFaceEffect;
 import org.lasque.tusdk.video.editor.TuSdkMediaSkinFaceEffect;
-import com.upyun.shortvideo.R;
+import org.lasque.tusdkvideodemo.utils.Constants;
 import org.lasque.tusdkvideodemo.views.BeautyPlasticRecyclerAdapter;
 import org.lasque.tusdkvideodemo.views.BeautyRecyclerAdapter;
 import org.lasque.tusdkvideodemo.views.FilterConfigSeekbar;
+import org.lasque.tusdkvideodemo.views.FilterRecyclerAdapter;
 import org.lasque.tusdkvideodemo.views.HorizontalProgressBar;
 import org.lasque.tusdkvideodemo.views.ParamsConfigView;
-import org.lasque.tusdkvideodemo.utils.Constants;
-import org.lasque.tusdkvideodemo.views.FilterRecyclerAdapter;
 import org.lasque.tusdkvideodemo.views.TabPagerIndicator;
 import org.lasque.tusdkvideodemo.views.cosmetic.CosmeticPanelController;
 import org.lasque.tusdkvideodemo.views.cosmetic.CosmeticTypes;
@@ -562,6 +562,7 @@ public class RecordView extends RelativeLayout {
         List<String> tabTitles = new ArrayList<>();
         List<FilterFragment> fragments = new ArrayList<>();
         for (FilterGroup group : mFilterGroups) {
+            if (group == null) continue;
             FilterFragment fragment = FilterFragment.newInstance(group);
             if (group.groupId == 252) {
                 fragment.setOnFilterItemClickListener(new FilterFragment.OnFilterItemClickListener() {
@@ -905,7 +906,7 @@ public class RecordView extends RelativeLayout {
                 }
             }, 700);
             // 滤镜切换需要做延时
-            if (!isFilterReset){
+            if (!isFilterReset) {
                 setDefaultFilter();
             }
             if (newState.equals(TuSdkStillCameraAdapter.CameraState.StatePreview) && mCameraMaxEV == 0) {
@@ -1811,7 +1812,8 @@ public class RecordView extends RelativeLayout {
                     for (String key : mDefaultBeautyPercentParams.keySet()) {
                         TLog.e("key -- %s", mDefaultBeautyPercentParams.get(key));
                         submitPlasticFaceParamter(key, mDefaultBeautyPercentParams.get(key));
-                    }                    dialog.dismiss();
+                    }
+                    dialog.dismiss();
                 }
             });
             adBuilder.show();
@@ -1862,7 +1864,7 @@ public class RecordView extends RelativeLayout {
                 mBeautyRecyclerView.setAdapter(mBeautyPlasticRecyclerAdapter);
                 mBeautyRecyclerView.scrollToPosition(mBeautyPlasticRecyclerAdapter.getCurrentPos() - 1);
                 int currentPos = mBeautyPlasticRecyclerAdapter.getCurrentPos();
-                if (currentPos != -1){
+                if (currentPos != -1) {
                     switchBeautyPlasticConfig(currentPos);
                 } else {
                     hideBeautyBarLayout();
@@ -1981,15 +1983,15 @@ public class RecordView extends RelativeLayout {
         smoothingArgs.setMaxValueFactor(1.0f);//设置最大值限制
         smoothingArgs.setDefaultPercent(0.8f);
         // 红润
-        SelesParameters.FilterArg ruddyArgs = skinFaceEffect.getFilterArg(skinMode!= TuSdkMediaSkinFaceEffect.SkinFaceType.Beauty ? "ruddy" : "sharpen");//sharpen ruddy
+        SelesParameters.FilterArg ruddyArgs = skinFaceEffect.getFilterArg(skinMode != TuSdkMediaSkinFaceEffect.SkinFaceType.Beauty ? "ruddy" : "sharpen");//sharpen ruddy
         ruddyArgs.setMaxValueFactor(1.0f);//设置最大值限制
-        ruddyArgs.setDefaultPercent(skinMode!= TuSdkMediaSkinFaceEffect.SkinFaceType.Beauty ? 0.4f : 0.6f);
+        ruddyArgs.setDefaultPercent(skinMode != TuSdkMediaSkinFaceEffect.SkinFaceType.Beauty ? 0.4f : 0.6f);
 
         whiteningArgs.setPrecentValue(0.3f);//设置默认显示
 
         smoothingArgs.setPrecentValue(0.8f);//设置默认显示
 
-        ruddyArgs.setPrecentValue(skinMode!= TuSdkMediaSkinFaceEffect.SkinFaceType.Beauty ? 0.4f : 0.6f);
+        ruddyArgs.setPrecentValue(skinMode != TuSdkMediaSkinFaceEffect.SkinFaceType.Beauty ? 0.4f : 0.6f);
 
         if (mCamera.mediaEffectsWithType(TuSdkMediaEffectDataTypeSkinFace) == null ||
                 mCamera.mediaEffectsWithType(TuSdkMediaEffectDataTypeSkinFace).size() == 0) {
@@ -2015,8 +2017,8 @@ public class RecordView extends RelativeLayout {
         isBeautyClose = false;
     }
 
-    private String getSkinModeTitle(TuSdkMediaSkinFaceEffect.SkinFaceType skinMode){
-        switch (skinMode){
+    private String getSkinModeTitle(TuSdkMediaSkinFaceEffect.SkinFaceType skinMode) {
+        switch (skinMode) {
             case SkinNatural:
                 return "lsq_beauty_skin_precision";
             case SkinMoist:
