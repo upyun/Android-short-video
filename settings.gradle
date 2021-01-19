@@ -1,1 +1,3 @@
+include ':appbase'
+include ':sdklib'
 include ':app', ':ijkplayer-java', ':upplayer'
